@@ -1,35 +1,20 @@
+
 body {
-    background: linear-gradient(180deg, rgba(43,47,255,0.3) 0%, rgba(145,215,252,0.3) 100%);
-    background-repeat: no-repeat;
-    min-height: 100vh;
-
-
+  background: linear-gradient(180deg, rgba(43,47,255,0.3) 0%, rgba(145,215,252,0.3) 100%);
+  background-repeat: no-repeat;
 }
 
-/* .video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(43,47,255,0.3);
-    z-index: 2;
-  }
-  
-  video, .ie8-poster {
-    position: fixed;
-    left: 0; 
-    bottom: 0;
-    width: 50vw;
-    object-fit: fill;
-    z-index: 1;
-  } */
-
-nav
-{
-    background-color: #2B2FFF;
-    color: white !important;
+video {
+  width: 50vw;
+  position: relative; /* Imposta la posizione relativa per consentire il posizionamento assoluto del paragrafo */
 }
-.nav-link{
-    color: white !important;
+
+
+nav {
+  background-color: #2B2FFF;
+  color: white !important;
+}
+
+.nav-link {
+  color: white !important;
 }
