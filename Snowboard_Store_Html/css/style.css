@@ -1,0 +1,42 @@
+nav {
+  background-color: #2B2FFF;
+  color: white !important;
+}
+
+.nav-link {
+  color: white !important;
+}
+body {
+  background: linear-gradient(180deg, rgba(43,47,255,0.3) 0%, rgba(145,215,252,0.3) 100%);
+  background-repeat: no-repeat;
+}
+header > h1
+{
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+}
+
+/* swiper */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+

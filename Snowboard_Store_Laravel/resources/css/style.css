@@ -1,0 +1,23 @@
+nav {
+  background-color: #2B2FFF;
+  color: white !important;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+body {
+  background: linear-gradient(180deg, rgba(43,47,255,0.3) 0%, rgba(145,215,252,0.3) 100%);
+  background-repeat: no-repeat;
+}
+header > h1
+{
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+}
+video {
+  height: 80vh;
+}
+
+
