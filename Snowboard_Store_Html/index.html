@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <!-- css -->
     <link rel="stylesheet" href="/css/style.css">
-    <title>Document</title>
+
+    <title>SnowBoard Store</title>
 </head>
 <body>
+
     <!-- navbar -->
     <nav class="shadow navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -37,35 +39,56 @@
         </div>
     </nav>
     <!-- fine navbar -->
-    <header class="container">
-        <div class="row justify-content-center mt-3">
-        <div class="col-12 text-center">
-            <div data-aos="fade-up" data-aos-duration="1500">
-                <h1>Lorem ipsum dolor sit amet</h1>
+    
+    <!-- header -->
+    <header id="header" class="container-fluid">
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 text-center">
+                <div data-aos="fade-up" data-aos-duration="1500">
+                    <h1>Lorem ipsum dolor sit amet</h1>
+                </div>
             </div>
         </div>
-        <div class="col-10 d-flex justify-content-center my-3">
-            <div data-aos="fade-up" data-aos-duration="3000" id="prova" >
-                <img src="./assets/img/header.avif" alt="" class="rounded img-fluid p-1 shadow-lg">
+
+        <div class="container-fluid">
+            <div class="row justify-content-evenly">
+                <div data-aos="fade-left" data-aos-duration="3000" class="col-12 col-md-6 mt-5">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae dolore corporis dicta voluptates laudantium quasi necessitatibus reiciendis nulla consequuntur laboriosam obcaecati molestias totam blanditiis architecto sed dolorem, quaerat, ut id?</p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-duration="3000" class="p-2 col-12 col-md-6 d-flex justify-content-center rounded shadow">
+                    <video src="./assets/video/header.mp4" height="100%vh" width="100%vw" autoplay muted></video>
+                </div>
             </div>
         </div>
     </header>
+    <!-- fine header -->
 
-    <div class="swiper mySwiper mb-5">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="https://picsum.photos/200/100" alt=""></div>
-          <div class="swiper-slide"><img src="https://picsum.photos/200/100" alt=""></div>
-          <div class="swiper-slide"><img src="https://picsum.photos/200/100" alt=""></div>
-          <div class="swiper-slide"><img src="https://picsum.photos/200/100" alt=""></div>
-          <div class="swiper-slide"><img src="https://picsum.photos/200/100" alt=""></div>
-          <div class="swiper-slide"><img src="https://picsum.photos/200/100" alt=""></div>
-          <div class="swiper-slide"><img src="https://picsum.photos/200/100" alt=""></div>
-          <div class="swiper-slide"><img src="https://picsum.photos/200/100" alt=""></div>
-          <div class="swiper-slide"><img src="https://picsum.photos/200/100" alt=""></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h1 id="prodotti">Vuoi scoprire i nostri prodotti?</h1>
+            </div>
+            <div class="col-12 text-center">
+                <a class="btn btn-primary my-5" id="mostra" href="#carosello">Mostra</a>
+            </div>
         </div>
-        <div class="swiper-pagination"></div>
-      </div>
+    </div>
+    
+    <!-- carosello -->
+        <div id="carosello" class="container d-none swiper mySwiper mb-5">
+            <div class="swiper-wrapper">
+                <!-- immagini -->
+            </div>
+            <div class="swiper-pagination"></div>
 
+            <div class="col-12 text-center">
+                <a class="btn btn-primary my-5 d-none" id="nascondi" href="#header">Nascondi</a>
+            </div>
+        </div>
+    <!-- fine carosello -->
+        
         
         <!-- aos -->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -89,6 +112,8 @@
             });
         </script>
         <!-- fine swiper js -->
-
-</body>
-</html>
+        <!-- script js -->
+        <script src="./js/script.js"></script>
+        
+    </body>
+    </html>

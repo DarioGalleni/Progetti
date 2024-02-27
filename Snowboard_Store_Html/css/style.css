@@ -9,12 +9,15 @@ nav {
 body {
   background: linear-gradient(180deg, rgba(43,47,255,0.3) 0%, rgba(145,215,252,0.3) 100%);
   background-repeat: no-repeat;
+  height: 100%;
 }
 header > h1
 {
   font-family: "Roboto", sans-serif;
   font-style: normal;
 }
+
+
 
 /* swiper */
 
@@ -26,7 +29,6 @@ header > h1
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,4 +41,7 @@ header > h1
   object-fit: cover;
 }
 
-
+#images:hover
+{
+  transform: scale(1.1);
+}
