@@ -1,0 +1,46 @@
+div
+{
+border: 1px solid black;
+}
+
+li
+{
+    margin-right: 150px;
+}
+
+h1
+{
+color: red;
+}
+#h1
+{
+margin-bottom: 550px;
+}
+#logo
+{
+height: 150px;
+width: 220px;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 100%; /* Adatta la larghezza massima del container alla larghezza dell'immagine */
+    margin: 0 auto; /* Centra il container */
+    opacity: 0.7;
+  }
+
+  .container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+
