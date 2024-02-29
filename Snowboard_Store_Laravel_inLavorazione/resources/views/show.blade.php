@@ -1,9 +1,15 @@
 <x-layout>
-    <div>
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-12 col-md-6">
         <h2>{{ $snowboards['Tipo'] }}</h2>
         <p>{{ $snowboards['descrizione'] }}</p>
         <p>Prezzo: ${{ $snowboards['price'] }}</p>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Immagini</button>
+      </div>
+    </div>
+  </div>
+        
 
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -38,5 +44,4 @@
           </div>
         </div>
       </div>
-    </div>
   </x-layout>

@@ -10,6 +10,7 @@ nav {
 body {
   background: linear-gradient(180deg, rgba(43,47,255,0.3) 0%, rgba(145,215,252,0.3) 100%);
   background-repeat: no-repeat;
+  height: 200vh;
 }
 header > h1
 {
