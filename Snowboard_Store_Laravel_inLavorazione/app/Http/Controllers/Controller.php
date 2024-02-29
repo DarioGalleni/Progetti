@@ -10,9 +10,11 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
     public function home()
-{
-    return view('welcome');
-}
+    {    
+        return view('welcome');
+    }
+
+
 
 public function index()
 {   
@@ -46,7 +48,6 @@ public function show($id)
         ['id'=>'9', 'Tipo' => 'Directional', 'descrizione' => 'Tavole con una forma e una flex direzionali, ottimali per il carving e il controllo a alta velocita\'', 'price' => 370, 'url' => 'img/snowboards/9.webp'],
     ];
     $snowboards= collect($snowboards)->where('id', $id)->first();
-    // dd($snowboards);
     return view('show', compact('snowboards'));
 
 }

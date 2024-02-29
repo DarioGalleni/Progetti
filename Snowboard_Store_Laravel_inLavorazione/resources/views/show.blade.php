@@ -12,17 +12,17 @@
               <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body d-flex justify-content-center">
+            <div class="modal-body d-flex justify-content-center mb-5">
               <div id="carouselExampleFade" class="carousel slide carousel-fade">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-bueNRFZYBEWXrABWYoTiyYtt4SK82GC7QQ&usqp=CAU" class="d-block w-100" alt="img/Romeo.jpg">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-bueNRFZYBEWXrABWYoTiyYtt4SK82GC7QQ&usqp=CAU" class="img-fluid" alt="img/Romeo.jpg">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS2RCLUPq1JgEPmHByabXOF8kuno6klS2moQ&usqp=CAU" class="d-block w-100" alt="img/Romeo.jpg">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS2RCLUPq1JgEPmHByabXOF8kuno6klS2moQ&usqp=CAU" class="img-fluid" alt="img/Romeo.jpg">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZScR8dZx0KDQ5ACuC9c8f-y9Ou2d4AC34Zg&usqp=CAU" class="d-block w-100" alt="img/Romeo.jpg">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZScR8dZx0KDQ5ACuC9c8f-y9Ou2d4AC34Zg&usqp=CAU" class="img-fluid" alt="img/Romeo.jpg">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
