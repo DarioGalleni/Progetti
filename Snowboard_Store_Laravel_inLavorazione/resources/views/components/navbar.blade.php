@@ -7,13 +7,13 @@
     <div class="collapse navbar-collapse d-flex justify-content-md-center" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="{{route('index')}}">Sempre Disponibili</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="{{route('crea')}}">Aggiungi</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          <a class="nav-link" href="{{route('indexAdded')}}">Aggiunti</a>
         </li>
       </ul>
     </div>

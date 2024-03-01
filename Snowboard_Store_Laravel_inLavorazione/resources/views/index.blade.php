@@ -16,7 +16,7 @@
                 descrizione="{{ $item['descrizione'] }}"
                 price="{{ $item['price'] }}"
                 url="{{ $item['url'] }}"
-                link="{{ route('show', ['id' => $item['id']]) }}"
+                link="{{ route('mostra', ['id' => $item['id']]) }}"
             />
             @endforeach
             </div>

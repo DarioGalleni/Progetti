@@ -34,7 +34,7 @@ public function index()
     return view('index', compact('snowboards', 'marca'));
 }
 
-public function show($id)
+public function mostra($id)
 {   
     $snowboards = [
         ['id'=>'1', 'Tipo' => 'Freestyle', 'descrizione' => 'Tavole leggere e flessibili, ottimali per salti, tricks e manovre in snowpark', 'price' => 300, 'url' => 'img/snowboards/1.webp'],
@@ -48,7 +48,7 @@ public function show($id)
         ['id'=>'9', 'Tipo' => 'Directional', 'descrizione' => 'Tavole con una forma e una flex direzionali, ottimali per il carving e il controllo a alta velocita\'', 'price' => 370, 'url' => 'img/snowboards/9.webp'],
     ];
     $snowboards= collect($snowboards)->where('id', $id)->first();
-    return view('show', compact('snowboards'));
+    return view('mostra', compact('snowboards'));
 
 }
 
