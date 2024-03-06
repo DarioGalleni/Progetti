@@ -3,6 +3,16 @@ nav {
   color: white !important;
 }
 
+.black
+{
+  background: black;
+  color: white;
+}
+span
+{
+
+  cursor: pointer;
+}
 .nav-link {
   color: white !important;
 }

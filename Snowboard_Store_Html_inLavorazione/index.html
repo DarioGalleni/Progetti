@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <!-- css -->
     <link rel="stylesheet" href="/css/style.css">
-
+    <!-- google icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- meta color -->
+    <meta name="theme-color" content="#2B2FFF"/>
     <title>SnowBoard Store</title>
 </head>
 <body>
@@ -36,6 +39,9 @@
                     </li>
                 </ul>
             </div>
+            <span id="darkmode" class="material-symbols-outlined">
+                contrast
+                </span>
         </div>
     </nav>
     <!-- fine navbar -->
@@ -51,16 +57,17 @@
         </div>
 
         <div class="container-fluid">
-            <div class="row justify-content-evenly">
-                <div data-aos="fade-left" data-aos-duration="3000" class="col-12 col-md-6 mt-5">
+            <div class="row justify-content-evenly align-items-center">
+                <div data-aos="fade-left" data-aos-duration="3000" class="col-12 col-md-6 d-flex align-content-center">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae dolore corporis dicta voluptates laudantium quasi necessitatibus reiciendis nulla consequuntur laboriosam obcaecati molestias totam blanditiis architecto sed dolorem, quaerat, ut id?</p>
                 </div>
-
-                <div data-aos="fade-up" data-aos-duration="3000" class="p-2 col-12 col-md-6 d-flex justify-content-center rounded shadow">
-                    <video src="./assets/video/header.mp4" height="100%vh" width="100%vw" autoplay muted></video>
+        
+                <div data-aos="fade-up" data-aos-duration="3000" class="p-2 col-12 col-md-6 d-flex justify-content-center shadow">
+                    <video src="./assets/video/header.mp4" height="100%vh" width="100%vw" muted autoplay></video>
                 </div>
             </div>
         </div>
+        
     </header>
     <!-- fine header -->
 
@@ -88,8 +95,6 @@
             </div>
         </div>
     <!-- fine carosello -->
-        
-        
         <!-- aos -->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <!-- bootstrap -->

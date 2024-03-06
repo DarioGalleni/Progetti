@@ -32,6 +32,7 @@ let snowboards = [
     {'Tipo' : 'Hybrid', 'descrizione' : 'Tavole che combinano caratteristiche del camber e del rocker per massimizzare prestazioni in diverse condizioni', 'price' : 380 , 'url': '/assets/img/snowboards/snowboards (8).webp'},
     {'Tipo' : 'Directional', 'descrizione' : 'Tavole con una forma e una flex direzionali, ottimali per il carving e il controllo a alta velocità', 'price' : 370 , 'url': '/assets/img/snowboards/snowboards (9).webp'},
 ];
+
 snowboards.forEach((item) => {
     let div = document.createElement('div');
     div.classList.add('swiper-slide', 'rounded', 'shadow');
@@ -43,3 +44,11 @@ snowboards.forEach((item) => {
     let swiperWrapper = document.querySelector(".swiper-wrapper");
     swiperWrapper.appendChild(div);
     });
+
+    let button = document.querySelector('#darkmode');
+    button.addEventListener("click", function() {
+        let body = document.querySelector('body');
+        body.classList.toggle('black');
+    });
+
+

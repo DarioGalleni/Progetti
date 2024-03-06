@@ -6,6 +6,21 @@ nav {
 .nav-link {
   color: white !important;
 }
+/* modalità notte */
+.black
+{
+  background: black;
+  color: white;
+}
+
+#darkmode:hover
+{
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+
+/* fine modalità notte */
 body {
   background: linear-gradient(180deg, rgba(43,47,255,0.3) 0%, rgba(145,215,252,0.3) 100%);
   background-repeat: no-repeat;
@@ -45,3 +60,5 @@ header > h1
 {
   transform: scale(1.1);
 }
+
+

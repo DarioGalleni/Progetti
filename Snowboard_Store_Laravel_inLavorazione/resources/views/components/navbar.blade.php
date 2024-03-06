@@ -17,5 +17,8 @@
         </li>
       </ul>
     </div>
+    <span id="prova" class="material-symbols-outlined">
+      contrast
+      </span>
   </div>
   </nav>
