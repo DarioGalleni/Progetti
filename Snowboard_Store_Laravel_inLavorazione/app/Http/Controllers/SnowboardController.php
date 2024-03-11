@@ -10,11 +10,12 @@ class SnowboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function added(snowboard $snowboard)
+    public function added(Snowboard $snowboard)
     {
         $snowboard = Snowboard::all();
         return view('indexAdded', compact('snowboard'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -9,8 +9,8 @@
     </div>
     
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6">
+        <div class="row justify-content-between">
+            <div class="col-12 col-md-3">
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
