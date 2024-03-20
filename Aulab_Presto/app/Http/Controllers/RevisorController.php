@@ -48,18 +48,4 @@ class RevisorController extends Controller
         
     }
 
-    // public function submit(Request $request) 
-    // {
-    //     // $email = $request->input('email');
-    //     // $name = $request->input('name');
-    //     // $message = $request->input('message');
-
-    //     Mail::to('admin@presto.it')->send(new becomeRevisor(Auth::user()));
-        
-
-
-    //     return redirect('welcome');
-
-    //     }
-
 }
