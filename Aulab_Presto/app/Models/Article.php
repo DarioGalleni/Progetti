@@ -47,10 +47,7 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(Review::class);
-    }
+
 
     public function setAccepted($value)
     {

@@ -1,4 +1,4 @@
-<div class="col-12 col-md-2">
+<div id="cards" class="col-12 col-md-4">
     <div class="card rounded text-center" style="width: 18rem;">
     <img src="{{$url}}" class="mt-2 rounded" alt="...">
     <div class="card-body d-flex flex-column">
