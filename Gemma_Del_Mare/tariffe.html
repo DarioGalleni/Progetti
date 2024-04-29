@@ -3,7 +3,7 @@
 	<head>
     <meta charset="utf-8">
         <title>Hotel Gemma del Mare di Marina di Pietrasanta, Benvenuti in Versilia</title>
-    <meta name="DESCRIPTION" content="Il nostro albergo � situato in una zona tranquilla e immerso nel verde a circa 800 metri dalle spiaggia, di Marina di Pietrasanta in Versilia.">
+    <meta name="DESCRIPTION" content="Il nostro albergo è situato in una zona tranquilla e immerso nel verde a circa 800 metri dalle spiaggia, di Marina di Pietrasanta in Versilia.">
     <meta name="KEYWORDS" content="Hotel Marina di Pietrasanta, Albergo in Versilia, Pietrasanta, Mare">
 	<link rel="alternate" hreflang="" href="https://www.gemmadelmare.com/" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -26,6 +26,7 @@
   <script type="text/javascript" src="/web/js/owlcarousel/owl.carousel.min.js"></script>
 
   <script type="text/javascript" src="/web/js/fancybox/jquery.fancybox.js"></script>
+  <script></script>
   <link rel="stylesheet" type="text/css" href="/web/js/fancybox/jquery.fancybox.css">
 
 		<link href="https://fonts.googleapis.com/css?family=Mukta:300,400,700|PT+Serif:400,700&display=swap" rel="stylesheet">
@@ -41,7 +42,7 @@
         <meta property="og:url"           content="https://www.gemmadelmare.com/" />
       <meta property="og:type"          content="website" />
       <meta property="og:title"         content="Hotel Gemma del Mare di Marina di Pietrasanta, Benvenuti in Versilia" />
-      <meta property="og:description"   content="Il nostro albergo � situato in una zona tranquilla e immerso nel verde a circa 800 metri dalle spiaggia, di Marina di Pietrasanta in Versilia." />
+      <meta property="og:description"   content="Il nostro albergo è situato in una zona tranquilla e immerso nel verde a circa 800 metri dalle spiaggia, di Marina di Pietrasanta in Versilia." />
           	  </head>
   <body>
   	<nav class="navbar fixed-top navheader">
@@ -129,8 +130,39 @@
 		</div>
 		<div class="row text-center ">
 		</div>
-		<div class="row no-gutters text-center">
-		<table style="word-wrap: break-word;">
+
+		<div id="tariffe_smartphone" class="container">
+			<div class="row">
+				<div class="col-12">
+					<p>Aprile e Maggio<br>
+					Pernottamento e colazione Euro 50
+					Mezza Pensione Euro 65</p>
+				</div>
+				<div class="col-12 mt-5">
+					<p>Giugno<br>
+					Pernottamento e colazione Euro 65 <br>
+					Mezza Pensione Euro 75</p>
+				</div>
+				<div class="col-12 mt-5">
+					<p>Luglio<br>
+					Pernottamento e colazione Euro 65 <br>
+					Mezza Pensione Euro 75</p>
+				</div>
+				<div class="col-12 mt-5">
+					<p>Agosto<br>
+					Pernottamento e colazione Euro 90 <br>
+					Mezza Pensione Euro 110</p>
+				</div>
+				<div class="col-12 mt-5">
+					<p>Settembre ed Ottobre<br>
+					Pernottamento e colazione Euro 50
+					Mezza Pensione Euro 65</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="tabelladesktop" class="row no-gutters text-center">
+		<table>
 			<thead>
 				<tr>
 					<th>Periodo</th>
@@ -167,6 +199,7 @@
 				</tbody>
 			</table>
 		</div>
+
 		<div class="row no-gutters text-center">
 			<img src="/web/struttura/separatore.png" alt="" class="separatore">
 		</div>
@@ -263,6 +296,7 @@
 	</div>
 </footer>
 <script type="text/javascript">
+
 	function attivaMenu(){
 		//console.log($('#menu-nav').is(':visible'));
       	if( !$('#menu-nav').is(':visible') ){
@@ -275,6 +309,8 @@
 	  		$('#menu-chiudi').hide();			
 		}
 	}
+
+
 
 	$(document).ready( function(){
 		if( $('.ban').length <= 0  ){

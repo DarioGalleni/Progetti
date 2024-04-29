@@ -72,3 +72,22 @@ a:hover
 {
 text-decoration: underline;
 }
+
+.col-12 p
+{
+   font-weight: bold;
+   font-size: 1.2rem;
+   
+}
+@media screen and (max-width: 576px) {
+   #tabelladesktop {
+     display: none;
+   }
+ }
+
+ @media screen and (min-width: 576px) {
+   #tariffe_smartphone {
+     display: none;
+   }
+ }
+
