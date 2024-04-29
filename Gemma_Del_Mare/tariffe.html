@@ -310,7 +310,16 @@
 		}
 	}
 
+// tabella prezzi per android internet
+if (window.innerWidth < 576) {
 
+    var tabella = document.getElementById("tabelladesktop");
+    tabella.classList.add("d-none");
+  }
+else { 
+    var tabella = document.getElementById("tabelladesktop");
+    tabella.classList.remove("d-none");
+}
 
 	$(document).ready( function(){
 		if( $('.ban').length <= 0  ){

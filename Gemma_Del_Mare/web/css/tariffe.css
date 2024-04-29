@@ -79,6 +79,8 @@ text-decoration: underline;
    font-size: 1.2rem;
    
 }
+
+/*tabella prezzi per mobile e desktop */
 @media screen and (max-width: 576px) {
    #tabelladesktop {
      display: none;
