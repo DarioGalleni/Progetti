@@ -1,5 +1,5 @@
 body {
-  background: #fff;
+  background: #f2f4fb;
   font-family: "Roboto", arial, sans-serif;
   font-weight: 200;
   font-size: 16px;
@@ -88,9 +88,10 @@ textarea.form-control {
   z-index: 2;
   -webkit-transition: .3s all ease-in-out;
   -o-transition: .3s all ease-in-out;
-  transition: .3s all ease-in-out; }
+  transition: .3s all ease-in-out;}
   .site-header.scrolled {
-    padding: 20px 0;
+    border-bottom:1px solid gainsboro;
+    padding: 10px 0;
     background: #fff;
     -webkit-box-shadow: 0 5px 20px -5px rgba(0, 0, 0, 0.1);
     box-shadow: 0 5px 20px -5px rgba(0, 0, 0, 0.1); }
@@ -1269,5 +1270,15 @@ textarea.form-control {
         background: #ffba5a;
         color: #fff;
         border-radius: 50%; }
+        @media screen and (max-width: 992px) {
+          .site-logo a
+          {
+            font-size: 18px;
+          }
+          #hotel_header
+          {
+            white-space: nowrap;
+          }
+        }
 
 

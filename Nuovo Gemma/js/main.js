@@ -153,18 +153,6 @@
   }
   smoothScroll();
 
-  var dateAndTime = function() {
-    $('#m_date').datepicker({
-      'format': 'm/d/yyyy',
-      'autoclose': true
-    });
-    $('#checkin_date, #checkout_date').datepicker({
-      'format': 'd MM, yyyy',
-      'autoclose': true
-    });
-    $('#m_time').timepicker();
-  };
-  dateAndTime();
 
 
   var windowScroll = function() {
@@ -187,15 +175,18 @@
   $(document).ready(function() {
     var lastScrollTop = 0;
     $(window).scroll(function() {
-      var scrollTop = $(this).scrollTop();
-      if (scrollTop > 200 && scrollTop > lastScrollTop) {
-        $('#hotel_header').removeClass('d-none');
-      } else {
-        $('#hotel_header').addClass('d-none');
-      }
-      lastScrollTop = scrollTop;
+        var scrollTop = $(this).scrollTop();
+        if (scrollTop > 200 && scrollTop > lastScrollTop) {
+            $('#hotel_header').removeClass('d-none');
+        } else {
+            if (scrollTop <= 200) {
+                $('#hotel_header').addClass('d-none');
+            }
+        }
+        lastScrollTop = scrollTop;
     });
-  });
+});
+
   
   
 
