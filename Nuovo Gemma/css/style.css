@@ -24,7 +24,7 @@ a {
     text-decoration: none; }
 
 h1, h2, h3, h4, h5 {
-  color: #000;
+  color: #1a1a1a;
   font-family: "Playfair Display", times, serif; }
 
 .font-family-serif {
@@ -193,7 +193,7 @@ textarea.form-control {
     transform: translateX(-50%);
     color: #fff; }
   .site-hero.overlay:before {
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.5);
     content: "";
     position: absolute;
     height: 100vh;
@@ -1080,7 +1080,8 @@ textarea.form-control {
 
 .room {
   position: relative;
-  display: block; }
+  display: block; 
+  cursor: auto;}
   .room .img-wrap {
     position: relative;
     overflow: hidden; }
