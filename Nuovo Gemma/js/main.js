@@ -177,10 +177,10 @@
     $(window).scroll(function() {
         var scrollTop = $(this).scrollTop();
         if (scrollTop > 200 && scrollTop > lastScrollTop) {
-            $('#hotel_header').removeClass('d-none');
+            $('.no_wrap').removeClass('d-none');
         } else {
             if (scrollTop <= 200) {
-                $('#hotel_header').addClass('d-none');
+                $('.no_wrap').addClass('d-none');
             }
         }
         lastScrollTop = scrollTop;

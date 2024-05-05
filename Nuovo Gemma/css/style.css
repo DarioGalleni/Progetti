@@ -1271,15 +1271,10 @@ textarea.form-control {
         background: #ffba5a;
         color: #fff;
         border-radius: 50%; }
-        @media screen and (max-width: 992px) {
-          .site-logo a
-          {
-            font-size: 18px;
-          }
-          #hotel_header
-          {
-            white-space: nowrap;
-          }
-        }
+      .no_wrap
+      {
+        white-space: nowrap;
+      } 
+        
 
 
