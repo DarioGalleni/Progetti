@@ -10,21 +10,6 @@ let reviews = document.querySelector("#reviews");
 recensioni.forEach((element) => {
     let div = document.createElement("div");
     div.classList.add("carousel-item", "active");
-  //   div.innerHTML = `<div class="container">
-  //   <div class="row">
-  //     <div class="col-6 ">
-  //       <h2 class="text-center">Recensore: ${element.nome}</h2>
-  //     </div>
-  //     <div class="col-6 d-flex justify-content-center">
-  //       <img src="images/tripadvisor.png" height="50px" class="" alt="">
-  //     </div>
-  //   </div>
-  //   <div class="row">
-  //     <div class="col-12 mt-3">
-  //       <h2 class="text-center">Recensione: ${element.recensione}</h2>
-  //     </div>
-  //   </div>
-  // </div>`;
   div.innerHTML = `<div class="card border-white">
   <div class="card-header d-flex row justify-content-between text-center">
     <div class="col-6 my-auto">
