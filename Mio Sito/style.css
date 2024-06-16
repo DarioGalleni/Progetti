@@ -13,7 +13,7 @@ body {
 
 body {
 	font-size: 110%;
-	color: #ecf0f1;
+	color: #eeecf1;
 	font-family: 'Source Sans Pro', sans-serif;
 	background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
 	width: 100%;
@@ -27,9 +27,7 @@ body {
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	margin-top: 50%;
 }
 
 .contact {
