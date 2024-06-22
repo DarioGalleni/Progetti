@@ -1,13 +1,8 @@
-.prova {
-    transition: 500ms;
-    background-color: #744264;
-    
-}
-
 @import url(//fonts.googleapis.com/css?family=Vibur);
 html,body{
   height:100%
 }
+
 body {
   background: url(//images.weserv.nl/?url=i.imgur.com/6QJjYMe.jpg)  center no-repeat;
   background-size:cover;
@@ -15,7 +10,7 @@ body {
 }
 .logo {
   /* text-align: center; */
-  width: 65%;
+  /* width: 65%; */
   height: 250px;
   /* margin: auto; */
   /* position: absolute; */
@@ -66,3 +61,11 @@ body {
     text-shadow: inherit;
   }
 }
+
+.prova
+{
+  transition: 1000ms ease-in;
+
+}
+
+

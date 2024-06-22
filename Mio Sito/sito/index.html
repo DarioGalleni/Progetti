@@ -10,18 +10,26 @@
     <!--  google font -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet">
+
+
+    
 
     <!-- custom css -->
 
-    <link rel="stylesheet" href="index.css">
-    </head>
+    <link rel="stylesheet" href="index.css"> 
+    
+    <!-- aos -->
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+</head>
 
     <body>
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg">
+    <nav class="navbar d-none navbar-expand-lg bg-body-tertiary shadow-lg fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,19 +54,19 @@
       </div>
     </nav>
     <!-- fine navbar -->
-    <div class="container">
+    <div class="container vh-100">
       <div class="row">
         <div class="col-12 d-flex justify-content-center">
-              <div style="height: 100vh;text-align: center;" class="logo d-flex align-items-center"><b>Dario</b></div>
+              <div class="logo d-flex align-items-center mt-5"><b>Dario</b></div>
         </div>
       </div>
     </div>
 
 
 
-    <div class="container mt-5">
+    <div class="container vh-100">
       <div class="row">
-        <div class="col-12">
+        <div  class="col-12" data-aos="fade-up">
           <p class="text-bg-danger">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis corporis dicta blanditiis nisi quae sequi praesentium! Aliquam repellendus pariatur inventore minima rerum quidem tempora maiores nisi, totam consectetur quibusdam necessitatibus?</p>
         </div>
       </div>
@@ -68,9 +76,17 @@
 
 
 
-
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+      <script>
+      AOS.init();
+    </script> 
+
+    
+
 </body>
 </html>
