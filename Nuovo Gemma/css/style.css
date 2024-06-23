@@ -207,7 +207,6 @@ textarea.form-control {
     height: 50vh;
     min-height: 700px; }
     .site-hero.inner-page.overlay:before {
-      height: 50vh;
       min-height: 700px; }
 
 .site-hero-inner {
@@ -720,7 +719,7 @@ textarea.form-control {
 
 .contact-section .contact-info p {
   font-family: "Playfair Display", times, serif;
-  font-size: 30px;
+  font-size: 25px;
   margin-bottom: 30px; }
   .contact-section .contact-info p .d-block {
     font-size: 14px;
