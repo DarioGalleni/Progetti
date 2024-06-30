@@ -321,3 +321,9 @@ footer ul li a:hover{ color: #FFF; }
 	.fotogallery > div:nth-child(9n-1) > a{ height: 180px;   }
 	.fotogallery > div:nth-child(9n) > a{ height: 180px;   }
 }
+
+#ristorante:hover
+{
+	transition: 500ms;
+	background-color:#336633;
+}
