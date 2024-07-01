@@ -174,23 +174,7 @@ fotogallery.forEach(element =>
       }
 );
 
-// let fotosmartphone = document.querySelector("#smartphone")
 
-// fotogallery.forEach((element) => {
-//       let div = document.createElement("div");
-//       div.setAttribute("data-aos", "zoom-out");
-//       div.setAttribute("data-aos-duration", "3000")
-//       div.setAttribute("data-aos-delay", "500")
-//       div.classList.add("col-12", "p-1");
-      
-      
-      
-//       div.innerHTML = `<img class="img-fluid my-3 rounded shadow-lg p-3 bg-body-tertiary" src="/images/photogallery/${element}" alt="foto">`
-
-
-    
-//       fotosmartphone.appendChild(div);
-//     });
 
 let slider = document.querySelector(".d-none");
 let si = document.querySelector("#si");
