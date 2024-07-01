@@ -17,27 +17,31 @@
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
-    <link rel="stylesheet" href="css/fancybox.min.css">
     <link rel="stylesheet" href="css/_custom.css">
     
     <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/photogallery.css">
   </head>
   <body>
     
-    <header class="site-header js-site-header ">
+    <header class="site-header js-site-header p-0 shadow bg-light">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="col-6 col-lg-4 site-logo" data-aos="fade"><a href="index.html" class="no_wrap">Hotel Gemma del Mare</a></div>
-          <div class="col-6 col-lg-8">
-            <div class="site-menu-toggle js-site-menu-toggle m-1"  data-aos="fade">
-              <span></span>
-              <span></span>
-              <span></span>
+          <div class="col-6 col-lg-4 site-logo" data-aos="fade"><a href="index.html" class="no_wrap" style="color: black;">Hotel Gemma del Mare</a></div>
+          <div class="col-6 col-lg-8 d-flex justify-content-end mt-1">
+            <div>
+              <div class="site-menu-toggle js-site-menu-toggle m-0 d-flex align-items-center"  data-aos="fade" style="color: black;">
+              <span style="background-color: black;"></span>
+              <span style="background-color: black;"></span>
+              <span style="background-color: black;"></span>
+            </div>
+            </div>
             </div>
             <!-- END menu-toggle -->
             <div class="site-navbar js-site-navbar">
@@ -49,7 +53,7 @@
                         <li class="active"><a href="index.html">Home</a></li>
                         <li><a href="rooms.html">Camere</a></li>
                         <li><a href="about.html">Hotel</a></li>
-                        <li><a href="fotogallery.html">Photogallery</a></li>
+                        <li><a href="events.html">Photogallery</a></li>
                         <li><a href="https://wa.me/3792597801"><img src="./images/wa.png" alt="whatsapp" width="50px" ></a></li>
                         <li><a href="mailto:info@gemmadelmare.com"><i class="fa-regular fa-envelope" style="color: #000000;"></i></a></li>
                       </ul>
@@ -64,92 +68,43 @@
     </header>
     <!-- END head -->
 
-    <section id="homepage" class="site-hero overlay" data-stellar-background-ratio="0.5">
-      <div class="container">
-        <div class="row site-hero-inner justify-content-center align-items-center">
-          <div class="col-md-10 text-center" data-aos="fade-up">
-            <span class="custom-caption text-uppercase text-white d-block  mb-3">Welcome To</span>
-            <h1 class="heading text-white">Gemma del Mare <br></h1>
-            <p class="text-white">Marina di Pietrasanta</p>
-          </div>
-        </div>
-      </div>
-        <a class="mouse smoothscroll" href="#next">
-        <div class="mouse-icon">
-          <span class="mouse-wheel"></span>
-        </div>
-        </a>
-    </section>
-    
 
-    <section class="py-5 bg-light mt-5">
+    <section id="slider" class="py-5 bg-light mt-5">
       <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-12 col-lg-7 ml-auto order-lg-2 position-relative mb-5 rounded" data-aos="fade-up">
-            <img src="images/esterno davanti.jpg" alt="Image" class="img-fluid rounded p-2 bg-white">
-          </div>
-          <div class="bg-light col-md-12 col-lg-4 order-lg-1" data-aos="fade-up">
-            <h2 class="heading text-center">Relax e Tranquillità</h2>
-            <p class="mb-4 text-center">L'Hotel Gemma del Mare è situato in una <strong>zona tranquilla e immerso nel verde a circa 900 metri dalle spiaggia</strong>, nelle immediate vicinanze di <strong>Pietrasanta, Forte dei Marmi, Lido di Camaiore e Viareggio.</strong></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section bg-image overlay" style="background-image: url('images/ristorante.jpg');">
-      <div class="container">
-        <div class="row justify-content-center text-center mb-5">
-          <div class="col-md-7">
-            <h2 class="heading text-white" data-aos="fade">Ristorante</h2>
-            <p class="text-white" data-aos="fade" data-aos-delay="100">Qui, ogni piatto racconta la storia della nostra terra e del mare che ci circonda. Lasciatevi tentare dai nostri piatti di pesce freschissimo, pescato giornalmente, e dalle ricette della tradizione, preparate con amore e ingredienti genuini. La nostra cucina casalinga è un omaggio ai sapori autentici e alle radici profonde di questa terra. Venite a scoprire un angolo di paradiso dove il gusto incontra la tradizione in un’atmosfera accogliente e familiare.
-            </p>
-          </div>
-        </div>
-        </div>
-    </section>
-
-    <section class="section bg-light">
-      <div class="container">
-        <div class="row justify-content-center text-center mb-5">
-          <div class="col-md-7">
-            <h2 class="heading" data-aos="fade-up">Camere</h2>
-            <p data-aos="fade-up" data-aos-delay="100">Le camere ampie e confortevoli con balconi vista su giardino sono munite di: TV, Wi-Fi, bagno doccia, scrivania.</p>
-          </div>
-        </div>
         <div class="row justify-content-center">
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-              <figure class="img-wrap">
-                <img src="images/imm singola.jpg" alt="Free website template" class="img-fluid mb-3 rounded">
-              </figure>
-              <div class="p-3 text-center room-info">
-                <h2>Camera Singola</h2>
-              </div>
+          <div class="col-12" data-aos="fade-up">
+            <h2 class="heading text-center">Guarda le nostre foto</h2>
           </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-              <figure class="img-wrap">
-                <img src="images/imm matrim balcone.jpg" alt="Free website template" class="img-fluid mb-3 rounded">
-              </figure>
-              <div class="p-3 text-center room-info">
-                <h2>Camera Matrimoniale</h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-6 d-flex justify-content-end">
+                <button id="si" class="btn">Si</button>
               </div>
+              <div class="col-6">
+                <button id="no" class="btn"><a id="button_no" href="index.html">No</a></button>
+              </div>
+            </div>
           </div>
+          <div class="container d-none">
+            <div class="row">
+              <div class="col-12">
+                <!-- Swiper -->
+                <div class="swiper mySwiper">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
 
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <a href="#" class="room">
-              <figure class="img-wrap">
-                <img src="images/imm tripla balcone.jpg" alt="Free website template" class="img-fluid mb-3 rounded">
-              </figure>
-              <div class="p-3 text-center room-info">
-                <h2>Camera Tripla</h2>
+                  </div>
+                  
+                </div>
+                <div class="swiper-pagination"></div>
               </div>
-            </a>
+            </div>
           </div>
         </div>
       </div>
     </section>
-    
-    
+
+
     <section class="section bg-image overlay" style="background-image: url('images/big_scopri-la-versilia-banner-6821.jpg');">
         <div class="container" >
           <div class="row align-items-center">
@@ -197,6 +152,29 @@
 
     
 
-    <script src="js/main.js"></script>
+    <script src="js/fotogallery.js"></script>
+
+      <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+    });
+  </script>
   </body>
 </html>
