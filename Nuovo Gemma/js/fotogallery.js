@@ -174,24 +174,6 @@ fotogallery.forEach(element =>
       }
 );
 
-
-
-let slider = document.querySelector(".d-none");
-let si = document.querySelector("#si");
-let no = document.querySelector("#no");
-
-si.addEventListener('click', function() {
-  slider.classList.remove('d-none');
-  si.classList.add('d-none');
-  no.classList.add('d-none');
-});
-
-no.addEventListener('click', function() {
-  slider.classList.remove('d-none');
-});
-
-    
-  
     var goToTop = function() {
       $('.js-gotop').on('click', function(event){
         event.preventDefault();
