@@ -16,7 +16,7 @@
 //     });
 // });
 
-// // navbar toggle
+// navbar toggle
 $('#nav-toggle').click(function(){
     $(this).toggleClass('is-active')
     $('ul.nav').toggleClass('show');
@@ -33,7 +33,7 @@ document.getElementById('downloadButton').addEventListener('click', function() {
     a.click();
 });
 
-//
+// navbar visibile allo scroll
 let nav = document.getElementsByTagName('nav')[0];
 window.addEventListener('scroll', function() {
     if (window.scrollY > 1) {
