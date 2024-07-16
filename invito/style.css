@@ -1,0 +1,27 @@
+/* #main
+{
+height: 100vh;
+width: 100vw;
+background-image: linear-gradient(white,rgba(255, 255, 255, 0.00005)), url(./img/main.jpg);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+} */
+
+.roboto {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .playwrite {
+    font-family: "Playwrite PE", cursive;
+    font-optical-sizing: auto;
+    
+  }
+
+  #tasto
+  {
+    background-color: #4DC247 !important;
+    border: #4DC247;
+  }
