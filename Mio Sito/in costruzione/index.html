@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with Meyawo landing page.">
-    <meta name="author" content="Devcrud">
+    <meta name="description" content="creazione siti web" />
+    <meta name="keywords" content="front-end developer versilia siti web " />
+    <meta name="author" content="Dario">
+    <meta name="theme-color" content="#5F659B" />
     <title>Dario's</title>
     <!-- font icons -->
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + main styles -->
 	<link rel="stylesheet" href="assets/css/style.css">
+    <!-- aos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <meta name="theme-color" content="#5F659B" />
 </head>
-<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+
+<body>
 
     <!-- Navbar -->
     <nav class="custom-navbar d-none shadow-lg" data-spy="affix" data-offset-top="20">
@@ -52,8 +59,8 @@
     <!-- page header -->
     <header id="home" class="header img-fluid">
         <div class="overlay"></div>
-        <div class="header-content container">
-            <h1 class="header-title">
+        <div data-aos="fade-right" data-aos-duration="500" class="header-content container">
+            <h1 class="header-title" data-aos="fade-right" data-aos-duration="500">
                 <span class="up">Ciao!</span>
                 <span class="down">Io sono Dario</span>
             </h1>
@@ -66,9 +73,9 @@
     <!-- about section -->
     <section class="section pt-0" id="about">
         <div class="container text-center">
-            <div class="about">
-                <div class="about-img-holder">
-                    <img src="assets/imgs/man.png" class="about-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
+            <div class="about" data-aos="fade-left" data-aos-duration="500">
+                <div class="about-img-holder ">
+                    <img src="assets/imgs/man_2.jpeg" class="about-img rounded-circle" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
                 </div>
                 <div class="about-caption">
                     <p class="section-subtitle">Chi sono ?</p>
@@ -89,44 +96,35 @@
 
 
     <!-- service section -->
-    <section class="section" id="service">
+    <section class="section" id="service" data-aos="fade-right" data-aos-duration="1500">
         <div class="container text-center">
             <p class="section-subtitle">Cosa faccio ?</p>
-            <h6 class="section-title mb-6">Servizi</h6>
-            <div class="row">
+            <h6 class="section-title mb-6">Creazione siti web</h6>
+            <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
+                    <div class="service-card service">
                         <div class="body">
                             <img src="assets/imgs/pencil-case.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
-                            <h6 class="title">Adipisicing</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam molestias dolorem iste quod.</p>
+                            <h6 class="title">Design dell'interfaccia utente</h6>
+                            <p class="subtitle">Creazione di layout visivamente accattivanti</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
+                    <div class="service-card service">
                         <div class="body">
                             <img src="assets/imgs/responsive.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
-                            <h6 class="title">Sapiente</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam molestias dolorem iste quod.</p>
+                            <h6 class="title">Responsive</h6>
+                            <p class="subtitle">Siti web che si adattano automaticamente ad ogni dispositivo</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
+                <div class="col-md-6 col-lg-3 mt-md-2 mt-lg-0">
+                    <div class="service-card service">
                         <div class="body">
                             <img src="assets/imgs/toolbox.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
-                            <h6 class="title">Placeat</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam molestias dolorem iste quod.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
-                        <div class="body">
-                            <img src="assets/imgs/analytics.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
-                            <h6 class="title">Iusto</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam molestias dolorem iste quod.</p>
+                            <h6 class="title">Dinamicità</h6>
+                            <p class="subtitle">Animazioni che faranno sembrare il tuo sito in movimento</p>
                         </div>
                     </div>
                 </div>
@@ -393,8 +391,8 @@
             </div>
         </footer>
     </div> <!-- end of page footer -->
-	
-	<!-- core  -->
+
+    <!-- core  -->
     <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
 
@@ -404,5 +402,10 @@
     <!-- Meyawo js -->
     <script src="assets/js/script.js"></script>
 
+    <!-- aos -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>
