@@ -25,3 +25,8 @@ background-repeat: no-repeat;
     background-color: #4DC247;
     border: #4DC247;
   }
+
+  #mioInput
+  {
+    margin-right: 0 !important;
+  }

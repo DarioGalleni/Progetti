@@ -32,6 +32,8 @@ function recuperaValore() {
     let outputElement = document.getElementById('tasto');
     outputElement.href = whatsappLink;
     outputElement.target = "blank";
+
+
   } else {
     // Mostra un messaggio di avviso se l'input è vuoto
     alert("Inserisci il tuo nome");
