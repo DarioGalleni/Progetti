@@ -19,14 +19,15 @@ function recuperaValore() {
 
     // Aggiungi testo in base alle checkbox selezionate
     if (sceltaCarne) {
-      messaggio += ", e vorrei ordinare la carne.";
+      messaggio += ", e vorrei ordinare il menu vegetariano.";
     }
-    if (sceltaPesce) {
-      messaggio += ", e vorrei ordinare il pesce.";
+    else if (sceltaPesce) {
+      messaggio += ", e vorrei ordinare il menu di pesce.";
     }
 
+
     // Crea il link per Whatsapp
-    let whatsappLink = `https://wa.me/393488289553/?text=${messaggio}`;
+    let whatsappLink = `https://wa.me/393298047791/?text=${messaggio}`;
 
     // Aggiorna l'elemento <a> con il link
     let outputElement = document.getElementById('tasto');

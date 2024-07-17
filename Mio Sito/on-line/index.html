@@ -17,18 +17,53 @@
 
         <meta name="theme-color" content="#5F659B" />
     </head>
+    <style>
+        
+        .at-item {
+            
+            animation-name: slide-in-right;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-delay: 0s;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+            animation-fill-mode: none;
+                
+            /* shorthand
+            animation: slide-in-right 5.2s linear 0s 1 normal none;*/
+        }
+        @keyframes slide-in-right {
+                
+            0% {
+                transform:translateX(1000px);
+                opacity:0;
+            }
+            100% {
+                transform:translateX(0);
+                opacity:1;
+            }
+        }
+    </style>
 <body>
     <!-- page header -->
     <header id="home" class="header vw-100">
         <div class="overlay"></div>
-        <div class="header-content container">
-            <h1 class="header-title" data-aos="fade-right" data-aos-duration="1000">
+            <div class="header-content container">
+            <h1 class="header-title" data-aos="fade-right">
                 <span class="up">Ciao!</span>
                 <span class="down">Io sono Dario</span>
             </h1>
             <p class="header-subtitle">FRONTEND WEB DESIGNER - SITO IN COSTRUZIONE</p>            
-        </div>              
+        </div><div class="container">
+        <div class="row">
+            <div class="col-12 at-item">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti repellendus fugiat, excepturi enim cum iste, sequi officia nihil animi quasi vel, atque doloribus! Vitae debitis et accusantium aliquam rerum tempora!</p>
+            </div>
+        </div>
+    </div>
     </header>
+
+    
     <!-- end of page header -->
 
     <!-- aos -->

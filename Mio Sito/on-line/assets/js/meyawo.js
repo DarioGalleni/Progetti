@@ -42,4 +42,3 @@ window.addEventListener('scroll', function() {
         nav.classList.add('d-none');
     }
 });
-
