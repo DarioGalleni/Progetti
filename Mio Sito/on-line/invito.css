@@ -1,0 +1,30 @@
+#main
+{ width: 100vw;
+  background: #ecffc1;
+  background: -webkit-linear-gradient(0deg, #ecffc1 0%, #ffe6cc 50%, #dfbaf7 100%);
+  background: linear-gradient(0deg, #ecffc1 0%, #ffe6cc 50%, #dfbaf7 100%);
+  background-repeat: repeat;
+}
+
+.roboto {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  .playwrite {
+    font-family: "Playwrite PE", cursive;
+    font-optical-sizing: auto;
+    
+  }
+
+  #tasto
+  {
+    background-color: #4DC247;
+    border: #4DC247;
+  }
+
+  #mioInput
+  {
+    margin-right: 0 !important;
+  }

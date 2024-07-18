@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html id="index" lang="it">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,59 +17,68 @@
 
         <meta name="theme-color" content="#5F659B" />
     </head>
-    <style>
-        
-        .at-item {
-            
-            animation-name: slide-in-right;
-            animation-duration: 10s;
-            animation-timing-function: linear;
-            animation-delay: 0s;
-            animation-iteration-count: 1;
-            animation-direction: normal;
-            animation-fill-mode: none;
-                
-            /* shorthand
-            animation: slide-in-right 5.2s linear 0s 1 normal none;*/
-        }
-        @keyframes slide-in-right {
-                
-            0% {
-                transform:translateX(1000px);
-                opacity:0;
-            }
-            100% {
-                transform:translateX(0);
-                opacity:1;
-            }
-        }
-    </style>
+
 <body>
     <!-- page header -->
-    <header id="home" class="header vw-100">
+    <header id="home" class="header vw-100 text text">
         <div class="overlay"></div>
             <div class="header-content container">
             <h1 class="header-title" data-aos="fade-right">
                 <span class="up">Ciao!</span>
                 <span class="down">Io sono Dario</span>
             </h1>
-            <p class="header-subtitle">FRONTEND WEB DESIGNER - SITO IN COSTRUZIONE</p>            
-        </div><div class="container">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <h3 class="header-subtitle">FRONTEND WEB DESIGNER - SITO IN COSTRUZIONE</h3>            
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- invito -->
+    <div class="container cena">
         <div class="row">
-            <div class="col-12 at-item">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti repellendus fugiat, excepturi enim cum iste, sequi officia nihil animi quasi vel, atque doloribus! Vitae debitis et accusantium aliquam rerum tempora!</p>
+            <div class="col-12 text-center at-item text-dark">
+                <p class="font-weight-bold">Sei qui per la cena di classe dell 5° Als ?</p>
+                <button id="si" class="btn btn-primary" href="">Si</button>
+                <button id="no" class="btn btn-primary">No</button>
             </div>
         </div>
     </div>
-    </header>
+    <!-- controllo -->
+    <div class="container controllo d-none">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <input type="text" id="check" value="" placeholder="Inserisci il tuo nome">
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-2">
+                <button id="verifica" class="btn btn-primary border-1 border-primary">Verifica</button>
+            </div>
+        </div>
+    </div>
+    <!-- accesso negato -->
+    <div class="container denied d-none">
+        <div class="row justify-content-center">
+            <div class="col-12 alert alert-danger">
+                <h5 class="text-center">Mi dispiace, non sei tra gli invitati</h5>
+            </div>
+        </div>
+    </div>
+
+    
 
     
     <!-- end of page header -->
-
     <!-- aos -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
+
+    <!-- my script -->
+    <script src="assets/js/script.js"></script>
+    
 </body>
 </html>

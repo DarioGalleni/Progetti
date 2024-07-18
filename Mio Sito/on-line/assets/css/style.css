@@ -12040,8 +12040,8 @@ pre .code {
 
 .header {
   position: relative;
-  height: 100vh;
-  min-height: 600px;
+  /* height: 100vh; */
+  min-height: 400px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -12226,7 +12226,7 @@ pre .code {
   padding: 100px 0 !important;
 }
 
-.header-content {
+/* .header-content {
   animation-name: slide-out-tl;
   animation-duration: 1s;
   animation-timing-function: linear;
@@ -12245,4 +12245,5 @@ pre .code {
       transform: translateY(-1000px) translateX(-1000px);
       opacity: 0;
   }
-}
+} */
+
