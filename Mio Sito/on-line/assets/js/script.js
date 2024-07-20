@@ -43,6 +43,7 @@
 //     }
 // });
 
+
 document.getElementById("no").addEventListener("click", function() {
     let div = document.getElementsByClassName("cena")[0];
     div.classList.add("d-none");
@@ -55,9 +56,14 @@ document.getElementById("si").addEventListener("click", function() {
     controllo.classList.remove("d-none");
 });
 
-// controllo
+// Controllo
 let check = document.getElementById("check");
 let verifica = document.getElementById("verifica");
+let denied = document.getElementsByClassName("denied")[0];
+let chiudi = document.getElementById("chiudi");
+let prova = document.getElementById("prova");
+
+
 
 verifica.addEventListener("click", function() {   
     let nomi = [
@@ -73,10 +79,22 @@ verifica.addEventListener("click", function() {
 
         // Reindirizza alla pagina invito.html
         window.location.href = "invito.html";
-    } else {
-        let denied = document.getElementsByClassName("denied")[0];
+    }
+    else if(check.value.trim() === "")
+    {
+        prova.classList.remove("d-none")
+        setTimeout(function() {
+            prova.style.display = 'none';
+        }, 5000);
+    }
+    else {
         denied.classList.remove("d-none");
-        let controllo = document.getElementsByClassName("controllo")[0];
-        controllo.classList.add("d-none");
     }
 });
+
+chiudi.addEventListener("click", function() {
+    console.log("ciao");
+    denied.classList.add("d-none");
+});
+
+

@@ -1,0 +1,5 @@
+height: 200px;
+  width: 200px;
+  background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 0, 0.4) 0%, rgba(0, 188, 212, 0.5) 58%, rgba(238, 130, 238, 0.5) 100%), url("https://picsum.photos/200/300");
+  
+}

@@ -24,15 +24,15 @@ $('#nav-toggle').click(function(){
 });
 
 // cv download
-document.getElementById('downloadButton').addEventListener('click', function() {
-    const fileUrl = '/assets/imgs/man.png';
-    const fileName = 'Cv';
-    const a = document.createElement('a');
-    a.href = fileUrl;
-    a.download = fileName;
-    document.body.appendChild(a);
-    a.click();
-});
+// document.getElementById('downloadButton').addEventListener('click', function() {
+//     const fileUrl = '/assets/imgs/man.png';
+//     const fileName = 'Cv';
+//     const a = document.createElement('a');
+//     a.href = fileUrl;
+//     a.download = fileName;
+//     document.body.appendChild(a);
+//     a.click();
+// });
 
 // navbar visibile allo scroll
 let nav = document.getElementsByTagName('nav')[0];

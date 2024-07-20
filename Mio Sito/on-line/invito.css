@@ -1,9 +1,6 @@
 #main
 { width: 100vw;
-  background: #ecffc1;
-  background: -webkit-linear-gradient(0deg, #ecffc1 0%, #ffe6cc 50%, #dfbaf7 100%);
-  background: linear-gradient(0deg, #ecffc1 0%, #ffe6cc 50%, #dfbaf7 100%);
-  background-repeat: repeat;
+  background: linear-gradient(180deg, rgba(76, 175, 80, 0.5) 0%, rgba(49, 220, 255, 0.5) 100%);
 }
 
 .roboto {
