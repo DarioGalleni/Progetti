@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
+let button = document.getElementById("tasto")
 button.addEventListener("click", recuperaValore);
 
 function recuperaValore() {

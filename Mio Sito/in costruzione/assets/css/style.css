@@ -12222,7 +12222,6 @@ pre .code {
 
 .service:hover
 {
-  cursor: pointer;
   background-color: rgba(95, 101, 155, 0.5);
   transition: 0.9s;
   
