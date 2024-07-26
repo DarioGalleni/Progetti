@@ -12161,6 +12161,11 @@ pre .code {
   min-width: 400px;
   max-width: 400px;
   margin-right: 20px;
+  transition: transform 500ms
+}
+
+.about-img-holder:hover {
+  transform: scale(1.1);
 }
 
 .about-img-holder .about-img {
@@ -12190,6 +12195,7 @@ pre .code {
     width: 100%;
     margin: auto;
     margin-bottom: 20px;
+    
   }
 }
 
