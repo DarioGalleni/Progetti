@@ -1,3 +1,10 @@
+document.addEventListener('keydown', function(a) {
+  if (a.key === 'F12' || (a.ctrlKey && a.shiftKey && a.key === 'I')) {
+        a.preventDefault();
+        alert("codice nascosto")
+    }
+  });
+
 document.addEventListener("DOMContentLoaded", function() {
     // Recupera il valore dal localStorage
     let username = localStorage.getItem("username");
