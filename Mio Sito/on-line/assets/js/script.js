@@ -72,36 +72,36 @@ let prova = document.getElementById("prova");
 
 
 
-verifica.addEventListener("click", function() {   
-    let nomi = [
-        "matteo", "marica", "francesco", "alessia", "alice", "mirko", 
-        "beatrice", "federica", "francesca", "giulia", "ilaria", "irene", 
-        "jessica", "mary", "mery", "serena", "silvia", "simone", 
-        "tommaso", "valentina", "veronica", "dario"
-    ];
+// verifica.addEventListener("click", function() {   
+//     let nomi = [
+//         "matteo", "marica", "francesco", "alessia", "alice", "mirko", 
+//         "beatrice", "federica", "francesca", "giulia", "ilaria", "irene", 
+//         "jessica", "mary", "mery", "serena", "silvia", "simone", 
+//         "tommaso", "valentina", "veronica", "dario",
+//     ];
     
-    if (nomi.includes(check.value.toLowerCase())) {
-        // Salva il valore nel localStorage
-        localStorage.setItem("username", check.value);
+//     if (nomi.includes(check.value.toLowerCase())) {
+//         // Salva il valore nel localStorage
+//         localStorage.setItem("username", check.value);
 
-        // Reindirizza alla pagina invito.html
-        window.location.href = "invito.html";
-    }
-    else if(check.value.trim() === "")
-    {
-        prova.classList.remove("d-none")
-        setTimeout(function() {
-            prova.style.display = 'none';
-        }, 5000);
-    }
-    else {
-        denied.classList.remove("d-none");
-    }
-});
+//         // Reindirizza alla pagina invito.html
+//         window.location.href = "invito.html";
+//     }
+//     else if(check.value.trim() === "")
+//     {
+//         prova.classList.remove("d-none")
+//         setTimeout(function() {
+//             prova.style.display = 'none';
+//         }, 5000);
+//     }
+//     else {
+//         denied.classList.remove("d-none");
+//     }
+// });
 
-chiudi.addEventListener("click", function() {
-    console.log("ciao");
-    denied.classList.add("d-none");
-});
+// chiudi.addEventListener("click", function() {
+//     console.log("ciao");
+//     denied.classList.add("d-none");
+// });
 
 

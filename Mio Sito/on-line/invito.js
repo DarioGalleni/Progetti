@@ -1,54 +1,34 @@
 document.addEventListener('keydown', function(a) {
-  if (a.key === 'F12' || (a.ctrlKey && a.shiftKey && a.key === 'I')) {
+    if (a.key === 'F12' || (a.ctrlKey && a.shiftKey && a.key === 'I')) {
         a.preventDefault();
-        alert("codice nascosto")
+        console.error('Tentativo di accesso alle funzionalità di sviluppo bloccato.');
     }
-  });
+});
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Recupera il valore dal localStorage
-    let username = localStorage.getItem("username");
-    
-    // Controlla se l'utente ha passato la verifica
-    if (!username) {
-        // Se non c'è username nel localStorage, reindirizza alla prima pagina
-        window.location.href = "index.html";
-        return;
-    }
-
-let button = document.getElementById("tasto")
+let button = document.getElementById("tasto");
 button.addEventListener("click", recuperaValore);
 
 function recuperaValore() {
-      // Recupera l'elemento input utilizzando il suo id
-    let carne = document.getElementById("carne");
-    let pesce = document.getElementById("pesce");
+    const nomeInput = document.getElementById("nome");
+    const carneInput = document.getElementById("carne");
+    const pesceInput = document.getElementById("pesce");
 
-      // Ottieni il valore dell'input
-    let sceltaPesce = pesce.checked;
-    let sceltaCarne = carne.checked;
+    const nome = nomeInput.value.trim();
 
-      // Se l'input non è vuoto
-    if (username) {
-        let messaggio = `Ciao, sono ${username}`;
+    if (nome) {
+        let messaggio = `Ciao, sono ${nome}`;
 
-          // Aggiungi testo in base alle checkbox selezionate
-        if (sceltaCarne) {
+        if (carneInput.checked) {
             messaggio += ", e vorrei ordinare il menu vegetariano.";
-        } else if (sceltaPesce) {
+        } else if (pesceInput.checked) {
             messaggio += ", e vorrei ordinare il menu di pesce.";
         }
 
-          // Crea il link per Whatsapp
-        let whatsappLink = `https://wa.me/393298047791/?text=${(messaggio)}`;
-
-          // Aggiorna l'elemento <a> con il link
-        let outputElement = document.getElementById('tasto');
-        outputElement.href = whatsappLink;
-        outputElement.target = "_blank";
+        const whatsappLink = `https://wa.me/393298047791/?text=${encodeURIComponent(messaggio)}`;
+        button.href = whatsappLink;
+        button.target = "_blank";
     } else {
-          // Mostra un messaggio di avviso se l'input è vuoto
-        alert("Inserisci il tuo nome");
+        alert("Inserisci il tuo nome per procedere.");
     }
 }
-});
+
