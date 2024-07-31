@@ -12040,7 +12040,7 @@ pre .code {
 
 .header {
   position: relative;
-  /* height: 100vh; */
+  height: 100vh;
   min-height: 400px;
   display: -webkit-box;
   display: -ms-flexbox;

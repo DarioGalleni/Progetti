@@ -1,30 +1,32 @@
-function mostraValore() {
-    var input = document.getElementById('mioInput');
-    var valore = input.value.toLowerCase();  // Convertiamo il valore dell'input in minuscolo per un confronto case-insensitive
+document.getElementById('dataForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-    fetch('https://api.restful-api.dev/objects')
-        .then(ex => ex.json())
-        .then(posts => {
-            // Pulisce il contenitore dei risultati prima di aggiungere nuovi elementi
-            var resultContainer = document.getElementById('resultContainer');
-            resultContainer.innerHTML = '';
+    const name = document.getElementById('name').value;
+    const cognome = document.getElementById('cognome').value;
+    const age = document.getElementById('age').value;
 
-            posts.forEach(element => {
-                // Controlliamo se il valore dell'input è contenuto nel nome dell'elemento
-                if (element.name.toLowerCase().includes(valore)) {
-                    // Creiamo un nuovo elemento per il nome
-                    var nameElement = document.createElement('p');
-                    nameElement.innerHTML = `
-                    Nome: ${element.name}<br>
-                    Capacità: ${element.data.capacity}
-                    `;
+    console.log(name,cognome,age)
 
-                    // Aggiungiamo il nuovo elemento al contenitore dei risultati
-                    resultContainer.appendChild(nameElement);
-                }
-            });
-        })
-        .catch(error => {
-            console.error("Errore nella richiesta fetch:", error);
-        });
-}
+    const data = {
+        name: name,
+        cognome: cognome,
+        age: age,
+    };
+
+    fetch('https://https://papaya-smakager-ebd02f.netlify.app/api', {  // Sostituisci con il tuo URL API
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        document.getElementById('response').innerText = 'Risposta del server: ' + JSON.stringify(data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        document.getElementById('response').innerText = 'Errore: ' + error;
+    });
+});
