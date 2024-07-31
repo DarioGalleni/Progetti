@@ -6,7 +6,7 @@ let recensioni = [
     {"nome": "Francesco", "recensione": "Il personale &egrave molto cordiale e molto simpatico e l'hotel &egrave molto bello,lo consiglierei vivamente"},   
   ];
 
-let reviews = document.querySelector(".js-carousel-2");
+let reviews = document.getElementById("reviews");
 
 recensioni.forEach((element) => {
     let div = document.createElement("div");
