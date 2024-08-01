@@ -11,7 +11,7 @@ let reviews = document.getElementById("reviews");
 recensioni.forEach((element) => {
     let div = document.createElement("div");
     div.style.minHeight = "300px"
-    div.innerHTML = `<p class="fst-italic">${element.recensione}}</p>
+    div.innerHTML = `<p class="fst-italic" style="min-height: 200px;">${element.recensione}}</p>
             <div class="d-flex justify-content-center align-items-end">
               <p class="fst-italic">${element.nome}</p>
             </div>`
