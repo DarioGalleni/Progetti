@@ -325,27 +325,49 @@
     <!-- contact section -->
     <section class="section" id="contact">
         <div class="container text-center">
-            <p class="section-subtitle">How can you communicate?</p>
-            <h6 class="section-title mb-5">Contact Me</h6>
-            <form action="" class="contact-form col-md-10 col-lg-8 m-auto">
-                <div class="form-row">
-                    <div class="form-group col-sm-6">
-                        <input type="text" size="50" class="form-control" placeholder="Your Name" required>                 
+            <h6 class="section-title mb-5">Contattami</h6>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <h3 style="color: black;">Email</h3>
+                        <form  class="contact-form" action="https://formsubmit.co/e534122944bcc984065e277bfa1f4703" method="POST">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <input type="text" name="name" size="50" class="form-control" placeholder="Nome" required>                 
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <input type="email" name="email" class="form-control" placeholder="Email"requried>                 
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <textarea name="messaget" id="comment" rows="6"   class="form-control" placeholder="Messaggio"></textarea>
+                                </div>
+                                <div class="form-group col-sm-12 mt-3">
+                                    <input id="submit" type="submit" value="Send Message" class="btn btn-outline-primary rounded">                  
+                                </div>
+                            </div>  
+                        </form>
                     </div>
-                    <div class="form-group col-sm-6">
-                        <input type="email" class="form-control" placeholder="Enter Email"requried>                 
+                    <div class="col-12 col-md-6">
+                        <h3 style="color: #25d366">WhatsApp</h3>
+                        <form action="" class="contact-form">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <input type="text" size="50" class="form-control" placeholder="Nome" required>                 
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <textarea name="comment" id="comment" rows="6"   class="form-control" placeholder="Messaggio"></textarea>
+                                </div>
+                                <div class="form-group col-sm-12 mt-3">
+                                    <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">                  
+                                </div>
+                            </div>  
+                        </form>
                     </div>
-                    <div class="form-group col-sm-12">
-                        <textarea name="comment" id="comment" rows="6"   class="form-control" placeholder="Write Something"></textarea>
-                    </div>
-                    <div class="form-group col-sm-12 mt-3">
-                        <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">                  
-                    </div>
-                </div>  
-            </form>
-        </div>
-    </section>
+                </div>
+            </div>
+        </section>
     <!-- end of contact section -->
+
+            
 
     <!-- footer -->
     <div class="container">

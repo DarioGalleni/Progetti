@@ -2640,10 +2640,12 @@ textarea.form-control {
     margin-bottom: 0;
   }
   .form-inline .form-group {
+
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    justify-content: center;
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 auto;
         -ms-flex: 0 0 auto;

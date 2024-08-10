@@ -1,9 +1,9 @@
-document.addEventListener('keydown', function(a) {
-    if (a.key === 'F12' || (a.ctrlKey && a.shiftKey && a.key === 'I')) {
-          a.preventDefault();
-          alert("codice nascosto")
-      }
-    });
+// document.addEventListener('keydown', function(a) {
+//     if (a.key === 'F12' || (a.ctrlKey && a.shiftKey && a.key === 'I')) {
+//           a.preventDefault();
+//           alert("codice nascosto")
+//       }
+//     });
 
 
 // $(document).ready(function(){
@@ -52,3 +52,8 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// let submit = document.getElementById("submit")
+// submit.addEventListener("click", function()
+// {
+//     alert("ok")
+// })
