@@ -9,7 +9,7 @@
         <meta property="og:url" content="https://dariux87com/"/>
         <meta property="og:title" content="Dario | Creazione Siti Web"/>
         <meta property="og:description" content="Crea la tua pagina web per il tuo negozio, hotel o ristorante"/>
-        <meta property="og:keywords" content="sitiweb, creazione, versilia, lido di camaiore"/>
+        <meta property="og:keywords" content="sitiweb, creazione, versilia, lido di camaiore, viareggio, sviluppo web"/>
         <meta property="og:image" content="assets/imgs/favicon/apple-touch-icon.png">
         <!-- favicon -->
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/imgs/favicon/apple-touch-icon.png">
@@ -30,7 +30,7 @@
     </head>
     
 <body>
-    
+    <!-- navbar -->
     <nav class="custom-navbar d-none shadow-lg fixed-top" data-spy="affix" data-offset-top="20">
         <div class="container">
             <a class="logo" href="#top">Dario</a>         
@@ -45,13 +45,7 @@
                     <a class="link" href="#portfolio">Portfolio</a>
                 </li>
                 <li class="item">
-                    <a class="link" href="#testmonial">Testmonial</a>
-                </li>
-                <li class="item">
                     <a class="link" href="#contact">Contact</a>
-                </li>
-                <li class="item ml-md-3">
-                    <a href="components.html" class="btn btn-primary">Components</a>
                 </li>
             </ul>
             <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
@@ -61,7 +55,7 @@
             </a>
         </div>          
     </nav>
-    
+    <!-- end navbar -->
 
     <!-- page header -->
     <header id="home" class="header img-fluid">
@@ -72,7 +66,6 @@
                 <span class="down">Io sono Dario</span>
             </h1>
             <p class="header-subtitle">FRONTEND WEB DESIGNER</p>            
-            <!-- <button class="btn btn-primary">Visit My Works</button> -->
         </div>              
     </header>
     <!-- end of page header -->
@@ -99,8 +92,6 @@
         </div>
     </section>
     <!-- end of about section -->
-
-
 
     <!-- service section -->
     <section class="section" id="service" data-aos="fade-right" data-aos-duration="1500">
@@ -142,7 +133,7 @@
 
     <!-- portfolio section -->
     <section class="section" id="portfolio">
-        <div class="container text-center">
+        <div class="container text-center" data-aos="fade-left" data-aos-duration="500">
             <h6 class="section-title mb-6">Cosa ho fatto ?</h6>
             <div class="row justify-content-center">
                 <div class="col-12 col-md-4">
@@ -175,33 +166,13 @@
                         </span>                     
                     </a>
                 </div>
-                <div  class="col-12 col-md-4 mt-2">
-                    <a href="https://recuperonomifiles.netlify.app" class="portfolio-card border" target="blank">
-                        <img src="assets/imgs/js.png" class="portfolio-card-img" alt="GitHub">    
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <p class="font-weight-normal">Piccolo script per recupero nomi files da cartella</p>
-                            </span>                         
-                        </span>                     
-                    </a>
-                </div>
-                <!-- <div class="col-12 col-md-4">
-                    <a href="#" class="portfolio-card">
-                        <img class="portfolio-card-img" src="assets/imgs/folio-3.jpg" class="img-responsive rounded" alt="Gemma del Mare">    
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <p class="font-weight-normal">Category: Web Templates</p>
-                            </span>                         
-                        </span>                     
-                    </a>
-                </div> -->
             </div>
         </div>
     </section>
     <!-- end of portfolio section -->
 
     <!-- pricing section -->
-    <section class="section" id="pricing">
+    <!-- <section class="section" id="pricing">
         <div class="container text-center">
             <p class="section-subtitle">How Much I Charge ?</p>
             <h6 class="section-title mb-6">My Pricing</h6>
@@ -271,30 +242,14 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- end of pricing section -->
 
-    <section class="section-sm bg-primary">
-        <div class="container text-center text-sm-left">
-            <div class="row align-items-center">
-                <div class="col-sm offset-md-1 mb-4 mb-md-0">
-                    <h6 class="title text-light">Want to work with me?</h6>
-                    <p class="m-0 text-light">Always feel Free to Contact & Hire me</p>
-                </div>
-                <div class="col-sm offset-sm-2 offset-md-3">
-                    <button class="btn btn-lg my-font btn-light rounded">Hire Me</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- testimonial section -->
-    <section class="section" id="testmonial">
+    <!-- <section class="section" id="testmonial">
         <div class="container text-center">
             <p class="section-subtitle">What Think Client About Me ?</p>
             <h6 class="section-title mb-6">Testmonial</h6>
-
-            <!-- row -->
             <div class="row">
                 <div class="col-md-6">
                     <div class="testimonial-card">
@@ -319,12 +274,13 @@
                     </div>
                 </div>
             </div>
-        </div> <!-- end of container -->
-    </section> <!-- end of testimonial section -->
+        </div>
+    </section> -->
+    <!-- end of testimonial section -->
     
     <!-- contact section -->
     <section class="section" id="contact">
-        <div class="container text-center">
+        <div class="container text-center" data-aos="fade-right" data-aos-duration="500">
             <h6 class="section-title mb-5">Contattami</h6>
                 <div class="row">
                     <div class="col-12 col-md-6">
@@ -338,7 +294,7 @@
                                     <input type="email" name="email" class="form-control" placeholder="Email"requried>                 
                                 </div>
                                 <div class="form-group col-sm-12">
-                                    <textarea name="messaget" id="comment" rows="6"   class="form-control" placeholder="Messaggio"></textarea>
+                                    <textarea name="message" id="comment" rows="6"   class="form-control" placeholder="Messaggio"></textarea>
                                 </div>
                                 <div class="form-group col-sm-12 mt-3">
                                     <input id="submit" type="submit" value="Send Message" class="btn btn-outline-primary rounded">                  
@@ -347,17 +303,17 @@
                         </form>
                     </div>
                     <div class="col-12 col-md-6">
-                        <h3 style="color: #25d366">WhatsApp</h3>
+                        <h3 class="mt-5 mt-md-0" style="color: #25d366">WhatsApp</h3>
                         <form action="" class="contact-form">
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <input type="text" size="50" class="form-control" placeholder="Nome" required>                 
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="form-group col-12">
+                                    <input type="text" size="" class="form-control col-12" placeholder="Nome" id="whatsapp_name" value="" required>                 
                                 </div>
                                 <div class="form-group col-sm-12">
-                                    <textarea name="comment" id="comment" rows="6"   class="form-control" placeholder="Messaggio"></textarea>
+                                    <textarea  name="whatsapp_message" id="whatsapp_message" rows="6" class="form-control" placeholder="Messaggio"></textarea>
                                 </div>
                                 <div class="form-group col-sm-12 mt-3">
-                                    <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">                  
+                                    <a href="#" id="whatsapp_submit" class="btn btn-outline-primary rounded" target="_blank">Send message</a>                  
                                 </div>
                             </div>  
                         </form>
@@ -370,15 +326,15 @@
             
 
     <!-- footer -->
-    <div class="container">
+    <div class="container d-flex justify-content-center">
         <footer class="footer">       
             <p class="mb-0">Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="#header">Dariux</a></p>
-            <div class="social-links text-right m-auto ml-sm-auto">
+            <!-- <div class="social-links text-right m-auto ml-sm-auto">
                 <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
                 <a href="javascript:void(0)" class="link"><i class="ti-pinterest-alt"></i></a>
                 <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
                 <a href="javascript:void(0)" class="link"><i class="ti-rss"></i></a>
-            </div>
+            </div> -->
         </footer>
     </div> <!-- end of page footer -->
 
