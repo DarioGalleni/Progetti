@@ -1,77 +1,360 @@
 <!DOCTYPE html>
-<html id="index" lang="it">
-    <head>
-        <title>Dario | Creazione Siti Web</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, initial-scale=1.0">
-        
-        <!-- Facebook Meta Tags -->
-        <meta property="og:title" content="Dario | Creazione Siti Web">
-        <meta property="og:description" content="Crea la tua pagina web per il tuo negozio, hotel o ristorante">
-        <meta property="og:image" content="https://i.postimg.cc/VkDBCQpb/android-chrome-512x512.png">
-        <meta property="og:url" content="https://www.dariux87.com">
-        <meta property="og:site_name" content="Dario's">
-        <meta property="og:type" content="website">
-        
-        <!-- Twitter Meta Tags -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Dario | Creazione Siti Web">
-        <meta name="twitter:description" content="Crea la tua pagina web per il tuo negozio, hotel o ristorante">
-        <meta name="twitter:image" content="https://i.postimg.cc/VkDBCQpb/android-chrome-512x512.png">
-        
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- open graph -->
+        <meta property="og:type" content="website"/>
+        <meta property="og:locale" content="it"/>
+        <meta property="og:url" content="https://dariux87com/"/>
+        <meta property="og:title" content="Dario | Creazione Siti Web"/>
+        <meta property="og:description" content="Crea la tua pagina web per il tuo negozio, hotel o ristorante"/>
+        <meta property="og:keywords" content="sitiweb, creazione, versilia, lido di camaiore, viareggio, sviluppo web"/>
+        <meta property="og:image" content="assets/imgs/favicon/apple-touch-icon.png">
         <!-- favicon -->
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/imgs/favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/assets/imgs/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/imgs/favicon//favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/imgs/favicon/favicon-16x16.png">
-        <link rel="icon" href="/assets/imgs/favicon/favicon.ico">
-        <link rel="manifest" href="/assets/imgs/favicon/site.webmanifest">
-        
+        <link rel="icon" href="/assets/imgs/favicon//favicon.ico">
+        <link rel="manifest" href="/assets/imgs/favicon//site.webmanifest">
         <!-- font icons -->
         <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
-        
         <!-- Bootstrap + main styles -->
         <link rel="stylesheet" href="assets/css/style.css">
-        
         <!-- aos -->
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-        
         <!-- fontawesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-        
         <meta name="theme-color" content="#5F659B" />
+        <title>Dario's</title>
     </head>
-<body>
     
-
+<body>
+    <!-- navbar -->
+    <nav class="custom-navbar d-none shadow-lg fixed-top" data-spy="affix" data-offset-top="20">
+        <div class="container">
+            <a class="logo" href="#top">Dario</a>         
+            <ul class="nav">
+                <li class="item">
+                    <a class="link" href="#home">Home</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#about">About</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#portfolio">Portfolio</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#contact">Contact</a>
+                </li>
+            </ul>
+            <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
+                <div class="hamburger-box">
+                    <div class="hamburger-inner"></div>
+                </div>
+            </a>
+        </div>          
+    </nav>
+    <!-- end navbar -->
 
     <!-- page header -->
-    <header id="home" class="header vw-100 text text">
+    <header id="home" class="header img-fluid">
         <div class="overlay"></div>
-            <div class="header-content container">
-            <h1 class="header-title" data-aos="fade-right">
+        <div data-aos="fade-right" data-aos-duration="500" class="header-content container">
+            <h1 class="header-title" data-aos="fade-right" data-aos-duration="500">
                 <span class="up">Ciao!</span>
                 <span class="down">Io sono Dario</span>
             </h1>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <h3 class="header-subtitle">FRONTEND WEB DESIGNER - SITO IN COSTRUZIONE</h3>            
+            <p class="header-subtitle">FRONTEND WEB DESIGNER</p>            
+        </div>              
+    </header>
+    <!-- end of page header -->
+
+    <!-- about section -->
+    <section class="section pt-0" id="about">
+        <div class="container text-center">
+            <div class="about" data-aos="fade-left" data-aos-duration="500">
+                <div class="about-img-holder">
+                    <img src="assets/imgs/man_2.jpeg" class="about-img rounded-circle" alt="Site_Logo" title="Site_Logo">
+                </div>
+                <div class="about-caption">
+                    <p class="section-subtitle">Chi sono ?</p>
+                    <h2 class="section-title mb-3">Eccomi...</h2>
+                    <p>
+                        Junior full stack developer con propensione per lo sviluppo front end. Buona dimestichezza nell'utilizzo di
+                        linguaggi front end e back end acquisita grazie ad un Coding Bootcamp basato sulla programmazione per
+                        oggetto e metodologia agile Scrum. Affidabilità, curiosità e passione per l'informatica unite a buone capacità di
+                        lavoro in team, organizzative, relazionali e di ascolto rappresentano punti di forza.              
+                    </p>
+                    <!-- <button class="btn-rounded btn btn-outline-primary mt-4" id="downloadButton">Download</button> -->
+                </div>              
+            </div>
+        </div>
+    </section>
+    <!-- end of about section -->
+
+    <!-- service section -->
+    <section class="section" id="service" data-aos="fade-right" data-aos-duration="1500">
+        <div class="container text-center">
+            <p class="section-subtitle">Cosa faccio ?</p>
+            <h6 class="section-title mb-6">Creazione siti web</h6>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card service">
+                        <div class="body">
+                            <img src="assets/imgs/pencil-case.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
+                            <h6 class="title">Design dell'interfaccia utente</h6>
+                            <p class="subtitle">Creazione di layout visivamente accattivanti</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card service">
+                        <div class="body">
+                            <img src="assets/imgs/responsive.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
+                            <h6 class="title">Responsive</h6>
+                            <p class="subtitle">Siti web che si adattano automaticamente ad ogni dispositivo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mt-md-2 mt-lg-0">
+                    <div class="service-card service">
+                        <div class="body">
+                            <img src="assets/imgs/toolbox.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
+                            <h6 class="title">Dinamicità</h6>
+                            <p class="subtitle">Animazioni che faranno sembrare il tuo sito in movimento</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
+    <!-- end of service section -->
+
+    <!-- portfolio section -->
+    <section class="section" id="portfolio">
+        <div class="container text-center" data-aos="fade-left" data-aos-duration="500">
+            <h6 class="section-title mb-6">Cosa ho fatto ?</h6>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-4">
+                    <a href="https://gemmadelmare2.netlify.app/" class="portfolio-card border" target="blank">
+                        <img src="assets/imgs/gemma2.png" class="portfolio-card-img" alt="Gemma del Mare" >    
+                        <span class="portfolio-card-overlay">
+                            <span class="portfolio-card-caption">
+                                <p class="font-weight-normal">Gemma del Mare</p>
+                            </span>                         
+                        </span>                     
+                    </a>
+                </div>
+                <div class="col-12 col-md-4">
+                    <a href="https://gemmadelmare.com/" class="portfolio-card border" target="blank">
+                        <img src="assets/imgs/gemma.png" class="portfolio-card-img" alt="Gemma del Mare">    
+                        <span class="portfolio-card-overlay">
+                            <span class="portfolio-card-caption">
+                                <p class="font-weight-normal">Gemma del Mare</p>
+                            </span>                         
+                        </span>                     
+                    </a>
+                </div>
+                <div class="col-12 col-md-4">
+                    <a href="https://github.com/DarioGalleni/Progetti" class="portfolio-card border" target="blank">
+                        <img src="assets/imgs/git.png" class="portfolio-card-img" alt="GitHub">    
+                        <span class="portfolio-card-overlay">
+                            <span class="portfolio-card-caption">
+                                <p class="font-weight-normal">Progetti vari</p>
+                            </span>                         
+                        </span>                     
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of portfolio section -->
+
+    <!-- pricing section -->
+    <!-- <section class="section" id="pricing">
+        <div class="container text-center">
+            <p class="section-subtitle">How Much I Charge ?</p>
+            <h6 class="section-title mb-6">My Pricing</h6>
+            <div class="pricing-wrapper">
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <img class="pricing-card-icon" src="assets/imgs/scooter.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
+                    </div>
+                    <div class="pricing-card-body">
+                        <h6 class="pricing-card-title">Free</h6>
+                        <div class="pricing-card-list">
+                            <p>accusamus reprehenderit</p>
+                            <p>provident dolorem </p>
+                            <p>quos neque</p>
+                            <p>fugiat quibusdam</p>
+                            <p><i class="ti-close"></i></p>
+                            <p><i class="ti-close"></i></p>
+                        </div>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <span>$</span>
+                        <span>0.00/Month</span>
+                    </div>
+                    <a href="#" class="btn btn-primary mt-3 pricing-card-btn">Subscribe</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <img class="pricing-card-icon" src="assets/imgs/shipped.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
+                    </div>
+                    <div class="pricing-card-body">
+                        <h6 class="pricing-card-title">Basic</h6>
+                        <div class="pricing-card-list">
+                            <p>accusamus reprehenderit</p>
+                            <p>provident dolorem </p>
+                            <p>quos neque</p>
+                            <p>fugiat quibusdam</p>
+                            <p>accusamus laboriosam</p>
+                            <p><i class="ti-close"></i></p>
+                        </div>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <span>$</span>
+                        <span>9.99/Month</span>
+                    </div>
+                    <a href="#" class="btn btn-primary mt-3 pricing-card-btn">Subscribe</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <img class="pricing-card-icon" src="assets/imgs/startup.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
+                    </div>
+                    <div class="pricing-card-body">
+                        <h6 class="pricing-card-title">Premium</h6>
+                        <div class="pricing-card-list">
+                            <p>accusamus reprehenderit</p>
+                            <p>provident dolorem </p>
+                            <p>quos neque</p>
+                            <p>fugiat quibusdam</p>
+                            <p>accusamus laboriosam</p>
+                            <p>inventore omnis</p>
+                        </div>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <span>$</span>
+                        <span>99.9/Month</span>
+                    </div>
+                    <a href="#" class="btn btn-primary mt-3 pricing-card-btn">Subscribe</a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- end of pricing section -->
+
+    <!-- testimonial section -->
+    <!-- <section class="section" id="testmonial">
+        <div class="container text-center">
+            <p class="section-subtitle">What Think Client About Me ?</p>
+            <h6 class="section-title mb-6">Testmonial</h6>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card-img-holder">
+                            <img src="assets/imgs/avatar2.jpg" class="testimonial-card-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">                           
+                        </div>
+                        <div class="testimonial-card-body">
+                            <p class="testimonial-card-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque doloribus autem aperiam earum nostrum omnis blanditiis corporis perspiciatis adipisci nihil.</p>
+                            <h6 class="testimonial-card-title">Emily Reb</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card-img-holder">
+                            <img src="assets/imgs/avatar3.jpg" class="testimonial-card-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">                        
+                        </div>
+                        <div class="testimonial-card-body">
+                            <p class="testimonial-card-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque doloribus autem aperiam earum nostrum omnis blanditiis corporis perspiciatis adipisci nihil.</p>
+                            <h6 class="testimonial-card-title">Emily Reb</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- end of testimonial section -->
+    
+    <!-- contact section -->
+    <section class="section" id="contact">
+        <div class="container text-center" data-aos="fade-right" data-aos-duration="500">
+            <h6 class="section-title mb-5">Contattami</h6>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <h3 style="color: black;">Email</h3>
+                        <form  class="contact-form" action="https://formsubmit.co/e534122944bcc984065e277bfa1f4703" method="POST">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <input type="text" name="name" size="50" class="form-control" placeholder="Nome" required>                 
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <input type="email" name="email" class="form-control" placeholder="Email"requried>                 
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <textarea name="message" id="comment" rows="6"   class="form-control" placeholder="Messaggio"></textarea>
+                                </div>
+                                <div class="form-group col-sm-12 mt-3">
+                                    <input id="submit" type="submit" value="Send Message" class="btn btn-outline-primary rounded">                  
+                                </div>
+                            </div>  
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h3 class="mt-5 mt-md-0" style="color: #25d366">WhatsApp</h3>
+                        <form action="" class="contact-form">
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="form-group col-12">
+                                    <input type="text" size="" class="form-control col-12" placeholder="Nome" id="whatsapp_name" value="" required>                 
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <textarea  name="whatsapp_message" id="whatsapp_message" rows="6" class="form-control" placeholder="Messaggio"></textarea>
+                                </div>
+                                <div class="form-group col-sm-12 mt-3">
+                                    <a href="#" id="whatsapp_submit" class="btn btn-outline-primary rounded" target="_blank">Send message</a>                  
+                                </div>
+                            </div>  
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- end of contact section -->
+
+            
+
+    <!-- footer -->
+    <div class="container d-flex justify-content-center">
+        <footer class="footer">       
+            <p class="mb-0">Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="#header">Dariux</a></p>
+            <!-- <div class="social-links text-right m-auto ml-sm-auto">
+                <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
+                <a href="javascript:void(0)" class="link"><i class="ti-pinterest-alt"></i></a>
+                <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
+                <a href="javascript:void(0)" class="link"><i class="ti-rss"></i></a>
+            </div> -->
+        </footer>
+    </div> <!-- end of page footer -->
+
+    <!-- core  -->
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+
+    <!-- bootstrap 3 affix -->
+	<script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+
+    <!-- js -->
+    <script src="assets/js/script.js"></script>
 
     <!-- aos -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
-
-    <!-- my script -->
-    <script src="assets/js/script.js"></script>
-    
-    <!-- ldJson -->
-    <script type="application/ld+json">
+     <!-- ldJson -->
+     <script type="application/ld+json">
         {
           "@context": "https://schema.org/", 
           "@type": "BreadcrumbList", 
@@ -92,5 +375,7 @@
               "description": "Siet_logo"
             }
             </script>
+            
 </body>
 </html>
+    
