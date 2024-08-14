@@ -1,30 +1,116 @@
-#main
-{ width: 100vw;
-  background: #ecffc1;
-  background: -webkit-linear-gradient(0deg, #ecffc1 0%, #ffe6cc 50%, #dfbaf7 100%);
-  background: linear-gradient(0deg, #ecffc1 0%, #ffe6cc 50%, #dfbaf7 100%);
-  background-repeat: repeat;
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js);
+@import url(https://fonts.googleapis.com/css?family=Arvo);
+/* iconicfill */
+[class*="iconicfill-"]:before {
+  font-family: 'IconicFill', sans-serif;
 }
 
-.roboto {
-    font-family: "Roboto", sans-serif;
-    font-weight: 900;
-    font-style: normal;
-  }
+body,html{width:100%;height:100%;}
 
-  .playwrite {
-    font-family: "Playwrite PE", cursive;
-    font-optical-sizing: auto;
-    
-  }
+body{font-family:'Arvo';
+  background: #58aea5;
+  background: -webkit-radial-gradient(circle, #58aea5 0%, #81f8b4 100%);
+  background: radial-gradient(circle, #58aea5 0%, #81f8b4 100%);}
 
-  #tasto
-  {
-    background-color: #4DC247;
-    border: #4DC247;
-  }
+.wrap{width:300px;}
+.center{
+ top:50%;
+ transform:translateY(-50%);
+ position:relative;
+ margin:auto;}
 
-  #mioInput
-  {
-    margin-right: 0 !important;
-  }
+input{
+  display:block;
+    width: 300px;
+    padding: 15px 0 15px 12px;
+    font-family: "Arvo";
+    font-weight: 400;
+    color: #377D6A;
+    background: rgba(0,0,0,0.3);
+    border: none;
+    outline: none;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 4px;
+    box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px  1px rgba(255,255,255,0.2);
+    text-indent: 60px;
+    transition: all .3s ease-in-out;
+    position: relative;
+    font-size: 13px;
+}
+input:focus{
+    text-indent: 12px;
+    box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2);
+}
+
+label{
+    display: block;
+    position: static;
+    margin: 0;
+    padding: 0;
+    color:#fff;
+    font-family: 'Arvo';
+    font-size: 16px;
+}
+
+.wrap-label{
+  width: 300px;
+  height: 34px;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  bottom: -15px;
+  overflow: hidden;}
+
+  .form__container{
+    font-family: Arial, Helvetica, sans-serif;
+     max-width:400px;
+     padding:3rem;
+     }
+   
+   .form__group{
+     position:relative;
+     margin-bottom:30px;
+   }
+   
+   .form__input{
+     position:realtive;
+     display:block;
+      width:100%;
+     padding:10px;  
+     border:1px solid #f3f3f3;
+     border-radius:10px;
+     outline:none;
+     box-shadow:0 16px 16px -5px rgba(0,0,0,.1);
+     background:transparent;
+   }
+   
+   .form__input:focus{
+      border:1px solid #5294F7;
+   }
+   
+   .form__label{
+     position:absolute;
+     top:9px;
+     left:15px;
+     transition:all 300ms ease-in-out;
+     pointer-events:none;
+   }
+   
+   .form__input:focus~label,
+   .form__input:not(:placeholder-shown)~label{
+       color:#5294F7;
+       top:-20px;
+       left:0;
+       font-size:14px;
+       z-index:1;
+    }
+   
+   .form__input::-webkit-input-placeholder{
+     color:transparent;
+   }
+   
+   .form__input::-moz-placeholder{
+     color:transparent;
+   }
