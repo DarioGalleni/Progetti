@@ -9,8 +9,8 @@ const button = document.getElementById('button')
             const formData = new FormData(form);
             const object = Object.fromEntries(formData);
             const json = JSON.stringify(object);
-        spinner.classList.remove('d-none')
-        button.classList.add('d-none')
+            spinner.classList.remove('d-none');
+            button.classList.add('d-none');
 
         
         
@@ -27,7 +27,7 @@ const button = document.getElementById('button')
                     if (response.status == 200) {
                         setTimeout(() => {
                             result.classList.remove("d-none");
-                        }, 5000);
+                        }, 2500);
                     } else {
                         console.log(response);
                         result.innerHTML = json.message;

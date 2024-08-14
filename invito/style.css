@@ -1,9 +1,9 @@
-/* @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js);
 @import url(https://fonts.googleapis.com/css?family=Arvo);
-/* iconicfill */
+ 
 [class*="iconicfill-"]:before {
   font-family: 'IconicFill', sans-serif;
-} */
+}
 
 body,html{
 
@@ -137,7 +137,7 @@ label{
   margin: 8px;
   border-radius: 50%;
   border: 4.4px solid #1a2926;
-  border-color: #5DB8A7 transparent #5DB8A7 transparent;
+  border-color: #292d2c transparent #292d2c transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {
