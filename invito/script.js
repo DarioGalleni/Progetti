@@ -1,12 +1,18 @@
 const form = document.getElementById('form');
-        const result = document.getElementById('result');
+const result = document.getElementById('result');
+const spinner = document.getElementById('spinner');
+const button = document.getElementById('button')
+
         
         form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const formData = new FormData(form);
-          const object = Object.fromEntries(formData);
-          const json = JSON.stringify(object);
-          result.innerHTML = "Please wait..."
+            e.preventDefault();
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+        spinner.classList.remove('d-none')
+        button.classList.add('d-none')
+
+        
         
             fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
@@ -19,8 +25,9 @@ const form = document.getElementById('form');
                 .then(async (response) => {
                     let json = await response.json();
                     if (response.status == 200) {
-                        result.classList.remove("d-none");
-                        result.innerHTML = "Form submitted successfully";
+                        setTimeout(() => {
+                            result.classList.remove("d-none");
+                        }, 5000);
                     } else {
                         console.log(response);
                         result.innerHTML = json.message;
@@ -31,9 +38,9 @@ const form = document.getElementById('form');
                     result.innerHTML = "Something went wrong!";
                 })
                 .then(function() {
-                    form.reset();
                     setTimeout(() => {
-                        result.style.display = "none";
-                    }, 3000);
+                        spinner.style.display = "none";
+                    }, 2500);
+                    form.reset();
                 });
         });

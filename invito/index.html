@@ -10,38 +10,37 @@
     </head>
 <body>
 
-
-
+  <!-- https://web3forms.com/ -->
     <form class="form__container container" data-aos="zoom-in" method="POST" id="form">
 
         <input type="hidden" name="access_key" value="be131da1-4928-4199-99ed-e26bb21f9ea9">
         
         <div class="form__group">
-          <input type="text" class="form__input" name="name" placeholder="Name" id="name" required>
+          <input type="text" class="form__input" name="name" id="name" required>
           <label class="form__label" for="name">Name</label>
         </div>
       
         <div class="form__group">
-          <input type="email" class="form__input" name="email" placeholder="Email" id="email" required>
+          <input type="email" class="form__input" name="email"  id="email" required>
           <label class="form__label" for="email">Email</label>
         </div>
-      
-        <div class="form__group">
-          <textarea class="form__input" name="message" placeholder="Message" id="message" required></textarea>
-          <label class="form__label" for="message">Message</label>
+        <div class="container">
+          <div class="row">
+            <!-- button -->
+            <div class="col-12 d-flex justify-content-center">
+              <button type="submit" id="button" class="btn btn-primary">Invia</button>
+            </div>
+            <!-- spinner -->
+            <div class="col-12 d-flex justify-content-center">
+              <div id="spinner" class="lds-dual-ring d-none"></div>
+            </div>
+            <!-- message -->
+            <div class="col-12 d-flex justify-content-center">
+              <div id="result" class="alert alert-success text-center d-none w-100">Dati Inviati</div>
+            </div>
+          </div>
         </div>
-      
-        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-      
-        <button type="submit">Submit Form</button>
-        
-        
-        <div id="result" class="alert alert-danger d-none"></div>
-      
-      </form>
-      
-
-
+    </form>
 
 
 
