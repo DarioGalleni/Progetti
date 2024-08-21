@@ -10,6 +10,19 @@
         }, 1);
     };
     spinner();
+
+    //Navabr visisble at scroll
+    let nav = document.getElementsByTagName('nav')[0];
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 1) {
+            nav.classList.remove('d-none');
+        } else {
+            nav.classList.add('d-none');
+        }
+    });
+    
+    
+    
     
     
     // Initiate the wowjs
@@ -71,7 +84,7 @@
         $('.btn-play').click(function () {
             $videoSrc = $(this).data("src");
         });
-        console.log($videoSrc);
+        // console.log($videoSrc);
 
         $('#videoModal').on('shown.bs.modal', function (e) {
             $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
