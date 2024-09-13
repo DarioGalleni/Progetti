@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
+use App\Models\Guest;
 use Illuminate\Http\Request;
 
-class ArticlesController extends Controller
+class GuestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,6 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('aggiungi');
         //
     }
 
@@ -28,15 +27,15 @@ class ArticlesController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $article = Article::create([
-        'brand' => $request->brand,
-        'price' => $request->price,
-        'name' => $request->name,
-    ]);
+    {
+        $guest = Guest::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'placebirth' => $request->placebirth,
+        ]);
 
-
-}
+        return redirect()->route('home')->with('message', 'utente inserito');
+    }
 
     /**
      * Display the specified resource.
