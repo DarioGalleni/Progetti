@@ -11,8 +11,9 @@ class GuestController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        $guests = Guest::all();
+        return view('index', compact('guests'));
     }
 
     /**
@@ -20,13 +21,13 @@ class GuestController extends Controller
      */
     public function create()
     {
-        //
+        return view ('create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function create_ok(Request $request)
     {
         $guest = Guest::create([
             'name' => $request->name,
@@ -34,15 +35,19 @@ class GuestController extends Controller
             'placebirth' => $request->placebirth,
         ]);
 
-        return redirect()->route('home')->with('message', 'utente inserito');
+        return redirect()->route('create')->with('message', 'Utente Inserito');
+
+
     }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
+    {   
+        
+        $guest = Guest::findOrFail($id);
+        return view('show', compact('guest'));
     }
 
     /**

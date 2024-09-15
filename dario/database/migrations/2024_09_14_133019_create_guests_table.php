@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('surname'); 
-            $table->string('placebirth'); 
             $table->timestamps();
+            $table->string('name');
+            $table->string('surname');
+            $table->string('placebirth');
+
+
         });
     }
 

@@ -1,0 +1,6 @@
+DB_CONNECTION=mysql
+DB_HOST=hostingssd57.netsons.net
+DB_PORT=3306
+DB_DATABASE=xvubbhgk_prova
+DB_USERNAME=xvubbhgk_dario
+DB_PASSWORD=Ominoverde87@
