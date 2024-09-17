@@ -73,4 +73,20 @@ class GuestController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+{
+    $query = $request->input('query');  // Ottieni il valore dell'input
+
+    if ($query) {
+        // Cerca i nomi corrispondenti alla query
+        $guests = Guest::where('name', 'like', '%' . $query . '%')->get();
+    } else {
+        // Se non c'è una query, non restituire nulla o un array vuoto
+        $guests = collect();  // Collezione vuota
+    }
+
+    return view('search', compact('guests'));  // Ritorna la vista con i risultati
+}
+
 }
