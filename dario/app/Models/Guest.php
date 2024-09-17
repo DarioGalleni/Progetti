@@ -14,5 +14,6 @@ class Guest extends Model
         'name',
         'surname',
         'placebirth',
+        'birthdate'
     ];
 }

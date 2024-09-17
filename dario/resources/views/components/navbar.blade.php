@@ -7,13 +7,16 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="{{route('welcome')}}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('create')}}">Crea</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('index')}}">Tutti</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('search')}}">Cerca</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>

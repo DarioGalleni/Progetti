@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class GuestController extends Controller
 {
+    public function welcome()
+    {
+        return view ('welcome');
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -33,6 +39,7 @@ class GuestController extends Controller
             'name' => $request->name,
             'surname' => $request->surname,
             'placebirth' => $request->placebirth,
+            'birthdate' => $request->birthdate,
         ]);
 
         return redirect()->route('create')->with('message', 'Utente Inserito');
@@ -81,6 +88,8 @@ class GuestController extends Controller
     if ($query) {
         // Cerca i nomi corrispondenti alla query
         $guests = Guest::where('name', 'like', '%' . $query . '%')->get();
+        $guests = Guest::where('placebirth', 'like', '%' . $query . '%')->get();
+
     } else {
         // Se non c'è una query, non restituire nulla o un array vuoto
         $guests = collect();  // Collezione vuota
