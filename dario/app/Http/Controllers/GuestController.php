@@ -33,7 +33,7 @@ class GuestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function create_ok(Request $request)
+    public function store(Request $request)
     {
         $guest = Guest::create([
             'name' => $request->name,
@@ -88,7 +88,6 @@ class GuestController extends Controller
     if ($query) {
         // Cerca i nomi corrispondenti alla query
         $guests = Guest::where('name', 'like', '%' . $query . '%')->get();
-        $guests = Guest::where('placebirth', 'like', '%' . $query . '%')->get();
 
     } else {
         // Se non c'è una query, non restituire nulla o un array vuoto

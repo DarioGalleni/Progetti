@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('surname');
             $table->string('placebirth');
             $table->string('birthdate');
-
-
-
+            
         });
     }
+
+
 
     /**
      * Reverse the migrations.

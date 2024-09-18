@@ -9,7 +9,6 @@
             <button type="submit" class="btn btn-primary">Cerca</button>
         </form>
     
-        @if(isset($guests) && $guests->isNotEmpty())
             <div class="row mt-5">
                 @foreach ($guests as $item)
                 <div class="col-5">
@@ -24,11 +23,6 @@
                     </div>
                 @endforeach
             </div>
-        @else
-            @if(request()->has('query'))
-                <p class="mt-5">Nessun risultato trovato per la tua ricerca.</p>
-            @endif
-        @endif
     </div>
     <script>
         // Svuota il campo input dopo il caricamento della pagina
