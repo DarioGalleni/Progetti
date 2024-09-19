@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use App\Models\Guest;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,8 @@ class GuestController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view ('create');
+    {   $genres = Genre::all();
+        return view ('create', compact('genres'));
     }
 
     /**
@@ -40,6 +41,7 @@ class GuestController extends Controller
             'surname' => $request->surname,
             'placebirth' => $request->placebirth,
             'birthdate' => $request->birthdate,
+            'genre' => $request->genre,
         ]);
 
         return redirect()->route('create')->with('message', 'Utente Inserito');

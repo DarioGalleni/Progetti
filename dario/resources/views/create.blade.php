@@ -33,12 +33,19 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Luogo di Nascita</label>
-                        <!-- Select per la dropdown dei comuni -->
                         <select name="placebirth" id="placebirth" class="form-control">
                             <option value="">Seleziona un comune</option>
                         </select>
-                        <!-- Messaggio di errore -->
                         <small id="error-msg" style="color: red; display: none;">Seleziona un comune valido.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Genere</label>
+                        <select name="genre" id="genre" class="form-control">
+                            <option value="">Seleziona un genere</option>
+                            @foreach($genres as $genre)
+                                <option value="{{ $genre->id }}">{{ $genre->genre }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Data di Nascita</label>
