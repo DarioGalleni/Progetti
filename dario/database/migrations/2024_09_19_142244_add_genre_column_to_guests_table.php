@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::table('guests', function (Blueprint $table) {
 
-            $table->string('genre')->nullable();
+            $table->unsignedBigInteger('genre_id');
+            $table->foreign('genre_id')->references('id')->on('genres');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('guests', function (Blueprint $table) {
-            //
+            
+            $table->dropForeign(['genre_id']);
+            $table->dropColumn('genre_id');
         });
     }
 };
+
+

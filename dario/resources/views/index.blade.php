@@ -17,7 +17,7 @@
                       <td>{{$item->surname}}</td>
                       <td>{{$item->placebirth}}</td>
                       <td>{{$item->birthdate}}</td>
-                      <td>{{$item->genre}}</td> </tr>
+                      <td>{{$item->genre->genre}}</td> </tr>
                   @endforeach
               </table>
           </div>

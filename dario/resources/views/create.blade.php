@@ -40,8 +40,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Genere</label>
-                        <select name="genre" id="genre" class="form-control">
-                            <option value="">Seleziona un genere</option>
+                        <select name="genre_id" required>
                             @foreach($genres as $genre)
                                 <option value="{{ $genre->id }}">{{ $genre->genre }}</option>
                             @endforeach

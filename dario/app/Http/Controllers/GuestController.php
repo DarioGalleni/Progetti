@@ -36,16 +36,18 @@ class GuestController extends Controller
      */
     public function store(Request $request)
     {
+        
+        
         $guest = Guest::create([
             'name' => $request->name,
             'surname' => $request->surname,
             'placebirth' => $request->placebirth,
             'birthdate' => $request->birthdate,
-            'genre' => $request->genre,
+            'genre_id' => $request->genre_id,
         ]);
-
+        
         return redirect()->route('create')->with('message', 'Utente Inserito');
-
+        
 
     }
 
