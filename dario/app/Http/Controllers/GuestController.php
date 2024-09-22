@@ -36,14 +36,15 @@ class GuestController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
+               
         $guest = Guest::create([
             'name' => $request->name,
             'surname' => $request->surname,
             'placebirth' => $request->placebirth,
             'birthdate' => $request->birthdate,
             'genre_id' => $request->genre_id,
+            'img' => $request->file('img')->store('img', 'public'),
+
         ]);
         
         return redirect()->route('create')->with('message', 'Utente Inserito');
@@ -57,8 +58,11 @@ class GuestController extends Controller
     public function show(string $id)
     {   
         
-        $guest = Guest::findOrFail($id);
-        return view('show', compact('guest'));
+        $guests = Guest::findOrFail($id);
+        
+      
+
+        return view('show', compact('guests'));
     }
 
     /**

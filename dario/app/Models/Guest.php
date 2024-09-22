@@ -15,7 +15,8 @@ class Guest extends Model
         'surname',
         'placebirth',
         'birthdate',
-        'genre_id'
+        'genre_id',
+        'img',
     ];
 
     public function genre(): BelongsTo

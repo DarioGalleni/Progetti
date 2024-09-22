@@ -21,7 +21,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form method="POST" action="{{route('create_ok')}}" id="guestForm">
+                <form method="POST" action="{{route('create_ok')}}" id="guestForm" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nome</label>
@@ -49,6 +49,10 @@
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Data di Nascita</label>
                         <input name="birthdate" type="date" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Immagine</label>
+                        <input name="img" type="file" class="form-control" id="exampleInputPassword1">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
