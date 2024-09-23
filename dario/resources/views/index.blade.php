@@ -1,9 +1,32 @@
 <x-layout>
+    @section('title', 'Tutti gli utenti')
 
-  <div class="container">
-      <div class="row">
-          <div class="col-12">
-              <table class="table table-striped">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>Tutti gli utenti</h1>
+            </div>
+        </div>
+    </div>
+
+
+  <div class="container mt-5">
+      <div class="row justify-content-between">
+          @foreach($guests as $item)
+          <div class="col-12 col-md-3">
+              <div class="card" style="width: 18rem;">
+                <img class="img-fluid" src="{{Storage::url($item->img)}}" alt="">
+                <div class="card-body">
+                  <p class="card-text">{{$item->name}}</p>
+                </div>
+              </div>
+            </div>
+              @endforeach
+      </div>
+  </div>
+  </x-layout>
+
+  {{-- <table class="table table-striped">
                   <tr>
                       <th>Nome</th>
                       <th>Cognome</th>
@@ -19,8 +42,4 @@
                       <td>{{$item->birthdate}}</td>
                       <td>{{$item->genre->genre}}</td> </tr>
                   @endforeach
-              </table>
-          </div>
-      </div>
-  </div>
-  </x-layout>
+              </table> --}}
