@@ -9,8 +9,29 @@
         </div>
     </div>
 
+    <div class="container mt-5">
+        <div class="row justify-content-between">
+            @foreach($guests as $item)
+            <div class="col-12 col-md-3">
+                <div class="card" style="width: 18rem;">
+                  @if(file_exists(public_path('img/' . $item->img)))
+      <img src="{{ asset('img/' . $item->img) }}" alt="Immagine utente">
+  @else
+      <img src="{{ asset('img/default.jpg') }}" alt="Immagine predefinita">
+  @endif
+  
+                  <div class="card-body">
+                    <p class="card-text">{{$item->name}}</p>
+                  </div>
+                </div>
+              </div>
+                @endforeach
+        </div>
+    </div>
+    </x-layout>
 
-  <div class="container mt-5">
+
+  {{-- <div class="container mt-5">
       <div class="row justify-content-between">
           @foreach($guests as $item)
           <div class="col-12 col-md-3">
@@ -24,7 +45,7 @@
               @endforeach
       </div>
   </div>
-  </x-layout>
+  </x-layout> --}}
 
   {{-- <table class="table table-striped">
                   <tr>
