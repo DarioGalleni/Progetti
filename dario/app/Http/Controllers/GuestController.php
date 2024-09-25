@@ -53,24 +53,13 @@ class GuestController extends Controller
     // }
     public function store(Request $request)
 {
-    // Validazione dei dati (opzionale, ma consigliato)
-    // $request->validate([
-    //     'name' => 'required|string|max:255',
-    //     'surname' => 'required|string|max:255',
-    //     'placebirth' => 'required|string|max:255',
-    //     'birthdate' => 'required|date',
-    //     'genre_id' => 'required|integer',
-    //     'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Limite sul tipo di file e dimensione
-    // ]);
-
-    // Ottieni il nome originale del file
+    // Ottiengo il nome originale del file
     $imageName = $request->file('img')->getClientOriginalName();
 
     // Sposta il file nella cartella public/img
     $request->file('img')->move(public_path('img'), $imageName);
 
-    
-    // Salva i dati nel database, includendo solo il nome dell'immagine
+    // Salva i dati nel database, includendo SOLO il nome dell'immagine
     $guest = Guest::create([
         'name' => $request->name,
         'surname' => $request->surname,
@@ -79,8 +68,7 @@ class GuestController extends Controller
         'genre_id' => $request->genre_id,
         'img' => $imageName, // Salva solo il nome del file
     ]);
-
-    // Reindirizza alla vista 'create' con un messaggio di conferma
+    
     return redirect()->route('create')->with('message', 'Utente Inserito');
 }
 
