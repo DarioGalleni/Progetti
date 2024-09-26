@@ -1,0 +1,8 @@
+[26-Sep-2024 17:07:20 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2005] Unknown server host 'sql210.infinityfree.com' (-2) in /home/apghciha/public_html/ferrarin/process.php:31
+Stack trace:
+#0 {main}
+  thrown in /home/apghciha/public_html/ferrarin/process.php on line 31
+[26-Sep-2024 20:47:52 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2005] Unknown server host 'sql210.infinityfree.com' (-2) in /home/apghciha/public_html/ferrarin/process.php:31
+Stack trace:
+#0 {main}
+  thrown in /home/apghciha/public_html/ferrarin/process.php on line 31

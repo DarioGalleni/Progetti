@@ -6,17 +6,17 @@
 // $pass = 'Ominoverde@87';
 // $charset = 'utf8mb4';
 
-// $host = '127.0.0.1';
-// $db   = 'riprova';
-// $user = 'root';
-// $pass = 'root';
-// $charset = 'utf8mb4';
-
-$host = 'sql210.infinityfree.com';
-$db   = 'if0_37033057_prova';
-$user = 'if0_37033057';
-$pass = 'YkGQMdDKZg';
+$host = '127.0.0.1';
+$db   = 'dariog';
+$user = 'root';
+$pass = 'root';
 $charset = 'utf8mb4';
+
+// $host = 'sql210.infinityfree.com';
+// $db   = 'if0_37033057_prova';
+// $user = 'if0_37033057';
+// $pass = 'YkGQMdDKZg';
+// $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
@@ -35,14 +35,13 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash della password
 
     // Inserisci i dati nel database
-    $sql = "INSERT INTO utenti (name, email, password) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO utenti (name, email) VALUES (?, ?)";
     $stmt = $pdo->prepare($sql);
 
     try {
-        $stmt->execute([$name, $email, $password]);
+        $stmt->execute([$name, $email]);
         $message = "Registrazione avvenuta con successo!";
     } catch (Exception $e) {
         $message = "Errore nell'inserimento: " . $e->getMessage();
@@ -57,6 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Processo completato</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="theme-color" content="#81f8b4">
+
 </head>
 <body>
     <div class="container text-center mt-5">
