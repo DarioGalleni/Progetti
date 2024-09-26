@@ -1,46 +1,19 @@
-const form = document.getElementById('form');
-const result = document.getElementById('result');
-const spinner = document.getElementById('spinner');
-const button = document.getElementById('button')
+AOS.init()
+  document.getElementById("form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Previene l'invio immediato del form
 
-        
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
-            spinner.classList.remove('d-none');
-            button.classList.add('d-none');
+    // Mostra lo spinner
+    document.getElementById("spinner").classList.remove("d-none");
 
-        
-        
-            fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: json
-                })
-                .then(async (response) => {
-                    let json = await response.json();
-                    if (response.status == 200) {
-                        setTimeout(() => {
-                            result.classList.remove("d-none");
-                        }, 2500);
-                    } else {
-                        console.log(response);
-                        result.innerHTML = json.message;
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                    result.innerHTML = "Something went wrong!";
-                })
-                .then(function() {
-                    setTimeout(() => {
-                        spinner.style.display = "none";
-                    }, 2500);
-                    form.reset();
-                });
-        });
+    // Nascondi il pulsante per evitare clic ripetuti
+    document.getElementById("button").disabled = true;
+
+    // Simula un ritardo di 3 secondi (3000 millisecondi)
+    setTimeout(function() {
+      // Nascondi lo spinner dopo 3 secondi
+      document.getElementById("spinner").classList.add("d-none");
+
+      // Procedi con l'invio del form
+      document.getElementById("form").submit();
+    }, 3000);
+  });
