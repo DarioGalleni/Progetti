@@ -112,17 +112,26 @@ class GuestController extends Controller
     public function search(Request $request)
 {
     $query = $request->input('query');  // Ottieni il valore dell'input
+    $message = null;  // Inizializza il messaggio come nullo
+    $guests = collect(); // Inizializza la variabile come collection vuota
 
-    if ($query) {
-        // Cerca i nomi corrispondenti alla query
-        $guests = Guest::where('name', 'like', '%' . $query . '%')->get();
+    if ($request->has('query')) {
+        if ($query) {
+            // Cerca i nomi corrispondenti alla query
+            $guests = Guest::where('name', 'like', '%' . $query . '%')->get();
 
-    } else {
-        // Se non c'è una query, non restituire nulla o un array vuoto
-        $guests = collect();  // Collezione vuota
+            // Se non ci sono risultati, imposta un messaggio
+            if ($guests->isEmpty()) {
+                $message = "Nessun risultato trovato.";
+            }
+        } else {
+            // Imposta il messaggio se non è stata inserita una query
+            $message = "Nessuna query inserita.";
+        }
     }
 
-    return view('search', compact('guests'));  // Ritorna la vista con i risultati
+    return view('search', compact('guests', 'message'));  // Ritorna la vista con i risultati
 }
+
 
 }

@@ -1,33 +1,41 @@
 <?php
+// Database connection details (replace with your own)
 $host = 'sql210.infinityfree.com';
-$db   = 'if0_37033057_prova';
-$user = 'if0_37033057';
-$pass = 'YkGQMdDKZg';
+$db_name = 'if0_37033057_ok';
+$username = 'if0_37033057';
+$password = 'YkGQMdDKZg';
 
-// Crea connessione
-$conn = new mysqli($host, $user, $pass, $db);
-
-// Controlla connessione
-if ($conn->connect_error) {
-    die("Connessione fallita: " . $conn->connect_error);
+try {
+  // PDO connection
+  $pdo = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+  die("Errore: " . $e->getMessage());
 }
 
-// Prepara e lega
-$stmt = $conn->prepare("INSERT INTO utenti (nome, email, password) VALUES (?, ?, ?)");
-$stmt->bind_param("sss", $name, $email, $hashed_password);
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = $_POST['name'];
+  $email = $_POST['email'];
 
-// Imposta i parametri e esegui
-$name = $_POST['name'];
-$email = $_POST['email'];
-$hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  // Prepare SQL statement with named parameters
+  $sql = "INSERT INTO clienti (nome, email) VALUES (:name, :email)";
+  $stmt = $pdo->prepare($sql);
 
-if ($stmt->execute()) {
-    $prova = "Si ok";
-    echo $prova;
+  // Bind parameters to prevent SQL injection
+  $stmt->bindParam(':name', $name);
+  $stmt->bindParam(':email', $email);
+
+  // Execute the statement
+  if ($stmt->execute()) {
+    $message = "Registrazione avvenuta con successo!";
+  } else {
+    $message = "Errore durante la registrazione: " . $stmt->errorInfo()[0]; // Get specific error message
+  }
 } else {
-    echo "Errore: " . $stmt->error;
+  $message = ""; // No message for initial page load
 }
 
-$stmt->close();
-$conn->close();
+// Close the connection (optional, but recommended)
+$pdo = null;
 ?>

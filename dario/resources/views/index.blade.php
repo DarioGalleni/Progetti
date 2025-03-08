@@ -20,7 +20,7 @@
                     <img src="{{ asset('img/default.jpg') }}" alt="Immagine predefinita">
                   @endif
                   <div class="card-body">
-                    <p class="card-text">{{$item->name}}</p>
+                    <a href="{{ route('guest.show', $item->id) }}" class="card-text">{{ $item->name }}</a>
                   </div>
                 </div>
               </div>
