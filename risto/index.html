@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Perla del Mare - Ristorante sul Mare</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-utensils me-2"></i> La Perla del Mare
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Chi Siamo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#menu">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Galleria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contatti</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold mb-4">La Perla del Mare</h1>
+            <p class="lead mb-5">Dove il gusto incontra il mare</p>
+            <a href="#menu" class="btn btn-primary btn-lg me-2">Scopri il Menu</a>
+            <a href="#contact" class="btn btn-outline-light btn-lg">Prenota Ora</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ristorante" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">Chi Siamo</h2>
+                    <p class="lead">Dal 1985, La Perla del Mare offre un'esperienza culinaria unica direttamente sul mare.</p>
+                    <p>Fondato dalla famiglia Rossi, il nostro ristorante si distingue per la qualità degli ingredienti, tutti rigorosamente freschi e locali. I nostri pescatori consegnano il pesce ogni mattina, garantendo piatti sempre freschi e saporiti.</p>
+                    <p>La nostra filosofia si basa su tre principi fondamentali: qualità, tradizione e innovazione. Uniamo le ricette della tradizione marinara con tocchi moderni che esaltano i sapori del mare.</p>
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-fish fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>Pesce Fresco</h5>
+                                    <p class="mb-0">Pescato giornalmente dai nostri pescatori</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-utensils fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>Cucina Tradizionale</h5>
+                                    <p class="mb-0">Ricette di famiglia tramandate da generazioni</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-wine-glass-alt fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>Vini Selezionati</h5>
+                                    <p class="mb-0">La migliore selezione di vini locali e nazionali</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-sun fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>Terrazza sul Mare</h5>
+                                    <p class="mb-0">Cene romantiche con vista sull'orizzonte</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Il Nostro Menu</h2>
+                <p class="lead">Scopri i nostri piatti più apprezzati</p>
+            </div>
+            
+            <ul class="nav nav-tabs justify-content-center mb-4" id="menuTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="antipasti-tab" data-bs-toggle="tab" data-bs-target="#antipasti" type="button">Antipasti</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="primi-tab" data-bs-toggle="tab" data-bs-target="#primi" type="button">Primi</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="secondi-tab" data-bs-toggle="tab" data-bs-target="#secondi" type="button">Secondi</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="dolci-tab" data-bs-toggle="tab" data-bs-target="#dolci" type="button">Dolci</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="menuTabsContent">
+                <div class="tab-pane fade show active" id="antipasti" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Carpaccio di Ricciola</h5>
+                                    <span class="text-primary fw-bold">€14</span>
+                                </div>
+                                <p class="mb-0">Ricciola marinata con olio extravergine, limone e erbe aromatiche</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Tartare di Tonno</h5>
+                                    <span class="text-primary fw-bold">€16</span>
+                                </div>
+                                <p class="mb-0">Tonno fresco con avocado, sesamo e salsa allo zenzero</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Cozze alla Tarantina</h5>
+                                    <span class="text-primary fw-bold">€12</span>
+                                </div>
+                                <p class="mb-0">Cozze fresche in umido con pomodorini, aglio e peperoncino</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Bruschette di Mare</h5>
+                                    <span class="text-primary fw-bold">€10</span>
+                                </div>
+                                <p class="mb-0">Pane croccante con crema di ricci di mare e bottarga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="primi" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Spaghetti alle Vongole</h5>
+                                    <span class="text-primary fw-bold">€18</span>
+                                </div>
+                                <p class="mb-0">Spaghetti con vongole veraci, aglio, prezzemolo e peperoncino</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Risotto alla Pescatora</h5>
+                                    <span class="text-primary fw-bold">€20</span>
+                                </div>
+                                <p class="mb-0">Risotto cremoso con misto di frutti di mare e zafferano</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Linguine all'Astice</h5>
+                                    <span class="text-primary fw-bold">€24</span>
+                                </div>
+                                <p class="mb-0">Linguine con polpa di astice, pomodorini e basilico fresco</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Tagliolini al Nero di Seppia</h5>
+                                    <span class="text-primary fw-bold">€19</span>
+                                </div>
+                                <p class="mb-0">Pasta fresca al nero di seppia con seppioline e crema di piselli</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="secondi" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Branzino alla Ligure</h5>
+                                    <span class="text-primary fw-bold">€26</span>
+                                </div>
+                                <p class="mb-0">Branzino al forno con patate, olive taggiasche e pinoli</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Grigliata Mista di Pesce</h5>
+                                    <span class="text-primary fw-bold">€28</span>
+                                </div>
+                                <p class="mb-0">Selezione di pesci freschi grigliati con verdure di stagione</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Frittura di Paranza</h5>
+                                    <span class="text-primary fw-bold">€22</span>
+                                </div>
+                                <p class="mb-0">Misto di pesciolini fritti con contorno di verdure in tempura</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Coda di Rospo alla Mediterranea</h5>
+                                    <span class="text-primary fw-bold">€24</span>
+                                </div>
+                                <p class="mb-0">Filetto di coda di rospo con pomodorini, capperi e olive</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="dolci" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Tiramisù al Limone</h5>
+                                    <span class="text-primary fw-bold">€8</span>
+                                </div>
+                                <p class="mb-0">Rivisitazione del classico con limone di Sorrento e meringa</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Sfera di Cioccolato</h5>
+                                    <span class="text-primary fw-bold">€9</span>
+                                </div>
+                                <p class="mb-0">Sfera di cioccolato fondente con cuore di frutti di bosco</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Cannolo Siciliano</h5>
+                                    <span class="text-primary fw-bold">€7</span>
+                                </div>
+                                <p class="mb-0">Cannolo croccante con ricotta di pecora e scorze d'arancia</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="menu-item p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Semifreddo al Mandarino</h5>
+                                    <span class="text-primary fw-bold">€8</span>
+                                </div>
+                                <p class="mb-0">Semifreddo cremoso al mandarino con salsa al caramello</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="section-title">La Nostra Galleria</h2>
+                <p class="lead">Immagini dal nostro ristorante e dalla cucina</p>
+            </div>
+            
+            <div class="row g-3">
+                <div class="col-md-4 col-6">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1510626176961-4b1d694e9950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Piatti di pesce" class="img-fluid w-100">
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1551504739-5d0c9ce7e8fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Terrazza sul mare" class="img-fluid w-100">
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2098&q=80" alt="Chef al lavoro" class="img-fluid w-100">
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Interno ristorante" class="img-fluid w-100">
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1981&q=80" alt="Piatto gourmet" class="img-fluid w-100">
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1569718212165-3a85731f58a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2089&q=80" alt="Cena romantica" class="img-fluid w-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 position-relative">
+        <div class="waves">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(13,110,253,0.7)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(13,202,240,0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                </g>
+            </svg>
+        </div>
+        
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="section-title text-white">Contattaci</h2>
+                <p class="lead text-white">Prenota un tavolo o chiedici informazioni</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form">
+                        <form id="contactForm" action="https://formsubmit.co/aa209262692a1d12c054327552586fc5" method="POST">
+                            <input type="hidden" name="_subject" value="Nuovo messaggio da La Perla del Mare">
+                            <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Telefono</label>
+                                <input type="tel" class="form-control" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Oggetto</label>
+                                <select class="form-select" id="subject" name="subject" required>
+                                    <option value="" selected disabled>Scegli un'opzione</option>
+                                    <option value="Prenotazione">Prenotazione</option>
+                                    <option value="Informazioni">Informazioni</option>
+                                    <option value="Eventi">Eventi speciali</option>
+                                    <option value="Altro">Altro</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Messaggio</label>
+                                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="privacy" required>
+                                <label class="form-check-label" for="privacy">Accetto la privacy policy</label>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Invia Messaggio</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5>Dove Siamo</h5>
+                            <p class="mb-0">Lungomare dei Cavalieri, 15<br>80067 Sorrento (NA)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-phone-alt fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5>Telefono</h5>
+                            <p class="mb-0">+39 081 123 4567<br>Lun-Dom: 12:00 - 23:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-envelope fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5>Email</h5>
+                            <p class="mb-0">info@laperladelmare.it<br>prenotazioni@laperladelmare.it</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">La Perla del Mare</h5>
+                    <p>Il nostro ristorante offre un'esperienza culinaria unica con prodotti freschi del mare e una vista mozzafiato sul golfo.</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tripadvisor"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">Orari di Apertura</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">Lunedì - Venerdì: 12:00 - 15:00 / 19:00 - 23:00</li>
+                        <li class="mb-2">Sabato: 12:00 - 23:30</li>
+                        <li>Domenica: 12:00 - 23:00</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p>Iscriviti alla nostra newsletter per ricevere offerte speciali e novità.</p>
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="La tua email" aria-label="La tua email">
+                            <button class="btn btn-outline-light" type="button">Iscriviti</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2023 La Perla del Mare. Tutti i diritti riservati.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Design by <a href="#" class="text-white">Your Agency</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
