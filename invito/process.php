@@ -8,8 +8,8 @@
 
 $host = '127.0.0.1';
 $db   = 'dariog';
-$user = 'root';
-$pass = 'root';
+$user = 'dario';
+$pass = 'password123';
 $charset = 'utf8mb4';
 
 // $host = 'sql210.infinityfree.com';

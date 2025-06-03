@@ -9,13 +9,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-window.addEventListener('scroll', function() {
-    if (window.scrollY > 50) {
-        var navbar = document.getElementsByClassName('navbar')[0];
-        if (navbar) {
-            navbar.classList.add('d-none');
-        }
+window.addEventListener('scroll', function () {
+    var navbar = document.getElementsByClassName('navbar')[0];
+    if (!navbar) return;
+
+    if (window.scrollY > 0) {
+        navbar.classList.remove('d-none');
+    } else {
+        navbar.classList.add('d-none');
     }
 });
-
-console.log("Script loaded successfully!");
