@@ -1,59 +1,46 @@
 <?php
-// Connessione al DB
-$host = '127.0.0.1';
-$db_name = 'dariog';
-$username = 'root';
-$password = 'root';
+$pdo = new PDO("mysql:host=127.0.0.1;dbname=dariog", 'root', 'root');
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-try {
-  $pdo = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-  die("Errore: " . $e->getMessage());
-}
-
-// Recupera tutti gli utenti
-$sql = "SELECT name, email FROM utenti";
+$sql = "SELECT id, color, units FROM dati";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
-$utenti = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$pdo = null;
+$dati = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Lista Utenti</title>
-  <style>
-    table {
-      margin: auto;
-      border-collapse: collapse;
-    }
-    td, th {
-      border: 1px solid black;
-      padding: 8px;
-    }
-  </style>
+  <title>Lista Dati</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-  <h2 style="text-align: center;">Utenti Registrati</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($utenti as $utente): ?>
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="text-center mb-4">Dati Registrati</h2>
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
         <tr>
-          <td><?= htmlspecialchars($utente['name']) ?></td>
-          <td><?= htmlspecialchars($utente['email']) ?></td>
+          <th>Colore</th>
+          <th>Unità</th>
+          <th>Azioni</th>
         </tr>
-      <?php endforeach; ?>
-    </tbody>
-  </table>
+      </thead>
+      <tbody class="">
+        <?php foreach ($dati as $riga): ?>
+        <tr>
+          <td class="text-center"><?= htmlspecialchars($riga['color']) ?></td>
+          <td class="text-center"><?= htmlspecialchars($riga['units']) ?></td>
+          <td class="text-center">
+            <a href="modifica.php?id=<?= $riga['id'] ?>" class="btn btn-sm btn-primary">Modifica</a>
+          </td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    <div class="text-center mt-4">
+      <a href="index.html" class="btn btn-success">Aggiungi nuovo dato</a>
+    </div>
+  </div>
 </body>
 </html>
