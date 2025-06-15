@@ -1,8 +1,16 @@
 <?php
-$pdo = new PDO("mysql:host=127.0.0.1;dbname=dariog", 'root', 'root');
+session_start(); // Inizia la sessione
+
+// Reindirizza se l'utente non è loggato
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$pdo = new PDO("mysql:host=hostingssd121.netsons.net;dbname=apghciha_dati", 'apghciha_dario', 'Ominoverde@87');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$sql = "SELECT id, color, units FROM dati";
+$sql = "SELECT id, color, units FROM dati ORDER BY color ASC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $dati = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -24,8 +32,7 @@ $dati = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr class="text-center">
           <th>Colore</th>
           <th>Unità</th>
-          <th>Azioni</th>
-        </tr>
+          <th colspan="2">Azioni</th> </tr>
       </thead>
       <tbody >
         <?php foreach ($dati as $element): ?>
@@ -34,8 +41,6 @@ $dati = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <td class="text-center"><?= htmlspecialchars($element['units']) ?></td>
           <td class="text-center">
             <a href="modifica.php?id=<?= $element['id'] ?>" class="btn btn-sm btn-primary">Modifica</a>
-          </td>
-          <td class="text-center">
             <a href="elimina.php?id=<?= $element['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo dato?');">Elimina</a>
           </td>
         </tr>
@@ -49,6 +54,7 @@ $dati = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
   <div class="text-center mt-4">
       <a href="index.html" class="btn btn-success">Aggiungi nuovo dato</a>
+      <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
   </div>
   <script src="/script.js"></script>

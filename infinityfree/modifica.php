@@ -1,6 +1,24 @@
 <?php
-$pdo = new PDO("mysql:host=127.0.0.1;dbname=dariog", 'root', 'root');
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+session_start(); // Inizia la sessione
+
+// Reindirizza se l'utente non è loggato
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$host = 'hostingssd121.netsons.net';
+$db   = 'apghciha_dati';
+$user = 'apghciha_dario';
+$pass = 'Ominoverde@87';
+$charset = 'utf8mb4';
+
+try {
+  $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+  die("Errore di connessione al database: " . $e->getMessage());
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
@@ -14,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':id', $id);
 
     if ($stmt->execute()) {
-        header("Location: utenti.php");
+        header("Location: leggi.php"); // Modificato da utenti.php a leggi.php
         exit;
     } else {
         echo "Errore durante l'aggiornamento.";
@@ -58,8 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
 
       <div class="d-flex justify-content-between">
-        <a href="utenti.php" class="btn btn-secondary">Annulla</a>
-        <button type="submit" class="btn btn-primary">Salva modifiche</button>
+        <a href="leggi.php" class="btn btn-secondary">Annulla</a> <button type="submit" class="btn btn-primary">Salva modifiche</button>
       </div>
     </form>
   </div>

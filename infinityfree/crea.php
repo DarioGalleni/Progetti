@@ -1,24 +1,33 @@
 <?php
-// Connessione al DB
-$host = '127.0.0.1';
-$db_name = 'dariog';
-$username = 'root';
-$password = 'root';
+
+session_start(); // Inizia la sessione
+
+// Reindirizza se l'utente non è loggato
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$host = 'hostingssd121.netsons.net';
+$db   = 'apghciha_dati';
+$user = 'apghciha_dario';
+$pass = 'Ominoverde@87';
+$charset = 'utf8mb4';
 
 try {
-  $pdo = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+  $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
   die("Errore: " . $e->getMessage());
 }
 
-$message = ""; // Inizializza la variabile
+$message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $color = $_POST['color']; // Changed from 'name' to 'color'
-  $units = $_POST['units']; // Changed from 'email' to 'units'
+  $color = $_POST['color'];
+  $units = $_POST['units'];
 
-  // Updated SQL query to insert into 'dati' table with 'color' and 'units' columns
+  
   $sql = "INSERT INTO dati (color, units) VALUES (:color, :units)";
   $stmt = $pdo->prepare($sql);
   $stmt->bindParam(':color', $color);
