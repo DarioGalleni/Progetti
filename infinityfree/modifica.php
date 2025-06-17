@@ -7,11 +7,27 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+/*
 $host = 'hostingssd121.netsons.net';
 $db   = 'apghciha_dati';
 $user = 'apghciha_dario';
 $pass = 'Ominoverde@87';
 $charset = 'utf8mb4';
+*/
+
+$host = 'sql107.infinityfree.com';
+$db   = 'if0_38876061_dario';
+$user = 'if0_38876061';
+$pass = 'ominoverde87';
+$charset = 'utf8mb4';
+
+
+
+// $host = '127.0.0.1';
+// $db   = 'dariog';
+// $user = 'root';
+// $pass = 'root';
+// $charset = 'utf8mb4';
 
 try {
   $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
@@ -60,6 +76,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <title>Modifica Dato</title>
 </head>
 <body class="bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Benvenuto</a>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <span class="navbar-text">
+            Utente: <?= htmlspecialchars($_SESSION['username']) ?>
+          </span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
   <div class="container py-5">
     <h2 class="text-center mb-4">Modifica Dato</h2>
     <form method="post" class="mx-auto" style="max-width: 500px;">

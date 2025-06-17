@@ -13,7 +13,28 @@ if (!isset($_GET['id'])) {
     exit;
 }
 
-$pdo = new PDO("mysql:host=hostingssd121.netsons.net;dbname=apghciha_dati", 'apghciha_dario', 'Ominoverde@87');
+
+// Vecchie credenziali di accesso al database commentate
+// $pdo = new PDO("mysql:host=hostingssd121.netsons.net;dbname=apghciha_dati", 'apghciha_dario', 'Ominoverde@87');
+
+
+
+
+$host = 'sql107.infinityfree.com';
+$db   = 'if0_38876061_dario';
+$user = 'if0_38876061';
+$pass = 'ominoverde87';
+$charset = 'utf8mb4';
+
+
+
+// $host = '127.0.0.1';
+// $db   = 'dariog';
+// $user = 'root';
+// $pass = 'root';
+// $charset = 'utf8mb4';
+
+$pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $id = (int) $_GET['id'];
@@ -25,9 +46,3 @@ $stmt->execute(['id' => $id]);
 header("Location: leggi.php");
 exit;
 ?>
-
-<!-- $host = 'hostingssd121.netsons.net';
-$db   = 'apghciha_database';
-$user = 'apghciha_dati';
-$pass = 'Ominoverde@87';
-$charset = 'utf8mb4'; -->

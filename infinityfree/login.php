@@ -2,11 +2,27 @@
 session_start();
 
 
+/*
 $host = 'hostingssd121.netsons.net';
 $db   = 'apghciha_dati';
 $user = 'apghciha_dario';
 $pass = 'Ominoverde@87';
 $charset = 'utf8mb4';
+*/
+
+$host = 'sql107.infinityfree.com';
+$db   = 'if0_38876061_dario';
+$user = 'if0_38876061';
+$pass = 'ominoverde87';
+$charset = 'utf8mb4';
+
+
+
+// $host = '127.0.0.1';
+// $db   = 'dariog';
+// $user = 'root';
+// $pass = 'root';
+// $charset = 'utf8mb4';
 
 
 $message = "";
@@ -25,10 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['password'])) {
+        // if ($user && password_verify($password, $user['password']))
+        if ($user && $password === $user['password'])
+
+      {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            header("Location: index.html"); // Reindirizza a index.html dopo il login
+            header("Location: index.php");
             exit;
         } else {
             $message = "Nome utente o password non validi.";
