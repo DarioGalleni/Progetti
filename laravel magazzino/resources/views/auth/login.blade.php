@@ -23,7 +23,7 @@
 
                     <div class="mb-3 text-center">
                         <label for="username" class="form-label">Nome Utente</label>
-                        <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" required>
+                        <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}">
                         @error('username')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -33,7 +33,7 @@
 
                     <div class="mb-3 text-center">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
                         @error('password')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -52,13 +52,6 @@
                     @endif
                 </form>
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <h2>Oppure <a href="{{ route('register') }}">Registrati</a></h2>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

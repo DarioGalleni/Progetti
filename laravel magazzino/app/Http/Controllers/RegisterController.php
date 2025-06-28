@@ -42,8 +42,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Effettua altre operazioni, come l'autenticazione, se necessario
-        // Potresti voler autenticare l'utente automaticamente dopo la registrazione
+
         // Auth::login($user); // Se vuoi autenticare l'utente appena registrato
 
         return redirect()->route('login')->with('success', 'Registrazione completata con successo! Ora puoi accedere.'); // Reindirizza al login dopo la registrazione

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash; // Assicurati che sia importato
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -20,36 +20,26 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Gestisce la richiesta di login.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+
     public function login(Request $request)
     {
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
+        ], [
+            'username.required' => 'Il nome utente è obbligatorio.',
+            'password.required' => 'La password è obbligatoria.',
         ]);
 
-        $username = $request->username;
-        $password = $request->password;
+        $user = User::where('username', $request->username)->first();
 
-        $user = User::where('username', $username)->first();
-
-        // QUESTA È LA RIGA CORRETTA E SICURA:
-        if ($user && Hash::check($password, $user->password)) { // Usa Hash::check() per le password hashate
+        if ($user && Hash::check($request->password, $user->password)) {
             Auth::login($user);
-
             $request->session()->regenerate();
-
             return redirect()->intended('/index');
         }
 
-        return back()->withErrors([
-            'username' => 'Nome utente o password non validi.',
-        ])->onlyInput('username');
+        return back()->withErrors(['credenziali' => 'Nome utente o password non validi.'])->onlyInput('username');
     }
 
     /**
@@ -61,11 +51,8 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 }

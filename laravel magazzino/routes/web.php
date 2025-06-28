@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('index');
 });
 
-// Redirect dalla root (opzionale e unica)
+// Rotta per la home page
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('welcome');
 });
