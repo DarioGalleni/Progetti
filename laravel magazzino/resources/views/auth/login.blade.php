@@ -1,57 +1,34 @@
 <x-layout>
-    @section('title', 'Homepage')
-
-    <div class="container my-5">
+    @section('title', 'Accedi')
+    <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h1>Login</h1>
-            </div>
-        </div>
-    </div>
-
-    @if (session('success'))
-        <div class="container w-50 alert alert-success text-center" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form method="post" action="{{ route('login') }}">
+                <h1 class="mt-5">Accedi</h1>
+                @if ($errors->any())
+                    <div class="alert alert-danger mt-3">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form action="{{ route('login') }}" method="post" class="mt-4">
                     @csrf
-
-                    <div class="mb-3 text-center">
-                        <label for="username" class="form-label">Nome Utente</label>
-                        <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}">
-                        @error('username')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" value="{{ old('username') }}" required autofocus>
                     </div>
-
-                    <div class="mb-3 text-center">
+                    <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
-                        @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-
-                    <div class="col-12 text-center mt-5">
-                        <button type="submit" class="btn btn-primary w-50">Accedi</button>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                        <label class="form-check-label" for="remember">Ricordami</label>
                     </div>
-
-                    @if ($errors->any() && !$errors->has('username') && !$errors->has('password'))
-                        <div class="alert alert-danger text-center mt-3" role="alert">
-                            {{ $errors->first() }}
-                        </div>
-                    @endif
+                    <button type="submit" class="btn btn-primary">Login</button>
                 </form>
-
             </div>
         </div>
     </div>

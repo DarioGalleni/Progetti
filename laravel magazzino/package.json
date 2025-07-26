@@ -4,7 +4,8 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "watch": "mix watch"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
@@ -15,6 +16,7 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
+        "boostrap": "^2.0.0",
         "bootstrap": "^5.3.7"
     }
 }

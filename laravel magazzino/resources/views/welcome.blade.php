@@ -1,12 +1,16 @@
 <x-layout>
-@section('title', 'Homepage')
+@section('title', 'Benvenuto')
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
-            <h1 class="mt-5">Welcome to Our Application</h1>
-            <p class="lead">This is a simple Laravel application to demonstrate the welcome page.</p>
-            <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
-            <a href="{{ route('register') }}" class="btn btn-secondary">Register</a>
+            <h1 class="mt-5">
+                @auth
+                    Benvenuto nella tua applicazione Laravel, {{ auth()->user()->name }}!
+                @else
+                    Benvenuto nella tua applicazione Laravel!
+                @endauth
+            </h1>
+            <p class="lead">Questa è la tua pagina di benvenuto.</p>
         </div>
     </div>
 </div>

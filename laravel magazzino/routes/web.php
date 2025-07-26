@@ -1,44 +1,30 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', [Controller::class, 'welcome'])->name('welcome');
 
-// Rotta per mostrare il form di login
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+// Authentication routes
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+// Registration routes
+Route::post('/login', [AuthController::class, 'login']);
+//logout route
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Rotta per mostrare il form di registrazione
-Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
-
-// Rotta per gestire la sottomissione del form di login
-Route::post('/login', [LoginController::class, 'login']);
-
-// Rotta per gestire la sottomissione del form di registrazione
-Route::post('/register', [RegisterController::class, 'register']); // Aggiunta la rotta POST per la registrazione
-
-// Rotta per il logout
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// Rotte per la creazione e l'archiviazione di nuovi utenti, accessibili anche senza autenticazione
+Route::get('/createUsers', [UsersController::class, 'create'])->name('createUsers');
+Route::post('/users', [UsersController::class, 'store'])->name('usersStore');
 
 
-// Rotta protetta (richiede autenticazione)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/index', function () {
-        return view('index'); // Supponendo che tu abbia una vista 'index.blade.php'
-    })->name('index');
-});
+// Routes accessible only by authenticated users with 'access-admin-features'
+Route::middleware(['auth', 'can:access-admin-features'])->group(function () {
+    Route::get('/allUsers', [UsersController::class, 'index'])->name('allUsers');
+    Route::get('/users/{user}/edit', [UsersController::class, 'edit'])->name('usersEdit');
+    Route::put('/users/{user}', [UsersController::class, 'update'])->name('usersUpdate');
+    Route::get('/users/{user}', [UsersController::class, 'show'])->name('usersShow');
+    Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('usersDestroy');
 
-// Rotta per la home page
-Route::get('/', function () {
-    return view('welcome');
 });
