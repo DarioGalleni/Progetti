@@ -12,11 +12,8 @@
             <div class="col-12 col-md-4">
                 <div class="card mt-4">
                     <div class="card-body text-center">
-                        @if ($user->profile_image)
                             <img src="{{ asset('storage/' . $user->profile_image) }}" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;" alt="Immagine Profilo">
-                        @else
-                            <img src="{{ asset('profile_images/default.jpg') }}" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;" alt="Immagine Placeholder">
-                        @endif
+                        {{-- <img src="{{ asset($user->profile_image) }}" class="card-img-top img-fluid border p-1 rounded" alt="Immagine Utente"> --}}
                         <h4 class="card-title">{{ $user->name }} {{ $user->surname }}</h4>
                         <p class="card-text"><strong>Username:</strong> {{ $user->username }}</p>
                         <p class="card-text"><strong>ID Utente:</strong> {{ $user->id }}</p>

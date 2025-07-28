@@ -19,21 +19,13 @@ class AuthController extends Controller
     {
         // 1. Validazione dei dati di input
         $credentials = $request->validate([
-            'username' => ['required'], // Ho usato 'username' come campo di login
+            'username' => ['required'],
             'password' => ['required'],
         ]);
-
-        // 2. Tentativo di autenticazione
-        // Il metodo 'attempt' prova ad autenticare l'utente.
-        // Puoi usare 'email' o 'username' a seconda di come è configurato il tuo modello User
-        // e quale campo vuoi usare per il login. Nel tuo modello User, hai 'username',
-        // quindi lo usiamo. Se volessi usare l'email, dovresti aggiungerla al tuo modello User
-        // e anche al form di login.
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate(); // Rigenera l'ID di sessione per prevenire session fixation
+            $request->session()->regenerate();
+            return view('welcome');
 
-            // Reindirizza l'utente alla dashboard o alla home page
-            return redirect()->intended('/')->with('success', 'Accesso effettuato con successo!');
         }
 
         // 3. Fallimento dell'autenticazione

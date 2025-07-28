@@ -27,6 +27,13 @@ class User extends Authenticatable
 
     ];
 
+    public function items()
+    {
+        return $this->hasMany(ItemsModel::class);
+        // Se la foreign key in items_model non fosse 'user_id', potresti specificarla:
+        // return $this->hasMany(ItemsModel::class, 'my_custom_user_id_column');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
