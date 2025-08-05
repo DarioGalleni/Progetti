@@ -27,6 +27,11 @@
                         <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
                     </div>
                     <div class="mb-3">
+    <label for="price" class="form-label">Prezzo</label>
+    <input type="number" class="form-control" id="price" name="price" required>
+</div> <!-- Questa chiusura mancava -->
+
+                    <div class="mb-3">
                         <label for="item_image" class="form-label">Immagine</label>
                         <input type="file" class="form-control" id="item_image" name="item_image" accept="image/*">
                     </div>

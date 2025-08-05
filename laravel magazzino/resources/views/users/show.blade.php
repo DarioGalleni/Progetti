@@ -19,7 +19,7 @@
                         <p class="card-text"><strong>ID Utente:</strong> {{ $user->id }}</p>
                         <p class="card-text"><strong>Registrato il:</strong> {{ $user->created_at->format('d/m/Y H:i') }}</p>
                         <hr>
-                        <a href="{{ route('allUsers') }}" class="btn btn-secondary">Torna alla lista Utenti</a>
+                        <a href="{{ route('users.index') }}" class="btn btn-secondary">Torna alla lista Utenti</a>
 
                         @can('access-admin-features')
                             <form action="{{ route('usersDestroy', $user) }}" method="POST" class="d-inline">

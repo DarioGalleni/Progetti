@@ -15,7 +15,7 @@
                             <a class="nav-link" href="{{ route('createUsers') }}">Crea Utente</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('allUsers') }}">Tutti gli utenti</a>
+                            <a class="nav-link" href="{{ route('users.index') }}">Tutti gli utenti</a>
                         </li>
                     @endif
                     <li class="nav-item">

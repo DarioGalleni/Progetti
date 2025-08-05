@@ -13,7 +13,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('users.all', compact('users'));
+        return view('users.index', compact('users'));
     }
 
     public function create()
@@ -112,6 +112,6 @@ public function destroy(User $user)
 
         $user->delete();
 
-        return redirect()->route('allUsers')->with('warning', 'Utente eliminato con successo!');
+        return redirect()->route('users.index')->with('warning', 'Utente eliminato con successo!');
     }
 }
