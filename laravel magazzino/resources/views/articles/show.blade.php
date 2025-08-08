@@ -18,8 +18,10 @@
                             @endif
                         </div>
                         <div class="col-md-7">
-                            <h1 class="mb-3">{{ $item->title }}</h1>
-                            <p class="lead">{{ $item->description }}</p>
+                            <h1 class="mb-3">Nome: {{ $item->title }}</h1>
+                            <p class="lead">Descrizione: {{ $item->description }}</p>
+                            <p class="lead">Prezzo: {{ $item->price }}</p>
+
                                 <p class="text-muted mt-3">
                                     <small>Creato da: {{ $item->user->username ?? 'Utente Sconosciuto' }}</small>
                                 </p>
