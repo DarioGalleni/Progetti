@@ -1,0 +1,41 @@
+th, td {
+      text-align: center;
+      vertical-align: middle;
+      min-width: 80px;
+    }
+/* Rimuove le frecce in Chrome, Safari, Edge e Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Rimuove le frecce in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+body.night-mode {
+        background-color: #28282B; /* Sfondo scuro */
+        color: #F5F5DC; /* Testo chiaro */
+    }
+    .night-mode .navbar,
+    .night-mode .card,
+    .night-mode .table,
+    .night-mode .list-group-item {
+        background-color: #38383a !important;
+        color: #F5F5DC !important;
+        border-color: #4a4a4d !important;
+    }
+    .night-mode .table th,
+    .night-mode .table td {
+        border-color: #4a4a4d !important;
+    }
+    .night-mode .table-striped > tbody > tr:nth-of-type(odd) > * {
+        background-color: #303032; /* Colore più scuro per le righe pari */
+    }
+    .night-mode .btn-dark,
+    .night-mode .btn-secondary {
+        background-color: #4a4a4d !important;
+        border-color: #4a4a4d !important;
+    }

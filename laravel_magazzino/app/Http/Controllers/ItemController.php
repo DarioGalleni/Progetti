@@ -16,7 +16,7 @@ public function index(Request $request)
         $searchTerms = explode(' ', $request->input('search'));
         $query->where(function ($q) use ($searchTerms) {
             foreach ($searchTerms as $term) {
-                $q->orWhere('title', 'like', '%' . $term . '%');
+                $q->orWhere('description', 'like', '%' . $term . '%');
             }
         });
     }
