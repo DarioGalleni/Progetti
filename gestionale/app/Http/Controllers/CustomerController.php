@@ -8,174 +8,177 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected function rules($customerId = null): array
+    {
+        $uniqueEmail = 'unique:customers,email' . ($customerId ? ",$customerId" : '');
+
+        return [
+            'first_name'       => 'required|string|max:255',
+            'last_name'        => 'required|string|max:255',
+            'room'             => 'required|integer',
+            'arrival_date'     => 'required|date',
+            'departure_date'   => 'required|date|after:arrival_date',
+            'treatment'        => 'required|in:BB,HB',
+            'phone'            => 'nullable|string|max:20',
+            'email'            => "required|email|$uniqueEmail",
+            'number_of_people' => 'required|integer|min:1',
+            'total_stay_cost'  => 'required|numeric|min:1',
+            'down_payment'     => 'required|numeric|min:0',
+        ];
+    }
+
+    protected function isRoomAvailable(int $room, string $arrival, string $departure, int $excludeId = null): bool
+    {
+        $query = Customer::where('room', $room)
+            ->where(function ($q) use ($arrival, $departure) {
+                $q->where('arrival_date', '<', $departure)
+                    ->where('departure_date', '>', $arrival);
+            });
+
+        if ($excludeId) {
+            $query->where('id', '!=', $excludeId);
+        }
+
+        return !$query->exists();
+    }
+
+    protected function bookingDateErrors(array $data): array
+    {
+        $errors = [];
+        $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
+        $currentYear = $today->year;
+
+        $arrival = Carbon::parse($data['arrival_date']);
+        $departure = Carbon::parse($data['departure_date']);
+
+        if ($arrival->lt($today)) {
+            $errors['arrival_date'] = 'La data di arrivo non può essere antecedente alla data odierna.';
+        }
+
+        if ($departure->lt($tomorrow)) {
+            $errors['departure_date'] = 'La data di partenza deve essere almeno il giorno successivo.';
+        }
+
+        if ($arrival->year !== $currentYear || $departure->year !== $currentYear) {
+            $errors['year'] = "Le prenotazioni sono consentite solo per l'anno corrente ({$currentYear}).";
+        }
+
+        return $errors;
+    }
+
     public function index()
     {
         $customers = Customer::all();
         return view('welcome', compact('customers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('customers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'room' => 'required|integer',
-            'arrival_date' => 'required|date',
-            'departure_date' => 'required|date|after_or_equal:arrival_date',
-            'treatment' => 'required|in:BB,HB,FB',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'required|email|unique:customers,email',
-            'number_of_people' => 'required|integer|min:1',
-            'total_stay_cost' => 'required|numeric|min:0',
-            'down_payment' => 'required|numeric|min:0',
-            'additional_expenses' => 'nullable'
-        ]);
+        $data = $request->validate($this->rules());
 
-        $existingBooking = Customer::where('room', $validatedData['room'])
-            ->where(function ($query) use ($validatedData) {
-                $query->where('arrival_date', '<', $validatedData['departure_date'])
-                    ->where('departure_date', '>', $validatedData['arrival_date']);
-            })
-            ->first();
-
-        if ($existingBooking) {
-            return back()->withErrors(['room' => 'La camera selezionata è già occupata per il periodo richiesto.'])->withInput();
+        $dateErrors = $this->bookingDateErrors($data);
+        if (!empty($dateErrors)) {
+            return back()->withErrors($dateErrors)->withInput();
         }
 
-        Customer::create($validatedData);
+        if (!$this->isRoomAvailable($data['room'], $data['arrival_date'], $data['departure_date'])) {
+            return back()
+                ->withErrors(['room' => 'La camera selezionata è già occupata per il periodo richiesto.'])
+                ->withInput();
+        }
+
+        Customer::create($data);
 
         return redirect()->route('welcome')->with('success', 'Cliente creato con successo!');
     }
-    
-    /**
-     * Handle the customer search.
-     */
+
     public function search(Request $request)
     {
-        $query = $request->input('query');
+        $query = trim($request->input('query', ''));
 
-        if (!$query) {
-            // Se la query è vuota, potremmo reindirizzare alla home o mostrare una lista vuota
-            // In questo caso, torniamo alla home
+        if ($query === '') {
             return redirect()->route('welcome')->with('error', 'Inserisci un termine di ricerca.');
         }
 
-        // Cerca i clienti che corrispondono al nome, cognome, telefono o email
-        $customers = Customer::where('first_name', 'LIKE', '%' . $query . '%')
-                             ->orWhere('last_name', 'LIKE', '%' . $query . '%')
-                             ->orWhere('phone', 'LIKE', '%' . $query . '%')
-                             ->orWhere('email', 'LIKE', '%' . $query . '%')
-                             ->get();
+        $customers = Customer::where('first_name', 'LIKE', "%{$query}%")
+            ->orWhere('last_name', 'LIKE', "%{$query}%")
+            ->orWhere('phone', 'LIKE', "%{$query}%")
+            ->orWhere('email', 'LIKE', "%{$query}%")
+            ->get();
 
-        // Passa i risultati della ricerca e la query alla nuova vista
-        return view('customers.index', compact('customers', 'query'));
+        return view('customers.index', ['customers' => $customers, 'query' => $query]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Customer $customer)
     {
         return view('customers.show', compact('customer'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Customer $customer)
     {
         return view('customers.edit', compact('customer'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Customer $customer)
     {
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'room' => 'required|integer',
-            'arrival_date' => 'required|date',
-            'departure_date' => 'required|date|after_or_equal:arrival_date',
-            'treatment' => 'required|in:BB,HB,FB',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'required|email|unique:customers,email,' . $customer->id,
-            'number_of_people' => 'required|integer|min:1',
-            'total_stay_cost' => 'required|numeric|min:0',
-            'down_payment' => 'required|numeric|min:0',
-        ]);
+        $data = $request->validate($this->rules($customer->id));
 
-        $existingBooking = Customer::where('room', $validatedData['room'])
-            ->where(function ($query) use ($validatedData) {
-                $query->where('arrival_date', '<', $validatedData['departure_date'])
-                    ->where('departure_date', '>', $validatedData['arrival_date']);
-            })
-            ->where('id', '!=', $customer->id)
-            ->first();
-
-        if ($existingBooking) {
-            return back()->withErrors(['room' => 'La camera selezionata è già occupata per il periodo richiesto.'])->withInput();
+        $dateErrors = $this->bookingDateErrors($data);
+        if (!empty($dateErrors)) {
+            return back()->withErrors($dateErrors)->withInput();
         }
 
-        $customer->update($validatedData);
+        if (!$this->isRoomAvailable($data['room'], $data['arrival_date'], $data['departure_date'], $customer->id)) {
+            return back()
+                ->withErrors(['room' => 'La camera selezionata è già occupata per il periodo richiesto.'])
+                ->withInput();
+        }
+
+        $customer->update($data);
 
         return redirect()->route('customers.show', $customer->id)->with('success', 'Dettagli cliente aggiornati con successo!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Customer $customer)
     {
         $customer->delete();
         return redirect()->route('welcome')->with('success', 'Prenotazione eliminata con successo.');
     }
 
-    /**
-     * Display a list of customers departing today for billing.
-     */
-    public function todayDeparturesBilling()
+    public function showTodayDeparturesBilling()
     {
-        $today = now()->toDateString();
+        $today = Carbon::today();
         $departingCustomers = Customer::whereDate('departure_date', $today)->get();
-        return view('customers.today-departures-billing', compact('departingCustomers'));
+
+        return view('customers.today-departures-billing', [
+            'departingCustomers' => $departingCustomers,
+            'today' => $today
+        ]);
     }
 
-    /**
-     * Calculate and display the detailed bill for a customer.
-     */
     public function showBill(Customer $customer)
-    {
-        $arrivalDate = Carbon::parse($customer->arrival_date);
-        $departureDate = Carbon::parse($customer->departure_date);
-        $totalDays = $arrivalDate->diffInDays($departureDate);
+    {   
+        $arrival = Carbon::parse($customer->arrival_date);
+        $departure = Carbon::parse($customer->departure_date);
+        $totalDays = max(0, $arrival->diffInDays($departure));
         $taxableDays = min($totalDays, 7);
-        $cityTax = $taxableDays * 1.5 * $customer->number_of_people;
-        $additionalExpensesTotal = $customer->expenses()->sum('amount');
-        $grandTotal = $customer->total_stay_cost + $additionalExpensesTotal + $cityTax;
+        $cityTax = 1.5 * $customer->number_of_people * $taxableDays;
+        $additionalExpenses = $customer->expenses()->sum('amount') ?? 0;
+        $grandTotal = $customer->total_stay_cost + $additionalExpenses + $cityTax;
         $finalBalance = $grandTotal - $customer->down_payment;
 
         return view('customers.bill', compact(
             'customer',
             'cityTax',
-            'additionalExpensesTotal',
+            'additionalExpenses',
             'grandTotal',
-            'finalBalance'
+            'finalBalance',
         ));
     }
 }

@@ -50,7 +50,6 @@
                 <select class="form-control" id="treatment" name="treatment" required>
                     <option value="BB" {{ old('treatment', $customer->treatment) == 'BB' ? 'selected' : '' }}>BB</option>
                     <option value="HB" {{ old('treatment', $customer->treatment) == 'HB' ? 'selected' : '' }}>HB</option>
-                    <option value="FB" {{ old('treatment', $customer->treatment) == 'FB' ? 'selected' : '' }}>FB</option>
                 </select>
                 @error('treatment')
                     <div class="text-danger">{{ $message }}</div>

@@ -1,38 +1,40 @@
 <x-layout>
     <div class="container mt-5">
-        <h1 class="mb-4">Clienti in Partenza Oggi - {{ now()->format('d/m/Y') }}</h1>
+<h1 class="text-center mb-4">
+    Clienti in partenza oggi, {{ \Carbon\Carbon::parse($today)->locale('it')->isoFormat('D MMMM') }}
+</h1>
 
-        @if($departingCustomers->isEmpty())
+        @if ($departingCustomers->isEmpty())
             <div class="alert alert-info" role="alert">
                 Nessun cliente in partenza oggi.
             </div>
         @else
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Cognome</th>
-                        <th>Camera</th>
-                        <th>Azioni</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($departingCustomers as $customer)
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered text-center align-middle">
+                    <thead class="table-light">
                         <tr>
-                            <td>{{ $customer->first_name }}</td>
-                            <td>{{ $customer->last_name }}</td>
-                            <td>{{ $customer->room }}</td>
-                            <td>
-                                <a href="{{ route('customers.showBill', $customer->id) }}" class="btn btn-primary">Elabora Conto</a>
-                            </td>
+                            <th>Nome</th>
+                            <th>Cognome</th>
+                            <th>Camera</th>
+                            <th>Azioni</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($departingCustomers as $customer)
+                            <tr>
+                                <td>{{ $customer->first_name }}</td>
+                                <td>{{ $customer->last_name }}</td>
+                                <td>{{ $customer->room }}</td>
+                                <td><a href="{{ route('customers.showBill', $customer->id) }}" class="btn btn-sm btn-primary">Elabora Conto</a></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         @endif
-        
-        <div class="mt-4">
-            <a href="{{ route('welcome') }}" class="btn btn-secondary">Torna alla Home</a>
+
+        <div class="mt-4 d-flex justify-content-center">
+            <a href="{{ route('welcome') }}" class="btn btn-outline-secondary">Torna alla Home</a>
         </div>
     </div>
 </x-layout>

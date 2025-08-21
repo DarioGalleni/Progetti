@@ -40,7 +40,7 @@ Route::get('/customers/{customer}/expenses', [CustomerExpenseController::class, 
 Route::post('/customers/{customer}/expenses', [CustomerExpenseController::class, 'updateExpenses'])->name('customers.updateExpenses');
 
 // Rotta per la pagina di gestione dei conti
-Route::get('/customers/departures/billing', [CustomerController::class, 'todayDeparturesBilling'])->name('customers.todayDeparturesBilling');
+Route::get('/today-departures-billing', [App\Http\Controllers\CustomerController::class, 'showTodayDeparturesBilling'])->name('customers.todayDeparturesBilling');
 
 // Rotta per visualizzare il conto dettagliato di un ospite
 Route::get('/customers/{customer}/bill', [CustomerController::class, 'showBill'])->name('customers.showBill');

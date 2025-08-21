@@ -1,41 +1,49 @@
-th, td {
-      text-align: center;
-      vertical-align: middle;
-      min-width: 80px;
-    }
-/* Rimuove le frecce in Chrome, Safari, Edge e Opera */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Rimuove le frecce in Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
+/* Night-mode: navbar scura e colonna camere scura */
 body.night-mode {
-        background-color: #28282B; /* Sfondo scuro */
-        color: #F5F5DC; /* Testo chiaro */
-    }
-    .night-mode .navbar,
-    .night-mode .card,
-    .night-mode .table,
-    .night-mode .list-group-item {
-        background-color: #38383a !important;
-        color: #F5F5DC !important;
-        border-color: #4a4a4d !important;
-    }
-    .night-mode .table th,
-    .night-mode .table td {
-        border-color: #4a4a4d !important;
-    }
-    .night-mode .table-striped > tbody > tr:nth-of-type(odd) > * {
-        background-color: #303032; /* Colore più scuro per le righe pari */
-    }
-    .night-mode .btn-dark,
-    .night-mode .btn-secondary {
-        background-color: #4a4a4d !important;
-        border-color: #4a4a4d !important;
-    }
+    background-color: #28282B;
+    color: #F5F5DC;
+}
+
+/* Navbar */
+body.night-mode .navbar {
+    background-color: #28282B !important;
+    border-bottom: 1px solid #3a3a3c;
+}
+body.night-mode .navbar .navbar-brand,
+body.night-mode .navbar .nav-link,
+body.night-mode .navbar .navbar-text {
+    color: #F5F5DC !important;
+}
+
+/* Colonna sinistra "Camera" (override .bg-light di Bootstrap) */
+body.night-mode .sticky-header-room,
+body.night-mode .sticky-header-room.bg-light {
+    background-color: #28282B !important;
+    color: #F5F5DC !important;
+    border-right: 1px solid #F5F5DC !important;
+    z-index: 3;
+}
+
+/* Tabelle: celle scure e bordi chiari */
+body.night-mode .table,
+body.night-mode .table th,
+body.night-mode .table td {
+    background-color: #28282B;
+    color: #F5F5DC;
+    border-color: #F5F5DC;
+}
+body.night-mode .table th,
+body.night-mode .table td {
+    border: 1px solid #F5F5DC;
+}
+
+/* Separatore visibile tra colonna sticky e calendario */
+body.night-mode .sticky-header-room + td {
+    box-shadow: -6px 0 6px -6px rgba(0,0,0,0.6);
+}
+
+/* Fascia blu (se presente) */
+body.night-mode .top-bar {
+    background-color: #1E90FF;
+    color: #ffffff;
+}

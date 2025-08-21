@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container-fluid mt-5">
-        <h1 class="mb-4 text-center">Stato Camere del Giorno - {{ now()->format('d/m/Y') }}</h1>
+<h1 class="mb-4 text-center">Stato Camere del Giorno - {{ \Carbon\Carbon::parse($today)->locale('it')->isoFormat('D MMMM') }}</h1>
 
         @if(empty($allRooms))
             <div class="alert alert-info" role="alert">

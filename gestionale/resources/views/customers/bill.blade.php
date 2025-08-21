@@ -1,4 +1,5 @@
 <x-layout>
+@section('title', 'Conto per ' . $customer->first_name . ' ' . $customer->last_name)
     <div class="container mt-5">
         <h1 class="mb-4">Conto per {{ $customer->first_name }} {{ $customer->last_name }} (Camera {{ $customer->room }})</h1>
 
@@ -16,19 +17,21 @@
                         Imposta di soggiorno:
                         <span class="fw-bold">{{ number_format($cityTax, 2, ',', '.') }} €</span>
                     </li>
-                    @if($additionalExpensesTotal > 0)
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Totale spese aggiuntive:
-                            <span class="fw-bold">{{ number_format($additionalExpensesTotal, 2, ',', '.') }} €</span>
+                    @if($additionalExpenses > 0)
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                Totale spese aggiuntive:
+                                <span class="fw-bold">{{ number_format($additionalExpenses, 2, ',', '.') }} €</span>
+                            </div>
+                            <ul class="list-group list-group-flush ms-3 mt-2">
+                                @foreach($customer->expenses as $expense)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        - {{ ucfirst(str_replace('_', ' ', $expense->expense_type)) }}:
+                                        <span>{{ number_format($expense->amount, 2, ',', '.') }} €</span>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </li>
-                        <ul class="list-group list-group-flush ms-3">
-                            @foreach($customer->expenses as $expense)
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    - {{ ucfirst($expense->expense_type) }}:
-                                    <span>{{ number_format($expense->amount, 2, ',', '.') }} €</span>
-                                </li>
-                            @endforeach
-                        </ul>
                     @endif
                     <li class="list-group-item d-flex justify-content-between align-items-center mt-3 bg-light">
                         <strong>Totale Complessivo:</strong>
@@ -45,10 +48,10 @@
                 </ul>
             </div>
         </div>
-
         <div class="mt-4">
             <a href="{{ route('customers.todayDeparturesBilling') }}" class="btn btn-secondary">Torna alla lista</a>
             <button class="btn btn-info" onclick="window.print()">Stampa</button>
         </div>
     </div>
 </x-layout>
+
