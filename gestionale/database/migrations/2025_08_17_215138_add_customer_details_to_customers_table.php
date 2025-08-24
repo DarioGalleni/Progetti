@@ -22,7 +22,6 @@ return new class extends Migration
             $table->unsignedInteger('number_of_people');
             $table->decimal('total_stay_cost', 8, 2);
             $table->decimal('down_payment', 8, 2)->nullable();
-            $table->enum('additional_expenses', ['spiaggia', 'bici', 'pasti', 'bevande', 'late_checkout'])->nullable();
         });
     }
 

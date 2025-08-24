@@ -30,9 +30,20 @@
           </a>
         </li>
         <li class="nav-item ms-3">
-          <button id="night-mode-toggle" class="btn btn-dark">
-            <i class="fas fa-moon"></i>
+          <button id="enable-night-mode" class="btn btn-dark" title="Attiva modalità notte">
+            <span class="theme-icon"><i class="fas fa-moon"></i></span>
           </button>
+          <button id="disable-night-mode" class="btn btn-sun hidden" title="Disattiva modalità notte">
+            <span class="theme-icon"><i class="fas fa-sun"></i></span>
+          </button>
+        </li>
+        <li class="nav-item ms-2">
+          <form method="POST" action="{{ route('optimize.clear') }}">
+            @csrf
+            <button type="submit" class="btn btn-outline-secondary" title="Clear cache e file ottimizzati">
+              <i class="fas fa-broom"></i>
+            </button>
+          </form>
         </li>
       </ul>
       <form class="d-flex" role="search" method="GET" action="{{ route('customers.search') }}">

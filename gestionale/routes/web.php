@@ -45,3 +45,6 @@ Route::get('/today-departures-billing', [App\Http\Controllers\CustomerController
 // Rotta per visualizzare il conto dettagliato di un ospite
 Route::get('/customers/{customer}/bill', [CustomerController::class, 'showBill'])->name('customers.showBill');
 
+// Route per svuotare cache e file ottimizzati (collegata al pulsante in navbar)
+Route::post('/optimize-clear', [App\Http\Controllers\Controller::class, 'optimizeClear'])->name('optimize.clear');
+

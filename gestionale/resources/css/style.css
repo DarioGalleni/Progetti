@@ -1,7 +1,46 @@
-/* Night-mode: navbar scura e colonna camere scura */
+/* Modalità notte */
 body.night-mode {
     background-color: #28282B;
     color: #F5F5DC;
+}
+
+/* Transizioni per cambio tema */
+body,
+.navbar,
+.navbar .navbar-brand,
+.navbar .nav-link,
+.table,
+.table th,
+.table td,
+.sticky-header-room,
+.sticky-header-room.bg-light,
+.top-bar,
+.btn,
+.btn-sun {
+    transition: background-color .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease;
+}
+
+/* Icon switch animations (fade + scale) */
+.theme-icon {
+    display: inline-block;
+    transition: transform .45s ease, opacity .45s ease;
+    will-change: transform, opacity;
+}
+.anim-in {
+    animation: iconIn .5s ease forwards;
+}
+.anim-out {
+    animation: iconOut .45s ease forwards;
+}
+
+@keyframes iconIn {
+    from { opacity: 0; transform: scale(.6) rotate(-8deg); }
+    to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes iconOut {
+    from { opacity: 1; transform: scale(1) rotate(0); }
+    to   { opacity: 0; transform: scale(.6) rotate(8deg); }
 }
 
 /* Navbar */
@@ -15,7 +54,7 @@ body.night-mode .navbar .navbar-text {
     color: #F5F5DC !important;
 }
 
-/* Colonna sinistra "Camera" (override .bg-light di Bootstrap) */
+/* Colonna "Camera" */
 body.night-mode .sticky-header-room,
 body.night-mode .sticky-header-room.bg-light {
     background-color: #28282B !important;
@@ -24,7 +63,7 @@ body.night-mode .sticky-header-room.bg-light {
     z-index: 3;
 }
 
-/* Tabelle: celle scure e bordi chiari */
+/* Tabelle */
 body.night-mode .table,
 body.night-mode .table th,
 body.night-mode .table td {
@@ -37,13 +76,83 @@ body.night-mode .table td {
     border: 1px solid #F5F5DC;
 }
 
-/* Separatore visibile tra colonna sticky e calendario */
+/* Separatore sticky */
 body.night-mode .sticky-header-room + td {
     box-shadow: -6px 0 6px -6px rgba(0,0,0,0.6);
 }
 
-/* Fascia blu (se presente) */
+/* Fascia blu */
 body.night-mode .top-bar {
     background-color: #1E90FF;
     color: #ffffff;
+}
+
+/* Drag-to-scroll */
+#calendar-container.drag-scroll {
+    position: relative; /* needed for any absolute pseudo-elements */
+    cursor: grab;
+    -webkit-overflow-scrolling: touch; /* smooth on iOS */
+}
+#calendar-container.drag-scroll.dragging {
+    cursor: grabbing;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+/* optional: subtle overlay while dragging (kept transparent) */
+#calendar-container.drag-scroll.dragging::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(0,0,0,0);
+}
+
+/* Utility classes moved from inline styles in Blade */
+.calendar-max-height {
+    max-height: 80vh;
+    overflow: auto;
+}
+.table-nowrap {
+    white-space: nowrap;
+}
+.sticky-room-cell {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    min-width: 140px;
+}
+.sticky-room-header {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+/* Pulsante "sole" (disattiva modalità notte) */
+.btn-sun {
+    background-color: #FFC107;
+    color: #000000;
+    border: 1px solid rgba(0,0,0,0.12);
+}
+.btn-sun .fa-sun {
+    margin-right: 0;
+}
+
+/* Spaziatura per il pulsante "sole" quando presente */
+.btn-sun.ms-2,
+.btn-sun + .btn {
+    margin-left: 6px;
+}
+
+/* Utility per nascondere elementi via CSS (script rimuove/aggiunge questa classe) */
+.hidden { display: none !important; }
+
+/* Stili per il numero e label delle camere nella colonna sticky */
+.room-number {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+.room-label {
+    font-size: 0.9rem;
+    display: block;
 }

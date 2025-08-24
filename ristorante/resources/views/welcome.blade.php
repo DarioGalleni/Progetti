@@ -1,0 +1,395 @@
+<x-layout>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Autentica Cucina Italiana</h1>
+            <p class="hero-subtitle">Ingredienti freschi, sapori tradizionali, atmosfera accogliente</p>
+            <a href="#reservation" class="btn btn-primary-custom">Prenota Ora</a>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
+                        alt="Chef preparing food" class="about-img">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">La Nostra Storia</h2>
+                    <p class="mb-4">Fondato nel 1985, il Ristorante Buongusto porta avanti una tradizione culinaria che affonda le sue radici nella cucina italiana più autentica.</p>
+                    <p class="mb-5">Il nostro chef, Giovanni Rossi, con oltre 30 anni di esperienza, seleziona personalmente gli ingredienti più freschi dai produttori locali per garantire la massima qualità in ogni piatto.</p>
+                    
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-award contact-icon"></i>
+                        <div>
+                            <h4 class="mb-1">Premio "Miglior Ristorante Italiano" 2022</h4>
+                            <p class="mb-0">Riconosciuto dalla Guida Gastronomica Italiana</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Il Nostro Menu</h2>
+                <p class="section-subtitle">Scopri i nostri piatti preparati con passione e ingredienti di prima qualità</p>
+            </div>
+            
+            <div class="row">
+                <!-- Antipasti -->
+                <div class="col-md-4 mb-4">
+                    <div class="menu-item">
+                        <div class="dish-category">
+                            <h3>Antipasti</h3>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <h4 class="dish-name mb-0">Bruschetta al Pomodoro</h4>
+                                    <span class="dish-price">€8</span>
+                                </div>
+                                <p class="dish-description">Pane tostato con pomodori freschi, aglio e basilico</p>
+                            </li>
+                            <li class="mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <h4 class="dish-name mb-0">Antipasto Misto</h4>
+                                    <span class="dish-price">€14</span>
+                                </div>
+                                <p class="dish-description">Selezione di salumi, formaggi e verdure sott'olio</p>
+                            </li>
+                            <li>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <h4 class="dish-name mb-0">Carpaccio di Manzo</h4>
+                                    <span class="dish-price">€12</span>
+                                </div>
+                                <p class="dish-description">Fettine sottili di manzo con scaglie di parmigiano e rucola</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Primi Piatti -->
+                <div class="col-md-4 mb-4">
+                    <div class="menu-item">
+                        <div class="dish-category">
+                            <h3>Primi Piatti</h3>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <h4 class="dish-name mb-0">Spaghetti Carbonara</h4>
+                                    <span class="dish-price">€12</span>
+                                </div>
+                                <p class="dish-description">Con uova, guanciale, pecorino e pepe nero</p>
+                            </li>
+                            <li class="mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <h4 class="dish-name mb-0">Risotto ai Funghi Porcini</h4>
+                                    <span class="dish-price">€14</span>
+                                </div>
+                                <p class="dish-description">Risotto cremoso con funghi porcini freschi</p>
+                            </li>
+                            <li class="mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <h4 class="dish-name mb-0">Lasagna alla Bolognese</h4>
+                                    <span class="dish-price">€13</span>
+                                </div>
+                                <p class="dish-description">Pasta fresca con ragù di carne e besciamella</p>
+                            </li>
+                            <li>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <h4 class="dish-name mb-0">Gnocchi al Pesto</h4>
+                                    <span class="dish-price">€11</span>
+                                </div>
+                                <p class="dish-description">Gnocchi fatti in casa con pesto genovese</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Secondi Piatti -->
+                <div class="col-md-4 mb-4">
+                    <div class="menu-item">
+                        <div class="dish-category">
+                            <h3>Secondi Piatti</h3>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <h4 class="dish-name mb-0">Filetto di Manzo</h4>
+                                    <span class="dish-price">€22</span>
+                                </div>
+                                <p class="dish-description">Con riduzione di vino rosso e patate al forno</p>
+                            </li>
+                            <li class="mb-4">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <h4 class="dish-name mb-0">Branzino al Cartoccio</h4>
+                                    <span class="dish-price">€18</span>
+                                </div>
+                                <p class="dish-description">Con verdure di stagione e erbe aromatiche</p>
+                            </li>
+                            <li>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <h4 class="dish-name mb-0">Pollo alla Cacciatora</h4>
+                                    <span class="dish-price">€16</span>
+                                </div>
+                                <p class="dish-description">Pollo cotto con pomodoro, olive e rosmarino</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary-custom">Scarica il Menu Completo (PDF)</a>
+            </div>
+        </div>
+    </section>
+
+<!-- Testimonials -->
+<section class="py-5 bg-white container-fluid">
+    <div class="py-5">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Cosa Dicono i Nostri Clienti</h2>
+            <p class="section-subtitle">Le esperienze dei nostri ospiti</p>
+        </div>
+        <div class="testimonial-slider container-fluid">
+            <div class="row testimonial-track">
+                @foreach ($testimonials as $testimonial)
+                    <div class="col-md-4 mb-4 testimonial-slide">
+                        <x-card 
+                            :stars="$testimonial['stars']"
+                            :text="$testimonial['text']"
+                            :author-img="$testimonial['authorImg']"
+                            :author-name="$testimonial['authorName']"
+                            :source="$testimonial['source']"
+                        />
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact & Reservation Section -->
+    <section id="contact" class="contact-section">
+        <div class="container-fluid
+        ">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="section-title text-white mb-4">Contattaci</h2>
+                    <p class="mb-5">Siamo aperti dal martedì alla domenica, dalle 12:00 alle 15:00 e dalle 19:00 alle 23:00.</p>
+                    
+                    <div class="contact-info">
+                        <div class="d-flex mb-4">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <div>
+                                <h4 class="mb-1">Indirizzo</h4>
+                                <p class="mb-0">Piazza Augusto Albini, 10, 00154 Roma</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-4">
+                            <i class="fas fa-phone-alt contact-icon"></i>
+                            <div>
+                                <h4 class="mb-1">Telefono</h4>
+                                <p class="mb-0">+39 06 1234567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <div>
+                                <h4 class="mb-1">Email</h4>
+                                <p class="mb-0">info@ristorantebuongusto.it</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="mb-3">Seguici sui Social</h4>
+                        <div>
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <h2 class="section-title text-white mb-4" id="reservation">Prenota un Tavolo</h2>
+                    <form action="https://formsubmit.co/aa209262692a1d12c054327552586fc5" method="POST">
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="name" class="form-label">Nome</label>
+                                <input type="text" class="form-control form-control-custom" id="name" name="name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="surname" class="form-label">Cognome</label>
+                                <input type="text" class="form-control form-control-custom" id="surname" name="surname" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control form-control-custom" id="email" name="email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Telefono</label>
+                                <input type="tel" class="form-control form-control-custom" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <label for="date" class="form-label">Data</label>
+                                <input type="date" class="form-control form-control-custom" id="date" name="date" required>
+                            </div>
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <label for="time" class="form-label">Ora</label>
+                                <input type="time" class="form-control form-control-custom" id="time" name="time" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="guests" class="form-label">Persone</label>
+                                <select class="form-select form-control-custom" id="guests" name="guests" required>
+                                    <option value="1">1 persona</option>
+                                    <option value="2">2 persone</option>
+                                    <option value="3">3 persone</option>
+                                    <option value="4">4 persone</option>
+                                    <option value="5">5+ persone</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="message" class="form-label">Note aggiuntive</label>
+                            <textarea class="form-control form-control-custom" id="message" name="message" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary-custom w-100" id="submit" target="blank">Invia Prenotazione</button>
+                        <!-- captcha remove -->
+                        <input type="hidden" name="_captcha" value="false">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map -->
+    <div class="map-div">
+        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4227.45824565231!2d12.485949725141166!3d41.86488483999944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a7e1a9ea0d5%3A0xb380d5b03fb3d29!2sPizzeria%20Buongusto%20a%20Garbatella!5e0!3m2!1sit!2sit!4v1756029392263!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+<x-footer/>
+
+<!-- JSON-LD Schema per i motori di ricerca -->
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "Restaurant",
+  "name": "Ristorante Buongusto",
+  "image": "{{ asset('images/ristorante-preview.jpg') }}",
+  "url": "{{ url('/') }}",
+  "telephone": "+39 06 1234567",
+  "email": "info@ristorantebuongusto.it",
+  "priceRange": "€€-€€€",
+  "servesCuisine": "Italiana",
+  "description": "Fondato nel 1985, il Ristorante Buongusto porta avanti una tradizione culinaria che affonda le sue radici nella cucina italiana più autentica.",
+  "address": {
+    "@@type": "PostalAddress",
+    "streetAddress": "Piazza Augusto Albini, 10",
+    "addressLocality": "Roma",
+    "postalCode": "00154",
+    "addressCountry": "IT"
+  },
+  "geo": {
+    "@@type": "GeoCoordinates",
+    "latitude": 41.86488,
+    "longitude": 12.48594
+  },
+  "openingHoursSpecification": [
+    {
+      "@@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "12:00",
+      "closes": "15:00"
+    },
+    {
+      "@@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "19:00",
+      "closes": "23:00"
+    }
+  ],
+  "menu": "{{ url('/menu') }}",
+  "hasMenu": {
+    "@@type": "Menu",
+    "hasMenuSection": [
+      {
+        "@@type": "MenuSection",
+        "name": "Antipasti",
+        "hasMenuItem": [
+          {
+            "@@type": "MenuItem",
+            "name": "Bruschetta al Pomodoro",
+            "description": "Pane tostato con pomodori freschi, aglio e basilico",
+            "offers": {
+              "@@type": "Offer",
+              "price": "8.00",
+              "priceCurrency": "EUR"
+            }
+          },
+          {
+            "@@type": "MenuItem",
+            "name": "Antipasto Misto",
+            "description": "Selezione di salumi, formaggi e verdure sott'olio",
+            "offers": {
+              "@@type": "Offer",
+              "price": "14.00",
+              "priceCurrency": "EUR"
+            }
+          }
+        ]
+      },
+      {
+        "@@type": "MenuSection",
+        "name": "Primi Piatti",
+        "hasMenuItem": [
+          {
+            "@@type": "MenuItem",
+            "name": "Spaghetti Carbonara",
+            "description": "Con uova, guanciale, pecorino e pepe nero",
+            "offers": {
+              "@@type": "Offer",
+              "price": "12.00",
+              "priceCurrency": "EUR"
+            }
+          },
+          {
+            "@@type": "MenuItem",
+            "name": "Risotto ai Funghi Porcini",
+            "description": "Risotto cremoso con funghi porcini freschi",
+            "offers": {
+              "@@type": "Offer",
+              "price": "14.00",
+              "priceCurrency": "EUR"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "award": "Premio 'Miglior Ristorante Italiano' 2022 - Riconosciuto dalla Guida Gastronomica Italiana",
+  "aggregateRating": {
+    "@@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "450"
+  }
+}
+</script>
+</x-layout>
