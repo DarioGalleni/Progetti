@@ -1,0 +1,21 @@
+Altri file di sviluppo che NON dovresti caricare
+Oltre a node_modules, ci sono altri file e cartelle che non dovresti caricare sul server di produzione:
+
+package.json e package-lock.json - File di configurazione npm
+gulpfile.js - File di configurazione Gulp
+.git/ - Cartella di configurazione Git
+node_modules - Dipendenze npm
+.gitignore, .npmrc, etc. - File di configurazione vari
+File SCSS originali (se hai già i file CSS compilati)
+
+
+Cosa dovresti caricare sul tuo hosting
+Solo i file essenziali necessari per far funzionare il tuo sito web:
+
+File HTML (come index.html)
+File CSS compilati (nella cartella css)
+File JavaScript (nella cartella js)
+Immagini (nella cartella imgs e sottocartelle)
+Font e icone (nella cartella themify-icons)
+File SEO importanti (robots.txt e sitemap.xml)
+Altri file statici come favicon, ecc.

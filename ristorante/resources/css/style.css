@@ -1,3 +1,5 @@
+/* percorso per immagini da css a vista url('../assets/img/home-section.jpg') */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
@@ -15,8 +17,8 @@ body {
 }
 
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6)),
-        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6)),url(/public/build/assets/img/home-section.jpg);
+    /*('../assets/img/home-section.jpg')*/
     background-size: cover;
     background-position: center;
     height: 70vh;
@@ -67,7 +69,7 @@ body {
     margin: 0 auto 50px;
 }
 
-.about-img {
+.about-video {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     width: 100%;
@@ -281,3 +283,23 @@ footer {
         }
     }
 }
+
+/* navbar */
+
+
+.navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1030;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    .hidden-navbar {
+        transform: translateY(-100%);
+    }
+    
+    .visible-navbar {
+        transform: translateY(0);
+    }

@@ -1,26 +1,30 @@
 <x-layout>
     <!-- Hero Section -->
-    <section id="home" class="hero-section">
+    <section id="home" class="hero-section vh-100">
         <div class="container">
             <h1 class="hero-title">Autentica Cucina Italiana</h1>
             <p class="hero-subtitle">Ingredienti freschi, sapori tradizionali, atmosfera accogliente</p>
-            <a href="#reservation" class="btn btn-primary-custom">Prenota Ora</a>
         </div>
     </section>
-    
+
     <!-- About Section -->
     <section id="about" class="py-5 bg-white">
         <div class="container py-5">
             <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
+                {{-- <div class="col-lg-6 mb-4 mb-lg-0">
                     <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
-                        alt="Chef preparing food" class="about-img">
+                        alt="Chef preparing food" class="about-video">
+                </div>  --}}
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <video controls class="about-video autoplay-on-view" muted playsinline preload="metadata" data-src="{{ asset('build/assets/video/video2.mp4') }}">
+                        <source data-src="{{ asset('build/assets/video/video.mp4') }}" type="video/mp4">
+                        Il tuo browser non supporta il tag video.
+                    </video>
                 </div>
                 <div class="col-lg-6">
                     <h2 class="section-title">La Nostra Storia</h2>
                     <p class="mb-4">Fondato nel 1985, il Ristorante Buongusto porta avanti una tradizione culinaria che affonda le sue radici nella cucina italiana più autentica.</p>
                     <p class="mb-5">Il nostro chef, Giovanni Rossi, con oltre 30 anni di esperienza, seleziona personalmente gli ingredienti più freschi dai produttori locali per garantire la massima qualità in ogni piatto.</p>
-                    
                     <div class="d-flex align-items-center">
                         <i class="fas fa-award contact-icon"></i>
                         <div>
@@ -282,9 +286,11 @@
     </section>
 
     <!-- Map -->
-    <div class="map-div">
-        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4227.45824565231!2d12.485949725141166!3d41.86488483999944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a7e1a9ea0d5%3A0xb380d5b03fb3d29!2sPizzeria%20Buongusto%20a%20Garbatella!5e0!3m2!1sit!2sit!4v1756029392263!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
+    <div class="map-container" style="height: 400px;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2971.3051977017053!2d12.482395075787636!3d41.86477966624845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a7e1448600f%3A0x4a1ae9829749f019!2sPiazza%20Augusto%20Albini%2C%2010%2C%2000154%20Roma%20RM!5e0!3m2!1sit!2sit!4v1756108690673!5m2!1sit!2sit" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
+    
 <x-footer/>
 
 <!-- JSON-LD Schema per i motori di ricerca -->

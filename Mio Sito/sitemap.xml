@@ -1,10 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <!-- Homepage -->
     <url>
-        <loc>http://dariux87.com/</loc>
+        <loc>https://dariux87.it/</loc>
+        <lastmod>2025-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
         <image:image>
-            <image:loc>http://www.dariux87.com/assets/favicon/android-chrome-512x512.png</image:loc>
+            <image:loc>https://dariux87.it/assets/favicon/android-chrome-512x512.png</image:loc>
+            <image:title>Dario | Creazione Siti Web</image:title>
             <image:caption>Site_Logo</image:caption>
         </image:image>
     </url>
+    
+    <!-- Portfolio: Hotel Management -->
+    <url>
+        <loc>https://dariux87.it/gest</loc>
+        <lastmod>2025-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://dariux87.it/assets/imgs/hotel.jpg</image:loc>
+            <image:title>Gestionale per hotel</image:title>
+            <image:caption>Sistema gestionale per hotel</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Portfolio: Restaurant -->
+    <url>
+        <loc>https://dariux87.it/rist/</loc>
+        <lastmod>2025-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://dariux87.it/assets/imgs/restaurant.jpg</image:loc>
+            <image:title>Sito Ristorante</image:title>
+            <image:caption>Template per ristorante</image:caption>
+        </image:image>
+    </url>
+    
 </urlset>
