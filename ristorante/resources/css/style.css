@@ -17,16 +17,9 @@ body {
 }
 
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6)),url(/public/build/assets/img/home-section.jpg);
-    /*('../assets/img/home-section.jpg')*/
+    background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8));
     background-size: cover;
     background-position: center;
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
 }
 
 .hero-title {
@@ -303,3 +296,10 @@ footer {
     .visible-navbar {
         transform: translateY(0);
     }
+
+    /* Nasconde solo la stringa su schermi <= 380px mantenendo l'icona */
+    @media (max-width: 380px) {
+    .brand-text {
+        display: none !important;
+    }
+}

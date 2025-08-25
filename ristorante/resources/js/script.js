@@ -1,14 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Scorrimento fluido per i link di ancoraggio
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
 
     // Visibilità della barra di navigazione durante lo scorrimento
     const navbar = document.getElementsByClassName('navbar')[0];
@@ -92,4 +82,46 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Attiva lo scroll listener
         window.addEventListener('scroll', handleScroll);
+    });
+
+    // Rendere efficace il clic sul pulsante #download-menu
+    document.addEventListener('DOMContentLoaded', function () {
+        var btn = document.getElementById('download-menu');
+        if (!btn) return;
+
+        btn.addEventListener('click', async function (e) {
+            e.preventDefault();
+            var url = btn.getAttribute('data-href') || btn.getAttribute('href') || '/menu';
+
+            try {
+                var res = await fetch(url, { method: 'GET' });
+                if (!res.ok) throw new Error('Network response was not ok (' + res.status + ')');
+
+                var contentType = res.headers.get('content-type') || '';
+                if (contentType.indexOf('text/html') === 0) {
+                    window.open(url, '_blank');
+                    return;
+                }
+
+                var filename = 'menu.pdf';
+                var cd = res.headers.get('content-disposition') || '';
+                var m = cd.match(/filename\*=UTF-8''([^;\n\r]+)/i) || cd.match(/filename=?"?([^";]+)"?/i);
+                if (m && m[1]) {
+                    try { filename = decodeURIComponent(m[1]); } catch (_) { filename = m[1]; }
+                }
+
+                var blob = await res.blob();
+                var blobUrl = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = blobUrl;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                setTimeout(function () { URL.revokeObjectURL(blobUrl); }, 1000);
+            } catch (err) {
+                console.error('Download fallito:', err);
+                window.open(url, '_blank');
+            }
+        });
     });
