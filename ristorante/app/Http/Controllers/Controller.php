@@ -67,6 +67,6 @@ class Controller extends BaseController
 ];
         
         return view('welcome', compact('testimonials'));
-        // return view('welcome');
+
     }
 }
