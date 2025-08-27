@@ -22,7 +22,6 @@
                     <table class="table table-striped align-middle">
                         <thead>
                             <tr>
-                                <th>Codice</th>
                                 <th>Nome</th>
                                 <th>Telefono</th>
                                 <th>Data</th>
@@ -37,49 +36,41 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($reservations as $r)
-                                @php
-                                    // Cerca disponibilità nel record TableAvailability (se presente)
-                                    $availability = \App\Models\TableAvailability::where('date', $r->date)
-                                        ->where('time_slot', $r->time)
-                                        ->first();
+@foreach($reservations as $r)
+    @php
+        // Cerca disponibilità nel record TableAvailability
+        $availability = \App\Models\TableAvailability::where('date', $r->date)
+            ->where('time_slot', $r->time)
+            ->first();
 
-                                    if ($availability) {
-                                        $remainingTables = max(0, (int) $availability->available_tables);
-                                    } else {
-                                        // Se non esiste record, calcola dai reservations (fallback)
-                                        $booked = \App\Models\Reservation::where('date', $r->date)
-                                            ->where('time', $r->time)
-                                            ->sum('tables_required');
-                                        $remainingTables = max(0, 20 - (int) $booked);
-                                    }
+        // Se non esiste un record di disponibilità, calcola la disponibilità totale (20 tavoli)
+        $remainingTables = $availability ? (int) $availability->available_tables : 20;
 
-                                    $remainingSeats = $remainingTables * 4;
-                                @endphp
-                                <tr>
-                                    <td class="fw-bold">{{ $r->reservation_code }}</td>
-                                    <td>{{ $r->customer->name ?? '-' }}</td>
-                                    <td>{{ $r->customer->phone ?? '-' }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($r->date)->format('d/m/Y') }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($r->time)->format('H:i') }}</td>
-                                    <td>{{ $r->people }}</td>
-                                    <td>{{ $r->tables_required }}</td>
-                                    <td>{{ $remainingTables }}</td>
-                                    <td>{{ $remainingSeats }}</td>
-                                    <td style="max-width:200px; white-space:pre-wrap;">{{ $r->notes ?? '-' }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($r->created_at)->format('d/m/Y H:i') }}</td>
-                                    <td class="align-middle">
-                                        <div class="d-flex justify-content-center align-items-center gap-2">
-                                            <a href="{{ route('reservations.edit', $r->id) }}" class="btn btn-sm btn-outline-primary">Modifica</a>
-                                            <form action="{{ route('reservations.destroy', $r->id) }}" method="POST" class="m-0" onsubmit="return confirm('Confermi la cancellazione della prenotazione {{ $r->reservation_code }}?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">Elimina</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
+        $remainingSeats = $remainingTables * 4;
+    @endphp
+    <tr>
+        <td>{{ $r->customer->name ?? '-' }}</td>
+        <td>{{ $r->customer->phone ?? '-' }}</td>
+        <td>{{ \Carbon\Carbon::parse($r->date)->format('d/m/Y') }}</td>
+        <td>{{ \Carbon\Carbon::parse($r->time)->format('H:i') }}</td>
+        <td>{{ $r->people }}</td>
+        <td>{{ $r->tables_required }}</td>
+        <td>{{ $remainingTables }}</td>
+        <td>{{ $remainingSeats }}</td>
+        <td style="max-width:200px; white-space:pre-wrap;">{{ $r->notes ?? '-' }}</td>
+        <td>{{ \Carbon\Carbon::parse($r->created_at)->format('d/m/Y H:i') }}</td>
+        <td class="align-middle">
+            <div class="d-flex justify-content-center align-items-center gap-2">
+                <a href="{{ route('reservations.edit', $r->id) }}" class="btn btn-sm btn-outline-primary">Modifica</a>
+                <form action="{{ route('reservations.destroy', $r->id) }}" method="POST" class="m-0" onsubmit="return confirm('Confermi la cancellazione della prenotazione {{ $r->reservation_code }}?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Elimina</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+@endforeach
                         </tbody>
                     </table>
                 </div>

@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\Controller;
-// use App\Http\Controllers\ReservationController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Controller::class, 'welcome'])->name('home');
 
