@@ -11,6 +11,8 @@
                 <li class="nav-item"><a class="nav-link" href="#about">Chi Siamo</a></li>
                 <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contatti</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('reservations.index') }}">Prenotazioni</a></li>
+                <li class="nav-item"><a class="btn btn-primary" href="{{ route('reservations.find') }}">Modifica Prenotazione</a></li>
             </ul>
         </div>
 

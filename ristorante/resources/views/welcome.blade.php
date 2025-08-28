@@ -10,14 +10,6 @@
         </div>
     </section>
 
-    <div class="container mt-5">
-    <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-            <a href="{{ route('reservations.index') }}" class="btn btn-primary">Visualizza Prenotazioni</a>
-        </div>
-    </div>
-</div>
-
     <!-- About Section -->
     <section id="about" class="py-5 bg-white">
         <div class="container py-5">
@@ -231,28 +223,28 @@
                 <!-- Reservation -->
                 <div class="col-lg-6">
                     <h2 class="section-title text-white mb-4" id="reservation">Prenota un Tavolo</h2>
-                    <form action="{{ route('reservation.store') }}" method="POST">
+                    <form action="{{ route('reservations.store') }}" method="POST">
                         @csrf
                         <div class="row mb-3">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label for="name" class="form-label">Nome e Cognome</label>
-                                <input type="text" class="form-control form-control-custom" id="name" name="name" required>
+                                <input type="text" class="form-control form-control-custom" id="name" name="name" value="{{ old('name') }}" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="phone" class="form-label">Telefono</label>
-                                <input type="tel" class="form-control form-control-custom" id="phone" name="phone" required>
+                                <input type="tel" class="form-control form-control-custom" id="phone" name="phone" value="{{ old('phone') }}" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control form-control-custom" id="email" name="email" required>
+                                <input type="email" class="form-control form-control-custom" id="email" name="email" value="{{ old('email') }}" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="people" class="form-label">Numero di persone</label>
                                 <select class="form-select form-control-custom" id="people" name="people" required>
-                                    @for ($i = 1; $i <= 10; $i++)
-                                        <option value="{{ $i }}">{{ $i }} {{ $i == 1 ? 'persona' : 'persone' }}</option>
+                                    @for ($i = 1; $i <= 20; $i++)
+                                        <option value="{{ $i }}" {{ old('people') == $i ? 'selected' : '' }}>{{ $i }} {{ $i == 1 ? 'persona' : 'persone' }}</option>
                                     @endfor
                                 </select>
                             </div>
@@ -260,34 +252,46 @@
                         <div class="row mb-3">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label for="date" class="form-label">Data</label>
-                                <input type="date" class="form-control form-control-custom" id="date" name="date" required min="{{ date('Y-m-d') }}">
+                                <input type="date" class="form-control form-control-custom" id="date" name="date" value="{{ old('date') }}" required min="{{ date('Y-m-d') }}">
                             </div>
                             <div class="col-md-6">
                                 <label for="time" class="form-label">Ora</label>
                                 <select class="form-select form-control-custom" id="time" name="time" required>
-                                    <option value="" disabled selected>Seleziona un orario</option>
-                                    <optgroup label="Pranzo">
+                                    <option value="" disabled {{ !old('time') ? 'selected' : '' }}>Seleziona un orario</option>
+                                    <optgroup label="Pranzo (12:00 - 13:45)">
                                         @for ($h = 12; $h <= 13; $h++)
                                             @for ($m = 0; $m < 60; $m += 15)
-                                                <option value="{{ sprintf('%02d:%02d', $h, $m) }}">{{ sprintf('%02d:%02d', $h, $m) }}</option>
+                                                @php
+                                                    $timeValue = sprintf('%02d:%02d', $h, $m);
+                                                    $timeLimit = ($h == 13 && $m > 45);
+                                                @endphp
+                                                @if (!$timeLimit)
+                                                    <option value="{{ $timeValue }}" {{ old('time') == $timeValue ? 'selected' : '' }}>{{ $timeValue }}</option>
+                                                @endif
                                             @endfor
                                         @endfor
-                                        <option value="14:00">14:00</option>
                                     </optgroup>
-                                    <optgroup label="Cena">
+                                    <optgroup label="Cena (19:30 - 22:00)">
                                         @for ($h = 19; $h <= 22; $h++)
                                             @for ($m = 0; $m < 60; $m += 15)
-                                                <option value="{{ sprintf('%02d:%02d', $h, $m) }}">{{ sprintf('%02d:%02d', $h, $m) }}</option>
+                                                @php
+                                                    $timeValue = sprintf('%02d:%02d', $h, $m);
+                                                    $tooEarly = ($h == 19 && $m < 30);
+                                                    $tooLate = ($h == 22 && $m > 0);
+                                                @endphp
+                                                @if (!$tooEarly && !$tooLate)
+                                                    <option value="{{ $timeValue }}" {{ old('time') == $timeValue ? 'selected' : '' }}>{{ $timeValue }}</option>
+                                                @endif
                                             @endfor
                                         @endfor
-                                        <option value="23:00">23:00</option>
+                                        <option value="22:00" {{ old('time') == '22:00' ? 'selected' : '' }}>22:00</option>
                                     </optgroup>
                                 </select>
                             </div>
                         </div>
                         <div class="mb-4">
                             <label for="notes" class="form-label">Note aggiuntive</label>
-                            <textarea class="form-control form-control-custom" id="notes" name="notes" rows="3"></textarea>
+                            <textarea class="form-control form-control-custom" id="notes" name="notes" rows="3">{{ old('notes') }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary-custom w-100">Prenota Ora</button>
                     </form>

@@ -1,112 +1,124 @@
 <x-layout>
-    <section class="hero-section vh-25 d-flex align-items-center justify-content-center text-white text-center" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ asset('media/img/home-section.jpg') }}'); background-size: cover; background-position: center;">
-        <div class="container">
-            <h1 class="hero-title">Modifica Prenotazione</h1>
-            <p class="hero-subtitle">Nome: <span class="fw-bold">{{ $reservation->customer->name }}</span></p>
-            <p class="hero-subtitle">Codice: <span class="fw-bold">{{ $reservation->reservation_code }}</span></p>
-        </div>
-    </section>
-
-    <section class="py-5">
-        <div class="container">
-            <div class="mb-4">
-                <a href="{{ route('reservations.index') }}" class="btn btn-outline-secondary">← Torna alle prenotazioni</a>
-            </div>
-
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <div class="card shadow">
-                <div class="card-body">
-                    <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="name" class="form-label">Nome e Cognome</label>
-                                <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $reservation->customer->name ?? '') }}" required>
+    <div class="container mt-5 pt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-body p-4">
+                        <h3 class="mb-4">Modifica Prenotazione</h3>
+                        
+                        <form action="{{ route('reservations.update.token', $reservation->modification_token) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label for="name" class="form-label">Nome e Cognome</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $reservation->name) }}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Telefono</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ old('phone', $reservation->phone) }}" required>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="phone" class="form-label">Telefono</label>
-                                <input type="tel" id="phone" name="phone" class="form-control" value="{{ old('phone', $reservation->customer->phone ?? '') }}" required>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" value="{{ old('email', $reservation->customer->email ?? '') }}" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="people" class="form-label">Numero di persone</label>
-                                <select id="people" name="people" class="form-select" required>
-                                    @for($i=1;$i<=20;$i++)
-                                        <option value="{{ $i }}" {{ (int)old('people', $reservation->people) === $i ? 'selected' : '' }}>
-                                            {{ $i }} {{ $i === 1 ? 'persona' : 'persone' }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="date" class="form-label">Data</label>
-                                <input type="date" id="date" name="date" class="form-control" value="{{ old('date', $reservation->date) }}" required min="{{ date('Y-m-d') }}">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="time" class="form-label">Ora</label>
-                                <select id="time" name="time" class="form-select" required>
-                                    <option value="" disabled>Seleziona un orario</option>
-                                    <optgroup label="Pranzo">
-                                        @for ($h = 12; $h <= 13; $h++)
-                                            @for ($m = 0; $m < 60; $m += 15)
-                                                @php $val = sprintf('%02d:%02d', $h, $m); @endphp
-                                                <option value="{{ $val }}" {{ old('time', $reservation->time) === $val ? 'selected' : '' }}>{{ $val }}</option>
-                                            @endfor
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $reservation->email) }}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="people" class="form-label">Numero di persone</label>
+                                    <select class="form-select" id="people" name="people" required>
+                                        @for ($i = 1; $i <= 20; $i++)
+                                            <option value="{{ $i }}" {{ old('people', $reservation->people) == $i ? 'selected' : '' }}>
+                                                {{ $i }} {{ $i == 1 ? 'persona' : 'persone' }}
+                                            </option>
                                         @endfor
-                                        <option value="14:00" {{ old('time', $reservation->time) === '14:00' ? 'selected' : '' }}>14:00</option>
-                                    </optgroup>
-                                    <optgroup label="Cena">
-                                        @for ($h = 19; $h <= 22; $h++)
-                                            @for ($m = 0; $m < 60; $m += 15)
-                                                @php $val = sprintf('%02d:%02d', $h, $m); @endphp
-                                                <option value="{{ $val }}" {{ old('time', $reservation->time) === $val ? 'selected' : '' }}>{{ $val }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label for="date" class="form-label">Data</label>
+                                    <input type="date" class="form-control" id="date" name="date" 
+                                           value="{{ old('date', $reservation->date->format('Y-m-d')) }}" required min="{{ date('Y-m-d') }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="time" class="form-label">Ora</label>
+                                    <select class="form-select" id="time" name="time" required>
+                                        <option value="" disabled>Seleziona un orario</option>
+                                        <optgroup label="Pranzo (12:00 - 13:45)">
+                                            @for ($h = 12; $h <= 13; $h++)
+                                                @for ($m = 0; $m < 60; $m += 15)
+                                                    @php
+                                                        $timeValue = sprintf('%02d:%02d', $h, $m);
+                                                        $timeLimit = ($h == 13 && $m > 45);
+                                                        $currentTime = old('time', $reservation->time->format('H:i'));
+                                                    @endphp
+                                                    @if (!$timeLimit)
+                                                        <option value="{{ $timeValue }}" {{ $currentTime == $timeValue ? 'selected' : '' }}>{{ $timeValue }}</option>
+                                                    @endif
+                                                @endfor
                                             @endfor
-                                        @endfor
-                                        <option value="23:00" {{ old('time', $reservation->time) === '23:00' ? 'selected' : '' }}>23:00</option>
-                                    </optgroup>
-                                </select>
+                                        </optgroup>
+                                        <optgroup label="Cena (19:30 - 22:00)">
+                                            @for ($h = 19; $h <= 22; $h++)
+                                                @for ($m = 0; $m < 60; $m += 15)
+                                                    @php
+                                                        $timeValue = sprintf('%02d:%02d', $h, $m);
+                                                        $tooEarly = ($h == 19 && $m < 30);
+                                                        $tooLate = ($h == 22 && $m > 0);
+                                                        $currentTime = old('time', $reservation->time->format('H:i'));
+                                                    @endphp
+                                                    @if (!$tooEarly && !$tooLate)
+                                                        <option value="{{ $timeValue }}" {{ $currentTime == $timeValue ? 'selected' : '' }}>{{ $timeValue }}</option>
+                                                    @endif
+                                                @endfor
+                                            @endfor
+                                            <option value="22:00" {{ old('time', $reservation->time->format('H:i')) == '22:00' ? 'selected' : '' }}>22:00</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="notes" class="form-label">Note aggiuntive</label>
-                            <textarea id="notes" name="notes" class="form-control" rows="3">{{ old('notes', $reservation->notes) }}</textarea>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <p class="mb-1"><strong>Tavoli riservati:</strong></p>
-                                <p>{{ \App\Models\Reservation::calculateTablesRequired(old('people', $reservation->people)) }}</p>
+                            
+                            <div class="mb-4">
+                                <label for="notes" class="form-label">Note aggiuntive</label>
+                                <textarea class="form-control" id="notes" name="notes" rows="3">{{ old('notes', $reservation->notes) }}</textarea>
                             </div>
-                            <div class="col-md-8 text-end">
-                                <button type="submit" class="btn btn-primary">Salva modifiche</button>
-                                <a href="{{ route('reservations.index') }}" class="btn btn-outline-secondary ms-2">Annulla</a>
+                            
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">Aggiorna Prenotazione</button>
+                                <button type="button" class="btn btn-danger" onclick="cancelReservation()">Cancella Prenotazione</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                        
+                        @if ($errors->any())
+                            <div class="alert alert-danger mt-3">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        
+                        <!-- Form nascosto per cancellazione -->
+                        <form id="cancelForm" action="{{ route('reservations.cancel.token', $reservation->modification_token) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    </div>
                 </div>
             </div>
-
         </div>
-    </section>
+    </div>
+    
+    <script>
+        function cancelReservation() {
+            if (confirm('Sei sicuro di voler cancellare questa prenotazione? Questa azione non può essere annullata.')) {
+                document.getElementById('cancelForm').submit();
+            }
+        }
+    </script>
 </x-layout>

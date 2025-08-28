@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -13,7 +12,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'ristorante'),
 
     /*
     |--------------------------------------------------------------------------
@@ -59,30 +58,40 @@ return [
     | Application Timezone
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default timezone for your application, which
-    | will be used by the PHP date and date-time functions. The timezone
-    | is set to "UTC" by default as it is suitable for most use cases.
+    | Impostato per l'Italia (Europe/Rome) via .env
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'timezone' => env('APP_TIMEZONE', 'Europe/Rome'),
 
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------
     |
-    | The application locale determines the default locale that will be used
-    | by Laravel's translation / localization methods. This option can be
-    | set to any locale for which you plan to have translation strings.
+    | Impostato in italiano.
     |
     */
 
-'locale' => env('APP_LOCALE', 'it'),
+    'locale' => env('APP_LOCALE', 'it'),
 
-'fallback_locale' => env('APP_FALLBACK_LOCALE', 'it'),
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'it'),
 
-'faker_locale' => env('APP_FAKER_LOCALE', 'it_IT'),
+    'faker_locale' => env('APP_FAKER_LOCALE', 'it_IT'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom date/time formats (used da app o helper)
+    |--------------------------------------------------------------------------
+    |
+    | Aggiunti formati predefiniti modificabili via .env
+    |
+    */
+
+    'date_format' => env('APP_DATE_FORMAT', 'd/m/Y'),
+    'time_format' => env('APP_TIME_FORMAT', 'H:i'),
+    'datetime_format' => env('APP_DATETIME_FORMAT', 'd/m/Y H:i'),
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -121,5 +130,4 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-
 ];

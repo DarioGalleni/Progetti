@@ -40,8 +40,8 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('media'),
-            'url' => env('APP_URL').'/media',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
@@ -74,8 +74,7 @@ return [
     */
 
     'links' => [
-        // public_path('storage') => storage_path('app/public'),
-        // public_path('media') => storage_path('app/public/media'),
+        public_path('storage') => storage_path('app/public'),
     ],
 
 ];
