@@ -1,6 +1,6 @@
 <x-layout>
     <section class="hero-section vh-25 d-flex align-items-center justify-content-center text-white text-center"
-             style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ asset('media/img/home-section.jpg') }}'); background-size: cover; background-position: center;">
+            style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ asset('media/img/home-section.jpg') }}'); background-size: cover; background-position: center;">
         <div class="container">
             <h1 class="hero-title">Grazie, {{ $reservation->name }}</h1>
         </div>

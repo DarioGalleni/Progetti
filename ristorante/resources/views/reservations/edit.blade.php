@@ -42,7 +42,7 @@
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label for="date" class="form-label">Data</label>
                                     <input type="date" class="form-control" id="date" name="date" 
-                                           value="{{ old('date', $reservation->date->format('Y-m-d')) }}" required min="{{ date('Y-m-d') }}">
+                                            value="{{ old('date', $reservation->date->format('Y-m-d')) }}" required min="{{ date('Y-m-d') }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="time" class="form-label">Ora</label>

@@ -1,78 +1,34 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunset Travel - Agenzia Viaggi</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-sun me-2"></i>Sunset Travel
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#destinations">Destinazioni</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">Chi Siamo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#testimonials">Recensioni</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contatti</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section" id="home">
+<x-layout>
+<!-- Hero Section -->
+    <header class="hero-section" id="home">
         <div class="container">
             <div class="hero-content">
                 <h1 class="display-4 fw-bold mb-4">Scopri il mondo con noi</h1>
                 <p class="lead mb-4">Pianifica la tua vacanza perfetta con i nostri esperti. Viaggi su misura per ogni esigenza e budget.</p>
-                <a href="#destinations" class="btn btn-accent btn-lg me-2">
+                <a href="#destinations" class="btn btn-accent btn-lg me-2" aria-label="Scopri le nostre destinazioni">
                     <i class="fas fa-map-marked-alt me-2"></i>Scopri le destinazioni
                 </a>
-                <a href="#contact" class="btn btn-outline-light btn-lg">
+                <a href="#contact" class="btn btn-outline-light btn-lg" aria-label="Contattaci per maggiori informazioni">
                     <i class="fas fa-phone-alt me-2"></i>Contattaci
                 </a>
             </div>
         </div>
-    </section>
+    </header>
 
     <!-- Destinations Section -->
-    <section class="py-5" id="destinations">
+    <main class="py-5" id="destinations">
         <div class="container">
             <h2 class="text-center section-title">Le nostre destinazioni top</h2>
             <div class="row">
                 <!-- Destination 1 -->
                 <div class="col-md-4">
-                    <div class="destination-card">
+                    <article class="destination-card">
                         <div class="position-relative">
-                            <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Bali" class="img-fluid destination-img">
+                            <img src="https://images.lonelyplanetitalia.it/uploads/il-tempio-di-pura-ulun-danu-bratan-allalba-balicgu-820.jpg?q=80&p=slider&s=ee8bf88b05570823302fca07bcdc547a" alt="Bali" class="img-fluid destination-img">
                             <div class="price-tag">€1.299</div>
                         </div>
                         <div class="p-4">
-                            <h4>Bali, Indonesia</h4>
+                            <h3>Bali, Indonesia</h3>
                             <p class="text-muted"><i class="fas fa-calendar-alt me-2"></i>8 giorni / 7 notti</p>
                             <p>Scopri le spiagge paradisiache, i templi sacri e la cultura unica di Bali.</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -83,21 +39,21 @@
                                     <i class="fas fa-star text-warning"></i>
                                     <i class="fas fa-star-half-alt text-warning"></i>
                                 </div>
-                                <a href="#" class="btn btn-sm btn-primary">Dettagli</a>
+                                {{-- <a href="#" class="btn btn-sm btn-primary" aria-label="Dettagli del viaggio a Bali">Dettagli</a> --}}
                             </div>
                         </div>
-                    </div>
+                    </article>
                 </div>
                 
                 <!-- Destination 2 -->
                 <div class="col-md-4">
-                    <div class="destination-card">
+                    <article class="destination-card">
                         <div class="position-relative">
-                            <img src="https://images.unsplash.com/photo-1533107862482-0e6974f06b43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Santorini" class="img-fluid destination-img">
+                            <img src="https://cdn2.paraty.es/demo14/images/ef7d8f6c8bff807" alt="Santorini" class="img-fluid destination-img">
                             <div class="price-tag">€899</div>
                         </div>
                         <div class="p-4">
-                            <h4>Santorini, Grecia</h4>
+                            <h3>Santorini, Grecia</h3>
                             <p class="text-muted"><i class="fas fa-calendar-alt me-2"></i>6 giorni / 5 notti</p>
                             <p>Case bianche, tramonti mozzafiato e il mare cristallino dell'Egeo.</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -108,21 +64,21 @@
                                     <i class="fas fa-star text-warning"></i>
                                     <i class="fas fa-star text-warning"></i>
                                 </div>
-                                <a href="#" class="btn btn-sm btn-primary">Dettagli</a>
+                                {{-- <a href="#" class="btn btn-sm btn-primary" aria-label="Dettagli del viaggio a Santorini">Dettagli</a> --}}
                             </div>
                         </div>
-                    </div>
+                    </article>
                 </div>
                 
                 <!-- Destination 3 -->
                 <div class="col-md-4">
-                    <div class="destination-card">
+                    <article class="destination-card">
                         <div class="position-relative">
-                            <img src="https://images.unsplash.com/photo-1514214246283-d427a95c5a2f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80" alt="Kyoto" class="img-fluid destination-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4sX87VY9hnQGyebt2t0aYuu9bpKDhhokOw&s" alt="Kyoto" class="img-fluid destination-img">
                             <div class="price-tag">€1.799</div>
                         </div>
                         <div class="p-4">
-                            <h4>Kyoto, Giappone</h4>
+                            <h3>Kyoto, Giappone</h3>
                             <p class="text-muted"><i class="fas fa-calendar-alt me-2"></i>10 giorni / 9 notti</p>
                             <p>Templi antichi, giardini zen e la tradizione giapponese autentica.</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -133,15 +89,15 @@
                                     <i class="fas fa-star text-warning"></i>
                                     <i class="far fa-star text-warning"></i>
                                 </div>
-                                <a href="#" class="btn btn-sm btn-primary">Dettagli</a>
+                                {{-- <a href="#" class="btn btn-sm btn-primary" aria-label="Dettagli del viaggio a Kyoto">Dettagli</a> --}}
                             </div>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
             
             <div class="text-center mt-4">
-                <a href="#" class="btn btn-primary btn-lg">
+                <a href="{{ route('destinations.index') }}" class="btn btn-primary btn-lg" aria-label="Vedi tutte le destinazioni disponibili">
                     <i class="fas fa-globe-americas me-2"></i>Vedi tutte le destinazioni
                 </a>
             </div>
@@ -166,7 +122,7 @@
                                     <i class="fas fa-passport fa-2x"></i>
                                 </div>
                                 <div>
-                                    <h5 class="mb-0">Esperienza</h5>
+                                    <h3 class="mb-0">Esperienza</h3>
                                     <p class="mb-0">18 anni nel settore</p>
                                 </div>
                             </div>
@@ -177,7 +133,7 @@
                                     <i class="fas fa-globe-europe fa-2x"></i>
                                 </div>
                                 <div>
-                                    <h5 class="mb-0">Destinazioni</h5>
+                                    <h3 class="mb-0">Destinazioni</h3>
                                     <p class="mb-0">Oltre 50 paesi</p>
                                 </div>
                             </div>
@@ -188,7 +144,7 @@
                                     <i class="fas fa-smile fa-2x"></i>
                                 </div>
                                 <div>
-                                    <h5 class="mb-0">Clienti soddisfatti</h5>
+                                    <h3 class="mb-0">Clienti soddisfatti</h3>
                                     <p class="mb-0">10.000+ viaggi organizzati</p>
                                 </div>
                             </div>
@@ -199,7 +155,7 @@
                                     <i class="fas fa-headset fa-2x"></i>
                                 </div>
                                 <div>
-                                    <h5 class="mb-0">Assistenza</h5>
+                                    <h3 class="mb-0">Assistenza</h3>
                                     <p class="mb-0">24/7 durante il viaggio</p>
                                 </div>
                             </div>
@@ -216,53 +172,59 @@
             <h2 class="text-center section-title">Cosa dicono i nostri clienti</h2>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="testimonial-card text-center">
-                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Cliente 1" class="testimonial-img">
-                        <h5>Maria Rossi</h5>
-                        <p class="text-muted">Viaggio in Giappone</p>
-                        <p>"L'organizzazione è stata perfetta, ogni dettaglio curato nei minimi particolari. Consiglio Sunset Travel a chiunque voglia vivere un'esperienza di viaggio senza pensieri."</p>
-                        <div class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
+                    <figure class="testimonial-card text-center">
+                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Maria Rossi" class="testimonial-img">
+                        <figcaption>
+                            <h3>Maria Rossi</h3>
+                            <p class="text-muted">Viaggio in Giappone</p>
+                            <p>"L'organizzazione è stata perfetta, ogni dettaglio curato nei minimi particolari. Consiglio Sunset Travel a chiunque voglia vivere un'esperienza di viaggio senza pensieri."</p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </figcaption>
+                    </figure>
                 </div>
                 <div class="col-md-4">
-                    <div class="testimonial-card text-center">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente 2" class="testimonial-img">
-                        <h5>Luigi Bianchi</h5>
-                        <p class="text-muted">Viaggio in Thailandia</p>
-                        <p>"Ho viaggiato con Sunset Travel due volte e ogni volta è stata un'esperienza fantastica. L'agenzia ha saputo consigliarmi itinerari fuori dai soliti percorsi turistici."</p>
-                        <div class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
+                    <figure class="testimonial-card text-center">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Luigi Bianchi" class="testimonial-img">
+                        <figcaption>
+                            <h3>Luigi Bianchi</h3>
+                            <p class="text-muted">Viaggio in Thailandia</p>
+                            <p>"Ho viaggiato con Sunset Travel due volte e ogni volta è stata un'esperienza fantastica. L'agenzia ha saputo consigliarmi itinerari fuori dai soliti percorsi turistici."</p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </figcaption>
+                    </figure>
                 </div>
                 <div class="col-md-4">
-                    <div class="testimonial-card text-center">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Cliente 3" class="testimonial-img">
-                        <h5>Giulia Verdi</h5>
-                        <p class="text-muted">Viaggio in Messico</p>
-                        <p>"Assistenza clienti eccellente! Quando abbiamo avuto un piccolo problema con il volo, si sono occupati di tutto risolvendolo in tempi record. Tornerò sicuramente a viaggiare con loro."</p>
-                        <div class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
+                    <figure class="testimonial-card text-center">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Giulia Verdi" class="testimonial-img">
+                        <figcaption>
+                            <h3>Giulia Verdi</h3>
+                            <p class="text-muted">Viaggio in Messico</p>
+                            <p>"Assistenza clienti eccellente! Quando abbiamo avuto un piccolo problema con il volo, si sono occupati di tutto risolvendolo in tempi record. Tornerò sicuramente a viaggiare con loro."</p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </figcaption>
+                    </figure>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
     <!-- Contact Section -->
     <section class="py-5 contact-section" id="contact">
@@ -274,22 +236,25 @@
                         <div class="contact-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h4>Dove siamo</h4>
-                        <p>Via del Viaggio, 123<br>00100 Roma, Italia</p>
+                        <h3>Dove siamo</h3>
+                        <address>
+                            Via del Viaggio, 123<br>
+                            00100 Roma, Italia
+                        </address>
                     </div>
                     <div class="text-center mb-5">
                         <div class="contact-icon">
                             <i class="fas fa-phone-alt"></i>
                         </div>
-                        <h4>Telefono</h4>
+                        <h3>Telefono</h3>
                         <p>+39 06 1234567<br>Lun-Ven: 9:00-18:00</p>
                     </div>
                     <div class="text-center">
                         <div class="contact-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
-                        <h4>Email</h4>
-                        <p>info@sunsattravel.it<br>assistenza@sunsattravel.it</p>
+                        <h3>Email</h3>
+                        <p><a href="mailto:info@sunsattravel.it">info@sunsattravel.it</a><br><a href="mailto:assistenza@sunsattravel.it">assistenza@sunsattravel.it</a></p>
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -319,10 +284,10 @@
                                     <label for="destination" class="form-label">Destinazione di interesse</label>
                                     <select class="form-select" id="destination">
                                         <option selected>Scegli una destinazione</option>
-                                        <option>Bali, Indonesia</option>
-                                        <option>Santorini, Grecia</option>
-                                        <option>Kyoto, Giappone</option>
-                                        <option>Altre destinazioni</option>
+                                        <option value="bali">Bali, Indonesia</option>
+                                        <option value="santorini">Santorini, Grecia</option>
+                                        <option value="kyoto">Kyoto, Giappone</option>
+                                        <option value="altre">Altre destinazioni</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -357,7 +322,7 @@
                 <div class="col-lg-6">
                     <form class="row g-2">
                         <div class="col-8">
-                            <input type="email" class="form-control form-control-lg" placeholder="La tua email">
+                            <input type="email" class="form-control form-control-lg" placeholder="La tua email" aria-label="Inserisci la tua email per iscriverti alla newsletter">
                         </div>
                         <div class="col-4">
                             <button type="submit" class="btn btn-accent btn-lg w-100">Iscriviti</button>
@@ -368,71 +333,4 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">Sunset Travel</h4>
-                    <p>La tua agenzia di viaggi di fiducia. Organizziamo esperienze uniche e indimenticabili in tutto il mondo.</p>
-                    <div class="mt-4">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase mb-4">Link veloci</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#home" class="text-white">Home</a></li>
-                        <li class="mb-2"><a href="#destinations" class="text-white">Destinazioni</a></li>
-                        <li class="mb-2"><a href="#about" class="text-white">Chi siamo</a></li>
-                        <li class="mb-2"><a href="#testimonials" class="text-white">Recensioni</a></li>
-                        <li class="mb-2"><a href="#contact" class="text-white">Contatti</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase mb-4">Destinazioni</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-white">Europa</a></li>
-                        <li class="mb-2"><a href="#" class="text-white">Asia</a></li>
-                        <li class="mb-2"><a href="#" class="text-white">Americhe</a></li>
-                        <li class="mb-2"><a href="#" class="text-white">Africa</a></li>
-                        <li class="mb-2"><a href="#" class="text-white">Oceania</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-uppercase mb-4">Contatti</h5>
-                    <address>
-                        <p><i class="fas fa-map-marker-alt me-2"></i> Via del Viaggio, 123, Roma</p>
-                        <p><i class="fas fa-phone-alt me-2"></i> +39 06 1234567</p>
-                        <p><i class="fas fa-envelope me-2"></i> info@sunsattravel.it</p>
-                    </address>
-                </div>
-            </div>
-            <hr class="my-4 bg-light">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">&copy; 2025 Sunset Travel. Tutti i diritti riservati.</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="#" class="text-white me-3">Privacy Policy</a>
-                    <a href="#" class="text-white">Termini e condizioni</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to top button -->
-    <div class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
-<script src="/script.js"></script>
-</body>
-</html>
+</x-layout>
