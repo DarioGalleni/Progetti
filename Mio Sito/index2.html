@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dario Galleni | Creazione Siti Web Professionali in Versilia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="text-2xl font-bold text-blue-600">Dario Galleni</a>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-800 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Desktop menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-800 hover:text-blue-600 transition">Home</a>
+                    <a href="#about" class="text-gray-800 hover:text-blue-600 transition">About</a>
+                    <a href="#portfolio" class="text-gray-800 hover:text-blue-600 transition">Portfolio</a>
+                    <a href="#contact" class="text-gray-800 hover:text-blue-600 transition">Contact</a>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <a href="#home" class="block py-2 text-gray-800 hover:text-blue-600 transition">Home</a>
+                <a href="#about" class="block py-2 text-gray-800 hover:text-blue-600 transition">About</a>
+                <a href="#portfolio" class="block py-2 text-gray-800 hover:text-blue-600 transition">Portfolio</a>
+                <a href="#contact" class="block py-2 text-gray-800 hover:text-blue-600 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                        Ciao! Io sono <span class="text-blue-600">Dario</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl text-gray-600 mb-8">FRONTEND WEB DESIGNER</h2>
+                    <p class="text-lg text-gray-700 mb-8">
+                        Creo siti web professionali e accattivanti per aiutare il tuo business a crescere online.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition shadow-md">
+                            Contattami
+                        </a>
+                        <a href="#portfolio" class="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-medium transition">
+                            Vedi Portfolio
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://www.dariux87.it/assets/imgs/man_2.jpeg" alt="Dario Galleni Frontend Web Designer" 
+                         class="rounded-lg shadow-xl max-w-xs md:max-w-md floating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Chi sono?</h2>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6">Eccomi...</h3>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Junior full stack developer con propensione per lo sviluppo front end. Buona dimestichezza nell'utilizzo di linguaggi front end e back end acquisita grazie ad un Coding Bootcamp basato sulla programmazione per oggetto e metodologia agile Scrum.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Affidabilità, curiosità e passione per l'informatica unite a buone capacità di lavoro in team, organizzative, relazionali e di ascolto rappresentano punti di forza.
+                    </p>
+                </div>
+                <div class="md:w-1/2 bg-gray-100 rounded-lg p-8 shadow-md">
+                    <h3 class="text-2xl font-semibold text-center mb-8">Le mie competenze</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fab fa-html5 text-blue-600 text-xl"></i>
+                            </div>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fab fa-css3-alt text-blue-600 text-xl"></i>
+                            </div>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fab fa-js text-blue-600 text-xl"></i>
+                            </div>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fab fa-react text-blue-600 text-xl"></i>
+                            </div>
+                            <span>React</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fab fa-node-js text-blue-600 text-xl"></i>
+                            </div>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-database text-blue-600 text-xl"></i>
+                            </div>
+                            <span>MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Cosa faccio?</h2>
+            <p class="text-xl text-center text-gray-600 mb-16">Servizi professionali per creare la tua presenza online</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <img src="https://www.dariux87.it/assets/imgs/pencil-case.svg" alt="Design dell'interfaccia utente" class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-4">Design dell'interfaccia utente</h3>
+                    <p class="text-gray-700 text-center">
+                        Creazione di layout visivamente accattivanti che catturano l'attenzione e migliorano l'esperienza utente.
+                    </p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <img src="https://www.dariux87.it/assets/imgs/responsive.svg" alt="Design responsive" class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-4">Design Responsive</h3>
+                    <p class="text-gray-700 text-center">
+                        Siti web che si adattano perfettamente a qualsiasi dispositivo, dal computer allo smartphone.
+                    </p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <img src="https://www.dariux87.it/assets/imgs/toolbox.svg" alt="Animazioni dinamiche" class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-4">Dinamicità</h3>
+                    <p class="text-gray-700 text-center">
+                        Animazioni fluide e interattive che rendono il tuo sito moderno e coinvolgente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Cosa ho fatto?</h2>
+            <p class="text-xl text-center text-gray-600 mb-16">Scopri alcuni dei miei progetti recenti</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 group">
+                    <div class="relative overflow-hidden">
+                        <img src="https://www.dariux87.it/assets/imgs/hotel.jpg" alt="Gestionale per hotel" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-blue-600 bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <a href="https://www.dariux87.it/gest" class="text-white px-6 py-3 border-2 border-white rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">Vedi Progetto</a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Gestionale per hotel</h3>
+                        <p class="text-gray-700">Siete liberi di testare</p>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 group">
+                    <div class="relative overflow-hidden">
+                        <img src="https://www.dariux87.it/assets/imgs/restaurant.jpg" alt="Template sito ristorante" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-blue-600 bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <a href="https://www.dariux87.it/rist/" class="text-white px-6 py-3 border-2 border-white rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">Vedi Progetto</a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Ristorante</h3>
+                        <p class="text-gray-700">Template sito ristorante</p>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 group">
+                    <div class="relative overflow-hidden">
+                        <img src="https://www.dariux87.it/assets/imgs/gemma2.png" alt="Gemma del Mare versione 2" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-blue-600 bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <a href="https://gemmadelmare2.netlify.app/" class="text-white px-6 py-3 border-2 border-white rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">Vedi Progetto</a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Gemma del Mare</h3>
+                        <p class="text-gray-700">Versione 2 del sito</p>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 group">
+                    <div class="relative overflow-hidden">
+                        <img src="https://www.dariux87.it/assets/imgs/gemma.png" alt="Gemma del Mare sito ufficiale" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-blue-600 bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <a href="https://gemmadelmare.com/" class="text-white px-6 py-3 border-2 border-white rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">Vedi Progetto</a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Gemma del Mare</h3>
+                        <p class="text-gray-700">Sito ufficiale</p>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 group">
+                    <div class="relative overflow-hidden">
+                        <img src="https://www.dariux87.it/assets/imgs/travel.png" alt="Template agenzia viaggi" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-blue-600 bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <a href="https://boisterous-cactus-c1197c.netlify.app/" class="text-white px-6 py-3 border-2 border-white rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">Vedi Progetto</a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Travel Agency</h3>
+                        <p class="text-gray-700">Template agenzia viaggi</p>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 group">
+                    <div class="relative overflow-hidden">
+                        <img src="https://www.dariux87.it/assets/imgs/git.png" alt="GitHub progetti" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-blue-600 bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <a href="https://github.com/DarioGalleni/Progetti" class="text-white px-6 py-3 border-2 border-white rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">Vedi Progetti</a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Progetti vari</h3>
+                        <p class="text-gray-700">Repository GitHub</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Contattami</h2>
+            <p class="text-xl text-center text-gray-600 mb-16">Sono a tua disposizione per qualsiasi domanda o progetto</p>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Contact Form -->
+                <div class="lg:w-1/2 bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-6">Invia un messaggio</h3>
+                    <form>
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 mb-2">Nome</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 mb-2">Messaggio</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition shadow-md">
+                            Invia messaggio
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- WhatsApp Contact -->
+                <div class="lg:w-1/2 bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-6">Contattami su WhatsApp</h3>
+                    <div class="flex items-center mb-8">
+                        <div class="bg-green-100 p-4 rounded-full mr-4">
+                            <i class="fab fa-whatsapp text-green-600 text-2xl"></i>
+                        </div>
+                        <p class="text-gray-700">Scrivimi direttamente su WhatsApp per una risposta più veloce.</p>
+                    </div>
+                    <form>
+                        <div class="mb-6">
+                            <label for="whatsapp-name" class="block text-gray-700 mb-2">Nome</label>
+                            <input type="text" id="whatsapp-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="whatsapp-message" class="block text-gray-700 mb-2">Messaggio</label>
+                            <textarea id="whatsapp-message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <a href="#" class="block w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition shadow-md text-center">
+                            <i class="fab fa-whatsapp mr-2"></i> Invia su WhatsApp
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#home" class="text-2xl font-bold text-white">Dario Galleni</a>
+                    <p class="mt-2 text-gray-400">Creazione Siti Web Professionali in Versilia</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>Copyright &copy; 2025 <a href="#home" class="text-blue-400 hover:text-blue-300 transition">Dario Galleni</a>. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!document.getElementById('mobile-menu').classList.contains('hidden')) {
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
