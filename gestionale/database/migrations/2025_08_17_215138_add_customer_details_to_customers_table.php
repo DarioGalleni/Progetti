@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('last_name')->after('first_name');
             $table->date('arrival_date');
             $table->date('departure_date');
-            $table->enum('treatment', ['BB', 'HB', 'FB']);
+            $table->enum('treatment', ['BB', 'HB']);
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->unsignedInteger('number_of_people');
