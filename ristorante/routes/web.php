@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
 
 
 Route::get('/', [Controller::class, 'welcome'])->name('home');
@@ -19,3 +20,12 @@ Route::delete('modify-reservation/{token}', [ReservationController::class, 'canc
 // Nuove rotte per la ricerca tramite email o telefono
 Route::get('reservations/find', [ReservationController::class, 'find'])->name('reservations.find');
 Route::post('reservations/search', [ReservationController::class, 'search'])->name('reservations.search');
+
+//! Rotta per servire le immagini del ristorante
+Route::get('/restaurant_images/{filename}', function ($filename) {
+    // Costruisce il percorso completo dell'immagine, tenendo conto delle sottocartelle
+    $path = resource_path('restaurant_images/' . $filename);
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    return Response::file($path);})->name('restaurant.image')->where('filename', '.*'); // Aggiungi questo per permettere i percorsi con '/'

@@ -60,6 +60,12 @@ return [
             'report' => false,
         ],
 
+        'rist_images' => [
+            'driver' => 'local',
+            'root' => resource_path('restaurant_images'),
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

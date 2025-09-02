@@ -1,7 +1,7 @@
 <x-layout>
     <!-- Hero Section -->
     <section id="home" class="hero-section vh-100 d-flex align-items-center justify-content-center text-white text-center"
-        style="background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8)),url('{{ asset('media/img/home-section.jpg') }}');
+        style="background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8)),url('{{ route('restaurant.image', ['filename' => 'home-section.jpg']) }}');
             background-size: cover;
             background-position: center;">
         <div class="container">
@@ -22,7 +22,7 @@
                 --}}
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <video class="about-video autoplay-on-view" muted playsinline preload="metadata" loop>
-                        <source data-src="{{ asset('media/video/video.mp4') }}" type="video/mp4">
+                        <source data-src="{{ route('restaurant.image', ['filename' => 'video.mp4']) }}" type="video/mp4">
                     </video>
                 </div>
                 <div class="col-lg-6">
