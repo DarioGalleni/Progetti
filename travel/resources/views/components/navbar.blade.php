@@ -15,6 +15,9 @@
                         <a class="nav-link" href="{{ route('destinations.index') }}" aria-label="Vai alla sezione Destinazioni">Destinazioni</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('destinations.create') }}" aria-label="Vai alla sezione Aggiungi Destinazione">Aggiungi Destinazione</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#about" aria-label="Vai alla sezione Chi Siamo">Chi Siamo</a>
                     </li>
                     <li class="nav-item">

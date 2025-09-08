@@ -47,7 +47,7 @@ return [
 
         'images' => [
             'driver' => 'local',
-            'root' => resource_path('destinations_images'),
+            'root' => resource_path('media/destinations_images'),
             'visibility' => 'public',
         ],
         

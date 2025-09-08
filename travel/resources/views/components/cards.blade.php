@@ -1,5 +1,6 @@
-
-<img src="{{ route('destination.image', ['filename' => $item->image_path]) }}" class="card-img-top" alt="{{ $item->destination }}">
+<div class="card-img-container">
+    <img src="{{ route('images', ['filename' => $item->image_path]) }}" class="card-img-top" alt="{{ $item->destination }}">
+</div>
 <div class="card-body">
     <h3 class="card-title">{{ $item->destination }}</h3>
     <p class="text-muted">
@@ -8,7 +9,9 @@
     <div class="price-tag">
         Prezzo: €{{ $item->price }}
     </div>
-    <a href="#" class="btn btn-sm btn-primary" aria-label="Dettagli del viaggio a Bali">
-        Dettagli
-    </a>
+    <div class="d-flex justify-content-between mt-3">
+        <a href="{{ route('destinations.show', $item) }}" class="btn btn-sm btn-primary" aria-label="Dettagli del viaggio a {{ $item->destination }}">
+            Dettagli
+        </a>
+    </div>
 </div>

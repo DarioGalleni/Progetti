@@ -1,3 +1,6 @@
+/* ========== GLOBAL (colors, base styles) ==========
+   These styles apply across the whole site
+*/
 /* Color Palette */
 :root {
     --primary-color: #3498db;
@@ -19,7 +22,9 @@ body {
     margin-bottom: 50px;
 }
 
-/* Navbar */
+/* ========== NAVBAR (all pages) ==========
+   Navbar branding and link styles
+*/
 .navbar-brand {
     font-weight: 700;
     font-size: 1.8rem;
@@ -41,7 +46,9 @@ body {
     color: var(--accent-color) !important;
 }
 
-/* Hero Section */
+/* ========== WELCOME / HERO (homepage) ==========
+   Styles used on the welcome / hero section of the homepage
+*/
 .hero-section {
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1368&q=80');
     background-position: center;
@@ -59,7 +66,9 @@ body {
     margin: auto;
 }
 
-/* Buttons */
+/* ========== BUTTONS (global / forms / actions) ==========
+   Primary and accent button styles used across forms and actions
+*/
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
@@ -84,7 +93,9 @@ body {
     color: white;
 }
 
-/* Destination Cards */
+/* ========== DESTINATIONS INDEX & CARDS (destinations.index, components/cards) ==========
+   Card layout and image handling for the destinations listing
+*/
 .destination-card {
     border-radius: 10px;
     overflow: hidden;
@@ -105,6 +116,43 @@ body {
     width: 100%;
 }
 
+/* ========== CARD COMPONENT (used by destinations and show) ==========
+   Generic card styling, image container and price tag
+*/
+.card {
+    height: 100%;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card-img-container {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-body {
+    position: relative;
+    padding: 1.25rem;
+}
+
 .price-tag {
     position: absolute;
     bottom: 15px;
@@ -116,7 +164,9 @@ body {
     font-weight: 600;
 }
 
-/* Testimonial Section */
+/* ========== TESTIMONIALS (home or landing sections) ==========
+   Cards and author images for testimonials
+*/
 .testimonial-card {
     background-color: var(--light-color);
     padding: 30px;
@@ -133,7 +183,9 @@ body {
     margin-bottom: 20px;
 }
 
-/* Contact Section */
+/* ========== CONTACT (contact page) ==========
+   Contact section background and icons
+*/
 .contact-section {
     background-color: var(--light-color);
 }
@@ -144,7 +196,9 @@ body {
     margin-bottom: 20px;
 }
 
-/* Footer */
+/* ========== FOOTER (all pages) ==========
+   Footer background, links and social icons
+*/
 footer {
     background-color: var(--secondary-color);
     color: white;
@@ -172,7 +226,9 @@ footer a:hover {
     color: var(--primary-color);
 }
 
-/* Back to top button */
+/* ========== BACK TO TOP (global helper) ==========
+   Fixed back-to-top button used on multiple pages
+*/
 .back-to-top {
     position: fixed;
     bottom: 20px;
