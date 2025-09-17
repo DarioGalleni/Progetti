@@ -23,7 +23,7 @@ class CustomerController extends Controller
             'email'            => "required|email|$uniqueEmail",
             'number_of_people' => 'required|integer|min:1',
             'total_stay_cost'  => 'required|numeric|min:1',
-            'down_payment'     => 'required|numeric|min:0',
+            'down_payment'     => 'numeric',
         ];
     }
 
@@ -42,7 +42,10 @@ class CustomerController extends Controller
         return !$query->exists();
     }
 
-    protected function bookingDateErrors(array $data): array
+    /**
+     * Controlla errori sulle date di prenotazione.
+     */
+    protected function bookingDateErrors(array $data, bool $isUpdate = false): array
     {
         $errors = [];
         $today = Carbon::today();
@@ -52,12 +55,17 @@ class CustomerController extends Controller
         $arrival = Carbon::parse($data['arrival_date']);
         $departure = Carbon::parse($data['departure_date']);
 
-        if ($arrival->lt($today)) {
+        // Solo in creazione blocca arrivi prima di oggi
+        if (!$isUpdate && $arrival->lt($today)) {
             $errors['arrival_date'] = 'La data di arrivo non può essere antecedente alla data odierna.';
         }
 
-        if ($departure->lt($tomorrow)) {
+        // Solo in creazione la partenza deve essere almeno domani, in modifica può essere anche oggi
+        if (!$isUpdate && $departure->lt($tomorrow)) {
             $errors['departure_date'] = 'La data di partenza deve essere almeno il giorno successivo.';
+        }
+        if ($isUpdate && $departure->lt($today)) {
+            $errors['departure_date'] = 'La data di partenza non può essere antecedente alla data odierna.';
         }
 
         if ($arrival->year !== $currentYear || $departure->year !== $currentYear) {
@@ -129,7 +137,8 @@ class CustomerController extends Controller
     {
         $data = $request->validate($this->rules($customer->id));
 
-        $dateErrors = $this->bookingDateErrors($data);
+        // Passa true per consentire arrivo antecedente ad oggi in modifica
+        $dateErrors = $this->bookingDateErrors($data, true);
         if (!empty($dateErrors)) {
             return back()->withErrors($dateErrors)->withInput();
         }
@@ -163,7 +172,7 @@ class CustomerController extends Controller
     }
 
     public function showBill(Customer $customer)
-    {   
+    {
         $arrival = Carbon::parse($customer->arrival_date);
         $departure = Carbon::parse($customer->departure_date);
         $totalDays = max(0, $arrival->diffInDays($departure));

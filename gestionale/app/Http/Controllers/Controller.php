@@ -27,5 +27,4 @@ class Controller extends BaseController
         Artisan::call('optimize:clear');
         return redirect()->back()->with('status', 'Cache e file ottimizzati rimossi.');
     }
-
 }

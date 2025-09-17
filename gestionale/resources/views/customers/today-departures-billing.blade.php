@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($departingCustomers as $customer)
+                        @foreach($departingCustomers->sortBy('room', SORT_NATURAL) as $customer)
                             <tr>
                                 <td>{{ $customer->first_name }}</td>
                                 <td>{{ $customer->last_name }}</td>

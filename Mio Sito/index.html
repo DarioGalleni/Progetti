@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Primary meta tags -->
-    <title>Dario – FULLSTACK Web Designer | Siti web professionali in Versilia</title>
+    <title>Dario – Fullstack Web Designer | Siti web professionali in Versilia</title>
     <meta name="description" content="Sviluppo e design di siti web professionali e responsive per negozi, hotel e ristoranti in Versilia (Lido di Camaiore, Viareggio). Consulenza gratuita e soluzioni su misura." />
     <meta name="keywords" content="siti web Versilia, FULLSTACK web designer, sviluppo siti web, design responsive, ristorante, hotel, negozio online" />
     <meta name="author" content="Dario" />
@@ -535,93 +535,95 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-gradient-to-r from-blue-50 to-indigo-50" aria-labelledby="contact-heading">
-            <div class="container mx-auto px-6">
-                <header class="text-center mb-16">
-                    <h2 id="contact-heading" class="text-3xl md:text-4xl font-bold mb-4">Contattami</h2>
-                    <p class="text-xl text-gray-600">Sono pronto ad aiutarti a realizzare il tuo progetto web</p>
-                </header>
-                
-                <div class="flex flex-col lg:flex-row gap-12">
-                    <!-- Contact Form -->
-                    <div class="lg:w-1/2 bg-white p-8 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-semibold mb-6">Invia email</h3>
-                        <form action="https://api.web3forms.com/submit" 
-                              method="POST" 
-                              role="form" 
-                              aria-label="Modulo di contatto"
-                              novalidate>
-                            <input type="hidden" name="access_key" value="dcf98231-7b8b-46f5-94e2-88c830afd939">
-                            
-                            <div class="mb-6">
-                                <label for="name" class="block text-gray-700 mb-2 font-medium">
-                                    Nome
-                                </label>
-                                <input type="text" 
-                                       id="name" 
-                                       name="name"
-                                       required
-                                       aria-required="true"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                                       placeholder="Il tuo nome completo">
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label for="message" class="block text-gray-700 mb-2 font-medium">
-                                    Messaggio
-                                </label>
-                                <textarea id="message" 
-                                          name="message"
-                                          rows="5" 
-                                          required
-                                          aria-required="true"
-                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                                          placeholder="Descrivi il tuo progetto, i tuoi obiettivi e come posso aiutarti..."></textarea>
-                            </div>
-                            
-                            <button type="submit" 
-                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                    aria-label="Invia il messaggio di contatto">
-                                <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i>
-                                Invia email
-                            </button>
-                        </form>
+<section id="contact" class="py-20 bg-gradient-to-r from-blue-50 to-indigo-50" aria-labelledby="contact-heading">
+    <div class="container mx-auto px-6">
+        <header class="text-center mb-16">
+            <h2 id="contact-heading" class="text-3xl md:text-4xl font-bold mb-4">Contattami</h2>
+            <p class="text-xl text-gray-600">Sono pronto ad aiutarti a realizzare il tuo progetto web</p>
+        </header>
+        
+        <div class="flex flex-col lg:flex-row gap-12">
+            <div class="lg:w-1/2 bg-white p-8 rounded-lg shadow-md flex flex-col">
+                <h3 class="text-2xl font-semibold mb-6">Invia email</h3>
+                <form action="https://api.web3forms.com/submit" 
+                      method="POST" 
+                      role="form" 
+                      aria-label="Modulo di contatto"
+                      novalidate
+                      class="flex flex-col flex-grow">
+                    <input type="hidden" name="access_key" value="dcf98231-7b8b-46f5-94e2-88c830afd939">
+                    
+                    <div class="mb-6">
+                        <label for="name" class="block text-gray-700 mb-2 font-medium">
+                            Nome
+                        </label>
+                        <input type="text" 
+                               id="name" 
+                               name="name"
+                               required
+                               aria-required="true"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                               placeholder="Il tuo nome completo">
                     </div>
                     
-                    <!-- WhatsApp Contact -->
-                    <div class="lg:w-1/2 bg-white p-8 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-semibold mb-6">WhatsApp</h3>
-                        
-                        <form role="form" aria-label="Modulo WhatsApp" id="whatsapp-form">
-                            <div class="mb-6">
-                                <label for="whatsapp-name" class="block text-gray-700 mb-2 font-medium">Il tuo nome</label>
-                                <input type="text" 
-                                       id="whatsapp-name" 
-                                       name="whatsapp-name"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                                       placeholder="Come ti chiami?">
-                            </div>
-                            <div class="mb-6">
-                                <label for="whatsapp-message" class="block text-gray-700 mb-2 font-medium">Il tuo messaggio</label>
-                                <textarea id="whatsapp-message" 
-                                          name="whatsapp-message"
-                                          rows="4" 
-                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                                          placeholder="Ciao Dario! Vorrei parlare con te di..."></textarea>
-                            </div>
-                            <button type="button" 
-                                    id="whatsapp-btn"
-                                    class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-                                    aria-label="Invia messaggio tramite WhatsApp">
-                                <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> 
-                                Apri WhatsApp
-                            </button>
-                        </form>
+                    <div class="mb-6 flex-grow">
+                        <label for="message" class="block text-gray-700 mb-2 font-medium">
+                            Messaggio
+                        </label>
+                        <textarea id="message" 
+                                  name="message"
+                                  rows="5" 
+                                  required
+                                  aria-required="true"
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                                  placeholder="Descrivi il tuo progetto, i tuoi obiettivi e come posso aiutarti..."></textarea>
                     </div>
-                </div>
+                    
+                    <div class="mt-auto">
+                        <button type="submit" 
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                aria-label="Invia il messaggio di contatto">
+                            <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i>
+                            Invia email
+                        </button>
+                    </div>
+                </form>
             </div>
-        </section>
+            
+            <div class="lg:w-1/2 bg-white p-8 rounded-lg shadow-md flex flex-col">
+                <h3 class="text-2xl font-semibold mb-6">WhatsApp</h3>
+                
+                <form role="form" aria-label="Modulo WhatsApp" id="whatsapp-form" class="flex flex-col flex-grow">
+                    <div class="mb-6">
+                        <label for="whatsapp-name" class="block text-gray-700 mb-2 font-medium">Il tuo nome</label>
+                        <input type="text" 
+                               id="whatsapp-name" 
+                               name="whatsapp-name"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                               placeholder="Come ti chiami?">
+                    </div>
+                    <div class="mb-6 flex-grow">
+                        <label for="whatsapp-message" class="block text-gray-700 mb-2 font-medium">Il tuo messaggio</label>
+                        <textarea id="whatsapp-message" 
+                                  name="whatsapp-message"
+                                  rows="4" 
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                                  placeholder="Ciao Dario! Vorrei parlare con te di..."></textarea>
+                    </div>
+                    <div class="mt-auto">
+                        <button type="button" 
+                                id="whatsapp-btn"
+                                class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                                aria-label="Invia messaggio tramite WhatsApp">
+                            <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> 
+                            Apri WhatsApp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
     </main>
 
@@ -688,12 +690,10 @@
             title="Torna su">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
-
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="assets/vendors/jquery/jquery-3.4.1.min.js"></script>
     <script src="assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.js"></script>
-
 </body>
 </html>

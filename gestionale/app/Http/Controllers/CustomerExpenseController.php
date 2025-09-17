@@ -13,6 +13,9 @@ class CustomerExpenseController extends Controller
         return view('customers.update_expenses', compact('customer', 'existingExpenses'));
     }
 
+    /**
+     * Aggiorna le spese aggiuntive del cliente.
+     */
     public function updateExpenses(Request $request, Customer $customer)
     {
         $data = $request->validate([

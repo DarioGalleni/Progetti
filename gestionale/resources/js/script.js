@@ -1,180 +1,136 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Elementi per l'interfaccia delle spese aggiuntive dinamiche
-    const addExpenseSelect = document.getElementById('add-expense-select');
-    const expensesContainer = document.getElementById('additional-expenses-container');
+	/* ==========================
+	   Modulo: Tema (modalità notte)
+	   ========================== */
+	function initThemeModule() {
+		const enableButton = document.getElementById('enable-night-mode');
+		const disableButton = document.getElementById('disable-night-mode');
+		const body = document.body;
 
-    if (addExpenseSelect && expensesContainer) {
-    // Gestisce la selezione di un tipo di spesa dal menu a tendina e aggiunge una riga di input
-    addExpenseSelect.addEventListener('change', function () {
-            const expense = this.value;
-            if (!expense) return;
+		// Anima le icone del tema quando si alterna la modalità notte; clsIn=true => animazione-in, false => animazione-out
+		function animateIcon(el, clsIn) {
+			if (!el) return;
+			el.classList.remove('anim-in', 'anim-out');
+			// Forza il reflow per riavviare l'animazione
+			void el.offsetWidth;
+			el.classList.add(clsIn ? 'anim-in' : 'anim-out');
+		}
 
-            if (expensesContainer.querySelector(`input[name="additional_expenses[${expense}]"]`)) {
-                alert('Questa spesa è già stata aggiunta.');
-                this.value = '';
-                return;
-            }
+		// Applica o rimuove gli stili della modalità notte e salva la preferenza in localStorage
+		function applyNightMode(enabled) {
+			const enableIcon = enableButton?.querySelector('.theme-icon');
+			const disableIcon = disableButton?.querySelector('.theme-icon');
 
-            const row = document.createElement('div');
-            row.className = 'input-group mb-2';
-            row.innerHTML = `
-                <span class="input-group-text">${expense.charAt(0).toUpperCase() + expense.slice(1)}</span>
-                <input type="number" step="0.01" class="form-control" name="additional_expenses[${expense}]" value="0.00" required>
-                <button type="button" class="btn btn-danger remove-expense-btn">Rimuovi</button>
-            `;
-            expensesContainer.appendChild(row);
-            this.value = '';
-        });
+			if (enabled) {
+				body.classList.add('night-mode');
+				localStorage.setItem('nightMode', 'enabled');
+				enableButton?.classList.add('hidden');
+				disableButton?.classList.remove('hidden');
+				animateIcon(disableIcon, true);
+				animateIcon(enableIcon, false);
+			} else {
+				body.classList.remove('night-mode');
+				localStorage.setItem('nightMode', 'disabled');
+				enableButton?.classList.remove('hidden');
+				disableButton?.classList.add('hidden');
+				animateIcon(enableIcon, true);
+				animateIcon(disableIcon, false);
+			}
+		}
 
-    // Gestisce la rimozione delle righe di spesa aggiunte dinamicamente
-        expensesContainer.addEventListener('click', function (e) {
-            if (e.target.classList.contains('remove-expense-btn')) {
-                const group = e.target.closest('.input-group');
-                if (group) group.remove();
-            }
-        });
-    }
+		// Inizializza l'interfaccia in base alla preferenza di modalità notte salvata
+		const stored = localStorage.getItem('nightMode');
+		applyNightMode(stored === 'enabled');
 
-    const enableButton = document.getElementById('enable-night-mode');
-    const disableButton = document.getElementById('disable-night-mode');
-    const body = document.body;
+		// Collega i gestori di click ai pulsanti di cambio tema
+		if (enableButton) enableButton.addEventListener('click', () => applyNightMode(true));
+		if (disableButton) disableButton.addEventListener('click', () => applyNightMode(false));
+	}
 
-    // Anima le icone del tema quando si alterna la modalità notte; clsIn=true => animazione-in, false => animazione-out
-    function animateIcon(el, clsIn) {
-        if (!el) return;
-        el.classList.remove('anim-in', 'anim-out');
-        // trigger reflow to restart animation
-        void el.offsetWidth;
-        el.classList.add(clsIn ? 'anim-in' : 'anim-out');
-    }
+	/* ==========================
+	   Modulo: Calendario drag & helpers
+	   ========================== */
+	function initCalendarDragModule() {
+		const calendarContainer = document.getElementById('calendar-container');
+		if (!calendarContainer) return;
 
-    // Applica o rimuove gli stili della modalità notte e salva la preferenza in localStorage
-    function applyNightMode(enabled) {
-        const enableIcon = enableButton?.querySelector('.theme-icon');
-        const disableIcon = disableButton?.querySelector('.theme-icon');
+		// classi iniziali
+		calendarContainer.classList.add('drag-scroll');
 
-        if (enabled) {
-            body.classList.add('night-mode');
-            localStorage.setItem('nightMode', 'enabled');
-            enableButton?.classList.add('hidden');
-            disableButton?.classList.remove('hidden');
-            animateIcon(disableIcon, true);
-            animateIcon(enableIcon, false);
-        } else {
-            body.classList.remove('night-mode');
-            localStorage.setItem('nightMode', 'disabled');
-            enableButton?.classList.remove('hidden');
-            disableButton?.classList.add('hidden');
-            animateIcon(enableIcon, true);
-            animateIcon(disableIcon, false);
-        }
-    }
+		let isPointerDown = false;
+		let isDragging = false;
+		let startX = 0, startY = 0;
+		let scrollLeft = 0, scrollTop = 0;
+		const DRAG_THRESHOLD = 4;
 
-    // Inizializza l'interfaccia in base alla preferenza di modalità notte salvata
-    const stored = localStorage.getItem('nightMode');
-    applyNightMode(stored === 'enabled');
+		// Avvia il trascinamento per lo scorrimento del calendario
+		calendarContainer.addEventListener('mousedown', (e) => {
+			isPointerDown = true;
+			isDragging = false;
+			startX = e.pageX;
+			startY = e.pageY;
+			scrollLeft = calendarContainer.scrollLeft;
+			scrollTop = calendarContainer.scrollTop;
+		});
 
-    // Collega i gestori di click ai pulsanti di cambio tema
-    if (enableButton) enableButton.addEventListener('click', () => applyNightMode(true));
-    if (disableButton) disableButton.addEventListener('click', () => applyNightMode(false));
+		// Termina il trascinamento
+		window.addEventListener('mouseup', () => {
+			if (!isPointerDown) return;
+			isPointerDown = false;
+			calendarContainer.classList.remove('dragging');
+			setTimeout(() => { isDragging = false; }, 0);
+		});
 
-    const calendarContainer = document.getElementById('calendar-container');
+		// Aggiorna la posizione di scorrimento durante il trascinamento
+		window.addEventListener('mousemove', (e) => {
+			if (!isPointerDown) return;
+			const dx = e.pageX - startX;
+			const dy = e.pageY - startY;
+			if (!isDragging && Math.hypot(dx, dy) > DRAG_THRESHOLD) {
+				isDragging = true;
+				calendarContainer.classList.add('dragging');
+			}
+			if (isDragging) {
+				e.preventDefault();
+				calendarContainer.scrollLeft = scrollLeft - dx;
+				calendarContainer.scrollTop = scrollTop - dy;
+			}
+		});
 
-    // Al caricamento, scorre il calendario per mostrare la colonna di oggi se presente
-    window.addEventListener('load', function () {
-        const todayCol = document.getElementById('today');
-        if (todayCol && calendarContainer) calendarContainer.scrollLeft = todayCol.offsetLeft;
-    });
+		// Previene i click accidentali durante il trascinamento
+		calendarContainer.addEventListener('click', (e) => {
+			if (isDragging) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		}, true);
 
-    // Pulsanti che saltano il calendario a una colonna di data specifica
-    document.querySelectorAll('.month-btn').forEach(btn => {
-        btn.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.getElementById(this.dataset.targetId);
-            if (target && calendarContainer) calendarContainer.scrollLeft = target.offsetLeft;
-        });
-    });
+		// All'avvio, scorre il calendario per mostrare la colonna di oggi se presente
+		window.addEventListener('load', function () {
+			const todayCol = document.getElementById('today');
+			if (todayCol) calendarContainer.scrollLeft = todayCol.offsetLeft;
+		});
 
-    if (!calendarContainer) return;
+		// Centra la cella di oggi nel calendario
+		function centerToday() {
+			const todayCell = document.querySelector('.today-cell');
+			if (todayCell) {
+				const containerWidth = calendarContainer.offsetWidth;
+				const cellWidth = todayCell.offsetWidth;
+				const cellLeft = todayCell.offsetLeft;
+				const scrollTo = cellLeft - (containerWidth / 2) + (cellWidth / 2);
+				calendarContainer.scrollLeft = scrollTo;
+			}
+		}
 
-    // Abilita il comportamento di trascinamento per scorrere nel contenitore del calendario
-    calendarContainer.classList.add('drag-scroll');
+		// Chiama la funzione al caricamento della pagina e quando il calendario è visibile
+		window.addEventListener('load', centerToday);
+		window.addEventListener('resize', centerToday);
+	}
 
-    let isPointerDown = false;
-    let isDragging = false;
-    let startX = 0, startY = 0;
-    let scrollLeft = 0, scrollTop = 0;
-    const DRAG_THRESHOLD = 4;
-
-    // Avvio puntatore (mouse) per il trascinamento per scorrere
-    calendarContainer.addEventListener('mousedown', (e) => {
-        isPointerDown = true;
-        isDragging = false;
-        startX = e.pageX;
-        startY = e.pageY;
-        scrollLeft = calendarContainer.scrollLeft;
-        scrollTop = calendarContainer.scrollTop;
-    });
-
-    // Fine del trascinamento del puntatore
-    window.addEventListener('mouseup', () => {
-        if (!isPointerDown) return;
-        isPointerDown = false;
-        calendarContainer.classList.remove('dragging');
-        setTimeout(() => { isDragging = false; }, 0);
-    });
-
-    // Gestisce il movimento del puntatore e aggiorna la posizione di scorrimento durante il trascinamento
-    window.addEventListener('mousemove', (e) => {
-        if (!isPointerDown) return;
-        const dx = e.pageX - startX;
-        const dy = e.pageY - startY;
-        if (!isDragging && Math.hypot(dx, dy) > DRAG_THRESHOLD) {
-            isDragging = true;
-            calendarContainer.classList.add('dragging');
-        }
-        if (isDragging) {
-            e.preventDefault();
-            calendarContainer.scrollLeft = scrollLeft - dx;
-            calendarContainer.scrollTop = scrollTop - dy;
-        }
-    });
-
-    // Previene eventi di click quando l'utente stava trascinando per evitare navigazioni accidentali
-    calendarContainer.addEventListener('click', (e) => {
-        if (isDragging) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-    }, true);
-
-    let touchStartX = 0, touchStartY = 0, touchScrollLeft = 0, touchScrollTop = 0;
-    // Gestori touch per il trascinamento (mobile) per scorrere
-    calendarContainer.addEventListener('touchstart', (e) => {
-        if (!e.touches || e.touches.length === 0) return;
-        touchStartX = e.touches[0].pageX;
-        touchStartY = e.touches[0].pageY;
-        touchScrollLeft = calendarContainer.scrollLeft;
-        touchScrollTop = calendarContainer.scrollTop;
-        isDragging = false;
-    }, { passive: true });
-
-    calendarContainer.addEventListener('touchmove', (e) => {
-        if (!e.touches || e.touches.length === 0) return;
-        const dx = e.touches[0].pageX - touchStartX;
-        const dy = e.touches[0].pageY - touchStartY;
-        if (!isDragging && Math.hypot(dx, dy) > DRAG_THRESHOLD) {
-            isDragging = true;
-            calendarContainer.classList.add('dragging');
-        }
-        if (isDragging) {
-            calendarContainer.scrollLeft = touchScrollLeft - dx;
-            calendarContainer.scrollTop = touchScrollTop - dy;
-        }
-    }, { passive: true });
-
-    calendarContainer.addEventListener('touchend', () => {
-        isDragging = false;
-        calendarContainer.classList.remove('dragging');
-    });
+	/* ==========================
+	   Inizializzazione moduli
+	   ========================== */
+	initThemeModule();
+	initCalendarDragModule();
 });

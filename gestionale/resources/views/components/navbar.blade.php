@@ -14,19 +14,24 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" href="{{ route('welcome') }}" aria-current="page">Home</a>
+          <a class="nav-link active" href="{{ route('welcome') }}" aria-current="page">Calendario</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('customers.create') }}">Aggiungi Cliente</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('rooms.todayDepartures') }}">
-            Camere da Pulire
+            Piano Pulizia Camere
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('customers.restaurant') }}">
+            Ristorante
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('customers.todayDeparturesBilling') }}">
-            Gestione Conti
+            Conti Partenze Odierne
           </a>
         </li>
         <li class="nav-item ms-3">

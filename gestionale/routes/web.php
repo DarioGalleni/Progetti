@@ -18,6 +18,9 @@ Route::post('/customers', [CustomerController::class, 'store'])->name('customers
 // Sposta questa rotta sopra quella dinamica per la visualizzazione.
 Route::get('/customers/search', [CustomerController::class, 'search'])->name('customers.search');
 
+// Rotta per la dashboard ristorante (deve essere prima delle rotte dinamiche)
+Route::get('/customers/restaurant', [RoomController::class, 'restaurant'])->name('customers.restaurant');
+
 // Rotta per visualizzare i dettagli di una prenotazione.
 Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
 

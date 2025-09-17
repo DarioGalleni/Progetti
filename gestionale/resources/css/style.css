@@ -1,9 +1,57 @@
-/* Modalità notte */
+/* ==========================================================
+    Modalità Notte
+    ========================================================== */
 body.night-mode {
-    background-color: #28282B;
-    color: #F5F5DC;
+background-color: #28282B;
+color: #F5F5DC;
 }
 
+/* Modalità Notte: testo attenuato */
+body.night-mode .text-muted {
+color: #ceceb9 !important;
+}
+
+/* Modalità Notte: navbar */
+body.night-mode .navbar {
+background-color: #28282B !important;
+border-bottom: 1px solid #3a3a3c;
+}
+body.night-mode .navbar .navbar-brand,
+body.night-mode .navbar .nav-link,
+body.night-mode .navbar .navbar-text {
+color: #F5F5DC !important;
+}
+
+/* Modalità Notte: colonna "Camera" */
+body.night-mode .sticky-header-room,
+body.night-mode .sticky-header-room.bg-light {
+background-color: #28282B !important;
+color: #F5F5DC !important;
+border-right: 1px solid #F5F5DC !important;
+z-index: 3;
+}
+
+/* Modalità Notte: tabelle */
+body.night-mode .table,
+body.night-mode .table th,
+body.night-mode .table td {
+background-color: #28282B;
+color: #F5F5DC;
+border-color: #F5F5DC;
+}
+body.night-mode .table th,
+body.night-mode .table td {
+border: 1px solid #F5F5DC;
+}
+
+/* Modalità Notte: icona hamburger */
+body.night-mode .navbar-toggler-icon {
+background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* ==========================================================
+    Temi e Transizioni
+    ========================================================== */
 /* Transizioni per cambio tema */
 body,
 .navbar,
@@ -14,145 +62,129 @@ body,
 .table td,
 .sticky-header-room,
 .sticky-header-room.bg-light,
-.top-bar,
 .btn,
 .btn-sun {
-    transition: background-color .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease;
+transition: background-color .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease;
 }
 
-/* Icon switch animations (fade + scale) */
+/* ==========================================================
+    Icone e Animazioni
+    ========================================================== */
+/* Animazioni switch icone tema (fade + scala) */
 .theme-icon {
-    display: inline-block;
-    transition: transform .45s ease, opacity .45s ease;
-    will-change: transform, opacity;
+display: inline-block;
+transition: transform .45s ease, opacity .45s ease;
+will-change: transform, opacity;
 }
 .anim-in {
-    animation: iconIn .5s ease forwards;
+animation: iconIn .5s ease forwards;
 }
 .anim-out {
-    animation: iconOut .45s ease forwards;
+animation: iconOut .45s ease forwards;
 }
-
 @keyframes iconIn {
-    from { opacity: 0; transform: scale(.6) rotate(-8deg); }
-    to   { opacity: 1; transform: scale(1) rotate(0); }
+from {
+    opacity: 0;
+    transform: scale(.6) rotate(-8deg);
 }
-
+to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+}
+}
 @keyframes iconOut {
-    from { opacity: 1; transform: scale(1) rotate(0); }
-    to   { opacity: 0; transform: scale(.6) rotate(8deg); }
+from {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+}
+to {
+    opacity: 0;
+    transform: scale(.6) rotate(8deg);
+}
 }
 
-/* Navbar */
-body.night-mode .navbar {
-    background-color: #28282B !important;
-    border-bottom: 1px solid #3a3a3c;
-}
-body.night-mode .navbar .navbar-brand,
-body.night-mode .navbar .nav-link,
-body.night-mode .navbar .navbar-text {
-    color: #F5F5DC !important;
-}
-
-/* Colonna "Camera" */
-body.night-mode .sticky-header-room,
-body.night-mode .sticky-header-room.bg-light {
-    background-color: #28282B !important;
-    color: #F5F5DC !important;
-    border-right: 1px solid #F5F5DC !important;
-    z-index: 3;
-}
-
-/* Tabelle */
-body.night-mode .table,
-body.night-mode .table th,
-body.night-mode .table td {
-    background-color: #28282B;
-    color: #F5F5DC;
-    border-color: #F5F5DC;
-}
-body.night-mode .table th,
-body.night-mode .table td {
-    border: 1px solid #F5F5DC;
-}
-
-/* Separatore sticky */
-body.night-mode .sticky-header-room + td {
-    box-shadow: -6px 0 6px -6px rgba(0,0,0,0.6);
-}
-
-/* Fascia blu */
-body.night-mode .top-bar {
-    background-color: #1E90FF;
-    color: #ffffff;
-}
-
-/* Drag-to-scroll */
+/* ==========================================================
+    Drag-to-Scroll Calendario
+    ========================================================== */
 #calendar-container.drag-scroll {
-    position: relative; /* needed for any absolute pseudo-elements */
-    cursor: grab;
-    -webkit-overflow-scrolling: touch; /* smooth on iOS */
+position: relative;
+cursor: grab;
+-webkit-overflow-scrolling: touch;
 }
 #calendar-container.drag-scroll.dragging {
-    cursor: grabbing;
-    user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-/* optional: subtle overlay while dragging (kept transparent) */
-#calendar-container.drag-scroll.dragging::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: rgba(0,0,0,0);
+cursor: grabbing;
+user-select: none;
+-webkit-user-select: none;
+-ms-user-select: none;
 }
 
-/* Utility classes moved from inline styles in Blade */
+/* ==========================================================
+    Utility e Classi di Supporto
+    ========================================================== */
+/* Utility: altezza massima calendario */
 .calendar-max-height {
-    max-height: 80vh;
-    overflow: auto;
-}
-.table-nowrap {
-    white-space: nowrap;
-}
-.sticky-room-cell {
-    position: sticky;
-    left: 0;
-    z-index: 1;
-    min-width: 140px;
-}
-.sticky-room-header {
-    position: sticky;
-    left: 0;
-    z-index: 2;
+max-height: 80vh;
+overflow: auto;
 }
 
+/* Utility: testo non a capo in tabella */
+.table-nowrap {
+white-space: nowrap;
+}
+
+/* Utility: cella sticky colonna camera */
+.sticky-room-cell {
+position: sticky;
+left: 0;
+z-index: 1;
+min-width: 140px;
+}
+
+/* Utility: header sticky colonna camera */
+.sticky-room-header {
+position: sticky;
+left: 0;
+z-index: 2;
+}
+
+/* Utility: nascondi elementi via CSS */
+.hidden {
+display: none !important;
+}
+
+/* ==========================================================
+    Pulsanti Tema
+    ========================================================== */
 /* Pulsante "sole" (disattiva modalità notte) */
 .btn-sun {
-    background-color: #FFC107;
-    color: #000000;
-    border: 1px solid rgba(0,0,0,0.12);
-}
-.btn-sun .fa-sun {
-    margin-right: 0;
+background-color: #FFC107;
+color: #000000;
+border: 1px solid rgba(0,0,0,0.12);
 }
 
-/* Spaziatura per il pulsante "sole" quando presente */
-.btn-sun.ms-2,
-.btn-sun + .btn {
-    margin-left: 6px;
-}
-
-/* Utility per nascondere elementi via CSS (script rimuove/aggiunge questa classe) */
-.hidden { display: none !important; }
-
-/* Stili per il numero e label delle camere nella colonna sticky */
+/* ==========================================================
+    Stili Camera (Colonna Sticky)
+    ========================================================== */
+/* Numero camera nella colonna sticky */
 .room-number {
-    font-size: 1.25rem;
-    line-height: 1;
+font-size: 1.25rem;
+line-height: 1;
 }
+
+/* Etichetta camera nella colonna sticky */
 .room-label {
-    font-size: 0.9rem;
-    display: block;
+font-size: 0.9rem;
+display: block;
+}
+
+/* ==========================================================
+    Celle Prenotazione
+    ========================================================== */
+/* Nome e cognome a capo nelle celle prenotazione */
+.booking-name {
+white-space: normal;
+word-break: break-word;
+font-weight: 500;
+font-size: 1rem;
+line-height: 1.15;
 }
