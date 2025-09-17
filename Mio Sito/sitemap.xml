@@ -5,8 +5,8 @@
     <!-- Homepage -->
     <url>
         <loc>https://dariux87.it/</loc>
-        <lastmod>2025-08-25</lastmod>
-        <changefreq>monthly</changefreq>
+        <lastmod>2025-09-13</lastmod>
+        <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
             <image:loc>https://dariux87.it/assets/favicon/android-chrome-512x512.png</image:loc>
@@ -18,7 +18,7 @@
     <!-- Portfolio: Hotel Management -->
     <url>
         <loc>https://dariux87.it/gest</loc>
-        <lastmod>2025-08-25</lastmod>
+        <lastmod>2025-09-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
         <image:image>
@@ -31,13 +31,74 @@
     <!-- Portfolio: Restaurant -->
     <url>
         <loc>https://dariux87.it/rist/</loc>
-        <lastmod>2025-08-25</lastmod>
+        <lastmod>2025-09-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
         <image:image>
             <image:loc>https://dariux87.it/assets/imgs/restaurant.jpg</image:loc>
             <image:title>Sito Ristorante</image:title>
             <image:caption>Template per ristorante</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Local pages / anchors -->
+    <url>
+        <loc>https://dariux87.it/about</loc>
+        <lastmod>2025-09-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://dariux87.it/portfolio</loc>
+        <lastmod>2025-09-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://dariux87.it/contact</loc>
+        <lastmod>2025-09-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- About section (pagina ancorata) -->
+    <url>
+        <loc>https://dariux87.it/#about</loc>
+        <lastmod>2025-09-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://dariux87.it/assets/imgs/man_2.jpeg</image:loc>
+            <image:title>About - Dario</image:title>
+            <image:caption>Foto profilo</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Portfolio section (pagina ancorata) -->
+    <url>
+        <loc>https://dariux87.it/#portfolio</loc>
+        <lastmod>2025-09-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://dariux87.it/assets/imgs/git.png</image:loc>
+            <image:title>Portfolio</image:title>
+            <image:caption>Progetti recenti</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Contact section (pagina ancorata) -->
+    <url>
+        <loc>https://dariux87.it/#contact</loc>
+        <lastmod>2025-09-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://dariux87.it/assets/imgs/header.jpg</image:loc>
+            <image:title>Contatti</image:title>
+            <image:caption>Contattami su WhatsApp</image:caption>
         </image:image>
     </url>
     

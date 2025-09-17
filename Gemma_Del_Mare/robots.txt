@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /web/struttura/
+Disallow: /gallery/upload/
+Allow: /
+
+Sitemap: https://www.gemmadelmare.com/sitemap.xml
+Allow: /
+
+Sitemap: https://www.gemmadelmare.com/sitemap.xml

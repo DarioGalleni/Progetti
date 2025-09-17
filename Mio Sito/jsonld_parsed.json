@@ -1,0 +1,75 @@
+﻿{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "@id": "https://dariux87.it/#website",
+            "url": "https://dariux87.it/",
+            "name": "Dario Galleni",
+            "description": "Sviluppo e design di siti web professionali e responsive in Versilia.",
+            "publisher": {
+                "@id": "https://dariux87.it/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://dariux87.it/?s={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "Organization",
+            "@id": "https://dariux87.it/#organization",
+            "name": "Dario Galleni",
+            "url": "https://dariux87.it/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://dariux87.it/assets/imgs/favicon/android-chrome-192x192.png",
+                "width": 192,
+                "height": 192
+            },
+            "sameAs": [
+                "https://www.facebook.com/tuoprofilo",
+                "https://www.linkedin.com/in/tuoprofilo"
+            ],
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+39-012-345-6789",
+                    "contactType": "customer service",
+                    "areaServed": "IT",
+                    "availableLanguage": ["Italian", "English"]
+                }
+            ]
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://dariux87.it/#breadcrumblist",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://dariux87.it/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "About",
+                    "item": "https://dariux87.it/#about"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Portfolio",
+                    "item": "https://dariux87.it/#portfolio"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": "Contact",
+                    "item": "https://dariux87.it/#contact"
+                }
+            ]
+        }
+    ]
+}

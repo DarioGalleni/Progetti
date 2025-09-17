@@ -1,12 +1,15 @@
 <x-layout>
+	<!-- AOS CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
     <!-- Hero Section -->
     <section id="home" class="hero-section vh-100 d-flex align-items-center justify-content-center text-white text-center"
         style="background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8)),url('{{ route('restaurant.image', ['filename' => 'home-section.jpg']) }}');
             background-size: cover;
             background-position: center;">
         <div class="container">
-            <h1 class="hero-title">Autentica Cucina Italiana</h1>
-            <p class="hero-subtitle">Ingredienti freschi, sapori tradizionali, atmosfera accogliente</p>
+            <h1 class="hero-title" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="200">Autentica Cucina Italiana</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">Ingredienti freschi, sapori tradizionali, atmosfera accogliente</p>
         </div>
     </section>
 
@@ -21,11 +24,12 @@
                 </div>  
                 --}}
                 <div class="col-lg-6 mb-4 mb-lg-0">
-                    <video class="about-video autoplay-on-view" muted playsinline preload="metadata" loop>
+                    <video class="about-video autoplay-on-view" muted playsinline preload="metadata" loop
+						data-aos="fade-right" data-aos-duration="900" data-aos-delay="250">
                         <source data-src="{{ route('restaurant.image', ['filename' => 'video.mp4']) }}" type="video/mp4">
                     </video>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="900" data-aos-delay="350">
                     <h2 class="section-title">La Nostra Storia</h2>
                     <p class="mb-4">Fondato nel 1985, il Ristorante Buongusto porta avanti una tradizione culinaria che affonda le sue radici nella cucina italiana più autentica.</p>
                     <p class="mb-5">Il nostro chef, Giovanni Rossi, con oltre 30 anni di esperienza, seleziona personalmente gli ingredienti più freschi dai produttori locali per garantire la massima qualità in ogni piatto.</p>
@@ -50,7 +54,7 @@
             </div>
             <div class="row">
                 <!-- Antipasti -->
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
                     <div class="menu-item">
                         <div class="dish-category">
                             <h3>Antipasti</h3>
@@ -81,7 +85,7 @@
                     </div>
                 </div>
                 <!-- Primi Piatti -->
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="350">
                     <div class="menu-item">
                         <div class="dish-category">
                             <h3>Primi Piatti</h3>
@@ -119,7 +123,7 @@
                     </div>
                 </div>
                 <!-- Secondi Piatti -->
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
                     <div class="menu-item">
                         <div class="dish-category">
                             <h3>Secondi Piatti</h3>
@@ -166,7 +170,7 @@
             <div class="testimonial-slider container-fluid">
                 <div class="row testimonial-track">
                     @foreach ($testimonials as $testimonial)
-                        <div class="col-md-4 mb-4 testimonial-slide">
+                        <div class="col-md-4 mb-4 testimonial-slide" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
                             <x-card 
                                 :stars="$testimonial['stars']"
                                 :text="$testimonial['text']"
@@ -186,7 +190,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Contact -->
-                <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-duration="900" data-aos-delay="200">
                     <h2 class="section-title text-white mb-4">Contattaci</h2>
                     <p class="mb-5">Siamo aperti dal martedì alla domenica, dalle 12:00 alle 15:00 e dalle 19:00 alle 23:00.</p>
                     <div class="contact-info">
@@ -221,7 +225,7 @@
                     </div>
                 </div>
                 <!-- Reservation -->
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="900" data-aos-delay="300">
                     <h2 class="section-title text-white mb-4" id="reservation">Prenota un Tavolo</h2>
                     <form action="{{ route('reservations.store') }}" method="POST">
                         @csrf
@@ -310,7 +314,7 @@
     </section>
 
     <!-- Map -->
-    <div class="map-container" style="height: 400px;">
+    <div class="map-container" style="height: 400px;" data-aos="fade-up" data-aos-duration="900" data-aos-delay="300">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2971.3051977017053!2d12.482395075787636!3d41.86477966624845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a7e1448600f%3A0x4a1ae9829749f019!2sPiazza%20Augusto%20Albini%2C%2010%2C%2000154%20Roma%20RM!5e0!3m2!1sit!2sit!4v1756108690673!5m2!1sit!2sit" 
             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
@@ -421,5 +425,19 @@
             "reviewCount": "450"
         }
     }
+    </script>
+
+    <!-- AOS JS e inizializzazione -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 100
+                });
+            }
+        });
     </script>
 </x-layout>

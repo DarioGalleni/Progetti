@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.gemmadelmare.com/</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.00</priority>
+    <image:image>
+      <image:loc>https://www.gemmadelmare.com/gallery/pagine/big_home-page-banner-7423.jpg</image:loc>
+      <image:caption>Banner Hotel Gemma del Mare</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gemmadelmare.com/gallery/pagine/big_home-page-standard-album-relax-e-tranquillita-2105.jpg</image:loc>
+      <image:caption>Relax e tranquillità - Hotel Gemma del Mare</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.gemmadelmare.com/index.html</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.gemmadelmare.com/camere.html</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <image:image>
+      <image:loc>https://www.gemmadelmare.com/gallery/albumfoto/big_1587569141301_1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gemmadelmare.com/gallery/albumfoto/big_1587569141305_1.jpg</image:loc>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.gemmadelmare.com/contatti.html</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.gemmadelmare.com/gallery.html</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <image:image>
+      <image:loc>https://www.gemmadelmare.com/gallery/albumfoto/big_1587652103_DSC7494.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gemmadelmare.com/gallery/albumfoto/big_1587652104_DSC7541.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gemmadelmare.com/gallery/albumfoto/big_1587652110_DSC7704-Pano.jpg</image:loc>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.gemmadelmare.com/hotel.html</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.gemmadelmare.com/ristorante.html</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.gemmadelmare.com/servizi.html</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.gemmadelmare.com/tariffe.html</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+</urlset>
