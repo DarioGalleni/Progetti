@@ -50,7 +50,9 @@
         </div>
         <div class="mt-4">
             <a href="{{ route('customers.todayDeparturesBilling') }}" class="btn btn-secondary">Torna alla lista</a>
-            <button class="btn btn-info" onclick="window.print()">Stampa</button>
+
+            {{-- Apri una nuova pagina HTML con tutti i dati del cliente (non lanciare la stampa) --}}
+            <a href="{{ url('/customers/'.$customer->id.'/print-html') }}" class="btn btn-info" target="_blank" rel="noopener">Stampa</a>
         </div>
     </div>
 </x-layout>

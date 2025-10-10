@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerExpenseController;
+use App\Models\Customer;
 
 
 
@@ -50,4 +51,19 @@ Route::get('/customers/{customer}/bill', [CustomerController::class, 'showBill']
 
 // Route per svuotare cache e file ottimizzati (collegata al pulsante in navbar)
 Route::post('/optimize-clear', [App\Http\Controllers\Controller::class, 'optimizeClear'])->name('optimize.clear');
+
+// Route per aprire la pagina HTML con tutti i dati del cliente
+Route::get('/customers/{id}/print-html', function ($id) {
+    // Carica cliente con eventuali spese relazionate
+    $customer = Customer::with('expenses')->findOrFail($id);
+
+    // Calcoli essenziali (adatta se la logica è diversa nella tua app)
+    $additionalExpenses = $customer->expenses->sum('amount');
+    // Prova a leggere un campo city_tax sul modello, altrimenti 0
+    $cityTax = $customer->city_tax ?? 0;
+    $grandTotal = ($customer->total_stay_cost ?? 0) + ($cityTax ?? 0) + ($additionalExpenses ?? 0);
+    $finalBalance = $grandTotal - ($customer->down_payment ?? 0);
+
+    return view('customers.bill_html', compact('customer', 'cityTax', 'additionalExpenses', 'grandTotal', 'finalBalance'));
+})->name('customers.print_html');
 
