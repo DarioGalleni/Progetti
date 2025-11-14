@@ -1,0 +1,96 @@
+/* ==========================================================
+    Utility e Classi di Supporto
+    ========================================================== */
+
+/* Utility: altezza massima calendario per fila (dentro l'accordion) */
+.calendar-max-height-fila {
+    max-height: 80vh; /* L'altezza estesa richiesta */
+    overflow: auto;
+}
+
+/* Utility: testo non a capo in tabella */
+.table-nowrap {
+    white-space: nowrap;
+}
+
+/* Utility: cella sticky colonna ombrellone (il blocco che resta a sinistra) */
+.sticky-room-cell {
+    position: sticky;
+    left: 0; /* Punto chiave per bloccare a sinistra */
+    z-index: 1; /* Deve stare sopra il contenuto che scorre */
+    min-width: 140px;
+}
+
+/* Utility: header sticky colonna ombrellone (l'intestazione che resta a sinistra) */
+.sticky-room-header {
+    position: sticky;
+    left: 0; /* Punto chiave per bloccare a sinistra */
+    z-index: 2; /* Deve stare sopra le celle ombrellone */
+}
+
+/* Utility: nascondi elementi via CSS (mantenuto per sicurezza) */
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================
+    Stili Calendario
+    ========================================================== */
+
+/* Cella del giorno corrente (per evidenziarlo) */
+.today {
+    background-color: #ffe4b2; /* Un colore chiaro per evidenziare "oggi" */
+    font-weight: bold;
+}
+
+/* Cella di prenotazione */
+.reservation-cell {
+    cursor: pointer;
+    background-color: #38a169; /* Verde scuro per prenotazioni */
+    color: white;
+    height: 100%;
+    border-radius: 0.25rem;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    /* Regola interna per il testo */
+    font-size: 0.8rem;
+    padding: 0.25rem;
+}
+
+/* Contenitore di prenotazione */
+.reservation-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+/* Intestazione della tabella delle date (deve essere sticky per lo scroll verticale) */
+.table-light.sticky-top {
+    top: 0;
+    z-index: 10; /* Alto z-index per non essere coperto da nulla */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Stili per l'indicatore di drag */
+.drag-scroll.dragging {
+    cursor: grabbing;
+}
+
+
+/* ==========================================================
+    Stili Ombrellone (Colonna Sticky)
+    ========================================================== */
+
+/* Numero ombrellone nella colonna sticky */
+.room-number {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+/* Etichetta della fila nella colonna sticky */
+.room-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
