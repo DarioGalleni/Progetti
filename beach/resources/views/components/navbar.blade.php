@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('home') }}">
-            <i class="bi bi-umbrella-fill"></i> Gestionale Ombrelloni
+            <i class="bi bi-umbrella-fill"></i>
+            <span class="ms-1">Gestionale Ombrelloni</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -23,14 +24,6 @@
                         <i class="bi bi-graph-up"></i> Aggiungi Prenotazione
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="bi bi-gear"></i> Impostazioni
-                    </a>
-                </li>
-
-                {{-- IL BLOCCO PER IL CAMBIO TEMA (MODALITÀ NOTTE) È STATO RIMOSSO DA QUI --}}
-                
             </ul>
         </div>
     </div>

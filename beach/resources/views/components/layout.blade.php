@@ -9,10 +9,10 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
     <title>@yield('title', 'Titolo Predefinito')</title>
 </head>
-<body>
+<body class="beach-theme">
     <x-navbar />
-    {{$slot}}
-
-    
+    <main class="py-3">
+        {{$slot}}
+    </main>
 </body>
 </html>

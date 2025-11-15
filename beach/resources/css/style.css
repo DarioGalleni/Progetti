@@ -1,3 +1,18 @@
+:root{
+    --sand: #F7E7C1; /* sabbia chiara */
+    --sea: #00A3C4; /* azzurre mare */
+    --sea-dark: #007A99; /* blu mare scuro */
+    --coral: #FF6B6B; /* corallo accent */
+    --palm: #2E8B57; /* verde palma */
+    --text-dark: #173743; /* testo principale */
+}
+
+/* Regole per estendere lo sfondo a tutta l'altezza della vista */
+html, body {
+    height: 100%;
+    min-height: 100vh; /* Garantisce che il body si estenda per l'altezza minima della vista */
+}
+
 /* ==========================================================
     Utility e Classi di Supporto
     ========================================================== */
@@ -33,37 +48,27 @@
     display: none !important;
 }
 
+/* Tema generale: applica uno sfondo sabbia e testo leggibile */
+body.beach-theme {
+    background: linear-gradient(180deg, rgba(247,231,193,0.8), rgba(255,255,255,0.95));
+    color: var(--text-dark);
+}
+
+/* Card leggermente traslucide con bordo sabbia */
+.beach-card {
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(236,196,141,0.6);
+    box-shadow: 0 6px 18px rgba(17, 73, 87, 0.06);
+}
+
 /* ==========================================================
     Stili Calendario
     ========================================================== */
 
 /* Cella del giorno corrente (per evidenziarlo) */
 .today {
-    background-color: #ffe4b2; /* Un colore chiaro per evidenziare "oggi" */
+    background-color: rgba(255,230,180,0.9); /* evidenzia oggi con tono sabbia */
     font-weight: bold;
-}
-
-/* Cella di prenotazione */
-.reservation-cell {
-    cursor: pointer;
-    background-color: #38a169; /* Verde scuro per prenotazioni */
-    color: white;
-    height: 100%;
-    border-radius: 0.25rem;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    /* Regola interna per il testo */
-    font-size: 0.8rem;
-    padding: 0.25rem;
-}
-
-/* Contenitore di prenotazione */
-.reservation-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100%;
 }
 
 /* Intestazione della tabella delle date (deve essere sticky per lo scroll verticale) */
@@ -93,4 +98,84 @@
 .room-label {
     font-size: 0.8rem;
     color: #6c757d;
+}
+
+#whatsapp {
+    /* text-decoration: none; */
+    color: #075e54 ;
+}
+
+/* Override di alcuni componenti Bootstrap per tema estivo */
+.bg-primary {
+    background: linear-gradient(90deg, rgba(0,163,196,0.95), rgba(0,122,153,0.95)) !important;
+    color: #fff !important;
+}
+.btn-primary {
+    background: linear-gradient(180deg, var(--sea), var(--sea-dark)) !important;
+    border-color: rgba(0,0,0,0.08) !important;
+    color: #fff !important;
+}
+.btn-primary:hover, .btn-primary:focus {
+    background: linear-gradient(180deg, var(--sea-dark), #005f76) !important;
+}
+.card-header.bg-primary {
+    background: linear-gradient(90deg, rgba(0,163,196,0.95), rgba(0,122,153,0.9)) !important;
+    color: #fff;
+}
+.text-sea { color: var(--sea-dark) !important; }
+.accent-coral { color: var(--coral) !important; }
+.badge-beach {
+    background: var(--coral);
+    color: white;
+}
+
+/* piccoli adattamenti responsive per il calendario */
+@media (max-width: 768px){
+    .sticky-room-cell { min-width: 120px; }
+}
+
+/* Bottoni secondari coerenti con tema spiaggia */
+.btn-secondary {
+    background: linear-gradient(180deg, #f3d9b6, #e8caa0) !important;
+    color: var(--text-dark) !important;
+    border: 1px solid rgba(0,0,0,0.04) !important;
+}
+.btn-info {
+    background: linear-gradient(180deg, #ffd166, #ffb86b) !important; /* tono caldo */
+    color: var(--text-dark) !important;
+}
+.btn-warning {
+    background: linear-gradient(180deg, #ff9e80, #ff6b6b) !important; /* corallo */
+    color: white !important;
+}
+
+/* Hero section per la welcome page */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2.25rem 1rem;
+    border-radius: 0.5rem;
+    background: linear-gradient(90deg, rgba(0,163,196,0.08), rgba(255,203,164,0.06));
+    margin-bottom: 1rem;
+}
+.hero h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: var(--sea-dark);
+}
+.hero svg { width: 72px; height: 72px; }
+.hero .hero-sub { color: #6b8e8f; font-size: 0.95rem; }
+
+/* ==========================================================
+    Prenotazioni: Bottoni Azione (Modifica)
+    ========================================================== */
+
+@media (max-width: 767.98px) {
+    /* Impone che i bottoni all'interno di d-grid (schermi piccoli) prendano tutta la larghezza */
+    /* Questo li rende di fatto di uguale dimensione e li centra orizzontalmente */
+    .d-grid .action-btn {
+        width: 100%;
+    }
 }

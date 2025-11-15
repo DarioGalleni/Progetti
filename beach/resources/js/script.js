@@ -108,6 +108,13 @@ document.addEventListener('DOMContentLoaded', function () {
     /* ==========================
        Inizializzazione moduli
        ========================== */
-    // initThemeModule(); <-- RIMOSSA
     initCalendarDragModule();
+
+    
+});
+
+document.querySelectorAll(".fa-x").forEach(el => {
+  el.addEventListener("click", () => {
+    el.parentElement.remove();
+  });
 });

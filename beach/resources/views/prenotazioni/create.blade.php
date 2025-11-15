@@ -1,8 +1,8 @@
-<x-layout>
-<div class="container mt-4">
+<x-layout class="vh-100">
+<div class="container mt-4 ">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card beach-card ">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0"><i class="bi bi-calendar-plus"></i> Nuova Prenotazione</h5>
                 </div>
@@ -106,7 +106,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="telefono" class="form-label">Telefono (Opzionale)</label>
-                                <input type="text" 
+                                <input type="number" 
                                        class="form-control @error('telefono') is-invalid @enderror" 
                                        id="telefono" 
                                        name="telefono" 
