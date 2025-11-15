@@ -4,19 +4,30 @@ Carbon::setLocale('it');
 ?>
 
 <x-layout>
-<div class="mt-10 sm:mt-0">
-        @include('profile.two-factor-authentication-form')
-    </div>
-
+@section('title', 'Homepage')
     <div class="main-container container-fluid mt-4 p-3">
-        {{-- <div class="alert alert-info container position-relative" id="prova">
-            <i class="fa-regular fa-x position-absolute end-0 top-0 m-3"></i>
-            <h2 class="mb-4 text-center mt-3">
-                Ambiente di test libero: potete aggiungere, modificare o eliminare ciò che desiderate.
-                Il progetto è ancora in fase di sviluppo.
-            </h2>
-        </div> --}}
-        <h2 class="mb-4 text-center text-sea" id="calendar-title">Calendario - {{ $selectedMonth->translatedFormat('F Y') }}</h2>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-info position-relative"> 
+                        <button type="button" 
+                                class="btn-close position-absolute top-0 end-0 mt-2 me-2" 
+                                data-bs-dismiss="alert" 
+                                aria-label="Close">
+                        </button>
+                        <h2 class="text-center">
+                            Ambiente di test: potete effettuare prove, modifiche e cancellazioni liberamente. Il sistema è ancora in fase di sviluppo.
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mb-4 text-center text-sea" id="calendar-title">
+            Calendario - {{ $selectedMonth->translatedFormat('F Y') }}
+        </h2>
+
         <div class="d-flex justify-content-between mb-3">
             <a href="{{ route('home', ['month' => $previousMonth->format('Y-m')]) }}" class="btn btn-secondary">
                 ← Mese Precedente
@@ -28,46 +39,66 @@ Carbon::setLocale('it');
                 Mese Successivo →
             </a>
         </div>
-        <div class="accordion beach-card" id="calendarAccordion vh-100">
+
+        <div class="accordion beach-card" id="calendarAccordion">
             @foreach($ombrelloniPerFila as $fila => $ombrelloni)
                 @php
                     $collapseId = 'collapseFila' . $fila;
                     $isFirst = $loop->first;
                 @endphp
+
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingFila{{ $fila }}">
-                        <button class="accordion-button {{ !$isFirst ? 'collapsed' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $collapseId }}" aria-expanded="{{ $isFirst ? 'true' : 'false' }}" aria-controls="{{ $collapseId }}">
-                            <i class="fas fa-umbrella-beach me-2"></i> Fila {{ $fila }} ({{ $ombrelloni->count() }} Ombrelloni)
+                        <button class="accordion-button {{ !$isFirst ? 'collapsed' : '' }}"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#{{ $collapseId }}"
+                                aria-expanded="{{ $isFirst ? 'true' : 'false' }}"
+                                aria-controls="{{ $collapseId }}">
+                            <i class="fas fa-umbrella-beach me-2"></i> 
+                            Fila {{ $fila }} ({{ $ombrelloni->count() }} Ombrelloni)
                         </button>
                     </h2>
-                    <div id="{{ $collapseId }}" class="accordion-collapse collapse {{ $isFirst ? 'show' : '' }}" aria-labelledby="headingFila{{ $fila }}" data-bs-parent="#calendarAccordion">
+
+                    <div id="{{ $collapseId }}"
+                         class="accordion-collapse collapse {{ $isFirst ? 'show' : '' }}"
+                         aria-labelledby="headingFila{{ $fila }}"
+                         data-bs-parent="#calendarAccordion">
+
                         <div class="accordion-body p-0">
-                            <div id="calendar-container-{{ $fila }}" class="table-responsive drag-scroll calendar-max-height-fila">
+                            <div id="calendar-container-{{ $fila }}"
+                                 class="table-responsive drag-scroll calendar-max-height-fila">
+
                                 <table class="table table-bordered align-middle text-center table-nowrap">
                                     <thead class="table-light sticky-top">
                                         <tr>
                                             <th class="sticky-header-room bg-light sticky-room-header" style="min-width: 140px;">
                                                 Ombrellone
                                             </th>
+
                                             @php $currentDate = $firstDayOfCalendar->copy(); @endphp
+
                                             @while($currentDate->lte($lastDayOfCalendar))
                                                 @php
                                                     $isHoliday = $currentDate->dayOfWeek === Carbon::SUNDAY;
                                                     $isToday = $currentDate->isToday();
                                                     $isDifferentMonth = $currentDate->month !== $selectedMonth->month;
                                                 @endphp
-                                                <th class="{{ $isHoliday ? 'text-danger' : '' }} {{ $isToday ? 'bg-warning today-cell' : '' }} {{ $isDifferentMonth ? 'text-muted' : '' }}"
+
+                                                <th class="{{ $isHoliday ? 'text-danger' : '' }} 
+                                                           {{ $isToday ? 'bg-warning today-cell' : '' }} 
+                                                           {{ $isDifferentMonth ? 'text-muted' : '' }}"
                                                     @if($isToday && $isFirst) id="today" @endif
                                                     style="min-width: 90px; max-width: 90px; width: 90px;">
                                                     {{ $currentDate->day }}<br>
-                                                    <small>
-                                                        {{ ucfirst($currentDate->translatedFormat('D')) }}
-                                                    </small>
+                                                    <small>{{ ucfirst($currentDate->translatedFormat('D')) }}</small>
                                                 </th>
+
                                                 @php $currentDate->addDay(); @endphp
                                             @endwhile
                                         </tr>
                                     </thead>
+
                                     <tbody>
                                         @foreach($ombrelloni->sortBy('numero') as $ombrellone)
                                             <tr>
@@ -98,36 +129,38 @@ Carbon::setLocale('it');
                                                             $displayDuration = $displayStart->diffInDays($displayEnd) + 1;
                                                             $remainingDays = $displayDuration;
                                                         @endphp
+
                                                         <td colspan="{{ $remainingDays }}"
                                                             class="bg-primary text-white position-relative"
                                                             style="min-width: 90px;">
                                                             <div class="d-flex flex-column align-items-center justify-content-center h-100 p-1">
                                                                 <div class="booking-name">
-                                                                    {{ $foundBooking->nome }}<br>{{ $foundBooking->cognome }}
+                                                                    {{ $foundBooking->nome }}<br>
+                                                                    {{ $foundBooking->cognome }}
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        @php
-                                                            $currentDate->addDays($remainingDays);
-                                                        @endphp
+
+                                                        @php $currentDate->addDays($remainingDays); @endphp
                                                     @else
                                                         <td style="min-width: 90px; max-width: 90px; width: 90px; cursor: pointer;"
                                                             onclick="window.location.href = '{{ route('prenotazioni.create') }}?ombrellone_id={{ $ombrellone->id }}&arrivo={{ $currentDate->format('Y-m-d') }}'"
                                                             title="Prenota {{ $ombrellone->identificativo }} per il {{ $currentDate->format('d/m') }}">
                                                         </td>
-                                                        @php
-                                                            $currentDate->addDay();
-                                                        @endphp
+
+                                                        @php $currentDate->addDay(); @endphp
                                                     @endif
                                                 @endwhile
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
             @endforeach
         </div>
     </div>

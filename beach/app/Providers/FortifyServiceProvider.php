@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Features;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -33,7 +33,6 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
-        Fortify::redirectUserForTwoFactorAuthenticationUsing(RedirectIfTwoFactorAuthenticatable::class);
 
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
@@ -41,8 +40,39 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($throttleKey);
         });
 
-        RateLimiter::for('two-factor', function (Request $request) {
-            return Limit::perMinute(5)->by($request->session()->get('login.id'));
+        // Rimuovi questo:
+        // RateLimiter::for('two-factor', function (Request $request) {
+        //     return Limit::perMinute(5)->by($request->session()->get('login.id'));
+        // });
+
+        // Definisci le view di Fortify
+        Fortify::loginView(function () {
+            return view('auth.login');
         });
+
+        Fortify::registerView(function () {
+            return view('auth.register');
+        });
+
+        Fortify::requestPasswordResetLinkView(function () {
+            return view('auth.forgot-password');
+        });
+
+        Fortify::resetPasswordView(function ($request) {
+            return view('auth.reset-password', ['request' => $request]);
+        });
+
+        // Rimuovi questo:
+        // Fortify::twoFactorChallengeView(function () {
+        //     return view('auth.two-factor-challenge');
+        // });
+
+        Fortify::confirmPasswordView(function () {
+            return view('auth.confirm-password');
+        });
+
+        // Rimuovi questo commento:
+        // IMPORTANTE: Non reindirizzare dopo il login se c'è 2FA
+        // Fortify gestisce automaticamente il reindirizzamento a two-factor-challenge
     }
 }

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    /* ==========================
+    /* ===========================
        Modulo: Calendario drag & helpers
-       ========================== */
+       =========================== */
     function initCalendarDragModule() {
         const DRAG_THRESHOLD = 4;
         let isPointerDown = false;
@@ -28,74 +28,96 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // Funzione per applicare il drag and scroll ad un contenitore
         function setupDragScroll(container) {
-            // Avvia trascinamento
-            container.addEventListener('mousedown', (e) => {
-                if (e.button !== 0) return; // Solo tasto sinistro
-                activeContainer = container; // Imposta il contenitore attivo
-                isPointerDown = true;
-                isDragging = false;
-                startX = e.pageX;
-                startY = e.pageY;
-                scrollLeft = container.scrollLeft;
-                scrollTop = container.scrollTop;
-            });
+            // Rimuovi listener precedenti per evitare duplicati
+            container.removeEventListener('pointerdown', handlePointerDown);
+            container.removeEventListener('pointerup', handlePointerUp);
+            container.removeEventListener('pointerleave', handlePointerUp);
+            container.removeEventListener('pointermove', handlePointerMove);
 
-            // Previene click durante il drag
-            container.addEventListener('click', (e) => {
-                if (isDragging) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-            }, true);
+            // Aggiungi nuovi listener
+            container.addEventListener('pointerdown', handlePointerDown);
+            container.addEventListener('pointerup', handlePointerUp);
+            container.addEventListener('pointerleave', handlePointerUp);
+            container.addEventListener('pointermove', handlePointerMove);
         }
         
-        // Termina trascinamento (globale, rimuove lo stato di drag su tutti)
-        window.addEventListener('mouseup', (e) => {
-            if (e.button !== 0 || !isPointerDown) return;
-            isPointerDown = false;
-            activeContainer?.classList.remove('dragging');
-            activeContainer = null; // Resetta il contenitore attivo
-            setTimeout(() => { isDragging = false; }, 0);
-        });
+        // Gestori degli eventi
+        function handlePointerDown(e) {
+            if (e.button !== 0) return; // Solo tasto sinistro
+            isPointerDown = true;
+            isDragging = false;
+            activeContainer = e.currentTarget;
+            startX = e.pageX - activeContainer.offsetLeft;
+            scrollLeft = activeContainer.scrollLeft;
+            activeContainer.classList.add('dragging'); // Aggiungi classe per feedback visivo (opzionale)
+        }
 
-        // Muovi (globale, usa il contenitore attivo)
-        window.addEventListener('mousemove', (e) => {
-            if (!isPointerDown || !activeContainer) return;
+        function handlePointerUp(e) {
+            if (isPointerDown) {
+                activeContainer.classList.remove('dragging');
+                isPointerDown = false;
+                
+                // Impedisce il click se c'è stato un trascinamento significativo
+                if (isDragging) {
+                    e.preventDefault(); 
+                    e.stopImmediatePropagation();
+                }
+            }
+            isDragging = false;
+            activeContainer = null;
+        }
+
+        function handlePointerMove(e) {
+            if (!isPointerDown) return;
+            e.preventDefault(); // Impedisce la selezione di testo
             
-            const dx = e.pageX - startX;
-            const dy = e.pageY - startY;
+            const dx = e.pageX - activeContainer.offsetLeft - startX;
             
-            if (!isDragging && Math.hypot(dx, dy) > DRAG_THRESHOLD) {
+            // Verifica se il movimento è significativo per considerarlo "dragging"
+            if (Math.abs(dx) > DRAG_THRESHOLD) {
                 isDragging = true;
-                activeContainer.classList.add('dragging');
             }
+
             if (isDragging) {
-                e.preventDefault();
+                 // Sposta il contenitore orizzontalmente
                 activeContainer.scrollLeft = scrollLeft - dx;
-                activeContainer.scrollTop = scrollTop - dy;
             }
-        });
+        }
+        
+        // Rimuove i drag event dai link (per prevenire bug)
+        function preventDragOnLinks(container) {
+            container.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('pointerdown', (e) => e.stopPropagation());
+            });
+        }
 
 
-        // Aggiungi listener per Accordion di Bootstrap (gestisce l'apertura e la centratura)
+        /* ===========================
+           Logica di Inizializzazione
+           =========================== */
+        
         const accordion = document.getElementById('calendarAccordion');
+        
         if (accordion) {
-            // Listener per quando un accordion si apre (e finisce l'animazione)
+             // 1. Inizializzazione per il contenitore drag-scroll quando si apre un accordion
             accordion.addEventListener('shown.bs.collapse', function (event) {
                 const collapseBody = event.target;
                 const calendarContainer = collapseBody.querySelector('.drag-scroll');
                 
                 if (calendarContainer) {
-                    // 1. Applica la logica di drag and scroll
+                    // Aggiunge la logica di drag and scroll
                     setupDragScroll(calendarContainer);
-                    // 2. Centra la data odierna
+                    // Rimuove il drag sui link
+                    preventDragOnLinks(calendarContainer);
+                    // Centra la data odierna
                     centerToday(calendarContainer);
                 }
             });
             
-            // Setup iniziale e centratura per i contenitori inizialmente visibili (la prima fila)
+            // 2. Setup iniziale e centratura per i contenitori inizialmente visibili (la prima fila)
             document.querySelectorAll('#calendarAccordion .accordion-collapse.show .drag-scroll').forEach(container => {
                 setupDragScroll(container);
+                preventDragOnLinks(container);
                 // Centra 'oggi' solo dopo che l'elemento è visibile e pronto
                 centerToday(container);
                 // Riprova a centrare 'oggi' al resize della finestra
@@ -103,18 +125,20 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
         
-    }
-
-    /* ==========================
+        // Inizializzazione Tooltip di Bootstrap
+        // Questo è necessario per il tooltip che hai aggiunto nella navbar
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+    } // fine initCalendarDragModule
+    
+    /* ===========================
        Inizializzazione moduli
-       ========================== */
+       =========================== */
     initCalendarDragModule();
 
-    
-});
 
-document.querySelectorAll(".fa-x").forEach(el => {
-  el.addEventListener("click", () => {
-    el.parentElement.remove();
-  });
+
 });

@@ -159,7 +159,7 @@
                                                         @endif
 
                                                         <dt class="col-sm-4">Creata il:</dt>
-                                                        <dd class="col-sm-8">{{ $prenotazione->created_at->format('d/m/Y H:i') }}</dd>
+                                                        <dd class="col-sm-8">{{ $prenotazione->created_at->format('d/m/Y') }}</dd>
                                                     </dl>
                                                 </div>
                                                 <div class="modal-footer">
