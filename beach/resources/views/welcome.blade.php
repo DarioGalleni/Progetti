@@ -4,29 +4,18 @@ Carbon::setLocale('it');
 ?>
 
 <x-layout>
-@section('title', 'Homepage')
-    <div class="main-container container-fluid mt-4 p-3">
+    @section('title', 'Homepage')
 
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="alert alert-info position-relative"> 
-                        <button type="button" 
-                                class="btn-close position-absolute top-0 end-0 mt-2 me-2" 
-                                data-bs-dismiss="alert" 
-                                aria-label="Close">
-                        </button>
-                        <h2 class="text-center">
-                            Ambiente di test: potete effettuare prove, modifiche e cancellazioni liberamente. Il sistema è ancora in fase di sviluppo.
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="main-container container-fluid mt-4 p-3">
 
         <h2 class="mb-4 text-center text-sea" id="calendar-title">
             Calendario - {{ $selectedMonth->translatedFormat('F Y') }}
         </h2>
+        
+        <div class="text-center mb-3">
+             <small class="text-muted"><i class="fas fa-info-circle me-1"></i> Tieni premuto <strong>CTRL</strong> (o Cmd) + Click su una cella per aprire o creare una prenotazione.</small> <br>
+             <small class="text-muted"><i class="fas fa-info-circle me-1"></i> Ambiente di test: potet testare, modificare, cancellare</small>
+        </div>
 
         <div class="d-flex justify-content-between mb-3">
             <a href="{{ route('home', ['month' => $previousMonth->format('Y-m')]) }}" class="btn btn-secondary">
@@ -55,7 +44,7 @@ Carbon::setLocale('it');
                                 data-bs-target="#{{ $collapseId }}"
                                 aria-expanded="{{ $isFirst ? 'true' : 'false' }}"
                                 aria-controls="{{ $collapseId }}">
-                            <i class="fas fa-umbrella-beach me-2"></i> 
+                            <i class="fas fa-umbrella-beach me-2"></i>
                             Fila {{ $fila }} ({{ $ombrelloni->count() }} Ombrelloni)
                         </button>
                     </h2>
@@ -66,8 +55,7 @@ Carbon::setLocale('it');
                          data-bs-parent="#calendarAccordion">
 
                         <div class="accordion-body p-0">
-                            <div id="calendar-container-{{ $fila }}"
-                                 class="table-responsive drag-scroll calendar-max-height-fila">
+                            <div id="calendar-container-{{ $fila }}" class="table-responsive drag-scroll calendar-max-height-fila">
 
                                 <table class="table table-bordered align-middle text-center table-nowrap">
                                     <thead class="table-light sticky-top">
@@ -85,9 +73,7 @@ Carbon::setLocale('it');
                                                     $isDifferentMonth = $currentDate->month !== $selectedMonth->month;
                                                 @endphp
 
-                                                <th class="{{ $isHoliday ? 'text-danger' : '' }} 
-                                                           {{ $isToday ? 'bg-warning today-cell' : '' }} 
-                                                           {{ $isDifferentMonth ? 'text-muted' : '' }}"
+                                                <th class="{{ $isHoliday ? 'text-danger' : '' }} {{ $isToday ? 'bg-warning today-cell' : '' }} {{ $isDifferentMonth ? 'text-muted' : '' }}"
                                                     @if($isToday && $isFirst) id="today" @endif
                                                     style="min-width: 90px; max-width: 90px; width: 90px;">
                                                     {{ $currentDate->day }}<br>
@@ -101,11 +87,12 @@ Carbon::setLocale('it');
 
                                     <tbody>
                                         @foreach($ombrelloni->sortBy('numero') as $ombrellone)
-                                            <tr>
+                                            <tr class="calendar-slot-row">
                                                 <td class="sticky-header-room bg-light sticky-room-cell">
                                                     <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <strong class="room-number">{{ $ombrellone->identificativo }}</strong>
-                                                        <span class="room-label">Fila {{ $ombrellone->fila }}</span>
+                                                        <strong class="room-number">
+                                                            {{ strtoupper($ombrellone->fila) }} - {{ $ombrellone->numero }}
+                                                        </strong>
                                                     </div>
                                                 </td>
 
@@ -128,26 +115,32 @@ Carbon::setLocale('it');
                                                             $displayEnd = $departure->copy()->min($lastDayOfCalendar);
                                                             $displayDuration = $displayStart->diffInDays($displayEnd) + 1;
                                                             $remainingDays = $displayDuration;
+                                                            $bookingUrl = route('prenotazioni.show', $foundBooking->id);
                                                         @endphp
 
-                                                        <td colspan="{{ $remainingDays }}"
-                                                            class="bg-primary text-white position-relative"
-                                                            style="min-width: 90px;">
-                                                            <div class="d-flex flex-column align-items-center justify-content-center h-100 p-1">
-                                                                <div class="booking-name">
-                                                                    {{ $foundBooking->nome }}<br>
-                                                                    {{ $foundBooking->cognome }}
+                                                        <td colspan="{{ $remainingDays }}" class="bg-primary p-0 position-relative prevent-drag" style="min-width: 90px;">
+                                                            <a href="javascript:void(0)" 
+                                                               onclick="handleCtrlClick(event, '{{ $bookingUrl }}')"
+                                                               class="text-decoration-none text-white d-block h-100 w-100"
+                                                               title="CTRL + Click per dettagli di {{ $foundBooking->nome }}">
+                                                                <div class="d-flex flex-column align-items-center justify-content-center h-100 p-1">
+                                                                    <div class="booking-name">
+                                                                        {{ $foundBooking->nome }}<br>
+                                                                        {{ $foundBooking->cognome }}
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            </a>
                                                         </td>
-
                                                         @php $currentDate->addDays($remainingDays); @endphp
                                                     @else
+                                                        @php
+                                                            $createUrl = route('prenotazioni.create') . "?ombrellone_id=" . $ombrellone->id . "&arrivo=" . $currentDate->format('Y-m-d');
+                                                        @endphp
+                                                        
                                                         <td style="min-width: 90px; max-width: 90px; width: 90px; cursor: pointer;"
-                                                            onclick="window.location.href = '{{ route('prenotazioni.create') }}?ombrellone_id={{ $ombrellone->id }}&arrivo={{ $currentDate->format('Y-m-d') }}'"
-                                                            title="Prenota {{ $ombrellone->identificativo }} per il {{ $currentDate->format('d/m') }}">
+                                                            onclick="handleCtrlClick(event, '{{ $createUrl }}')"
+                                                            title="CTRL + Click per prenotare Fila {{ strtoupper($ombrellone->fila) }} - {{ $ombrellone->numero }}">
                                                         </td>
-
                                                         @php $currentDate->addDay(); @endphp
                                                     @endif
                                                 @endwhile
@@ -155,12 +148,10 @@ Carbon::setLocale('it');
                                         @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             @endforeach
         </div>
     </div>

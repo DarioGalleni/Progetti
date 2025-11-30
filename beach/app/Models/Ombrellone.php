@@ -65,17 +65,17 @@ class Ombrellone extends Model
         return $this->prenotazioni()
             ->where(function($query) use ($dataInizio, $dataFine) {
                 $query->whereBetween('data_inizio', [$dataInizio, $dataFine])
-                      ->orWhereBetween('data_fine', [$dataInizio, $dataFine])
-                      ->orWhere(function($q) use ($dataInizio, $dataFine) {
-                          $q->where('data_inizio', '<=', $dataInizio)
+                        ->orWhereBetween('data_fine', [$dataInizio, $dataFine])
+                        ->orWhere(function($q) use ($dataInizio, $dataFine) {
+                        $q->where('data_inizio', '<=', $dataInizio)
                             ->where('data_fine', '>=', $dataFine);
-                      });
+                    });
             })
             ->exists();
     }
 
     public function getIdentificativoAttribute()
     {
-        return 'Fila ' . $this->fila . ' - Ombrellone ' . $this->numero;
+        
     }
 }

@@ -11,7 +11,6 @@ class Prenotazione extends Model
 {
     use HasFactory;
 
-    // FIX CHIAVE: Forzare il nome della tabella a 'prenotazioni'
     protected $table = 'prenotazioni'; 
 
     protected $fillable = [
@@ -21,14 +20,13 @@ class Prenotazione extends Model
         'cognome',
         'telefono',
         'email',
-        'data_inizio', // Mappa ad Arrivo
-        'data_fine',   // Mappa a Partenza - 1 giorno
+        'data_inizio',
+        'data_fine',
         'note',
         'costo_totale', 
         'acconto'
     ];
     
-    // Casting per le date
     protected $casts = [
         'data_inizio' => 'date',
         'data_fine' => 'date',

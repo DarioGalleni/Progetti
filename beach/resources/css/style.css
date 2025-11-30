@@ -1,155 +1,111 @@
-:root{
-    --sand: #F7E7C1; /* sabbia chiara */
-    --sea: #00A3C4; /* azzurre mare */
-    --sea-dark: #007A99; /* blu mare scuro */
-    --coral: #FF6B6B; /* corallo accent */
-    --palm: #2E8B57; /* verde palma */
-    --text-dark: #173743; /* testo principale */
+/* ==========================================================================
+   SEZIONE 1: Tema e Variabili Globali
+   Descrizione: Definizione dei colori principali e setup del body.
+   ========================================================================== */
+:root {
+    --sand: #F7E7C1;      /* Sabbia chiara */
+    --sea: #00A3C4;       /* Azzurro mare */
+    --sea-dark: #007A99;  /* Blu mare scuro */
+    --coral: #FF6B6B;     /* Corallo per accenti */
+    --palm: #2E8B57;      /* Verde palma */
+    --text-dark: #173743; /* Testo principale */
 }
 
-/* Regole per estendere lo sfondo a tutta l'altezza della vista */
 html, body {
     height: 100%;
-    min-height: 100vh; /* Garantisce che il body si estenda per l'altezza minima della vista */
+    min-height: 100vh;
 }
 
-/* ==========================================================
-    Utility e Classi di Supporto
-    ========================================================== */
+.beach-theme {
+    background: linear-gradient(to bottom, var(--sand) 0%, #ffffff 100%);
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
 
-/* Utility: altezza massima calendario per fila (dentro l'accordion) */
+/* Titoli */
+.text-sea {
+    color: var(--sea);
+}
+
+/* ==========================================================================
+   SEZIONE 2: Layout Calendario e Tabelle
+   Descrizione: Classi per la griglia, le celle sticky e lo scroll.
+   ========================================================================== */
+
+/* Altezza massima del contenitore calendario per ogni fila */
 .calendar-max-height-fila {
-    max-height: 80vh; /* L'altezza estesa richiesta */
+    max-height: 80vh;
     overflow: auto;
 }
 
-/* Utility: testo non a capo in tabella */
+/* Forza il testo su una sola riga nella tabella */
 .table-nowrap {
     white-space: nowrap;
 }
 
-/* Utility: cella sticky colonna ombrellone (il blocco che resta a sinistra) */
+/* Altezza fissa per le celle/slot */
+.calendar-slot-row td {
+    height: 70px;
+    min-height: 70px;
+}
+
+/* Cella sticky: Colonna "Ombrellone" (resta fissa a sinistra) */
 .sticky-room-cell {
     position: sticky;
-    left: 0; /* Punto chiave per bloccare a sinistra */
-    z-index: 1; /* Deve stare sopra il contenuto che scorre */
-    min-width: 140px;
+    left: 0;
+    z-index: 2;
 }
 
-/* Utility: header sticky colonna ombrellone (l'intestazione che resta a sinistra) */
+/* Header sticky: Colonna "Ombrellone" nell'intestazione */
 .sticky-room-header {
     position: sticky;
-    left: 0; /* Punto chiave per bloccare a sinistra */
-    z-index: 2; /* Deve stare sopra le celle ombrellone */
+    left: 0;
+    z-index: 12;
+    background-color: #f8f9fa !important;
 }
 
-/* Utility: nascondi elementi via CSS (mantenuto per sicurezza) */
-.hidden {
-    display: none !important;
-}
-
-/* Tema generale: applica uno sfondo sabbia e testo leggibile */
-body.beach-theme {
-    background: linear-gradient(180deg, rgba(247,231,193,0.8), rgba(255,255,255,0.95));
-    color: var(--text-dark);
-}
-
-/* Card leggermente traslucide con bordo sabbia */
-.beach-card {
-    background: rgba(255,255,255,0.9);
-    border: 1px solid rgba(236,196,141,0.6);
-    box-shadow: 0 6px 18px rgba(17, 73, 87, 0.06);
-}
-
-/* ==========================================================
-    Stili Calendario
-    ========================================================== */
-
-/* Cella del giorno corrente (per evidenziarlo) */
-.today {
-    background-color: rgba(255,230,180,0.9); /* evidenzia oggi con tono sabbia */
-    font-weight: bold;
-}
-
-/* Intestazione della tabella delle date (deve essere sticky per lo scroll verticale) */
-.table-light.sticky-top {
+/* Header sticky: Riga delle date (resta fissa in alto) */
+.sticky-top {
+    position: sticky;
     top: 0;
-    z-index: 10; /* Alto z-index per non essere coperto da nulla */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
 }
 
-/* Stili per l'indicatore di drag */
-.drag-scroll.dragging {
-    cursor: grabbing;
-}
-
-
-/* ==========================================================
-    Stili Ombrellone (Colonna Sticky)
-    ========================================================== */
-
-/* Numero ombrellone nella colonna sticky */
-.room-number {
-    font-size: 1.25rem;
-    line-height: 1;
-}
-
-/* Etichetta della fila nella colonna sticky */
-.room-label {
-    font-size: 0.8rem;
-    color: #6c757d;
-}
-
-#whatsapp {
-    /* text-decoration: none; */
-    color: #075e54 ;
-}
-
-/* Override di alcuni componenti Bootstrap per tema estivo */
+/* Colore slot occupato */
 .bg-primary {
-    background: linear-gradient(90deg, rgba(0,163,196,0.95), rgba(0,122,153,0.95)) !important;
-    color: #fff !important;
-}
-.btn-primary {
-    background: linear-gradient(180deg, var(--sea), var(--sea-dark)) !important;
-    border-color: rgba(0,0,0,0.08) !important;
-    color: #fff !important;
-}
-.btn-primary:hover, .btn-primary:focus {
-    background: linear-gradient(180deg, var(--sea-dark), #005f76) !important;
-}
-.card-header.bg-primary {
-    background: linear-gradient(90deg, rgba(0,163,196,0.95), rgba(0,122,153,0.9)) !important;
-    color: #fff;
-}
-.text-sea { color: var(--sea-dark) !important; }
-.accent-coral { color: var(--coral) !important; }
-.badge-beach {
-    background: var(--coral);
-    color: white;
+    background-color: var(--sea) !important;
 }
 
-/* piccoli adattamenti responsive per il calendario */
-@media (max-width: 768px){
-    .sticky-room-cell { min-width: 120px; }
+/* ==========================================================================
+   SEZIONE 3: Componenti Grafici e UI
+   Descrizione: Stili per card, bottoni, form e icone.
+   ========================================================================== */
+
+/* Card con ombra leggera */
+.beach-card {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Bottoni secondari coerenti con tema spiaggia */
+/* Bottoni personalizzati tema spiaggia */
 .btn-secondary {
     background: linear-gradient(180deg, #f3d9b6, #e8caa0) !important;
     color: var(--text-dark) !important;
-    border: 1px solid rgba(0,0,0,0.04) !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
 }
+
 .btn-info {
-    background: linear-gradient(180deg, #ffd166, #ffb86b) !important; /* tono caldo */
+    background: linear-gradient(180deg, #ffd166, #ffb86b) !important;
     color: var(--text-dark) !important;
 }
+
 .btn-warning {
-    background: linear-gradient(180deg, #ff9e80, #ff6b6b) !important; /* corallo */
+    background: linear-gradient(180deg, #ff9e80, #ff6b6b) !important;
     color: white !important;
 }
 
-/* Hero section per la welcome page */
+/* Hero Section (Intestazione pagina) */
 .hero {
     display: flex;
     align-items: center;
@@ -157,25 +113,40 @@ body.beach-theme {
     gap: 1rem;
     padding: 2.25rem 1rem;
     border-radius: 0.5rem;
-    background: linear-gradient(90deg, rgba(0,163,196,0.08), rgba(255,203,164,0.06));
+    background: linear-gradient(90deg, rgba(0, 163, 196, 0.08), rgba(255, 203, 164, 0.06));
     margin-bottom: 1rem;
 }
+
 .hero h1 {
     margin: 0;
-    font-size: 1.75rem;
-    color: var(--sea-dark);
+    font-size: 2.5rem;
+    color: var(--text-dark);
 }
-.hero svg { width: 72px; height: 72px; }
-.hero .hero-sub { color: #6b8e8f; font-size: 0.95rem; }
 
-/* ==========================================================
-    Prenotazioni: Bottoni Azione (Modifica)
-    ========================================================== */
+.hero-icon {
+    font-size: 3rem;
+    color: var(--sea);
+}
 
-@media (max-width: 767.98px) {
-    /* Impone che i bottoni all'interno di d-grid (schermi piccoli) prendano tutta la larghezza */
-    /* Questo li rende di fatto di uguale dimensione e li centra orizzontalmente */
-    .d-grid .action-btn {
-        width: 100%;
-    }
+/* Select Form personalizzata */
+.custom-select {
+    display: block;
+    width: 100%;
+    padding: .375rem 2.25rem .375rem .75rem;
+    font-size: 1rem;
+    color: #212529;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: .375rem;
+    appearance: none;
+}
+
+/* Link Whatsapp */
+#whatsapp {
+    text-decoration: none;
+    color: #25d366;
 }

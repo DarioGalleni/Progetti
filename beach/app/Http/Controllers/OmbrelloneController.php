@@ -35,7 +35,7 @@ class OmbrelloneController extends Controller
         // Eager load solo le prenotazioni rilevanti per l'intervallo di date visualizzato
         $ombrelloniPerFila = Ombrellone::with(['prenotazioni' => function ($query) use ($firstDayOfCalendar, $lastDayOfCalendar) {
             $query->where('data_inizio', '<=', $lastDayOfCalendar)
-                  ->where('data_fine', '>=', $firstDayOfCalendar);
+                    ->where('data_fine', '>=', $firstDayOfCalendar);
         }])
         ->orderBy('fila')
         ->orderBy('numero')

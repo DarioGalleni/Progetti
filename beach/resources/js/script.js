@@ -1,47 +1,46 @@
 document.addEventListener('DOMContentLoaded', function () {
-    /* ===========================
-       Modulo: Calendario drag & helpers
-       =========================== */
+    
+    /* ==========================================================================
+       SEZIONE 1: Gestione Drag & Scroll (Trascinamento Calendario)
+       Descrizione: Gestisce la logica per trascinare la tabella orizzontalmente
+       usando il mouse, simile a Google Maps.
+       ========================================================================== */
     function initCalendarDragModule() {
         const DRAG_THRESHOLD = 4;
         let isPointerDown = false;
         let isDragging = false;
-        let startX = 0, startY = 0;
-        let scrollLeft = 0, scrollTop = 0;
-        let activeContainer = null; // Riferimento al container attualmente trascinato
+        let startX = 0;
+        let scrollLeft = 0;
+        let activeContainer = null;
 
-        // Funzione per centrare la cella 'oggi' in un contenitore specifico
+        // Centra la vista sulla data odierna
         function centerToday(calendarContainer) {
-            // L'ID 'today' è applicato solo all'intestazione della prima riga (Fila A) in welcome.blade.php
             const todayCell = calendarContainer.querySelector('table #today');
-            
             if (todayCell && calendarContainer) {
                 const containerRect = calendarContainer.getBoundingClientRect();
                 const cellRect = todayCell.getBoundingClientRect();
                 const cellOffsetLeft = todayCell.offsetLeft;
-                
-                // Calcola lo scroll per centrare la cella 'oggi' orizzontalmente
                 const scrollTarget = cellOffsetLeft - (containerRect.width / 2) + (cellRect.width / 2);
                 calendarContainer.scrollLeft = scrollTarget;
             }
         }
-        
-        // Funzione per applicare il drag and scroll ad un contenitore
+
+        // Configura i listener per gli eventi del mouse
         function setupDragScroll(container) {
-            // Rimuovi listener precedenti per evitare duplicati
+            // Rimuove eventuali listener precedenti per evitare duplicati
             container.removeEventListener('pointerdown', handlePointerDown);
             container.removeEventListener('pointerup', handlePointerUp);
             container.removeEventListener('pointerleave', handlePointerUp);
             container.removeEventListener('pointermove', handlePointerMove);
 
-            // Aggiungi nuovi listener
+            // Aggiunge i nuovi listener
             container.addEventListener('pointerdown', handlePointerDown);
             container.addEventListener('pointerup', handlePointerUp);
             container.addEventListener('pointerleave', handlePointerUp);
             container.addEventListener('pointermove', handlePointerMove);
         }
-        
-        // Gestori degli eventi
+
+        // Inizio del trascinamento
         function handlePointerDown(e) {
             if (e.button !== 0) return; // Solo tasto sinistro
             isPointerDown = true;
@@ -49,17 +48,16 @@ document.addEventListener('DOMContentLoaded', function () {
             activeContainer = e.currentTarget;
             startX = e.pageX - activeContainer.offsetLeft;
             scrollLeft = activeContainer.scrollLeft;
-            activeContainer.classList.add('dragging'); // Aggiungi classe per feedback visivo (opzionale)
+            activeContainer.classList.add('dragging');
         }
 
+        // Fine del trascinamento
         function handlePointerUp(e) {
             if (isPointerDown) {
                 activeContainer.classList.remove('dragging');
                 isPointerDown = false;
-                
-                // Impedisce il click se c'è stato un trascinamento significativo
                 if (isDragging) {
-                    e.preventDefault(); 
+                    e.preventDefault();
                     e.stopImmediatePropagation();
                 }
             }
@@ -67,78 +65,99 @@ document.addEventListener('DOMContentLoaded', function () {
             activeContainer = null;
         }
 
+        // Movimento del mouse
         function handlePointerMove(e) {
             if (!isPointerDown) return;
-            e.preventDefault(); // Impedisce la selezione di testo
-            
+            e.preventDefault();
             const dx = e.pageX - activeContainer.offsetLeft - startX;
             
-            // Verifica se il movimento è significativo per considerarlo "dragging"
+            // Inizia a considerare "drag" solo dopo una certa soglia di movimento
             if (Math.abs(dx) > DRAG_THRESHOLD) {
                 isDragging = true;
             }
 
             if (isDragging) {
-                 // Sposta il contenitore orizzontalmente
                 activeContainer.scrollLeft = scrollLeft - dx;
             }
         }
-        
-        // Rimuove i drag event dai link (per prevenire bug)
+
+        // Evita che il click su link interferisca col drag
         function preventDragOnLinks(container) {
-            container.querySelectorAll('a, button').forEach(el => {
+            container.querySelectorAll('a, button, .prevent-drag').forEach(el => {
                 el.addEventListener('pointerdown', (e) => e.stopPropagation());
             });
         }
 
-
-        /* ===========================
-           Logica di Inizializzazione
-           =========================== */
-        
+        /* ==========================================================================
+           SEZIONE 2: Inizializzazione e Listener
+           Descrizione: Attiva la logica di drag sui container corretti all'avvio
+           e quando vengono aperti gli accordion.
+           ========================================================================== */
         const accordion = document.getElementById('calendarAccordion');
-        
+
         if (accordion) {
-             // 1. Inizializzazione per il contenitore drag-scroll quando si apre un accordion
+            // Quando si apre una fila, inizializza il drag su quella specifica tabella
             accordion.addEventListener('shown.bs.collapse', function (event) {
                 const collapseBody = event.target;
                 const calendarContainer = collapseBody.querySelector('.drag-scroll');
-                
+
                 if (calendarContainer) {
-                    // Aggiunge la logica di drag and scroll
                     setupDragScroll(calendarContainer);
-                    // Rimuove il drag sui link
                     preventDragOnLinks(calendarContainer);
-                    // Centra la data odierna
                     centerToday(calendarContainer);
                 }
             });
-            
-            // 2. Setup iniziale e centratura per i contenitori inizialmente visibili (la prima fila)
+
+            // Inizializza le file già aperte al caricamento pagina
             document.querySelectorAll('#calendarAccordion .accordion-collapse.show .drag-scroll').forEach(container => {
                 setupDragScroll(container);
                 preventDragOnLinks(container);
-                // Centra 'oggi' solo dopo che l'elemento è visibile e pronto
                 centerToday(container);
-                // Riprova a centrare 'oggi' al resize della finestra
                 window.addEventListener('resize', () => centerToday(container));
             });
         }
         
-        // Inizializzazione Tooltip di Bootstrap
-        // Questo è necessario per il tooltip che hai aggiunto nella navbar
+        // Attivazione Tooltip di Bootstrap
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
-        
-    } // fine initCalendarDragModule
-    
-    /* ===========================
-       Inizializzazione moduli
-       =========================== */
+    }
+
+    // Avvia il modulo calendario
     initCalendarDragModule();
 
 
+    /* ==========================================================================
+       SEZIONE 3: Utility Interfaccia Utente
+       Descrizione: Funzioni accessorie per migliorare la UX (es. saluto orario).
+       ========================================================================== */
+    function getSalutoDelGiorno() {
+        const ora = new Date().getHours();
+        if (ora >= 5 && ora < 13) return "Buongiorno";
+        else if (ora >= 13 && ora < 18) return "Buon pomeriggio";
+        else return "Buonasera";
+    }
 
+    const elementoSaluto = document.getElementById('saluto-dinamico');
+    if (elementoSaluto) {
+        elementoSaluto.textContent = getSalutoDelGiorno();
+    }
 });
+
+/* ==========================================================================
+   SEZIONE 4: Helper Globali
+   Descrizione: Funzioni accessibili da attributi inline HTML (onclick).
+   ========================================================================== */
+
+/**
+ * Gestisce l'apertura dei link solo se il tasto CTRL (o Command) è premuto.
+ * Utile per distinguere tra "trascinamento calendario" e "apertura prenotazione".
+ */
+window.handleCtrlClick = function(event, url) {
+    if (event.ctrlKey || event.metaKey) {
+        window.location.href = url;
+    } else {
+        event.preventDefault();
+    }
+};
