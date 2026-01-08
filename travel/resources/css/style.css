@@ -1,0 +1,191 @@
+/* --- Stili Base --- */
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Personalizzazione Barra di Scorrimento */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* --- Classi Utility e Animazioni Generiche --- */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.02);
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.section-padding {
+    padding: 100px 0;
+}
+
+.overlay-gradient {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+}
+
+/* --- Effetti Parallax e Reveal --- */
+.parallax-section {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+/* Classi per l'apparizione degli elementi allo scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Componenti Specifici --- */
+
+/* Hero Section */
+.hero-title {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: -2px;
+}
+
+/* Card con effetto vetro (Glassmorphism) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Box Icone Moderno */
+.icon-box-modern {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #0d6efd 0%, #0099ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    transform: rotate(-5deg);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover .icon-box-modern {
+    transform: rotate(5deg) scale(1.1);
+}
+
+/* Card Viaggi (Hover Effect) */
+.hover-card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+.hover-card .card-img-top {
+    transition: transform 0.5s ease;
+}
+
+/* --- Keyframes e Animazioni Temporizzate --- */
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Nuovi Stili Estratti (Refactoring) --- */
+.hero-bg {
+    height: 100vh;
+    background-image: var(--hero-bg);
+}
+
+.hero-description {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.rotate-2 {
+    transform: rotate(2deg);
+}
+
+.rotate-n2 {
+    transform: rotate(-2deg);
+}
+
+.floating-review {
+    max-width: 250px;
+    transform: rotate(-2deg);
+}
+
+.stats-bg {
+    background-image: var(--stats-bg);
+}
+
+.divider-bg {
+    height: 60vh;
+    background-image: var(--divider-bg);
+}
+
+.journey-card-img-container {
+    height: 300px;
+}
+
+.btn-circle-lg {
+    width: 50px;
+    height: 50px;
+}
+
+.newsletter-bg {
+    height: 70vh;
+    background-image: var(--newsletter-bg);
+}
+
+.multiply-blend {
+    mix-blend-mode: multiply;
+}

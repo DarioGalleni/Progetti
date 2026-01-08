@@ -1,43 +1,57 @@
-<x-layout>
-	<!-- AOS CSS -->
-	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-
-    <!-- Hero Section -->
-    <section id="home" class="hero-section vh-100 d-flex align-items-center justify-content-center text-white text-center"
-        style="background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8)),url('{{ route('restaurant.image', ['filename' => 'home-section.jpg']) }}');
-            background-size: cover;
-            background-position: center;">
-        <div class="container">
-            <h1 class="hero-title" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="200">Autentica Cucina Italiana</h1>
-            <p class="hero-subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">Ingredienti freschi, sapori tradizionali, atmosfera accogliente</p>
+﻿<x-layout>
+    <!-- Sezione Hero con Parallax -->
+    <section id="home" class="hero-section parallax-section"
+        style="background-image: url('{{ route('restaurant.image', ['filename' => 'home-section.jpg']) }}');">
+        <div class="overlay"></div>
+        <div class="container content-wrapper text-center text-white">
+            <span class="d-block mb-3 text-uppercase letter-spacing-2" data-aos="fade-up"
+                style="color: var(--primary-color);">Benvenuti</span>
+            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">Ristorante Buongusto</h1>
+            <p class="hero-subtitle mb-5" data-aos="fade-up" data-aos-delay="200">
+                <span
+                    style="border-top: 1px solid var(--primary-color); border-bottom: 1px solid var(--primary-color); padding: 10px 0;">
+                    Eccellenza Italiana dal 1985
+                </span>
+            </p>
+            <a href="#reservation" class="btn btn-primary-custom" data-aos="fade-up" data-aos-delay="300">Prenota un
+                Tavolo</a>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-5 bg-white">
-        <div class="container py-5">
+    <!-- Sezione Chi Siamo -->
+    <section id="about" class="parallax-section py-5 d-flex align-items-center" 
+             style="background-image: url('{{ route('restaurant.image', ['filename' => 'about-bg.jpg']) }}'); min-height: 80vh;">
+        <div class="overlay"></div>
+        <div class="container content-wrapper py-5">
             <div class="row align-items-center">
-                {{-- 
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
-                        alt="Chef preparing food" class="about-video">
-                </div>  
-                --}}
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <video class="about-video autoplay-on-view" muted playsinline preload="metadata" loop
-						data-aos="fade-right" data-aos-duration="900" data-aos-delay="250">
-                        <source data-src="{{ route('restaurant.image', ['filename' => 'video.mp4']) }}" type="video/mp4">
-                    </video>
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                    <div class="video-container position-relative">
+                        <video class="w-100 d-block" autoplay muted loop playsinline style="border-radius: 16px;">
+                            <source src="{{ route('restaurant.image', ['filename' => 'video.mp4']) }}" type="video/mp4">
+                        </video>
+                        <div
+                            style="position: absolute; bottom: 20px; left: 20px; right: 20px; padding: 15px; background: rgba(0,0,0,0.7); border-radius: 8px;">
+                            <h5 class="mb-0 text-white serif-font">L'Arte della Preparazione</h5>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="900" data-aos-delay="350">
-                    <h2 class="section-title">La Nostra Storia</h2>
-                    <p class="mb-4">Fondato nel 1985, il Ristorante Buongusto porta avanti una tradizione culinaria che affonda le sue radici nella cucina italiana più autentica.</p>
-                    <p class="mb-5">Il nostro chef, Giovanni Rossi, con oltre 30 anni di esperienza, seleziona personalmente gli ingredienti più freschi dai produttori locali per garantire la massima qualità in ogni piatto.</p>
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-award contact-icon"></i>
+                <div class="col-lg-6 pl-lg-5" data-aos="fade-left">
+                    <span class="text-uppercase"
+                        style="color: var(--primary-color); letter-spacing: 1px; font-size: 0.9rem;">La Nostra
+                        Storia</span>
+                    <h2 class="section-title text-start text-white mb-4">Tradizione & Passione</h2>
+                    <p class="text-white mb-4 lead" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Ogni piatto racconta una storia di sapori autentici, tramandati di
+                        generazione in generazione e perfezionati con tecniche moderne.</p>
+                    <p class="text-light mb-5" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Il nostro chef, Giovanni Rossi, seleziona personalmente ogni
+                        ingrediente dai migliori produttori locali. Crediamo che la qualità della materia prima sia il
+                        vero segreto della cucina italiana.</p>
+
+                    <div class="d-flex align-items-center p-3"
+                        style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;">
+                        <i class="fas fa-award contact-icon fa-2x"></i>
                         <div>
-                            <h4 class="mb-1">Premio "Miglior Ristorante Italiano" 2022</h4>
-                            <p class="mb-0">Riconosciuto dalla Guida Gastronomica Italiana</p>
+                            <h5 class="mb-1 text-white">Premio "Miglior Ristorante Italiano" 2022</h5>
+                            <small class="text-muted">Guida Gastronomica Italiana</small>
                         </div>
                     </div>
                 </div>
@@ -45,283 +59,297 @@
         </div>
     </section>
 
-    <!-- Menu Section -->
-    <section id="menu" class="py-5 bg-light">
+    <!-- Sezione Menu -->
+    <section id="menu" class="py-5 bg-dark position-relative">
+        <!-- Overlay texture opzionale -->
         <div class="container py-5">
-            <div class="text-center mb-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="text-uppercase" style="color: var(--primary-color);">Scopri</span>
                 <h2 class="section-title">Il Nostro Menu</h2>
-                <p class="section-subtitle">Scopri i nostri piatti preparati con passione e ingredienti di prima qualità</p>
+                <div style="width: 60px; height: 2px; background: var(--primary-color); margin: 0 auto;"></div>
             </div>
+
             <div class="row">
                 <!-- Antipasti -->
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                    <div class="menu-item">
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card h-100 menu-item">
                         <div class="dish-category">
                             <h3>Antipasti</h3>
                         </div>
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled mt-4">
                             <li class="mb-4">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h4 class="dish-name mb-0">Bruschetta al Pomodoro</h4>
+                                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                    <h4 class="dish-name text-white mb-0">Bruschetta al Pomodoro</h4>
                                     <span class="dish-price">€8</span>
                                 </div>
-                                <p class="dish-description">Pane tostato con pomodori freschi, aglio e basilico</p>
+                                <p class="dish-description">Pane tostato, pomodori San Marzano, basilico fresco, olio
+                                    EVO.</p>
                             </li>
                             <li class="mb-4">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h4 class="dish-name mb-0">Antipasto Misto</h4>
+                                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                    <h4 class="dish-name text-white mb-0">Antipasto Misto</h4>
                                     <span class="dish-price">€14</span>
                                 </div>
-                                <p class="dish-description">Selezione di salumi, formaggi e verdure sott'olio</p>
+                                <p class="dish-description">Prosciutto di Parma 24 mesi, mozzarelline, verdure
+                                    grigliate.</p>
                             </li>
                             <li>
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h4 class="dish-name mb-0">Carpaccio di Manzo</h4>
+                                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                    <h4 class="dish-name text-white mb-0">Carpaccio di Manzo</h4>
                                     <span class="dish-price">€12</span>
                                 </div>
-                                <p class="dish-description">Fettine sottili di manzo con scaglie di parmigiano e rucola</p>
+                                <p class="dish-description">Manzo marinato, rucola selvatica, scaglie di Grana Padano.
+                                </p>
                             </li>
                         </ul>
                     </div>
                 </div>
+
                 <!-- Primi Piatti -->
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="350">
-                    <div class="menu-item">
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card h-100 menu-item">
                         <div class="dish-category">
                             <h3>Primi Piatti</h3>
                         </div>
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled mt-4">
                             <li class="mb-4">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h4 class="dish-name mb-0">Spaghetti Carbonara</h4>
+                                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                    <h4 class="dish-name text-white mb-0">Spaghetti Carbonara</h4>
                                     <span class="dish-price">€12</span>
                                 </div>
-                                <p class="dish-description">Con uova, guanciale, pecorino e pepe nero</p>
+                                <p class="dish-description">Guanciale croccante, tuorlo d'uovo bio, Pecorino Romano,
+                                    pepe nero.</p>
                             </li>
                             <li class="mb-4">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h4 class="dish-name mb-0">Risotto ai Funghi Porcini</h4>
+                                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                    <h4 class="dish-name text-white mb-0">Risotto ai Porcini</h4>
                                     <span class="dish-price">€14</span>
                                 </div>
-                                <p class="dish-description">Risotto cremoso con funghi porcini freschi</p>
-                            </li>
-                            <li class="mb-4">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h4 class="dish-name mb-0">Lasagna alla Bolognese</h4>
-                                    <span class="dish-price">€13</span>
-                                </div>
-                                <p class="dish-description">Pasta fresca con ragù di carne e besciamella</p>
+                                <p class="dish-description">Riso Carnaroli, porcini freschi trifolati, mantecatura al
+                                    burro.</p>
                             </li>
                             <li>
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h4 class="dish-name mb-0">Gnocchi al Pesto</h4>
+                                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                    <h4 class="dish-name text-white mb-0">Gnocchi al Pesto</h4>
                                     <span class="dish-price">€11</span>
                                 </div>
-                                <p class="dish-description">Gnocchi fatti in casa con pesto genovese</p>
+                                <p class="dish-description">Gnocchi di patate fatti a mano, pesto genovese autentico.
+                                </p>
                             </li>
                         </ul>
                     </div>
                 </div>
+
                 <!-- Secondi Piatti -->
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
-                    <div class="menu-item">
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card h-100 menu-item">
                         <div class="dish-category">
                             <h3>Secondi Piatti</h3>
                         </div>
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled mt-4">
                             <li class="mb-4">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h4 class="dish-name mb-0">Filetto di Manzo</h4>
+                                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                    <h4 class="dish-name text-white mb-0">Filetto di Manzo</h4>
                                     <span class="dish-price">€22</span>
                                 </div>
-                                <p class="dish-description">Con riduzione di vino rosso e patate al forno</p>
+                                <p class="dish-description">Filetto alla griglia, riduzione al Chianti, patate novelle.
+                                </p>
                             </li>
                             <li class="mb-4">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h4 class="dish-name mb-0">Branzino al Cartoccio</h4>
+                                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                    <h4 class="dish-name text-white mb-0">Branzino al Cartoccio</h4>
                                     <span class="dish-price">€18</span>
                                 </div>
-                                <p class="dish-description">Con verdure di stagione e erbe aromatiche</p>
+                                <p class="dish-description">Filetto di branzino, pomodorini, olive taggiasche, capperi.
+                                </p>
                             </li>
                             <li>
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h4 class="dish-name mb-0">Pollo alla Cacciatora</h4>
+                                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                    <h4 class="dish-name text-white mb-0">Pollo alla Cacciatora</h4>
                                     <span class="dish-price">€16</span>
                                 </div>
-                                <p class="dish-description">Pollo cotto con pomodoro, olive e rosmarino</p>
+                                <p class="dish-description">Pollo ruspante stufato, salsa di pomodoro, aromi dell'orto.
+                                </p>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-4">
-                <a href="{{ asset('menu.pdf') }}" class="btn btn-primary-custom" download>Scarica il Menu Completo (PDF)</a>
+
+            <div class="text-center mt-5" data-aos="fade-in">
+                <a href="{{ asset('menu.pdf') }}" class="btn btn-primary-custom px-5" download>
+                    <i class="fas fa-file-pdf me-2"></i> Scarica Menu Completo
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="py-5 bg-white container-fluid">
-        <div class="py-5">
-            <div class="text-center mb-5">
-                <h2 class="section-title">Cosa Dicono i Nostri Clienti</h2>
-                <p class="section-subtitle">Le esperienze dei nostri ospiti</p>
-            </div>
-            <div class="testimonial-slider container-fluid">
-                <div class="row testimonial-track">
-                    @foreach ($testimonials as $testimonial)
-                        <div class="col-md-4 mb-4 testimonial-slide" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
-                            <x-card 
-                                :stars="$testimonial['stars']"
-                                :text="$testimonial['text']"
-                                :author-img="$testimonial['authorImg']"
-                                :author-name="$testimonial['authorName']"
-                                :source="$testimonial['source']"
-                            />
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+    <!-- Sezione Break Parallax -->
+    <section class="parallax-section d-flex align-items-center justify-content-center"
+        style="height: 400px; background-image: url('{{ route('restaurant.image', ['filename' => 'home-section.jpg']) }}');">
+        <!-- Usiamo la stessa immagine o un'altra se disponibile -->
+        <div class="overlay"></div>
+        <div class="container content-wrapper text-center">
+            <h2 class="text-white display-4 serif-font mb-4" data-aos="zoom-in">Un'Esperienza Unica</h2>
+            <p class="lead text-white-50">Dove il gusto incontra l'eleganza.</p>
         </div>
     </section>
 
-    <!-- Contact & Reservation Section -->
-    <section id="contact" class="contact-section">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Contact -->
-                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-duration="900" data-aos-delay="200">
-                    <h2 class="section-title text-white mb-4">Contattaci</h2>
-                    <p class="mb-5">Siamo aperti dal martedì alla domenica, dalle 12:00 alle 15:00 e dalle 19:00 alle 23:00.</p>
-                    <div class="contact-info">
+    <!-- Sezione Contatti & Prenotazioni -->
+    <section id="contact" class="py-5" style="background-color: #0F0F0F;">
+        <div class="container py-5">
+            <div class="row g-5">
+                <!-- Info Contatti -->
+                <div class="col-lg-5" data-aos="fade-right">
+                    <span class="text-uppercase" style="color: var(--primary-color);">Informazioni</span>
+                    <h2 class="section-title text-start text-white mb-4">Vieni a Trovarci</h2>
+                    <p class="text-muted mb-5">Siamo aperti dal martedÃ¬ alla domenica. Prenota il tuo tavolo per
+                        assicurarti un posto nella nostra sala.</p>
+
+                    <div class="contact-card p-4 mb-4" style="background: rgba(255,255,255,0.03); border-radius: 12px;">
                         <div class="d-flex mb-4">
-                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <i class="fas fa-clock contact-icon mt-1"></i>
                             <div>
-                                <h4 class="mb-1">Indirizzo</h4>
-                                <p class="mb-0">Piazza Augusto Albini, 10, 00154 Roma</p>
+                                <h5 class="text-white mb-2">Orari di Apertura</h5>
+                                <p class="text-muted mb-0">Pranzo: 12:00 - 15:00</p>
+                                <p class="text-muted mb-0">Cena: 19:00 - 23:00</p>
+                                <small class="text-danger mt-1 d-block">Chiuso il LunedÃ¬</small>
                             </div>
                         </div>
                         <div class="d-flex mb-4">
-                            <i class="fas fa-phone-alt contact-icon"></i>
+                            <i class="fas fa-map-marker-alt contact-icon mt-1"></i>
                             <div>
-                                <h4 class="mb-1">Telefono</h4>
-                                <p class="mb-0">+39 06 1234567</p>
+                                <h5 class="text-white mb-2">Dove Siamo</h5>
+                                <p class="text-muted mb-0">Piazza Augusto Albini, 10</p>
+                                <p class="text-muted mb-0">00154 Roma, Italia</p>
                             </div>
                         </div>
                         <div class="d-flex">
-                            <i class="fas fa-envelope contact-icon"></i>
+                            <i class="fas fa-phone-alt contact-icon mt-1"></i>
                             <div>
-                                <h4 class="mb-1">Email</h4>
-                                <p class="mb-0">info@ristorantebuongusto.it</p>
+                                <h5 class="text-white mb-2">Contatti</h5>
+                                <p class="text-muted mb-0">+39 06 1234567</p>
+                                <p class="text-muted mb-0">info@ristorantebuongusto.it</p>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <h4 class="mb-3">Seguici sui Social</h4>
-                        <div>
-                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        </div>
+
+                    <div class="social-links pt-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tripadvisor"></i></a>
                     </div>
                 </div>
-                <!-- Reservation -->
-                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="900" data-aos-delay="300">
-                    <h2 class="section-title text-white mb-4" id="reservation">Prenota un Tavolo</h2>
-                    <form action="{{ route('reservations.store') }}" method="POST">
-                        @csrf
-                        <div class="row mb-3">
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="name" class="form-label">Nome e Cognome</label>
-                                <input type="text" class="form-control form-control-custom" id="name" name="name" value="{{ old('name') }}" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="phone" class="form-label">Telefono</label>
-                                <input type="tel" class="form-control form-control-custom" id="phone" name="phone" value="{{ old('phone') }}" required>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control form-control-custom" id="email" name="email" value="{{ old('email') }}" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="people" class="form-label">Numero di persone</label>
-                                <select class="form-select form-control-custom" id="people" name="people" required>
-                                    @for ($i = 1; $i <= 20; $i++)
-                                        <option value="{{ $i }}" {{ old('people') == $i ? 'selected' : '' }}>{{ $i }} {{ $i == 1 ? 'persona' : 'persone' }}</option>
-                                    @endfor
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="date" class="form-label">Data</label>
-                                <input type="date" class="form-control form-control-custom" id="date" name="date" value="{{ old('date') }}" required min="{{ date('Y-m-d') }}">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="time" class="form-label">Ora</label>
-                                <select class="form-select form-control-custom" id="time" name="time" required>
-                                    <option value="" disabled {{ !old('time') ? 'selected' : '' }}>Seleziona un orario</option>
-                                    <optgroup label="Pranzo (12:00 - 13:45)">
-                                        @for ($h = 12; $h <= 13; $h++)
-                                            @for ($m = 0; $m < 60; $m += 15)
-                                                @php
-                                                    $timeValue = sprintf('%02d:%02d', $h, $m);
-                                                    $timeLimit = ($h == 13 && $m > 45);
-                                                @endphp
-                                                @if (!$timeLimit)
-                                                    <option value="{{ $timeValue }}" {{ old('time') == $timeValue ? 'selected' : '' }}>{{ $timeValue }}</option>
-                                                @endif
-                                            @endfor
+
+                <!-- Form Prenotazioni -->
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="glass-card h-100" id="reservation">
+                        <h2 class="serif-font text-white mb-4 text-center">Prenota il tuo Tavolo</h2>
+                        <form action="{{ route('reservations.store') }}" method="POST">
+                            @csrf
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Nome Completo</label>
+                                    <input type="text" class="form-control form-control-custom" id="name" name="name"
+                                        value="{{ old('name') }}" required placeholder="Mario Rossi">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Telefono</label>
+                                    <input type="tel" class="form-control form-control-custom" id="phone" name="phone"
+                                        value="{{ old('phone') }}" required placeholder="+39 ...">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control form-control-custom" id="email" name="email"
+                                        value="{{ old('email') }}" required placeholder="email@esempio.com">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="people" class="form-label">Ospiti</label>
+                                    <select class="form-select form-control-custom" id="people" name="people" required>
+                                        @for ($i = 1; $i <= 20; $i++)
+                                            <option value="{{ $i }}" {{ old('people') == $i ? 'selected' : '' }}>{{ $i }}
+                                                {{ $i == 1 ? 'persona' : 'persone' }}</option>
                                         @endfor
-                                    </optgroup>
-                                    <optgroup label="Cena (19:30 - 22:00)">
-                                        @for ($h = 19; $h <= 22; $h++)
-                                            @for ($m = 0; $m < 60; $m += 15)
-                                                @php
-                                                    $timeValue = sprintf('%02d:%02d', $h, $m);
-                                                    $tooEarly = ($h == 19 && $m < 30);
-                                                    $tooLate = ($h == 22 && $m > 0);
-                                                @endphp
-                                                @if (!$tooEarly && !$tooLate)
-                                                    <option value="{{ $timeValue }}" {{ old('time') == $timeValue ? 'selected' : '' }}>{{ $timeValue }}</option>
-                                                @endif
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="date" class="form-label">Data</label>
+                                    <input type="date" class="form-control form-control-custom" id="date" name="date"
+                                        value="{{ old('date') }}" required min="{{ date('Y-m-d') }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="time" class="form-label">Orario</label>
+                                    <select class="form-select form-control-custom" id="time" name="time" required>
+                                        <option value="" disabled {{ !old('time') ? 'selected' : '' }}>Seleziona orario
+                                        </option>
+                                        <optgroup label="Pranzo (12:00 - 13:45)">
+                                            @for ($h = 12; $h <= 13; $h++)
+                                                @for ($m = 0; $m < 60; $m += 15)
+                                                    @php
+                                                        $timeValue = sprintf('%02d:%02d', $h, $m);
+                                                        $timeLimit = ($h == 13 && $m > 45);
+                                                    @endphp
+                                                    @if (!$timeLimit)
+                                                        <option value="{{ $timeValue }}" {{ old('time') == $timeValue ? 'selected' : '' }}>{{ $timeValue }}</option>
+                                                    @endif
+                                                @endfor
                                             @endfor
-                                        @endfor
-                                        <option value="22:00" {{ old('time') == '22:00' ? 'selected' : '' }}>22:00</option>
-                                    </optgroup>
-                                </select>
+                                        </optgroup>
+                                        <optgroup label="Cena (19:30 - 22:00)">
+                                            @for ($h = 19; $h <= 22; $h++)
+                                                @for ($m = 0; $m < 60; $m += 15)
+                                                    @php
+                                                        $timeValue = sprintf('%02d:%02d', $h, $m);
+                                                        $tooEarly = ($h == 19 && $m < 30);
+                                                        $tooLate = ($h == 22 && $m > 0);
+                                                    @endphp
+                                                    @if (!$tooEarly && !$tooLate)
+                                                        <option value="{{ $timeValue }}" {{ old('time') == $timeValue ? 'selected' : '' }}>{{ $timeValue }}</option>
+                                                    @endif
+                                                @endfor
+                                            @endfor
+                                            <option value="22:00" {{ old('time') == '22:00' ? 'selected' : '' }}>22:00
+                                            </option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="notes" class="form-label">Richieste Speciali</label>
+                                    <textarea class="form-control form-control-custom" id="notes" name="notes" rows="2"
+                                        placeholder="Allergie, tavolo preferito, ecc.">{{ old('notes') }}</textarea>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-primary-custom w-100 py-3 fw-bold">Conferma
+                                        Prenotazione</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mb-4">
-                            <label for="notes" class="form-label">Note aggiuntive</label>
-                            <textarea class="form-control form-control-custom" id="notes" name="notes" rows="3">{{ old('notes') }}</textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary-custom w-100">Prenota Ora</button>
-                    </form>
-                    @if ($errors->any())
-                        <div class="alert alert-danger mt-3">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                        </form>
+                        @if ($errors->any())
+                            <div class="alert alert-danger mt-3"
+                                style="background-color: rgba(220, 53, 69, 0.2); border-color: #dc3545; color: #ff8b94;">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Map -->
-    <div class="map-container" style="height: 400px;" data-aos="fade-up" data-aos-duration="900" data-aos-delay="300">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2971.3051977017053!2d12.482395075787636!3d41.86477966624845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a7e1448600f%3A0x4a1ae9829749f019!2sPiazza%20Augusto%20Albini%2C%2010%2C%2000154%20Roma%20RM!5e0!3m2!1sit!2sit!4v1756108690673!5m2!1sit!2sit" 
+    <!-- Mappa Full Width -->
+    <div class="map-container" style="height: 450px; filter: grayscale(100%) invert(90%);" data-aos="fade-in">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2971.3051977017053!2d12.482395075787636!3d41.86477966624845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a7e1448600f%3A0x4a1ae9829749f019!2sPiazza%20Augusto%20Albini%2C%2010%2C%2000154%20Roma%20RM!5e0!3m2!1sit!2sit!4v1756108690673!5m2!1sit!2sit"
             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
-    
-    <x-footer/>
 
-    <!-- JSON-LD Schema per i motori di ricerca -->
+    <x-footer />
+
+    <!-- JSON-LD Schema (Invariato per SEO) -->
     <script type="application/ld+json">
     {
         "@@context": "https://schema.org",
@@ -333,7 +361,7 @@
         "email": "info@ristorantebuongusto.it",
         "priceRange": "€€-€€€",
         "servesCuisine": "Italiana",
-        "description": "Fondato nel 1985, il Ristorante Buongusto porta avanti una tradizione culinaria che affonda le sue radici nella cucina italiana più autentica.",
+        "description": "Fondato nel 1985, il Ristorante Buongusto porta avanti una tradizione culinaria più autentica.",
         "address": {
             "@@type": "PostalAddress",
             "streetAddress": "Piazza Augusto Albini, 10",
@@ -361,81 +389,20 @@
             }
         ],
         "menu": "{{ url('/menu') }}",
-        "hasMenu": {
-            "@@type": "Menu",
-            "hasMenuSection": [
-                {
-                    "@@type": "MenuSection",
-                    "name": "Antipasti",
-                    "hasMenuItem": [
-                        {
-                            "@@type": "MenuItem",
-                            "name": "Bruschetta al Pomodoro",
-                            "description": "Pane tostato con pomodori freschi, aglio e basilico",
-                            "offers": {
-                                "@@type": "Offer",
-                                "price": "8.00",
-                                "priceCurrency": "EUR"
-                            }
-                        },
-                        {
-                            "@@type": "MenuItem",
-                            "name": "Antipasto Misto",
-                            "description": "Selezione di salumi, formaggi e verdure sott'olio",
-                            "offers": {
-                                "@@type": "Offer",
-                                "price": "14.00",
-                                "priceCurrency": "EUR"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "@@type": "MenuSection",
-                    "name": "Primi Piatti",
-                    "hasMenuItem": [
-                        {
-                            "@@type": "MenuItem",
-                            "name": "Spaghetti Carbonara",
-                            "description": "Con uova, guanciale, pecorino e pepe nero",
-                            "offers": {
-                                "@@type": "Offer",
-                                "price": "12.00",
-                                "priceCurrency": "EUR"
-                            }
-                        },
-                        {
-                            "@@type": "MenuItem",
-                            "name": "Risotto ai Funghi Porcini",
-                            "description": "Risotto cremoso con funghi porcini freschi",
-                            "offers": {
-                                "@@type": "Offer",
-                                "price": "14.00",
-                                "priceCurrency": "EUR"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
-        "award": "Premio 'Miglior Ristorante Italiano' 2022 - Riconosciuto dalla Guida Gastronomica Italiana",
-        "aggregateRating": {
-            "@@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "reviewCount": "450"
-        }
+        "award": "Premio 'Miglior Ristorante Italiano' 2022"
     }
     </script>
 
-    <!-- AOS JS e inizializzazione -->
+    <!-- Script AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof AOS !== 'undefined') {
                 AOS.init({
-                    duration: 800,
+                    duration: 1000,
                     once: true,
-                    offset: 100
+                    offset: 50,
+                    easing: 'ease-in-out'
                 });
             }
         });

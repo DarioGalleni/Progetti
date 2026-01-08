@@ -1,0 +1,205 @@
+ :root {
+            --primary-color: #c8a97e;
+            --dark-bg: #111111;
+            --light-text: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background-color: #0a0a0a; /* Sfondo generale scuro per maggior contrasto */
+            color: #eee;
+        }
+
+        h1, h2, h3, h4, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Parallax Classes */
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+            z-index: 2;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Hero Specifics */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Glassmorphism Components */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* Menu Items */
+        .menu-item {
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+        .dish-category h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid rgba(200, 169, 126, 0.3);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .dish-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .dish-price {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .dish-description {
+            font-size: 0.9rem;
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* Form Styling */
+        .form-control-custom {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+        }
+        .form-control-custom:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(200, 169, 126, 0.25);
+            color: #fff;
+        }
+        .form-label {
+            color: #ddd;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Custom Select Color fix for options */
+        select.form-control-custom option {
+            background-color: #222;
+            color: #fff;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 1rem 2rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #fff;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            background-color: #b09268;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(200, 169, 126, 0.4);
+            color: #fff;
+        }
+
+        /* Chef/Video Section */
+        .video-container {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
+            height: 100%;
+        }
+        
+        /* Footer/Contacts */
+        .contact-icon {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 30px;
+            text-align: center;
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: #fff;
+            transition: 0.3s;
+        }
+        .social-icon:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
