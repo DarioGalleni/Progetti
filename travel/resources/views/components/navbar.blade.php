@@ -19,49 +19,15 @@
                         href="{{ route('journeys.index') }}">Viaggi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-primary rounded-pill px-4 ms-2 {{ Request::routeIs('journeys.create') ? 'active' : '' }}"
-                        href="{{ route('journeys.create') }}"><i class="bi bi-plus-lg"></i> Nuovo</a>
+                    <a class="nav-link fs-5 mx-2 {{ Request::routeIs('journeys.create') ? 'active' : '' }}"
+                        href="{{ route('journeys.create') }}">Nuovo</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<style>
-    /* Custom Navbar Styling */
-    .navbar {
-        transition: background-color 0.3s ease, padding 0.3s ease;
-        padding: 1.5rem 0;
-    }
 
-    .navbar.scrolled {
-        background-color: rgba(0, 0, 0, 0.9) !important;
-        backdrop-filter: blur(10px);
-        padding: 0.8rem 0;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-
-    .nav-link {
-        position: relative;
-        font-weight: 500;
-    }
-
-    .nav-link::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background-color: #0d6efd;
-        transition: width 0.3s ease;
-    }
-
-    .nav-link:hover::after,
-    .nav-link.active::after {
-        width: 100%;
-    }
-</style>
 
 <script>
     window.addEventListener('scroll', function () {

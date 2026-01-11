@@ -106,7 +106,7 @@ class JourneyController extends Controller
 
         $journey->update($validated);
 
-        return redirect()->route('journeys.index')->with('success', 'Viaggio aggiornato con successo!');
+        return redirect()->route('journeys.index')->with('success', 'Viaggio modificato con successo!');
     }
 
     /**
@@ -114,10 +114,17 @@ class JourneyController extends Controller
      */
     public function destroy(Journey $journey)
     {
+        // Elimina le immagini associate dallo storage
+        foreach ($journey->images as $image) {
+            \Illuminate\Support\Facades\Storage::disk('s3')->delete($image->path);
+            $image->delete();
+        }
+
         $journey->delete();
 
         return redirect()->route('journeys.index')->with('success', 'Viaggio eliminato con successo!');
     }
+
     /**
      * Mostra la galleria fotografica del viaggio.
      */

@@ -9,6 +9,30 @@
             </div>
         </div>
 
+        @if (session('success'))
+            <div id="success-alert"
+                class="alert alert-success border-0 bg-success-subtle text-success rounded-3 mb-5 d-flex align-items-center animate-bounce justify-content-center">
+                <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                <div>
+                    <h6 class="fw-bold mb-0">Operazione completata!</h6>
+                    <p class="mb-0 small">{{ session('success') }}</p>
+                </div>
+            </div>
+        @endif
+
+        <script>
+            setTimeout(function() {
+                var alert = document.getElementById('success-alert');
+                if (alert) {
+                    alert.style.transition = 'opacity 0.5s ease';
+                    alert.style.opacity = '0';
+                    setTimeout(function() {
+                        alert.remove();
+                    }, 500);
+                }
+            }, 5000);
+        </script>
+
         <div class="row g-4">
             @foreach($journeys as $journey)
                 <div class="col-md-6 col-lg-4 animate-fade-in-up delay-2">

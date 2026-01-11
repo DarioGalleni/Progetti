@@ -41,7 +41,7 @@
             <div class="col-md-7 col-lg-8">
                 <p class="text-white-50">
                     Copyright © {{ date('Y') }} Tutti i diritti riservati da: 
-                    <a href="#" class="text-primary text-decoration-none fw-bold">StartJourney Ltd</a>
+                    <a href="https://www.dariux87.it" class="text-primary text-decoration-none fw-bold" target="_blank">Dariux87.it</a>
                 </p>
             </div>
             <div class="col-md-5 col-lg-4 text-md-end text-white-50">

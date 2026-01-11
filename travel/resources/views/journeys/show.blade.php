@@ -21,12 +21,25 @@
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="h3 fw-bold mb-0 text-primary">Descrizione del Viaggio</h2>
                         @if($journey->images->count() > 0)
-                            <a href="{{ route('journeys.gallery', $journey) }}" class="btn btn-outline-primary rounded-pill px-4 fw-bold hover-scale">
-                                <i class="bi bi-images me-2"></i> Galleria Foto
+                            <a href="{{ route('journeys.gallery', $journey) }}"
+                                class="btn btn-outline-primary rounded-pill px-4 fw-bold hover-scale me-2">
+                                <i class="bi bi-images me-2"></i> Galleria
                             </a>
                         @endif
+                        <a href="{{ route('journeys.edit', $journey) }}"
+                            class="btn btn-outline-secondary rounded-pill px-4 fw-bold hover-scale me-2">
+                            <i class="bi bi-pencil me-2"></i> Modifica
+                        </a>
+                        <form action="{{ route('journeys.destroy', $journey) }}" method="POST" class="d-inline"
+                            onsubmit="return confirm('Sei sicuro di voler eliminare questo viaggio?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-outline-danger rounded-pill px-4 fw-bold hover-scale">
+                                <i class="bi bi-trash me-2"></i> Elimina
+                            </button>
+                        </form>
                     </div>
-                    
+
                     <p class="lead text-muted" style="text-align: justify; line-height: 1.8;">
                         {{ $journey->description }}
                     </p>
