@@ -1,36 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Verifica di Sicurezza</title>
+    <meta name="description" content="Semplice verifica matematica di sicurezza">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <p id="demo">Quanto fa <span id="num1"></span>+<span id="num2"></span></p> 
-    <input type="text" id="input" value=""> 
-    <button id="button" type="button">Invia</button>
 
-    <script>
-        let button = document.getElementById("button");
-        let num1 = document.getElementById("num1");
-        let a = Math.floor(Math.random() * 10);
-        num1.innerHTML = a;
+    <main class="card">
+        <h1>Controllo Sicurezza</h1>
+        <p class="description">Per favore, completa la seguente operazione per verificare che sei umano.</p>
 
-        let num2 = document.getElementById("num2");
-        let b = Math.floor(Math.random() * 10);
-        num2.innerHTML = b;
+        <section class="captcha-box" aria-label="Area del Captcha">
+            <div class="equation">
+                <span id="num1">0</span>
+                <span>+</span>
+                <span id="num2">0</span>
+                <span>=</span>
+                <span>?</span>
+            </div>
 
-        button.addEventListener("click", function() {
-            let input = document.getElementById("input").value;
-            input = Number(input)
-            if (a + b === input) {
-                alert("Risposta corretta");
-            } else {
-                alert("Risposta sbagliata");
-            }
-        });
+            <div class="input-container">
+                <input type="number" id="input" placeholder="Inserisci il totale" aria-label="Risultato della somma">
+            </div>
+        </section>
 
-        // ciao
-    </script>
+        <button id="button" class="btn" type="button">
+            Verifica
+        </button>
+
+        <div id="message" class="message" role="alert" aria-live="polite"></div>
+    </main>
+
+    <script src="script.js"></script>
 </body>
+
 </html>

@@ -23,16 +23,23 @@ class CustomerExpenseController extends Controller
             'expenses.*.amount' => 'nullable|numeric|min:0',
         ]);
 
-        $customer->expenses()->delete();
+        // $customer->expenses()->delete(); // Removed to allow adding to existing expenses
 
         if (!empty($data['expenses'])) {
             foreach ($data['expenses'] as $type => $item) {
                 $amount = $item['amount'] ?? 0;
                 if ($amount > 0) {
-                    $customer->expenses()->create([
-                        'expense_type' => $type,
-                        'amount' => $amount,
-                    ]);
+                    $existingExpense = $customer->expenses()->where('expense_type', $type)->first();
+
+                    if ($existingExpense) {
+                        $existingExpense->amount += $amount;
+                        $existingExpense->save();
+                    } else {
+                        $customer->expenses()->create([
+                            'expense_type' => $type,
+                            'amount' => $amount,
+                        ]);
+                    }
                 }
             }
         }

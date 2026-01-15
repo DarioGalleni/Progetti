@@ -21,6 +21,9 @@ Route::delete('modify-reservation/{token}', [ReservationController::class, 'canc
 Route::get('reservations/find', [ReservationController::class, 'find'])->name('reservations.find');
 Route::post('reservations/search', [ReservationController::class, 'search'])->name('reservations.search');
 
+//Rotta per offline
+Route::view('/offline', 'offline');
+
 //! Rotta per servire le immagini del ristorante
 Route::get('/restaurant_images/{filename}', function ($filename) {
     // Costruisce il percorso completo dell'immagine, tenendo conto delle sottocartelle

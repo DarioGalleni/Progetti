@@ -150,3 +150,41 @@ html, body {
     text-decoration: none;
     color: #25d366;
 }
+
+/* ==========================================================================
+   SEZIONE 5: Modale Info & Qualità (Glassmorphism & Premium UI)
+   Descrizione: Stili per il modale informativo di benvenuto.
+   ========================================================================== */
+
+/* Effetto vetro per il modale */
+.glass-modal {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+}
+
+/* Colori e background specifici per sezione Info Utente */
+.bg-light-info {
+    background-color: rgba(13, 202, 240, 0.05); /* Bootstrap Info ma molto leggero */
+}
+.border-info-subtle {
+    border-color: rgba(13, 202, 240, 0.2);
+}
+
+/* Effetto hover card qualità */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Tipografia modale */
+.modal-title {
+    font-family: 'Poppins', sans-serif; /* Assicurarsi che il font sia caricato, o usa default */
+    letter-spacing: -0.5px;
+}

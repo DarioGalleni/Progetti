@@ -3,183 +3,181 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class CustomerController extends Controller
 {
-    protected function rules($customerId = null): array
+    /**
+     * Display the welcome calendar.
+     */
+    public function welcome(Request $request)
     {
-        $uniqueEmail = 'unique:customers,email' . ($customerId ? ",$customerId" : '');
+        $selectedMonth = $request->input('month')
+            ? Carbon::parse($request->input('month'))
+            : Carbon::now();
 
-        return [
-            'first_name'       => 'required|string|max:255',
-            'last_name'        => 'required|string|max:255',
-            'room'             => 'required|integer',
-            'arrival_date'     => 'required|date',
-            'departure_date'   => 'required|date|after:arrival_date',
-            'treatment'        => 'required|in:BB,HB',
-            'phone'            => 'nullable|string|max:20',
-            'email'            => "required|email|$uniqueEmail",
-            'number_of_people' => 'required|integer|min:1',
-            'total_stay_cost'  => 'required|numeric|min:1',
-            'down_payment'     => 'numeric',
-        ];
-    }
+        $customers = Customer::all();
 
-    protected function isRoomAvailable(int $room, string $arrival, string $departure, int $excludeId = null): bool
-    {
-        $query = Customer::where('room', $room)
-            ->where(function ($q) use ($arrival, $departure) {
-                $q->where('arrival_date', '<', $departure)
-                    ->where('departure_date', '>', $arrival);
-            });
-
-        if ($excludeId) {
-            $query->where('id', '!=', $excludeId);
-        }
-
-        return !$query->exists();
+        return view('welcome', compact('customers', 'selectedMonth'));
     }
 
     /**
-     * Controlla errori sulle date di prenotazione.
+     * Display a listing of the resource.
      */
-    protected function bookingDateErrors(array $data, bool $isUpdate = false): array
-    {
-        $errors = [];
-        $today = Carbon::today();
-        $tomorrow = Carbon::tomorrow();
-        $currentYear = $today->year;
-
-        $arrival = Carbon::parse($data['arrival_date']);
-        $departure = Carbon::parse($data['departure_date']);
-
-        // Solo in creazione blocca arrivi prima di oggi
-        if (!$isUpdate && $arrival->lt($today)) {
-            $errors['arrival_date'] = 'La data di arrivo non può essere antecedente alla data odierna.';
-        }
-
-        // Solo in creazione la partenza deve essere almeno domani, in modifica può essere anche oggi
-        if (!$isUpdate && $departure->lt($tomorrow)) {
-            $errors['departure_date'] = 'La data di partenza deve essere almeno il giorno successivo.';
-        }
-        if ($isUpdate && $departure->lt($today)) {
-            $errors['departure_date'] = 'La data di partenza non può essere antecedente alla data odierna.';
-        }
-
-        if ($arrival->year !== $currentYear || $departure->year !== $currentYear) {
-            $errors['year'] = "Le prenotazioni sono consentite solo per l'anno corrente ({$currentYear}).";
-        }
-
-        return $errors;
-    }
-
     public function index()
     {
-        $customers = Customer::all();
-        return view('welcome', compact('customers'));
+        $customers = Customer::latest()->paginate(10);
+        return view('customers.index', compact('customers'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         return view('customers.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $data = $request->validate($this->rules());
+        $request->merge([
+            'is_booking' => $request->has('is_booking'),
+            'is_cash_payment' => $request->has('is_cash_payment'),
+        ]);
 
-        $dateErrors = $this->bookingDateErrors($data);
-        if (!empty($dateErrors)) {
-            return back()->withErrors($dateErrors)->withInput();
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'room' => 'required|integer',
+            'arrival_date' => 'required|date|after_or_equal:today',
+            'departure_date' => 'required|date|after:arrival_date|after_or_equal:tomorrow',
+            'treatment' => 'required|in:BB,HB',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'number_of_people' => 'nullable|integer|min:1',
+            'total_stay_cost' => 'required|numeric|min:0',
+            'down_payment' => 'nullable|numeric|min:0',
+            'additional_notes' => 'nullable|string',
+            'is_booking' => 'nullable|boolean',
+            'is_cash_payment' => 'nullable|boolean',
+        ]);
+
+        // Check for availability
+        $exists = Customer::where('room', $request->room)
+            ->where('arrival_date', '<', $request->departure_date)
+            ->where('departure_date', '>', $request->arrival_date)
+            ->exists();
+
+        if ($exists) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'room' => "La camera {$request->room} è già occupata in questo periodo.",
+            ]);
         }
 
-        if (!$this->isRoomAvailable($data['room'], $data['arrival_date'], $data['departure_date'])) {
-            return back()
-                ->withErrors(['room' => 'La camera selezionata è già occupata per il periodo richiesto.'])
-                ->withInput();
-        }
+        Customer::create($validated);
 
-        Customer::create($data);
-
-        return redirect()->route('welcome')->with('success', 'Cliente creato con successo!');
+        return redirect()->route('welcome')->with('success', 'Cliente aggiunto con successo!');
     }
 
-    public function search(Request $request)
-    {
-        $query = trim($request->input('query', ''));
-
-        if ($query === '') {
-            return redirect()->route('welcome')->with('error', 'Inserisci un termine di ricerca.');
-        }
-
-        $customers = Customer::where('first_name', 'LIKE', "%{$query}%")
-            ->orWhere('last_name', 'LIKE', "%{$query}%")
-            ->orWhere('phone', 'LIKE', "%{$query}%")
-            ->orWhere('email', 'LIKE', "%{$query}%")
-            ->get();
-
-        return view('customers.index', ['customers' => $customers, 'query' => $query]);
-    }
-
+    /**
+     * Display the specified resource.
+     */
     public function show(Customer $customer)
     {
         return view('customers.show', compact('customer'));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(Customer $customer)
     {
         return view('customers.edit', compact('customer'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, Customer $customer)
     {
-        $data = $request->validate($this->rules($customer->id));
+        $request->merge([
+            'is_booking' => $request->has('is_booking'),
+            'is_cash_payment' => $request->has('is_cash_payment'),
+        ]);
 
-        // Passa true per consentire arrivo antecedente ad oggi in modifica
-        $dateErrors = $this->bookingDateErrors($data, true);
-        if (!empty($dateErrors)) {
-            return back()->withErrors($dateErrors)->withInput();
-        }
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'room' => 'required|integer',
+            'arrival_date' => 'required|date|after_or_equal:today',
+            'departure_date' => 'required|date|after:arrival_date|after_or_equal:today',
+            'treatment' => 'required|in:BB,HB',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'number_of_people' => 'nullable|integer|min:1',
+            'total_stay_cost' => 'required|numeric|min:0',
+            'down_payment' => 'nullable|numeric|min:0',
+            'additional_notes' => 'nullable|string',
+            'is_booking' => 'nullable|boolean',
+            'is_cash_payment' => 'nullable|boolean',
+        ]);
 
-        if (!$this->isRoomAvailable($data['room'], $data['arrival_date'], $data['departure_date'], $customer->id)) {
-            return back()
-                ->withErrors(['room' => 'La camera selezionata è già occupata per il periodo richiesto.'])
-                ->withInput();
-        }
+        $customer->update($validated);
 
-        $customer->update($data);
-
-        return redirect()->route('customers.show', $customer->id)->with('success', 'Dettagli cliente aggiornati con successo!');
+        return redirect()->route('customers.show', $customer)->with('success', 'Cliente aggiornato con successo!');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Customer $customer)
     {
         $customer->delete();
-        return redirect()->route('welcome')->with('success', 'Prenotazione eliminata con successo.');
+        return redirect()->route('welcome')->with('error', 'Cliente eliminato con successo!');
     }
 
-    public function showTodayDeparturesBilling()
+    /**
+     * Search for customers.
+     */
+    public function search(Request $request)
     {
-        $today = Carbon::today();
-        $departingCustomers = Customer::whereDate('departure_date', $today)->get();
+        $query = $request->input('query');
+        $customers = Customer::where('first_name', 'like', "%{$query}%")
+            ->orWhere('last_name', 'like', "%{$query}%")
+            ->orWhere('phone', 'like', "%{$query}%")
+            ->orWhere('email', 'like', "%{$query}%")
+            ->get();
 
-        return view('customers.today-departures-billing', [
-            'departingCustomers' => $departingCustomers,
-            'today' => $today
-        ]);
+        return view('customers.index', compact('customers', 'query'));
     }
 
+    /**
+     * Show billing for today's departures.
+     */
+    public function todayDeparturesBilling(Request $request)
+    {
+        $today = $request->input('date') ? Carbon::parse($request->input('date')) : Carbon::today();
+        $departingCustomers = Customer::whereDate('departure_date', $today)->get();
+        return view('customers.today-departures-billing', compact('departingCustomers', 'today'));
+    }
+
+    /**
+     * Show the bill for the customer.
+     */
     public function showBill(Customer $customer)
     {
+
         $arrival = Carbon::parse($customer->arrival_date);
         $departure = Carbon::parse($customer->departure_date);
-        $totalDays = max(0, $arrival->diffInDays($departure));
-        $taxableDays = min($totalDays, 7);
-        $cityTax = 1.5 * $customer->number_of_people * $taxableDays;
-        $additionalExpenses = $customer->expenses()->sum('amount') ?? 0;
-        $grandTotal = $customer->total_stay_cost + $additionalExpenses + $cityTax;
+        $nights = $arrival->diffInDays($departure);
+        $taxRate = 1.50;
+        $cityTax = $nights * $customer->number_of_people * $taxRate;
+        $additionalExpenses = $customer->expenses->sum('amount');
+        $grandTotal = $customer->total_stay_cost + $cityTax + $additionalExpenses;
         $finalBalance = $grandTotal - $customer->down_payment;
 
         return view('customers.bill', compact(
@@ -187,7 +185,59 @@ class CustomerController extends Controller
             'cityTax',
             'additionalExpenses',
             'grandTotal',
-            'finalBalance',
+            'finalBalance'
+        ));
+    }
+
+    /**
+     * Print the bill (HTML view).
+     */
+    public function printBill(Customer $customer)
+    {
+        $arrival = Carbon::parse($customer->arrival_date);
+        $departure = Carbon::parse($customer->departure_date);
+        $nights = $arrival->diffInDays($departure);
+
+        $taxRate = 1.50;
+        $cityTax = $nights * $customer->number_of_people * $taxRate;
+
+        $additionalExpenses = $customer->expenses->sum('amount');
+
+        $grandTotal = $customer->total_stay_cost + $cityTax + $additionalExpenses;
+        $finalBalance = $grandTotal - $customer->down_payment;
+
+        return view('customers.bill_html', compact(
+            'customer',
+            'cityTax',
+            'additionalExpenses',
+            'grandTotal',
+            'finalBalance'
+        ));
+    }
+
+    /**
+     * Print the receipt (HTML view).
+     */
+    public function printReceipt(Customer $customer)
+    {
+        $arrival = Carbon::parse($customer->arrival_date);
+        $departure = Carbon::parse($customer->departure_date);
+        $nights = $arrival->diffInDays($departure);
+
+        $taxRate = 1.50;
+        $cityTax = $nights * $customer->number_of_people * $taxRate;
+
+        $additionalExpenses = $customer->expenses->sum('amount');
+
+        $grandTotal = $customer->total_stay_cost + $cityTax + $additionalExpenses;
+        $finalBalance = $grandTotal - $customer->down_payment;
+
+        return view('customers.receipt_html', compact(
+            'customer',
+            'cityTax',
+            'additionalExpenses',
+            'grandTotal',
+            'finalBalance'
         ));
     }
 }

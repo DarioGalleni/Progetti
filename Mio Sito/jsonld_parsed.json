@@ -34,10 +34,13 @@
             "contactPoint": [
                 {
                     "@type": "ContactPoint",
-                    "telephone": "+39-012-345-6789",
+                    "telephone": "+393298047791",
                     "contactType": "customer service",
                     "areaServed": "IT",
-                    "availableLanguage": ["Italian", "English"]
+                    "availableLanguage": [
+                        "Italian",
+                        "English"
+                    ]
                 }
             ]
         },

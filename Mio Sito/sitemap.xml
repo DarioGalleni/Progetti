@@ -5,100 +5,133 @@
     <!-- Homepage -->
     <url>
         <loc>https://dariux87.it/</loc>
-        <lastmod>2025-09-13</lastmod>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
-            <image:loc>https://dariux87.it/assets/favicon/android-chrome-512x512.png</image:loc>
-            <image:title>Dario | Creazione Siti Web</image:title>
-            <image:caption>Site_Logo</image:caption>
+            <image:loc>https://dariux87.it/assets/imgs/favicon/android-chrome-512x512.png</image:loc>
+            <image:title>Dario - Fullstack Web Developer Versilia</image:title>
+            <image:caption>Developer professionista per siti web moderni</image:caption>
         </image:image>
     </url>
     
+    <!-- About Me Section -->
+    <url>
+        <loc>https://dariux87.it/#about</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://dariux87.it/assets/imgs/man_2.jpeg</image:loc>
+            <image:title>Chi sono - Dario Galleni</image:title>
+            <image:caption>Junior Fullstack Developer specializzato in Laravel e Vue.js</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Services Section -->
+    <url>
+        <loc>https://dariux87.it/#services</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Portfolio Section -->
+    <url>
+        <loc>https://dariux87.it/#portfolio</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://dariux87.it/assets/imgs/git.png</image:loc>
+            <image:title>Portfolio - Progetti Realizzati</image:title>
+            <image:caption>15+ progetti web completati con successo</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Contact Section -->
+    <url>
+        <loc>https://dariux87.it/#contact</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Portfolio: Beach Management -->
+    <url>
+        <loc>https://dariux87.it/beach</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://previews.123rf.com/images/alimurthado/alimurthado2510/alimurthado251033799/256299513-beach-with-chair-and-umbrella-vector-illustration-in-flat-style.jpg</image:loc>
+            <image:title>Gestionale Spiaggia - Applicazione Web</image:title>
+            <image:caption>Sistema di gestione per stabilimenti balneari con mappa ombrelloni interattiva</image:caption>
+        </image:image>
+    </url>
+
     <!-- Portfolio: Hotel Management -->
     <url>
         <loc>https://dariux87.it/gest</loc>
-        <lastmod>2025-09-13</lastmod>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.7</priority>
         <image:image>
             <image:loc>https://dariux87.it/assets/imgs/hotel.jpg</image:loc>
-            <image:title>Gestionale per hotel</image:title>
-            <image:caption>Sistema gestionale per hotel</image:caption>
+            <image:title>Gestionale Hotel - Sistema Prenotazioni</image:title>
+            <image:caption>Sistema gestionale completo per hotel e strutture ricettive</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Portfolio: Travel Agency -->
+    <url>
+        <loc>https://dariux87.it/trav</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://dariux87.it/assets/imgs/travel.png</image:loc>
+            <image:title>Agenzia Viaggi - Software Gestionale</image:title>
+            <image:caption>Gestione itinerari personalizzati e pacchetti vacanze</image:caption>
         </image:image>
     </url>
     
-    <!-- Portfolio: Restaurant -->
+    <!-- Portfolio: Restaurant Website -->
     <url>
         <loc>https://dariux87.it/rist/</loc>
-        <lastmod>2025-09-13</lastmod>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.7</priority>
         <image:image>
             <image:loc>https://dariux87.it/assets/imgs/restaurant.jpg</image:loc>
-            <image:title>Sito Ristorante</image:title>
-            <image:caption>Template per ristorante</image:caption>
+            <image:title>Sito Ristorante - Template Moderno</image:title>
+            <image:caption>Sito web professionale per ristoranti con menu digitale</image:caption>
         </image:image>
     </url>
 
-    <!-- Local pages / anchors -->
+    <!-- Portfolio: Gemma del Mare v2 -->
     <url>
-        <loc>https://dariux87.it/about</loc>
-        <lastmod>2025-09-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <url>
-        <loc>https://dariux87.it/portfolio</loc>
-        <lastmod>2025-09-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://dariux87.it/contact</loc>
-        <lastmod>2025-09-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <!-- About section (pagina ancorata) -->
-    <url>
-        <loc>https://dariux87.it/#about</loc>
-        <lastmod>2025-09-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-        <image:image>
-            <image:loc>https://dariux87.it/assets/imgs/man_2.jpeg</image:loc>
-            <image:title>About - Dario</image:title>
-            <image:caption>Foto profilo</image:caption>
-        </image:image>
-    </url>
-
-    <!-- Portfolio section (pagina ancorata) -->
-    <url>
-        <loc>https://dariux87.it/#portfolio</loc>
-        <lastmod>2025-09-13</lastmod>
+        <loc>https://dariux87.it/gem/</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
         <image:image>
-            <image:loc>https://dariux87.it/assets/imgs/git.png</image:loc>
-            <image:title>Portfolio</image:title>
-            <image:caption>Progetti recenti</image:caption>
+            <image:loc>https://dariux87.it/assets/imgs/gemma2.png</image:loc>
+            <image:title>Gemma del Mare v2 - Restyling Completo</image:title>
+            <image:caption>Versione aggiornata con design moderno e UX migliorata</image:caption>
         </image:image>
     </url>
 
-    <!-- Contact section (pagina ancorata) -->
+    <!-- Portfolio: Gemma del Mare Original -->
     <url>
-        <loc>https://dariux87.it/#contact</loc>
-        <lastmod>2025-09-13</lastmod>
+        <loc>https://gemmadelmare.com/</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
         <image:image>
-            <image:loc>https://dariux87.it/assets/imgs/header.jpg</image:loc>
-            <image:title>Contatti</image:title>
-            <image:caption>Contattami su WhatsApp</image:caption>
+            <image:loc>https://dariux87.it/assets/imgs/gemma.png</image:loc>
+            <image:title>Gemma del Mare - Sito Ufficiale Ristorante</image:title>
+            <image:caption>Sito web ristorante con menu interattivo e prenotazioni online</image:caption>
         </image:image>
     </url>
     

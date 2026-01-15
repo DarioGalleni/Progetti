@@ -129,8 +129,20 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	/* ==========================
+	   Modulo: Modale Ambiente di Test
+	   ========================== */
+	function initTestEnvironmentModal() {
+		const testModal = document.getElementById('testEnvironmentModal');
+		if (testModal && typeof bootstrap !== 'undefined') {
+			const modal = new bootstrap.Modal(testModal);
+			modal.show();
+		}
+	}
+
+	/* ==========================
 	   Inizializzazione moduli
 	   ========================== */
 	initThemeModule();
 	initCalendarDragModule();
+	initTestEnvironmentModal();
 });

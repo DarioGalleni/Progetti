@@ -1,5 +1,7 @@
+import * as bootstrap from 'bootstrap';
+
 document.addEventListener('DOMContentLoaded', function () {
-    
+
     /* ==========================================================================
        SEZIONE 1: Gestione Drag & Scroll (Trascinamento Calendario)
        Descrizione: Gestisce la logica per trascinare la tabella orizzontalmente
@@ -70,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!isPointerDown) return;
             e.preventDefault();
             const dx = e.pageX - activeContainer.offsetLeft - startX;
-            
+
             // Inizia a considerare "drag" solo dopo una certa soglia di movimento
             if (Math.abs(dx) > DRAG_THRESHOLD) {
                 isDragging = true;
@@ -116,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.addEventListener('resize', () => centerToday(container));
             });
         }
-        
+
         // Attivazione Tooltip di Bootstrap
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -126,6 +128,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Avvia il modulo calendario
     initCalendarDragModule();
+
+    /* ==========================================================================
+       SEZIONE 2b: Gestione Modale Info
+       Descrizione: Mostra il modale di benvenuto all'avvio automaticamente.
+       ========================================================================== */
+    const infoModalEl = document.getElementById('infoModal');
+    if (infoModalEl) {
+        const infoModal = new bootstrap.Modal(infoModalEl);
+        infoModal.show();
+    }
 
 
     /* ==========================================================================
@@ -154,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
  * Gestisce l'apertura dei link solo se il tasto CTRL (o Command) è premuto.
  * Utile per distinguere tra "trascinamento calendario" e "apertura prenotazione".
  */
-window.handleCtrlClick = function(event, url) {
+window.handleCtrlClick = function (event, url) {
     if (event.ctrlKey || event.metaKey) {
         window.location.href = url;
     } else {

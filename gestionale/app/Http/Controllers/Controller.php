@@ -13,11 +13,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function welcome()
-    {
-        $customers = Customer::all();
-        return view('welcome', compact('customers'));
-    }
+
 
     /**
      * Esegue il comando artisan optimize:clear e ritorna alla pagina precedente con un messaggio.

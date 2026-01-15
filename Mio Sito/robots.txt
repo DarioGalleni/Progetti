@@ -1,20 +1,34 @@
+# Robots.txt per dariux87.it
+# Ottimizzato per migliore indicizzazione SEO
+
 User-agent: *
 Allow: /
-Disallow: /assets/vendors/
-Disallow: /assets/scss/
-
-# Permettere a tutti i crawler di accedere a tutto il contenuto statico
+Allow: /assets/
+Allow: /assets/imgs/
 Allow: /assets/css/
 Allow: /assets/js/
+
+# Disallow admin/private areas (se presenti)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
 Allow: /assets/imgs/
 
-# Indirizzo del sitemap
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Sitemap location
 Sitemap: https://dariux87.it/sitemap.xml
 
-# Velocità di crawling per Googlebot
-User-agent: Googlebot
-Crawl-delay: 1
-
-# Velocità di crawling per Bingbot
-User-agent: Bingbot
-Crawl-delay: 2
+# Crawl delay (opzionale, per evitare sovraccarico)
+Crawl-delay: 10

@@ -1,0 +1,22 @@
+{
+    "name": "Ristorante Buongusto",
+    "short_name": "Buongusto",
+    "start_url": "/",
+    "background_color": "#202938",
+    "description": "Autentica cucina italiana con ingredienti freschi, sapori tradizionali e atmosfera accogliente.",
+    "display": "standalone",
+    "theme_color": "#202938",
+    "icons": [
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/jpg",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "logo.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}

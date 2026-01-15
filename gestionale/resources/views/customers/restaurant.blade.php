@@ -1,98 +1,131 @@
 <x-layout>
-    @section('title', 'Ristorante')
-    <div class="container-fluid mt-5">
-        <h1 class="mb-4 text-center">
-            Ristorante - {{ \Carbon\Carbon::parse($selectedDate)->locale('it')->isoFormat('D MMMM YYYY') }}
-        </h1>
+    <div class="container py-5">
+        <div class="card shadow border-0 rounded-3">
+            <div class="card-header bg-white border-bottom border-light pt-4 pb-3">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                    <h4 class="mb-0 text-dark fw-bold">
+                        <i class="fas fa-utensils me-2"></i><span class="text-primary">Ristorante</span>
+                    </h4>
 
-        <!-- Selettore data -->
-        <div class="row mb-4">
-            <div class="col-md-6 offset-md-3">
-                <form method="GET" action="{{ route('customers.restaurant') }}" class="d-flex">
-                    <input 
-                        type="date" 
-                        name="date" 
-                        class="form-control me-2" 
-                        value="{{ $selectedDate->format('Y-m-d') }}"
-                    >
-                    <button type="submit" class="btn btn-primary">Visualizza</button>
-                </form>
+                    <form action="{{ route('customers.restaurant') }}" method="GET"
+                        class="d-flex align-items-center gap-2">
+                        <input type="date" name="date" id="date"
+                            class="form-control form-control-lg border-primary shadow-sm fw-bold text-primary"
+                            value="{{ $selectedDate->format('Y-m-d') }}" onchange="this.form.submit()"
+                            style="min-width: 200px;">
+                    </form>
+
+                    <div>
+                        <a href="{{ route('customers.restaurant.print', ['date' => $selectedDate->format('Y-m-d')]) }}"
+                            target="_blank" class="btn btn-outline-primary me-2">
+                            <i class="fas fa-print me-1"></i>Stampa
+                        </a>
+                        <a href="{{ route('welcome') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>Indietro
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        @if(empty($roomData))
-            <div class="alert alert-info" role="alert">
-                Nessuna camera occupata per la data selezionata.
+            <div class="card-body p-4">
+                @php
+                    $totalBreakfast = 0;
+                    $totalDinner = 0;
+                    foreach ($roomData as $data) {
+                        if ($data['breakfast']) {
+                            $totalBreakfast += $data['number_of_people'];
+                        }
+                        if ($data['dinner']) {
+                            if (isset($data['arriving_people'])) {
+                                $totalDinner += $data['arriving_people'];
+                            } elseif ($data['status'] === 'arriving') {
+                                $totalDinner += $data['number_of_people'];
+                            } else {
+                                $totalDinner += $data['number_of_people'];
+                            }
+                        }
+                    }
+                @endphp
+                @if(empty($roomData))
+                    <div class="alert alert-info shadow-sm border-0 d-flex align-items-center" role="alert">
+                        <i class="fas fa-info-circle me-3 fs-4"></i>
+                        <div>
+                            Nessun ospite presente per la data selezionata.
+                        </div>
+                    </div>
+                @else
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle text-center table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col" class="py-3" style="width: 20%;">Camera</th>
+                                    <th scope="col" class="py-3" style="width: 20%;">Pax</th>
+                                    <th scope="col" class="py-3"><i class="fas fa-coffee me-2"></i>Colazione
+                                    </th>
+                                    <th scope="col" class="py-3"><i class="fas fa-utensils me-2"></i>Cena</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($roomData as $room => $data)
+                                    <tr>
+                                        <td class="fw-bold fs-5">{{ $room }}</td>
+
+                                        {{-- Colonna Pax --}}
+                                        <td>
+                                            <span class="fw-bold">{{ $data['number_of_people'] }}</span>
+                                            @if(isset($data['arriving_people']))
+                                                <span class="text-success small ms-1">
+                                                    <i class="fas fa-arrow-left me-1"></i>{{ $data['arriving_people'] }}
+                                                </span>
+                                            @endif
+                                        </td>
+
+                                        {{-- Colonna Colazione --}}
+                                        <td>
+                                            @if($data['breakfast'])
+                                                <i class="fas fa-check text-success fs-5"></i>
+                                            @else
+                                                <span class="text-muted opacity-25">-</span>
+                                            @endif
+                                        </td>
+
+                                        {{-- Colonna Cena --}}
+                                        <td>
+                                            @if($data['dinner'])
+                                                <div class="d-flex align-items-center justify-content-center gap-2">
+                                                    <i class="fas fa-check text-success fs-5"></i>
+                                                    @if($data['status'] === 'arriving')
+                                                        {{-- Arrivo HB: Mostra Pax in arrivo --}}
+                                                        <span class="badge bg-success rounded-pill fs-6 px-2">
+                                                            In Arrivo: {{ $data['number_of_people'] }} <i class="fas fa-user ms-1"></i>
+                                                        </span>
+                                                    @elseif($data['status'] === 'departing_arriving' && isset($data['arriving_people']))
+                                                        {{-- Cambio Camera HB: Mostra Pax in arrivo --}}
+                                                        <span class="badge bg-success rounded-pill fs-6 px-2">
+                                                            In Arrivo: {{ $data['arriving_people'] }} <i class="fas fa-user ms-1"></i>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            @else
+                                                <span class="text-muted opacity-25">-</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot class="table-light fw-bold">
+                                <tr>
+                                    <td colspan="2" class="text-center pe-3">Totali:</td>
+                                    <td class="fs-5">{{ $totalBreakfast }}</td>
+                                    <td class="fs-5">{{ $totalDinner }}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                @endif
+
+
             </div>
-        @else
-            <table class="table table-bordered text-center">
-                <thead class="bg-light">
-                    <tr>
-                        <th scope="col">Numero Camera</th>
-                        <th scope="col">Numero Persone</th>
-                        <th scope="col">Colazione</th>
-                        <th scope="col">Cena</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($roomData as $roomNumber => $data)
-                        <tr>
-                            <td class="fw-bold align-middle">{{ $roomNumber }}</td>
-                            <td class="align-middle">{{ $data['number_of_people'] }}</td>
-                            <td class="align-middle">
-                                @if($data['breakfast'])
-                                    <span class="text-success fs-4 fw-bold">&#10003;</span>
-                                @else
-                                    <small class="text-muted">-</small>
-                                @endif
-                            </td>
-                            <td class="align-middle">
-                                @if($data['dinner'])
-                                    <span class="text-primary fs-4 fw-bold">&#10003;</span>
-                                    @if($data['status'] === 'arriving' || ($data['status'] === 'departing_arriving' && isset($data['arriving_people'])))
-                                        <small class="text-muted ms-2">
-                                            ({{ $data['status'] === 'departing_arriving' ? $data['arriving_people'] : $data['number_of_people'] }} in arrivo)
-                                        </small>
-                                    @endif
-                                @else
-                                    <small class="text-muted">-</small>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-                <tfoot class="bg-light">
-                    <tr>
-                        <th>Totali</th>
-                        <th>
-                            {{ array_sum(array_column($roomData, 'number_of_people')) }} persone
-                        </th>
-                        <th>
-                            {{ array_sum(array_map(function($data) { return $data['breakfast'] ? $data['number_of_people'] : 0; }, $roomData)) }} persone
-                        </th>
-                        <th>
-                            @php
-                                $totalDinnerPeople = 0;
-                                foreach($roomData as $data) {
-                                    if($data['dinner']) {
-                                        if($data['status'] === 'departing_arriving' && isset($data['arriving_people'])) {
-                                            $totalDinnerPeople += $data['arriving_people'];
-                                        } else {
-                                            $totalDinnerPeople += $data['number_of_people'];
-                                        }
-                                    }
-                                }
-                            @endphp
-                            {{ $totalDinnerPeople }} persone
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-
-        @endif
-        
-        <div class="mt-4 d-flex justify-content-center">
-            <a href="{{ route('welcome') }}" class="btn btn-primary">Torna al Calendario</a>
         </div>
     </div>
 </x-layout>

@@ -59,7 +59,7 @@
         href="{{ route('restaurant.image', ['filename' => 'favicon/favicon-96x96.png']) }}">
     <link rel="icon" type="image/png" sizes="16x16"
         href="{{ route('restaurant.image', ['filename' => 'favicon/favicon-16x16.png']) }}">
-    <link rel="manifest" href="{{ route('restaurant.image', ['filename' => 'favicon/manifest.json']) }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <meta name="msapplication-TileColor" content="#202938">
     <meta name="msapplication-TileImage"
         content="{{ route('restaurant.image', ['filename' => 'favicon/ms-icon-144x144.png']) }}">
@@ -71,7 +71,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome -->
@@ -81,9 +81,6 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <!-- CSS Personalizzato -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
@@ -92,7 +89,20 @@
 
     <!-- AOS JS e inizializzazione -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
 </body>
 
 </html>

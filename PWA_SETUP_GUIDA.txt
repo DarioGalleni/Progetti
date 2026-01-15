@@ -1,0 +1,178 @@
+GUIDA IMPLEMENTAZIONE PWA (PROGRESSIVE WEB APP)
+=================================================
+
+Questa guida passo-passo ti spiega tutti i file e le cartelle necessari per trasformare il tuo sito Laravel in una PWA installabile che funziona anche offline.
+
+-------------------------------------------------
+1. FILE MANIFEST
+-------------------------------------------------
+Dove crearlo: public/manifest.json
+Cosa fa: Dice al browser come installare l'app (nome, colori, icone).
+
+Codice da inserire:
+{
+    "name": "Ristorante Buongusto",
+    "short_name": "Buongusto",
+    "start_url": "/",
+    "background_color": "#202938",
+    "description": "Autentica cucina italiana con ingredienti freschi.",
+    "display": "standalone",
+    "theme_color": "#202938",
+    "icons": [
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "logo.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
+
+NOTA: Assicurati di avere un file 'logo.png' nella cartella 'public/'.
+
+-------------------------------------------------
+2. SERVICE WORKER
+-------------------------------------------------
+Dove crearlo: public/sw.js
+Cosa fa: Gestisce la cache e permette al sito di funzionare offline mostrand una pagina dedicata.
+
+Codice da inserire:
+const preLoad = function () {
+    return caches.open("offline").then(function (cache) {
+        // caching index and important routes
+        return cache.addAll(filesToCache);
+    });
+};
+
+self.addEventListener("install", function (event) {
+    event.waitUntil(preLoad());
+});
+
+const filesToCache = [
+    '/',
+    '/offline.html'
+];
+
+const checkResponse = function (request) {
+    return new Promise(function (fulfill, reject) {
+        fetch(request).then(function (response) {
+            if (response.status !== 404) {
+                fulfill(response);
+            } else {
+                reject();
+            }
+        }, reject);
+    });
+};
+
+const addToCache = function (request) {
+    // Only cache http(s) requests
+    if (!request.url.startsWith('http')) {
+        return Promise.resolve();
+    }
+    return caches.open("offline").then(function (cache) {
+        return fetch(request).then(function (response) {
+            return cache.put(request, response);
+        });
+    });
+};
+
+
+const returnFromCache = function (request) {
+    return caches.open("offline").then(function (cache) {
+        return cache.match(request).then(function (matching) {
+            if (!matching || matching.status === 404) {
+                return cache.match("offline.html");
+            } else {
+                return matching;
+            }
+        });
+    });
+};
+
+self.addEventListener("fetch", function (event) {
+    event.respondWith(checkResponse(event.request).catch(function () {
+        return returnFromCache(event.request);
+    }));
+    if(!event.request.url.startsWith('http')){
+        event.waitUntil(addToCache(event.request));
+    }
+});
+
+-------------------------------------------------
+3. PAGINA OFFLINE
+-------------------------------------------------
+Dove crearlo: public/offline.html
+Cosa fa: È la pagina che l'utente vedrà se prova ad aprire il sito senza connessione internet.
+
+Codice da inserire:
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sei Offline</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        h1 { color: #e74c3c; }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nessuna Connessione</h1>
+        <p>Sembra che tu non sia connesso a internet.</p>
+        <a href="/" class="btn">Riprova</a>
+    </div>
+</body>
+</html>
+
+-------------------------------------------------
+4. INTEGRAZIONE NEL LAYOUT
+-------------------------------------------------
+Dove modificare: resources/views/components/layout.blade.php
+Cosa fa: Collega il manifest e registra il Service Worker nel browser.
+
+Aggiungi questo nel <head>:
+<link rel="manifest" href="{{ asset('manifest.json') }}">
+<meta name="theme-color" content="#202938">
+
+Aggiungi questo script prima della chiusura del </body>:
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+        });
+    }
+</script>
+
+=================================================
+FINE GUIDA
+=================================================

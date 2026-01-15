@@ -2,51 +2,58 @@
     Modalità Notte
     ========================================================== */
 body.night-mode {
-background-color: #28282B;
-color: #F5F5DC;
+    background-color: #28282B;
+    color: #F5F5DC;
 }
 
 /* Modalità Notte: testo attenuato */
 body.night-mode .text-muted {
-color: #ceceb9 !important;
+    color: #ceceb9 !important;
 }
 
 /* Modalità Notte: navbar */
 body.night-mode .navbar {
-background-color: #28282B !important;
-border-bottom: 1px solid #3a3a3c;
+    background-color: #28282B !important;
+    border-bottom: 1px solid #3a3a3c;
 }
+
 body.night-mode .navbar .navbar-brand,
 body.night-mode .navbar .nav-link,
 body.night-mode .navbar .navbar-text {
-color: #F5F5DC !important;
+    color: #F5F5DC !important;
 }
 
 /* Modalità Notte: colonna "Camera" */
 body.night-mode .sticky-header-room,
 body.night-mode .sticky-header-room.bg-light {
-background-color: #28282B !important;
-color: #F5F5DC !important;
-border-right: 1px solid #F5F5DC !important;
-z-index: 3;
+    background-color: #28282B !important;
+    color: #F5F5DC !important;
+    border-right: 1px solid #F5F5DC !important;
+    z-index: 3;
 }
 
 /* Modalità Notte: tabelle */
 body.night-mode .table,
 body.night-mode .table th,
 body.night-mode .table td {
-background-color: #28282B;
-color: #F5F5DC;
-border-color: #F5F5DC;
+    background-color: #28282B;
+    color: #F5F5DC;
+    border-color: #F5F5DC;
 }
+
 body.night-mode .table th,
 body.night-mode .table td {
-border: 1px solid #F5F5DC;
+    border: 1px solid #F5F5DC;
 }
 
 /* Modalità Notte: icona hamburger */
 body.night-mode .navbar-toggler-icon {
-background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Modalità Notte: numeri camera (forza colore bianco anche con text-dark) */
+body.night-mode .sticky-room-cell .text-dark {
+    color: #F5F5DC !important;
 }
 
 /* ==========================================================
@@ -64,7 +71,7 @@ body,
 .sticky-header-room.bg-light,
 .btn,
 .btn-sun {
-transition: background-color .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease;
+    transition: background-color .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease;
 }
 
 /* ==========================================================
@@ -72,50 +79,57 @@ transition: background-color .5s ease, color .5s ease, border-color .5s ease, bo
     ========================================================== */
 /* Animazioni switch icone tema (fade + scala) */
 .theme-icon {
-display: inline-block;
-transition: transform .45s ease, opacity .45s ease;
-will-change: transform, opacity;
+    display: inline-block;
+    transition: transform .45s ease, opacity .45s ease;
+    will-change: transform, opacity;
 }
+
 .anim-in {
-animation: iconIn .5s ease forwards;
+    animation: iconIn .5s ease forwards;
 }
+
 .anim-out {
-animation: iconOut .45s ease forwards;
+    animation: iconOut .45s ease forwards;
 }
+
 @keyframes iconIn {
-from {
-    opacity: 0;
-    transform: scale(.6) rotate(-8deg);
+    from {
+        opacity: 0;
+        transform: scale(.6) rotate(-8deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
 }
-to {
-    opacity: 1;
-    transform: scale(1) rotate(0);
-}
-}
+
 @keyframes iconOut {
-from {
-    opacity: 1;
-    transform: scale(1) rotate(0);
-}
-to {
-    opacity: 0;
-    transform: scale(.6) rotate(8deg);
-}
+    from {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(.6) rotate(8deg);
+    }
 }
 
 /* ==========================================================
     Drag-to-Scroll Calendario
     ========================================================== */
 #calendar-container.drag-scroll {
-position: relative;
-cursor: grab;
--webkit-overflow-scrolling: touch;
+    position: relative;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
 }
+
 #calendar-container.drag-scroll.dragging {
-cursor: grabbing;
-user-select: none;
--webkit-user-select: none;
--ms-user-select: none;
+    cursor: grabbing;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 /* ==========================================================
@@ -123,33 +137,33 @@ user-select: none;
     ========================================================== */
 /* Utility: altezza massima calendario */
 .calendar-max-height {
-max-height: 80vh;
-overflow: auto;
+    max-height: 80vh;
+    overflow: auto;
 }
 
 /* Utility: testo non a capo in tabella */
 .table-nowrap {
-white-space: nowrap;
+    white-space: nowrap;
 }
 
 /* Utility: cella sticky colonna camera */
 .sticky-room-cell {
-position: sticky;
-left: 0;
-z-index: 1;
-min-width: 140px;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    min-width: 140px;
 }
 
 /* Utility: header sticky colonna camera */
 .sticky-room-header {
-position: sticky;
-left: 0;
-z-index: 2;
+    position: sticky;
+    left: 0;
+    z-index: 2;
 }
 
 /* Utility: nascondi elementi via CSS */
 .hidden {
-display: none !important;
+    display: none !important;
 }
 
 /* ==========================================================
@@ -157,9 +171,9 @@ display: none !important;
     ========================================================== */
 /* Pulsante "sole" (disattiva modalità notte) */
 .btn-sun {
-background-color: #FFC107;
-color: #000000;
-border: 1px solid rgba(0,0,0,0.12);
+    background-color: #FFC107;
+    color: #000000;
+    border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 /* ==========================================================
@@ -167,14 +181,14 @@ border: 1px solid rgba(0,0,0,0.12);
     ========================================================== */
 /* Numero camera nella colonna sticky */
 .room-number {
-font-size: 1.25rem;
-line-height: 1;
+    font-size: 1.25rem;
+    line-height: 1;
 }
 
 /* Etichetta camera nella colonna sticky */
 .room-label {
-font-size: 0.9rem;
-display: block;
+    font-size: 0.9rem;
+    display: block;
 }
 
 /* ==========================================================
@@ -182,9 +196,24 @@ display: block;
     ========================================================== */
 /* Nome e cognome a capo nelle celle prenotazione */
 .booking-name {
-white-space: normal;
-word-break: break-word;
-font-weight: 500;
-font-size: 1rem;
-line-height: 1.15;
+    white-space: normal;
+    word-break: break-word;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.15;
+}
+
+/* ==========================================================
+    Input Number - Rimozione Frecce (Spinners)
+    ========================================================== */
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield !important;
 }
