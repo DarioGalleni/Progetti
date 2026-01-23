@@ -1,130 +1,229 @@
 <x-layout>
-    <!-- Background Section (reused from create for consistency) -->
-    <div class="min-vh-100 d-flex align-items-center justify-content-center py-5 position-relative bg-dark"
-        style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=2021&q=80'); background-size: cover; background-position: center; background-attachment: fixed;">
-        <!-- Overlay -->
-        <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-50"></div>
-
-        <div class="container position-relative z-index-1">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <!-- Glass Card -->
-                    <div class="card border-0 rounded-4 overflow-hidden shadow-2xl animate-fade-in-up"
-                        style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px);">
-
-                        <!-- Header -->
-                        <div class="card-header bg-transparent border-0 p-5 pb-0 text-center">
-                            <span
-                                class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-3 py-2 mb-3 fw-bold letter-spacing-1">
-                                MODIFICA
-                            </span>
-                            <h1 class="display-5 fw-bold mb-2">Modifica Viaggio</h1>
-                            <p class="text-muted">Aggiorna i dettagli di: <strong>{{ $journey->title }}</strong></p>
-                        </div>
-
-                        <div class="card-body p-5 pt-4">
-                            <!-- Helper Text -->
-                            <div
-                                class="alert alert-info border-0 bg-info-subtle text-info-emphasis rounded-3 mb-4 d-flex align-items-center">
-                                <i class="bi bi-info-circle-fill fs-4 me-3"></i>
-                                <div>
-                                    <p class="mb-0 small">Stai modificando un viaggio esistente. I campi sono
-                                        precompilati con i valori attuali.</p>
-                                </div>
-                            </div>
-
-                            <!-- Error Message -->
-                            @if ($errors->any())
-                                <div class="alert alert-danger border-0 bg-danger-subtle text-danger rounded-3 mb-4">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="bi bi-exclamation-triangle-fill fs-4 me-2"></i>
-                                        <h6 class="fw-bold mb-0">Attenzione</h6>
-                                    </div>
-                                    <ul class="mb-0 small ps-3">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-                            <form action="{{ route('journeys.update', $journey) }}" method="POST"
-                                class="needs-validation" enctype="multipart/form-data" novalidate>
-                                @csrf
-                                @method('PUT')
-
-                                <!-- Title Field -->
-                                <div class="form-floating mb-4 reveal hover-lift">
-                                    <input type="text" class="form-control border-0 bg-light rounded-3 fw-bold"
-                                        id="title" name="title" value="{{ old('title', $journey->title) }}"
-                                        placeholder="Titolo" style="height: 60px;" required>
-                                    <label for="title" class="text-muted ps-4">Titolo del Viaggio</label>
-                                </div>
-
-                                <div class="row g-3 mb-4">
-                                    <!-- Price Field -->
-                                    <div class="col-md-6 reveal hover-lift" style="transition-delay: 0.1s;">
-                                        <div class="form-floating input-group has-validation">
-                                            <input type="number" step="0.01"
-                                                class="form-control border-0 bg-light rounded-start-3 fw-bold"
-                                                id="price" name="price" value="{{ old('price', $journey->price) }}"
-                                                placeholder="0.00" style="height: 60px;" required>
-                                            <span
-                                                class="input-group-text border-0 bg-primary text-white px-4 fw-bold rounded-end-3">€</span>
-                                            <label for="price" class="text-muted ps-4 z-index-1">Prezzo a
-                                                persona</label>
-                                        </div>
-                                    </div>
-                                    <!-- Duration Field -->
-                                    <div class="col-md-6 reveal hover-lift" style="transition-delay: 0.2s;">
-                                        <div class="form-floating">
-                                            <input type="number"
-                                                class="form-control border-0 bg-light rounded-3 fw-bold"
-                                                id="duration_days" name="duration_days"
-                                                value="{{ old('duration_days', $journey->duration_days) }}"
-                                                placeholder="Giorni" style="height: 60px;" required>
-                                            <label for="duration_days" class="text-muted ps-4">Durata (Giorni)</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Current Image Warning -->
-                                <div class="mb-4 p-3 bg-light rounded-3 border border-secondary-subtle">
-                                    <h6 class="fw-bold mb-2 small text-uppercase text-muted">Copertina Attuale</h6>
-                                    <img src="{{ $journey->image }}" alt="Copertina attuale"
-                                        class="img-fluid rounded-2 shadow-sm" style="max-height: 150px;">
-                                    <input type="hidden" name="image" value="{{ $journey->image }}">
-                                </div>
-
-                                <!-- Description Field -->
-                                <div class="form-floating mb-5 reveal hover-lift" style="transition-delay: 0.4s;">
-                                    <textarea class="form-control border-0 bg-light rounded-3" id="description"
-                                        name="description" placeholder="Descrizione"
-                                        style="height: 150px; resize: none;"
-                                        required>{{ old('description', $journey->description) }}</textarea>
-                                    <label for="description" class="text-muted ps-4">Descrizione emozionale e
-                                        dettagliata</label>
-                                </div>
-
-                                <!-- Actions -->
-                                <div class="d-flex justify-content-between align-items-center pt-3 reveal"
-                                    style="transition-delay: 0.5s;">
-                                    <a href="{{ route('journeys.show', $journey) }}"
-                                        class="btn btn-link text-muted text-decoration-none px-0 hover-translate-start">
-                                        <i class="bi bi-arrow-left me-1"></i> Annulla
-                                    </a>
-                                    <button type="submit"
-                                        class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg hover-scale">
-                                        <i class="bi bi-save-fill me-2"></i> Salva Modifiche
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+    <div class="bg-black min-vh-100 text-white py-5 font-monospace">
+        <div class="container">
+            <!-- Header -->
+            <div class="row mb-5 border-bottom border-secondary pb-3 align-items-end">
+                <div class="col-md-8">
+                    <span class="badge bg-warning text-dark rounded-0 mb-2">MODIFICA</span>
+                    <h1 class="display-5 fw-bold text-white mb-0 text-uppercase">Modifica Viaggio</h1>
+                </div>
+                <div class="col-md-4 text-md-end text-secondary small">
+                    ID: {{ $journey->id }} | REVISIONE
                 </div>
             </div>
+
+            <!-- Alerts -->
+            @if ($errors->any())
+                <div class="alert alert-danger bg-transparent text-danger border-danger rounded-0 mb-4" role="alert">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <span class="fw-bold">ATTENZIONE</span>
+                    </div>
+                    <ul class="mb-0 small ps-3">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('journeys.update', $journey) }}" method="POST" enctype="multipart/form-data"
+                novalidate class="needs-validation">
+                @csrf
+                @method('PUT')
+
+                <!-- Grid -->
+                <div class="row g-5">
+                    <!-- Left Column: inputs -->
+                    <div class="col-lg-8">
+
+                        <!-- Title -->
+                        <div class="mb-4">
+                            <label for="title"
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Titolo
+                                Viaggio</label>
+                            <input type="text"
+                                class="form-control bg-dark text-white border-secondary rounded-0 p-3 fs-5 focus-ring-light"
+                                id="title" name="title" value="{{ old('title', $journey->title) }}"
+                                placeholder="Inserisci il titolo..." required>
+                        </div>
+
+                        <div class="row g-4 mb-4">
+                            <!-- Price -->
+                            <div class="col-md-6">
+                                <label for="price"
+                                    class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Prezzo
+                                    (€)</label>
+                                <input type="number" step="0.01"
+                                    class="form-control bg-dark text-white border-secondary rounded-0 p-3 fs-5"
+                                    id="price" name="price" value="{{ old('price', $journey->price) }}"
+                                    placeholder="0.00" required>
+                            </div>
+                            <!-- Duration -->
+                            <div class="col-md-6">
+                                <label for="duration_days"
+                                    class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Durata
+                                    (Giorni)</label>
+                                <input type="number"
+                                    class="form-control bg-dark text-white border-secondary rounded-0 p-3 fs-5"
+                                    id="duration_days" name="duration_days"
+                                    value="{{ old('duration_days', $journey->duration_days) }}" placeholder="0"
+                                    required>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-4">
+                            <label for="description"
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Descrizione</label>
+                            <textarea class="form-control bg-dark text-white border-secondary rounded-0 p-3"
+                                id="description" name="description" rows="10"
+                                placeholder="Scrivi una descrizione dettagliata..."
+                                required>{{ old('description', $journey->description) }}</textarea>
+                        </div>
+
+                        <!-- Details: Includes & Excludes -->
+                        <div class="row g-4 mb-4">
+                            <!-- Includes -->
+                            <div class="col-12">
+                                <label
+                                    class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Cosa
+                                    è incluso</label>
+                                <div id="includes-container">
+                                    @foreach(old('includes', $journey->includes ?? []) as $include)
+                                        <div class="input-group mb-2">
+                                            <input type="text"
+                                                class="form-control bg-dark text-white border-secondary rounded-0 p-2"
+                                                name="includes[]" value="{{ $include }}" placeholder="Es. Voli A/R">
+                                            <button type="button" class="btn btn-outline-secondary rounded-0"
+                                                onclick="removeItem(this)">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <button type="button"
+                                    class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase mt-1"
+                                    onclick="addItem('includes-container', 'includes[]')">
+                                    <i class="bi bi-plus-lg me-1"></i> Aggiungi voce
+                                </button>
+                            </div>
+
+                            <!-- Excludes -->
+                            <div class="col-12">
+                                <label
+                                    class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Cosa
+                                    NON è incluso</label>
+                                <div id="excludes-container">
+                                    @foreach(old('excludes', $journey->excludes ?? []) as $exclude)
+                                        <div class="input-group mb-2">
+                                            <input type="text"
+                                                class="form-control bg-dark text-white border-secondary rounded-0 p-2"
+                                                name="excludes[]" value="{{ $exclude }}" placeholder="Es. Mance">
+                                            <button type="button" class="btn btn-outline-secondary rounded-0"
+                                                onclick="removeItem(this)">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <button type="button"
+                                    class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase mt-1"
+                                    onclick="addItem('excludes-container', 'excludes[]')">
+                                    <i class="bi bi-plus-lg me-1"></i> Aggiungi voce
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Itinerary -->
+                        <div class="mb-5">
+                            <label
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase mb-3">Itinerario
+                                Giornaliero</label>
+                            <div id="itinerary-container">
+                                @foreach(old('itinerary', $journey->itinerary ?? []) as $index => $day)
+                                    <div class="card bg-dark border-secondary mb-3 itinerary-day">
+                                        <div
+                                            class="card-header bg-transparent border-secondary d-flex justify-content-between align-items-center">
+                                            <span class="text-white small text-uppercase fw-bold">Giorno <span
+                                                    class="day-number">{{ $index + 1 }}</span></span>
+                                            <button type="button" class="btn btn-sm text-secondary hover-text-danger p-0"
+                                                onclick="removeDay(this)">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-2">
+                                                <input type="text"
+                                                    class="form-control bg-black text-white border-secondary rounded-0 mb-2"
+                                                    name="itinerary[{{ $index }}][title]" value="{{ $day['title'] ?? '' }}"
+                                                    placeholder="Titolo del giorno (es. Arrivo a Roma)" required>
+                                            </div>
+                                            <div>
+                                                <textarea
+                                                    class="form-control bg-black text-white border-secondary rounded-0"
+                                                    name="itinerary[{{ $index }}][description]" rows="3"
+                                                    placeholder="Descrizione delle attività..."
+                                                    required>{{ $day['description'] ?? '' }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button type="button" class="btn btn-outline-light w-100 rounded-0 text-uppercase py-2"
+                                onclick="addDay()">
+                                <i class="bi bi-plus-lg me-2"></i> Aggiungi Giorno
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column: Images -->
+                    <div class="col-lg-4">
+                        <div class="mb-4">
+                            <label
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Immagine
+                                Copertina (Attuale)</label>
+                            <div class="mb-3">
+                                <img src="{{ $journey->image }}" class="img-fluid border border-secondary"
+                                    alt="Copertina">
+                                <input type="hidden" name="image" value="{{ $journey->image }}">
+                            </div>
+
+                            <label for="images"
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase mt-4">Carica
+                                Nuove Immagini</label>
+                            <input type="file" class="form-control bg-dark text-white border-secondary rounded-0 mb-3"
+                                id="images" name="images[]" multiple accept="image/*">
+                            <div class="form-text text-secondary mb-3 small">
+                                <i class="bi bi-info-circle me-1"></i> Caricando nuove immagini potrai selezionare una
+                                nuova copertina.
+                            </div>
+
+                            <!-- Hidden input for cover index -->
+                            <input type="hidden" name="cover_image_index" id="coverImageIndex" value="0">
+
+                            <!-- Preview Container -->
+                            <div id="imagePreviewContainer" class="row g-2">
+                                <!-- Previews will be injected here via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div
+                        class="col-12 border-top border-secondary pt-4 mt-2 d-flex justify-content-between align-items-center">
+                        <a href="{{ route('journeys.show', $journey) }}"
+                            class="text-secondary text-decoration-none small text-uppercase hover-text-white">
+                            <i class="bi bi-arrow-left me-1"></i> Torna ai dettagli
+                        </a>
+                        <button type="submit"
+                            class="btn btn-warning rounded-0 px-5 py-3 fw-bold text-uppercase border-0 hover-scale text-dark">
+                            Salva Modifiche
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
-
 </x-layout>

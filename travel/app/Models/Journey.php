@@ -14,7 +14,16 @@ class Journey extends Model
         'description',
         'price',
         'duration_days',
-        'image'
+        'image',
+        'includes',
+        'excludes',
+        'itinerary'
+    ];
+
+    protected $casts = [
+        'includes' => 'array',
+        'excludes' => 'array',
+        'itinerary' => 'array',
     ];
 
     public function images()

@@ -12,7 +12,6 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -30,8 +29,20 @@ html {
     background: #555;
 }
 
+/* Nasconde le freccette dell'input numero */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
 /* =========================================
-   2. TYPOGRAPHY & UTILITIES
+   2. TYPOGRAFIA & UTILITÀ
    ========================================= */
 .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -64,10 +75,27 @@ html {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
+.hover-translate-start {
+    transition: transform 0.3s ease;
+}
+
+.hover-translate-start:hover {
+    transform: translateX(-5px);
+}
+
+.rotate-2 {
+    transform: rotate(2deg);
+}
+
+.rotate-n2 {
+    transform: rotate(-2deg);
+}
+
 /* =========================================
-   3. ANIMATIONS & TRANSITIONS
+   3. ANIMAZIONI & TRANSIZIONI
    ========================================= */
-/* Reveal Animation (Scroll) */
+
+/* Animazione Reveal (Scroll) */
 .reveal {
     opacity: 0;
     transform: translateY(50px);
@@ -79,7 +107,14 @@ html {
     transform: translateY(0);
 }
 
-/* Float / Bounce Animations */
+/* Animazione Parallax Scroll Avanzata */
+.scroll-transform {
+    will-change: transform;
+    transition: transform 0.1s linear;
+    /* Transizione lineare fluida per aggiornamenti continui */
+}
+
+/* Animazioni Float / Bounce */
 .animate-bounce {
     animation: bounce 2s infinite;
 }
@@ -124,7 +159,7 @@ html {
     animation-delay: 0.4s;
 }
 
-/* Hover Effects */
+/* Effetti Hover */
 .hover-scale {
     transition: transform 0.3s ease;
 }
@@ -141,24 +176,8 @@ html {
     transform: translateY(-5px);
 }
 
-.hover-translate-start {
-    transition: transform 0.3s ease;
-}
-
-.hover-translate-start:hover {
-    transform: translateX(-5px);
-}
-
-.rotate-2 {
-    transform: rotate(2deg);
-}
-
-.rotate-n2 {
-    transform: rotate(-2deg);
-}
-
 /* =========================================
-   4. COMPONENTS
+   4. COMPONENTI UI
    ========================================= */
 
 /* --- Navbar --- */
@@ -195,10 +214,21 @@ html {
     width: 100%;
 }
 
-/* --- Forms --- */
+/* --- Moduli / Form --- */
 .form-control:focus {
     box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
     background-color: #fff !important;
+}
+
+/* Overwrite per input scuri se necessario */
+.bg-dark.form-control:focus {
+    background-color: #212529 !important;
+    color: #fff !important;
+}
+
+.bg-black.form-control:focus {
+    background-color: #000 !important;
+    color: #fff !important;
 }
 
 /* --- Glassmorphism Card --- */
@@ -214,7 +244,7 @@ html {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Modern Icon Box --- */
+/* --- Box Icona Moderno --- */
 .icon-box-modern {
     width: 80px;
     height: 80px;
@@ -237,7 +267,7 @@ html {
 }
 
 /* =========================================
-   5. PAGE SPECIFIC: WELCOME PAGE
+   5. PAGINE SPECIFICHE: WELCOME & LANDING
    ========================================= */
 
 /* --- Hero Section --- */
@@ -261,17 +291,7 @@ html {
     margin: 0 auto;
 }
 
-.scroll-down-indicator {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: bounce 2s infinite;
-    cursor: pointer;
-    z-index: 10;
-}
-
-/* --- Features (Bento Grid) --- */
+/* --- Features (Griglia Bento) --- */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -282,6 +302,11 @@ html {
     .bento-grid {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(2, minmax(250px, auto));
+    }
+
+    .hover-primary:hover {
+        color: #0d6efd !important;
+        transition: color 0.3s ease;
     }
 
     .bento-item-large {
@@ -311,7 +336,7 @@ html {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* --- How It Works (Steps) --- */
+/* --- Come Funziona (Step) --- */
 .step-card {
     position: relative;
     padding: 2rem;
@@ -335,7 +360,7 @@ html {
     z-index: 1;
 }
 
-/* --- Trending Categories --- */
+/* --- Categorie Trending --- */
 .category-card {
     position: relative;
     overflow: hidden;
@@ -370,7 +395,7 @@ html {
     transform: scale(1.1);
 }
 
-/* Category Images */
+/* Immagini Categorie */
 .cat-img-1 {
     background-image: url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
 }
@@ -387,7 +412,7 @@ html {
     background-image: url('https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
 }
 
-/* --- Stats Section --- */
+/* --- Sezione Statistiche --- */
 .stats-bg {
     background-image: var(--stats-bg);
     background-attachment: fixed;
@@ -397,7 +422,7 @@ html {
     position: relative;
 }
 
-/* --- Divider Section --- */
+/* --- Sezione Divisore --- */
 .divider-bg {
     height: 60vh;
     background-image: var(--divider-bg);
@@ -408,7 +433,7 @@ html {
     position: relative;
 }
 
-/* --- Newsletter Section --- */
+/* --- Sezione Newsletter --- */
 .newsletter-bg {
     height: 70vh;
     background-image: var(--newsletter-bg);
@@ -419,7 +444,7 @@ html {
     position: relative;
 }
 
-/* --- Other Components --- */
+/* --- Altri Componenti Pagina --- */
 .journey-card-img-container {
     height: 300px;
 }
@@ -429,8 +454,7 @@ html {
     transform: rotate(-2deg);
 }
 
-/* Parallax Base */
+/* Base Parallax Generica */
 .parallax-section {
     position: relative;
-    /* Background properties handled by specific classes (hero-bg, stats-bg, etc.) */
 }

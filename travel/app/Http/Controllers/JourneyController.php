@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreJourneyRequest;
+use App\Http\Requests\UpdateJourneyRequest;
 use App\Models\Journey;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class JourneyController extends Controller
 {
@@ -27,44 +30,53 @@ class JourneyController extends Controller
     /**
      * Salva un nuovo viaggio nel database.
      */
-    public function store(Request $request)
+    public function store(StoreJourneyRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'duration_days' => 'required|integer|min:1',
-            'images' => 'required|array|min:1',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5000',
-        ]);
+        // I dati sono già validati grazie alla Form Request
 
-        // Crea lo slug per la cartella
-        $slug = \Illuminate\Support\Str::slug($request->title);
+        // Upload Immagini
+        $slug = Str::slug($request->title);
         $folder = "journeys/{$slug}";
-
         $uploadedPaths = [];
 
-        // Caricamento immagini su S3
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                // store() genera un nome unico e salva nel path specificato
-                $path = $file->store($folder, 's3');
+                $filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
+                $extension = $file->getClientOriginalExtension();
+                $fullFilename = $filename . '-' . uniqid() . '.' . $extension;
+
+                $path = $file->storeAs($folder, $fullFilename, 'r2');
                 $uploadedPaths[] = $path;
             }
         }
 
-        // Usa la prima immagine come copertina (URL completo per compatibilità)
-        $coverUrl = \Illuminate\Support\Facades\Storage::disk('s3')->url($uploadedPaths[0]);
+        // Gestione Copertina
+        $coverIndex = $request->input('cover_image_index', 0);
+        if (!isset($uploadedPaths[$coverIndex])) {
+            $coverIndex = 0;
+        }
 
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        $disk = Storage::disk('r2');
+        $coverUrl = $disk->url($uploadedPaths[$coverIndex]);
+
+        // Pulizia Array Dati
+        $includes = array_filter($request->input('includes', []), fn($value) => !is_null($value) && $value !== '');
+        $excludes = array_filter($request->input('excludes', []), fn($value) => !is_null($value) && $value !== '');
+
+        // Creazione Record
         $journey = Journey::create([
             'title' => $request->title,
             'description' => $request->description,
             'price' => $request->price,
             'duration_days' => $request->duration_days,
             'image' => $coverUrl,
+            'includes' => array_values($includes),
+            'excludes' => array_values($excludes),
+            'itinerary' => $request->input('itinerary', []),
         ]);
 
-        // Salva tutte le immagini nella tabella correlata
+        // Associazione Immagini
         foreach ($uploadedPaths as $path) {
             \App\Models\JourneyImage::create([
                 'journey_id' => $journey->id,
@@ -72,7 +84,7 @@ class JourneyController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Viaggio creato con successo! Ora puoi inserirne un altro.');
+        return redirect()->route('journeys.index')->with('success', 'Viaggio creato con successo!');
     }
 
     /**
@@ -94,17 +106,52 @@ class JourneyController extends Controller
     /**
      * Aggiorna un viaggio nel database.
      */
-    public function update(Request $request, Journey $journey)
+    public function update(UpdateJourneyRequest $request, Journey $journey)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'duration_days' => 'required|integer|min:1',
-            'image' => 'required|url',
-        ]);
+        // I dati sono già validati
 
-        $journey->update($validated);
+        $data = $request->except(['images', 'cover_image_index']);
+
+        // Gestione Nuovi Upload
+        if ($request->hasFile('images')) {
+            $slug = Str::slug($request->title);
+            $folder = "journeys/{$slug}";
+            $uploadedPaths = [];
+
+            foreach ($request->file('images') as $file) {
+                $filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
+                $extension = $file->getClientOriginalExtension();
+                $fullFilename = $filename . '-' . uniqid() . '.' . $extension;
+
+                $path = $file->storeAs($folder, $fullFilename, 'r2');
+                $uploadedPaths[] = $path;
+            }
+
+            foreach ($uploadedPaths as $path) {
+                \App\Models\JourneyImage::create([
+                    'journey_id' => $journey->id,
+                    'path' => $path,
+                ]);
+            }
+
+            // Aggiornamento Copertina se Selezionata
+            $coverIndex = $request->input('cover_image_index', -1);
+            if ($coverIndex >= 0 && isset($uploadedPaths[$coverIndex])) {
+                /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+                $disk = Storage::disk('r2');
+                $data['image'] = $disk->url($uploadedPaths[$coverIndex]);
+            }
+        }
+
+        // Pulizia Array Dati
+        $includes = array_filter($request->input('includes', []), fn($value) => !is_null($value) && $value !== '');
+        $excludes = array_filter($request->input('excludes', []), fn($value) => !is_null($value) && $value !== '');
+
+        $data['includes'] = array_values($includes);
+        $data['excludes'] = array_values($excludes);
+        $data['itinerary'] = $request->input('itinerary', []);
+
+        $journey->update($data);
 
         return redirect()->route('journeys.index')->with('success', 'Viaggio modificato con successo!');
     }
@@ -114,9 +161,9 @@ class JourneyController extends Controller
      */
     public function destroy(Journey $journey)
     {
-        // Elimina le immagini associate dallo storage
+        // Pulizia Storage
         foreach ($journey->images as $image) {
-            \Illuminate\Support\Facades\Storage::disk('s3')->delete($image->path);
+            Storage::disk('r2')->delete($image->path);
             $image->delete();
         }
 

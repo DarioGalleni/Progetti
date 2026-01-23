@@ -1,133 +1,218 @@
 <x-layout>
-    <!-- Background Section -->
-    <div class="min-vh-100 d-flex align-items-center justify-content-center py-5 position-relative bg-dark"
-        style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=2021&q=80'); background-size: cover; background-position: center; background-attachment: fixed;">
-        <!-- Overlay -->
-        <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-50"></div>
-
-        <div class="container position-relative z-index-1">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <!-- Glass Card -->
-                    <div class="card border-0 rounded-4 overflow-hidden shadow-2xl animate-fade-in-up"
-                        style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px);">
-
-                        <!-- Header -->
-                        <div class="card-header bg-transparent border-0 p-5 pb-0 text-center">
-                            <span
-                                class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 mb-3 fw-bold letter-spacing-1">
-                                BACKOFFICE
-                            </span>
-                            <h1 class="display-5 fw-bold mb-2">Crea Nuova Avventura</h1>
-                            <p class="text-muted">Compila i dettagli per aggiungere una nuova destinazione.</p>
-                        </div>
-
-                        <div class="card-body p-5 pt-4">
-                            <!-- Success Message -->
-                            @if (session('success'))
-                                <div
-                                    class="alert alert-success border-0 bg-success-subtle text-success rounded-3 mb-4 d-flex align-items-center animate-bounce">
-                                    <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                                    <div>
-                                        <h6 class="fw-bold mb-0">Ottimo lavoro!</h6>
-                                        <p class="mb-0 small">{{ session('success') }}</p>
-                                    </div>
-                                </div>
-                            @endif
-
-                            <!-- Error Message -->
-                            @if ($errors->any())
-                                <div class="alert alert-danger border-0 bg-danger-subtle text-danger rounded-3 mb-4">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="bi bi-exclamation-triangle-fill fs-4 me-2"></i>
-                                        <h6 class="fw-bold mb-0">Attenzione</h6>
-                                    </div>
-                                    <ul class="mb-0 small ps-3">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-                            <form action="{{ route('journeys.store') }}" method="POST" class="needs-validation"
-                                enctype="multipart/form-data" novalidate>
-                                @csrf
-
-                                <!-- Title Field -->
-                                <div class="form-floating mb-4 reveal hover-lift">
-                                    <input type="text" class="form-control border-0 bg-light rounded-3 fw-bold"
-                                        id="title" name="title" value="{{ old('title') }}" placeholder="Titolo"
-                                        style="height: 60px;" required>
-                                    <label for="title" class="text-muted ps-4">Titolo del Viaggio</label>
-                                </div>
-
-                                <div class="row g-3 mb-4">
-                                    <!-- Price Field -->
-                                    <div class="col-md-6 reveal hover-lift" style="transition-delay: 0.1s;">
-                                        <div class="form-floating input-group has-validation">
-                                            <input type="number" step="0.01"
-                                                class="form-control border-0 bg-light rounded-start-3 fw-bold"
-                                                id="price" name="price" value="{{ old('price') }}" placeholder="0.00"
-                                                style="height: 60px;" required>
-                                            <span
-                                                class="input-group-text border-0 bg-primary text-white px-4 fw-bold rounded-end-3">€</span>
-                                            <label for="price" class="text-muted ps-4 z-index-1">Prezzo a
-                                                persona</label>
-                                        </div>
-                                    </div>
-                                    <!-- Duration Field -->
-                                    <div class="col-md-6 reveal hover-lift" style="transition-delay: 0.2s;">
-                                        <div class="form-floating">
-                                            <input type="number"
-                                                class="form-control border-0 bg-light rounded-3 fw-bold"
-                                                id="duration_days" name="duration_days"
-                                                value="{{ old('duration_days') }}" placeholder="Giorni"
-                                                style="height: 60px;" required>
-                                            <label for="duration_days" class="text-muted ps-4">Durata (Giorni)</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Images Field -->
-                                <div class="mb-4 reveal hover-lift" style="transition-delay: 0.3s;">
-                                    <label for="images" class="form-label text-muted fw-bold ms-2">Galleria
-                                        Immagini</label>
-                                    <input type="file" class="form-control form-control-lg border-0 bg-light rounded-3"
-                                        id="images" name="images[]" multiple accept="image/*" required>
-                                    <div class="form-text mt-2 ms-2"><i class="bi bi-info-circle me-1"></i> Seleziona
-                                        una o più immagini per il carosello. La prima sarà usata come copertina.</div>
-                                </div>
-
-                                <!-- Description Field -->
-                                <div class="form-floating mb-5 reveal hover-lift" style="transition-delay: 0.4s;">
-                                    <textarea class="form-control border-0 bg-light rounded-3" id="description"
-                                        name="description" placeholder="Descrizione"
-                                        style="height: 150px; resize: none;"
-                                        required>{{ old('description') }}</textarea>
-                                    <label for="description" class="text-muted ps-4">Descrizione emozionale e
-                                        dettagliata</label>
-                                </div>
-
-                                <!-- Actions -->
-                                <div class="d-flex justify-content-between align-items-center pt-3 reveal"
-                                    style="transition-delay: 0.5s;">
-                                    <a href="{{ route('journeys.index') }}"
-                                        class="btn btn-link text-muted text-decoration-none px-0 hover-translate-start">
-                                        <i class="bi bi-arrow-left me-1"></i> Torna alla lista
-                                    </a>
-                                    <button type="submit"
-                                        class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg hover-scale">
-                                        <i class="bi bi-rocket-takeoff-fill me-2"></i> Pubblica Viaggio
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+    <div class="bg-black min-vh-100 text-white py-5 font-monospace">
+        <div class="container">
+            <!-- Header -->
+            <div class="row mb-5 border-bottom border-secondary pb-3 align-items-end">
+                <div class="col-md-8">
+                    <span class="badge bg-secondary text-dark rounded-0 mb-2">BACKOFFICE</span>
+                    <h1 class="display-5 fw-bold text-white mb-0 text-uppercase">Nuova Avventura</h1>
+                </div>
+                <div class="col-md-4 text-md-end text-secondary small">
+                    DASHBOARD OPERATIVA
                 </div>
             </div>
+
+            <!-- Alerts -->
+            @if (session('success'))
+                <div class="alert alert-success bg-transparent text-success border-success rounded-0 d-flex align-items-center mb-4"
+                    role="alert">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    <div>{{ session('success') }}</div>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger bg-transparent text-danger border-danger rounded-0 mb-4" role="alert">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <span class="fw-bold">ATTENZIONE</span>
+                    </div>
+                    <ul class="mb-0 small ps-3">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('journeys.store') }}" method="POST" enctype="multipart/form-data" novalidate
+                class="needs-validation">
+                @csrf
+
+                <!-- Grid -->
+                <div class="row g-5">
+                    <!-- Left Column: inputs -->
+                    <div class="col-lg-8">
+
+                        <!-- Title -->
+                        <div class="mb-4">
+                            <label for="title"
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Titolo
+                                Viaggio</label>
+                            <input type="text"
+                                class="form-control bg-dark text-white border-secondary rounded-0 p-3 fs-5 focus-ring-light"
+                                id="title" name="title" value="{{ old('title') }}" placeholder="Inserisci il titolo..."
+                                required>
+                        </div>
+
+                        <div class="row g-4 mb-4">
+                            <!-- Price -->
+                            <div class="col-md-6">
+                                <label for="price"
+                                    class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Prezzo
+                                    (€)</label>
+                                <input type="number" step="0.01"
+                                    class="form-control bg-dark text-white border-secondary rounded-0 p-3 fs-5"
+                                    id="price" name="price" value="{{ old('price') }}" placeholder="0.00" required>
+                            </div>
+                            <!-- Duration -->
+                            <div class="col-md-6">
+                                <label for="duration_days"
+                                    class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Durata
+                                    (Giorni)</label>
+                                <input type="number"
+                                    class="form-control bg-dark text-white border-secondary rounded-0 p-3 fs-5"
+                                    id="duration_days" name="duration_days" value="{{ old('duration_days') }}"
+                                    placeholder="0" required>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-4">
+                            <label for="description"
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Descrizione</label>
+                            <textarea class="form-control bg-dark text-white border-secondary rounded-0 p-3"
+                                id="description" name="description" rows="10"
+                                placeholder="Scrivi una descrizione dettagliata..."
+                                required>{{ old('description') }}</textarea>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column: Images -->
+                    <div class="col-lg-4">
+                        <div class="mb-4">
+                            <label for="images"
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Galleria
+                                & Copertina</label>
+                            <input type="file" class="form-control bg-dark text-white border-secondary rounded-0 mb-3"
+                                id="images" name="images[]" multiple accept="image/*" required>
+                            <div class="form-text text-secondary mb-3 small">
+                                <i class="bi bi-info-circle me-1"></i> Carica le foto e seleziona la copertina.
+                            </div>
+
+                            <!-- Hidden input for cover index -->
+                            <input type="hidden" name="cover_image_index" id="coverImageIndex" value="0">
+
+                            <!-- Preview Container -->
+                            <div id="imagePreviewContainer" class="row g-2">
+                                <!-- Previews will be injected here via JS -->
+                            </div>
+                        </div>
+                        <!-- Details: Includes & Excludes -->
+                        <div class="row g-4 mb-4">
+                            <!-- Includes -->
+                            <div class="col-12">
+                                <label
+                                    class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Cosa
+                                    è incluso</label>
+                                <div id="includes-container">
+                                    <div class="input-group mb-2">
+                                        <input type="text"
+                                            class="form-control bg-dark text-white border-secondary rounded-0 p-2"
+                                            name="includes[]" placeholder="Es. Voli A/R">
+                                        <button type="button" class="btn btn-outline-secondary rounded-0"
+                                            onclick="removeItem(this)">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase mt-1"
+                                    onclick="addItem('includes-container', 'includes[]')">
+                                    <i class="bi bi-plus-lg me-1"></i> Aggiungi voce
+                                </button>
+                            </div>
+
+                            <!-- Excludes -->
+                            <div class="col-12">
+                                <label
+                                    class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Cosa
+                                    NON è incluso</label>
+                                <div id="excludes-container">
+                                    <div class="input-group mb-2">
+                                        <input type="text"
+                                            class="form-control bg-dark text-white border-secondary rounded-0 p-2"
+                                            name="excludes[]" placeholder="Es. Mance">
+                                        <button type="button" class="btn btn-outline-secondary rounded-0"
+                                            onclick="removeItem(this)">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="btn btn-sm btn-outline-secondary rounded-0 text-uppercase mt-1"
+                                    onclick="addItem('excludes-container', 'excludes[]')">
+                                    <i class="bi bi-plus-lg me-1"></i> Aggiungi voce
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Itinerary -->
+                        <div class="mb-5">
+                            <label
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase mb-3">Itinerario
+                                Giornaliero</label>
+                            <div id="itinerary-container">
+                                <!-- Day 1 -->
+                                <div class="card bg-dark border-secondary mb-3 itinerary-day">
+                                    <div
+                                        class="card-header bg-transparent border-secondary d-flex justify-content-between align-items-center">
+                                        <span class="text-white small text-uppercase fw-bold">Giorno <span
+                                                class="day-number">1</span></span>
+                                        <button type="button" class="btn btn-sm text-secondary hover-text-danger p-0"
+                                            onclick="removeDay(this)">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-2">
+                                            <input type="text"
+                                                class="form-control bg-black text-white border-secondary rounded-0 mb-2"
+                                                name="itinerary[0][title]"
+                                                placeholder="Titolo del giorno (es. Arrivo a Roma)" required>
+                                        </div>
+                                        <div>
+                                            <textarea
+                                                class="form-control bg-black text-white border-secondary rounded-0"
+                                                name="itinerary[0][description]" rows="3"
+                                                placeholder="Descrizione delle attività..." required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline-light w-100 rounded-0 text-uppercase py-2"
+                                onclick="addDay()">
+                                <i class="bi bi-plus-lg me-2"></i> Aggiungi Giorno
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- Actions -->
+                    <div
+                        class="col-12 border-top border-secondary pt-4 mt-2 d-flex justify-content-between align-items-center">
+                        <a href="{{ route('journeys.index') }}"
+                            class="text-secondary text-decoration-none small text-uppercase hover-text-white">
+                            <i class="bi bi-arrow-left me-1"></i> Torna alla lista
+                        </a>
+                        <button type="submit"
+                            class="btn btn-light rounded-0 px-5 py-3 fw-bold text-uppercase border-0 hover-scale">
+                            Pubblica Viaggio
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
-
 </x-layout>

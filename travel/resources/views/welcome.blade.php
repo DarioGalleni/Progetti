@@ -1,5 +1,6 @@
 <x-layout title="Home - StartJourney">
 
+    <!-- redirect immagini su cloudfare -->
     <style>
         :root {
             --hero-bg: url('{{ Storage::url('images/header.webp') }}');
@@ -15,7 +16,6 @@
         role="banner">
         <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-25"></div>
         <div class="position-absolute top-0 start-0 w-100 h-100 overlay-gradient"></div>
-
         <div class="container position-relative z-index-1 text-center">
             <span
                 class="d-inline-block py-1 px-3 rounded-pill bg-white bg-opacity-25 border border-white border-opacity-50 backdrop-blur-sm mb-4 reveal">
@@ -27,23 +27,6 @@
                 Non offriamo semplici vacanze, ma esperienze trasformative disegnate su misura per te. Scopri
                 destinazioni esclusive e itinerari unici.
             </p>
-            <nav class="d-flex justify-content-center gap-3 reveal" aria-label="Azioni principali">
-                <a href="{{ route('journeys.index') }}"
-                    class="btn btn-primary btn-lg px-5 py-3 rounded-pill fw-bold shadow-lg hover-scale"
-                    aria-label="Esplora i nostri viaggi">
-                    Trova la tua meta
-                </a>
-                <a href="#how-it-works"
-                    class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill fw-bold hover-scale backdrop-blur-sm"
-                    aria-label="Scopri come funziona">
-                    Come Funziona
-                </a>
-            </nav>
-        </div>
-
-        <div class="scroll-down-indicator text-white text-center opacity-75">
-            <span class="d-block small text-uppercase letter-spacing-2 mb-2">Scorri</span>
-            <i class="bi bi-chevron-down fs-3"></i>
         </div>
     </header>
 
@@ -116,7 +99,7 @@
 
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3 reveal">
-                    <div class="category-card">
+                    <div class="category-card parallax-scroll scroll-transform" data-parallax-speed="0.1">
                         <div class="category-bg cat-img-1"></div>
                         <div class="category-overlay">
                             <h3 class="h4 fw-bold mb-1">Relax & Spa</h3>
@@ -125,7 +108,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 reveal delay-1">
-                    <div class="category-card">
+                    <div class="category-card parallax-scroll scroll-transform" data-parallax-speed="-0.1">
                         <div class="category-bg cat-img-2"></div>
                         <div class="category-overlay">
                             <h3 class="h4 fw-bold mb-1">Avventura</h3>
@@ -134,7 +117,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 reveal delay-2">
-                    <div class="category-card">
+                    <div class="category-card parallax-scroll scroll-transform" data-parallax-speed="0.15">
                         <div class="category-bg cat-img-3"></div>
                         <div class="category-overlay">
                             <h3 class="h4 fw-bold mb-1">Cultura</h3>
@@ -143,7 +126,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 reveal delay-2">
-                    <div class="category-card">
+                    <div class="category-card parallax-scroll scroll-transform" data-parallax-speed="-0.05">
                         <div class="category-bg cat-img-4"></div>
                         <div class="category-overlay">
                             <h3 class="h4 fw-bold mb-1">Viaggi di Nozze</h3>
@@ -311,7 +294,8 @@
             <!-- (Keeping the loop/content similiar but wrapped in a carousel or grid? Stick to grid for now but polished) -->
             <div class="row g-4">
                 <div class="col-md-4 reveal">
-                    <div class="card border-0 shadow-lg p-4 h-100 rounded-4 bg-light position-relative">
+                    <div class="card border-0 shadow-lg p-4 h-100 rounded-4 bg-light position-relative parallax-scroll scroll-transform"
+                        data-parallax-speed="0.05">
                         <i class="bi bi-quote fs-1 text-primary opacity-25 position-absolute top-0 start-0 m-3"></i>
                         <div class="card-body position-relative z-index-1">
                             <div class="text-warning mb-3">
@@ -503,7 +487,8 @@
                             <p class="small text-muted mb-0">Powered by <strong>Laravel 12</strong>. Utilizza
                                 <strong>Eloquent ORM</strong> per interazioni efficienti con il DB, <strong>Storage
                                     Facades</strong> per la gestione asincrona dei file su Cloud (S3), e Controller
-                                <strong>RESTful</strong> per una gestione pulita delle risorse API-like.</p>
+                                <strong>RESTful</strong> per una gestione pulita delle risorse API-like.
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -513,7 +498,8 @@
                             <p class="small text-muted mb-0">Sviluppato con <strong>Blade Template Engine</strong> e
                                 <strong>Bootstrap 5</strong>. Implementa un design system personalizzato con effetti
                                 <strong>Glassmorphism</strong>, animazioni CSS3 e ottimizzazione degli asset tramite
-                                <strong>Vite</strong>.</p>
+                                <strong>Vite</strong>.
+                            </p>
                         </div>
                     </div>
                 </div>

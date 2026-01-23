@@ -1,7 +1,8 @@
 <x-layout>
     <!-- Parallax Hero for Details -->
     <header class="parallax-section d-flex align-items-end"
-        style="height: 60vh; background-image: url('{{ $journey->image }}');" role="banner">
+        style="height: 60vh; background-image: url('{{ $journey->image }}'); background-position: center; background-repeat: no-repeat; background-size: cover;"
+        role="banner">
         <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-to-t from-black opacity-75"
             aria-hidden="true"></div>
         <div class="container position-relative z-index-1 text-white pb-5 reveal">
@@ -46,61 +47,67 @@
 
                     <hr class="my-5 opacity-10">
 
-                    <h3 class="h4 fw-bold mb-3">Cosa è incluso</h3>
-                    <div class="row g-3">
+                    <h3 class="h4 fw-bold mb-3">Dettagli Incluso/Escluso</h3>
+                    <div class="row g-4">
                         <div class="col-md-6">
-                            <ul class="list-unstyled">
-                                <li class="mb-2 d-flex align-items-center">
-                                    <i class="bi bi-check-circle-fill text-success me-2"></i> Voli A/R inclusi
-                                </li>
-                                <li class="mb-2 d-flex align-items-center">
-                                    <i class="bi bi-check-circle-fill text-success me-2"></i> Hotel 4/5 Stelle
-                                </li>
-                                <li class="mb-2 d-flex align-items-center">
-                                    <i class="bi bi-check-circle-fill text-success me-2"></i> Colazioni incluse
-                                </li>
-                            </ul>
+                            <h5 class="text-success small text-uppercase fw-bold mb-3"><i
+                                    class="bi bi-check-circle-fill me-1"></i> Cosa è incluso</h5>
+                            @if(is_array($journey->includes) && count($journey->includes) > 0)
+                                <ul class="list-unstyled">
+                                    @foreach($journey->includes as $item)
+                                        <li class="mb-2 d-flex align-items-center">
+                                            <i class="bi bi-check2 text-success me-2"></i> {{ $item }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="text-muted small fst-italic">Nessuna informazione disponibile.</p>
+                            @endif
                         </div>
                         <div class="col-md-6">
-                            <ul class="list-unstyled">
-                                <li class="mb-2 d-flex align-items-center">
-                                    <i class="bi bi-check-circle-fill text-success me-2"></i> Guide locali esperte
-                                </li>
-                                <li class="mb-2 d-flex align-items-center">
-                                    <i class="bi bi-check-circle-fill text-success me-2"></i> Assicurazione medica
-                                </li>
-                                <li class="mb-2 d-flex align-items-center">
-                                    <i class="bi bi-check-circle-fill text-success me-2"></i> Trasferimenti privati
-                                </li>
-                            </ul>
+                            <h5 class="text-danger small text-uppercase fw-bold mb-3"><i
+                                    class="bi bi-x-circle-fill me-1"></i> Cosa NON è incluso</h5>
+                            @if(is_array($journey->excludes) && count($journey->excludes) > 0)
+                                <ul class="list-unstyled">
+                                    @foreach($journey->excludes as $item)
+                                        <li class="mb-2 d-flex align-items-center">
+                                            <i class="bi bi-x text-danger me-2"></i> {{ $item }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="text-muted small fst-italic">Nessuna informazione disponibile.</p>
+                            @endif
                         </div>
                     </div>
                 </div>
 
-                <!-- Itinerary Placeholder -->
-                <div class="bg-light p-4 rounded-4 shadow-sm reveal">
-                    <h3 class="h4 fw-bold mb-4">Itinerario Consigliato</h3>
-                    <div class="accordion" id="itineraryAccordion">
-                        @for ($i = 1; $i <= min($journey->duration_days, 5); $i++)
-                            <div class="accordion-item border-0 mb-2 rounded-3 overflow-hidden shadow-sm">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button {{ $i == 1 ? '' : 'collapsed' }} fw-bold" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#day{{ $i }}"
-                                        aria-expanded="{{ $i == 1 ? 'true' : 'false' }}">
-                                        Giorno {{ $i }} - Esplorazione e Avventura
-                                    </button>
-                                </h2>
-                                <div id="day{{ $i }}" class="accordion-collapse collapse {{ $i == 1 ? 'show' : '' }}"
-                                    data-bs-parent="#itineraryAccordion">
-                                    <div class="accordion-body text-muted">
-                                        Programma dettagliato per il giorno {{ $i }}. Visite guidate ai principali
-                                        monumenti, tempo libero per lo shopping e cena tipica in ristorante selezionato.
+                <!-- Itinerary -->
+                @if(is_array($journey->itinerary) && count($journey->itinerary) > 0)
+                    <div class="bg-light p-4 rounded-4 shadow-sm reveal">
+                        <h3 class="h4 fw-bold mb-4">Itinerario di Viaggio</h3>
+                        <div class="accordion" id="itineraryAccordion">
+                            @foreach($journey->itinerary as $index => $day)
+                                <div class="accordion-item border-0 mb-2 rounded-3 overflow-hidden shadow-sm">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button {{ $index == 0 ? '' : 'collapsed' }} fw-bold"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#day{{ $index }}"
+                                            aria-expanded="{{ $index == 0 ? 'true' : 'false' }}">
+                                            Giorno {{ $index + 1 }} - {{ $day['title'] ?? 'Dettagli Giorno' }}
+                                        </button>
+                                    </h2>
+                                    <div id="day{{ $index }}"
+                                        class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}"
+                                        data-bs-parent="#itineraryAccordion">
+                                        <div class="accordion-body text-muted">
+                                            {{ $day['description'] ?? 'Descrizione non disponibile.' }}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endfor
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
 
             <!-- Sidebar -->

@@ -1,24 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="style.css">
   <title>Lettura Nomi File</title>
 </head>
-<body class="vh-100 d-flex  align-items-center">
-<div class="container code">
-  <div class="row">
-    <div class="col-12 d-flex justify-content-center">
+
+<body>
+
+  <div class="glass-card text-center">
+    <h1 class="display-5 mb-3">Lettura Nomi File</h1>
+    <p class="lead mb-4">Seleziona una cartella per estrarre l'elenco dei file contenuti.</p>
+
+    <div class="file-upload-wrapper" id="dropZone">
       <input type="file" id="fileInput" webkitdirectory multiple>
-  <div id="output"></div>
+      <i class="bi bi-folder2-open upload-icon"></i>
+      <p class="mb-0">Clicca o trascina una cartella qui</p>
+    </div>
+
+    <div class="output-container" id="outputContainer">
+      <button class="btn-copy" id="copyBtn" title="Copia negli appunti">
+        <i class="bi bi-clipboard"></i>
+      </button>
+      <div class="stats" id="stats"></div>
+      <div class="code-block" id="output"></div>
     </div>
   </div>
-</div>
 
-  <script src="/script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
 
 </body>
+
 </html>
