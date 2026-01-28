@@ -44,10 +44,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge([
-            'is_booking' => $request->has('is_booking'),
-            'is_cash_payment' => $request->has('is_cash_payment'),
-        ]);
+
 
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
@@ -78,6 +75,9 @@ class CustomerController extends Controller
             ]);
         }
 
+        $validated['is_booking'] = $request->boolean('is_booking');
+        $validated['is_cash_payment'] = $request->boolean('is_cash_payment');
+
         Customer::create($validated);
 
         return redirect()->route('welcome')->with('success', 'Cliente aggiunto con successo!');
@@ -102,18 +102,23 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, Customer $customer)
     {
-        $request->merge([
-            'is_booking' => $request->has('is_booking'),
-            'is_cash_payment' => $request->has('is_cash_payment'),
-        ]);
+        // "tutte le modifiche dei record sono concesse fin alla data di partenza"
+        // Se la data di partenza è passata (ieri o prima), blocca la modifica.
+        if (Carbon::now()->startOfDay()->gt(Carbon::parse($customer->departure_date))) {
+            return redirect()->back()->with('error', 'Non è possibile modificare prenotazioni già concluse.');
+        }
+
 
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'nullable|string|max:255',
             'room' => 'required|integer',
-            'arrival_date' => 'required|date|after_or_equal:today',
+            'arrival_date' => 'required|date',
             'departure_date' => 'required|date|after:arrival_date|after_or_equal:today',
             'treatment' => 'required|in:BB,HB',
             'phone' => 'nullable|string|max:20',
@@ -126,9 +131,12 @@ class CustomerController extends Controller
             'is_cash_payment' => 'nullable|boolean',
         ]);
 
+        $validated['is_booking'] = $request->boolean('is_booking');
+        $validated['is_cash_payment'] = $request->boolean('is_cash_payment');
+
         $customer->update($validated);
 
-        return redirect()->route('customers.show', $customer)->with('success', 'Cliente aggiornato con successo!');
+        return redirect()->route('welcome')->with('success', "Il cliente {$customer->first_name} {$customer->last_name} è stato modificato.");
     }
 
     /**
@@ -162,7 +170,37 @@ class CustomerController extends Controller
     {
         $today = $request->input('date') ? Carbon::parse($request->input('date')) : Carbon::today();
         $departingCustomers = Customer::whereDate('departure_date', $today)->get();
-        return view('customers.today-departures-billing', compact('departingCustomers', 'today'));
+        return view('customers.departures', compact('departingCustomers', 'today'));
+    }
+
+    /**
+     * Show arrivals for a specific date.
+     */
+    public function arrivals(Request $request)
+    {
+        $today = $request->input('date') ? Carbon::parse($request->input('date')) : Carbon::today();
+        $arrivingCustomers = Customer::whereDate('arrival_date', $today)->get();
+        return view('customers.arrivals', compact('arrivingCustomers', 'today'));
+    }
+
+    /**
+     * Print departures for a specific date.
+     */
+    public function printDepartures(Request $request)
+    {
+        $today = $request->input('date') ? Carbon::parse($request->input('date')) : Carbon::today();
+        $departingCustomers = Customer::whereDate('departure_date', $today)->get();
+        return view('customers.departures-print', compact('departingCustomers', 'today'));
+    }
+
+    /**
+     * Print arrivals for a specific date.
+     */
+    public function printArrivals(Request $request)
+    {
+        $today = $request->input('date') ? Carbon::parse($request->input('date')) : Carbon::today();
+        $arrivingCustomers = Customer::whereDate('arrival_date', $today)->get();
+        return view('customers.arrivals-print', compact('arrivingCustomers', 'today'));
     }
 
     /**

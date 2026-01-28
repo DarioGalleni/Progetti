@@ -29,7 +29,7 @@ class UpdateJourneyRequest extends FormRequest
             'image' => 'nullable|url',
             // Immagini opzionali in update
             'images' => 'nullable|array|min:1',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5000',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:25000',
             'includes' => 'nullable|array',
             'includes.*' => 'nullable|string',
             'excludes' => 'nullable|array',
@@ -56,7 +56,9 @@ class UpdateJourneyRequest extends FormRequest
             'images.array' => 'Le immagini devono essere un array.',
             'images.*.image' => 'Il file deve essere un\'immagine.',
             'images.*.mimes' => 'I formati supportati sono: jpeg, png, jpg, gif, webp.',
-            'images.*.max' => 'L\'immagine non può superare i 5MB.',
+            'images.*.max' => 'L\'immagine non può superare i 25MB.',
+            'itinerary.*.title.required_with' => 'Il titolo della tappa è obbligatorio.',
+            'itinerary.*.description.required_with' => 'La descrizione della tappa è obbligatoria.',
         ];
     }
 }

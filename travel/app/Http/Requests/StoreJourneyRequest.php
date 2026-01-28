@@ -27,7 +27,7 @@ class StoreJourneyRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'duration_days' => 'required|integer|min:1',
             'images' => 'required|array|min:1',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5000',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:25000',
             'includes' => 'nullable|array',
             'includes.*' => 'nullable|string',
             'excludes' => 'nullable|array',
@@ -61,7 +61,9 @@ class StoreJourneyRequest extends FormRequest
             'images.min' => 'Carica almeno un\'immagine.',
             'images.*.image' => 'Il file deve essere un\'immagine.',
             'images.*.mimes' => 'I formati supportati sono: jpeg, png, jpg, gif, webp.',
-            'images.*.max' => 'L\'immagine non può superare i 5MB.',
+            'images.*.max' => 'L\'immagine non può superare i 25MB.',
+            'itinerary.*.title.required_with' => 'Il titolo della tappa è obbligatorio.',
+            'itinerary.*.description.required_with' => 'La descrizione della tappa è obbligatoria.',
         ];
     }
 }

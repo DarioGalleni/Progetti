@@ -128,15 +128,25 @@ document.addEventListener('DOMContentLoaded', function () {
 		window.addEventListener('resize', centerToday);
 	}
 
+
+
 	/* ==========================
-	   Modulo: Modale Ambiente di Test
+	   Modulo: Alert scompaiono da soli
 	   ========================== */
-	function initTestEnvironmentModal() {
-		const testModal = document.getElementById('testEnvironmentModal');
-		if (testModal && typeof bootstrap !== 'undefined') {
-			const modal = new bootstrap.Modal(testModal);
-			modal.show();
-		}
+	function initAutoDismissAlerts() {
+		setTimeout(function () {
+			let alerts = document.querySelectorAll('.alert');
+			alerts.forEach(function (alert) {
+				let closeButton = alert.querySelector('.btn-close');
+				if (closeButton) {
+					closeButton.click();
+				} else {
+					alert.style.transition = "opacity 0.5s ease";
+					alert.style.opacity = "0";
+					setTimeout(() => alert.remove(), 500);
+				}
+			});
+		}, 5000);
 	}
 
 	/* ==========================
@@ -144,5 +154,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	   ========================== */
 	initThemeModule();
 	initCalendarDragModule();
-	initTestEnvironmentModal();
+
+	initAutoDismissAlerts();
 });

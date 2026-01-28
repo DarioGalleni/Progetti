@@ -4,6 +4,12 @@
     <style>
         :root {
             --hero-bg: url('{{ Storage::url('images/header.webp') }}');
+            /* categorie */
+            --relax-bg: url('{{ Storage::url('images/relax.avif') }}');
+            --adventure-bg: url('{{ Storage::url('images/adventure.avif') }}');
+            --culture-bg: url('{{ Storage::url('images/culture.jpg') }}');
+            --honeymoon-bg: url('{{ Storage::url('images/honeymoon.avif') }}');
+            /* fine categorie */
             --stats-bg: url('{{ Storage::url('images/stats.avif') }}');
             --divider-bg: url('{{ Storage::url('images/parallax_divider_1.avif') }}');
             --newsletter-bg: url('{{ Storage::url('images/newsletter.avif') }}');
@@ -27,6 +33,12 @@
                 Non offriamo semplici vacanze, ma esperienze trasformative disegnate su misura per te. Scopri
                 destinazioni esclusive e itinerari unici.
             </p>
+            <div class="mt-4">
+                <a href="{{ route('technical.info') }}"
+                    class="btn btn-light rounded-pill px-5 py-3 fw-bold shadow-lg hover-scale text-primary">
+                    <i class="bi bi-info-circle-fill me-2"></i> Info Tecniche & Demo
+                </a>
+            </div>
         </div>
     </header>
 
@@ -38,7 +50,7 @@
                 <h2 class="display-4 fw-bold">Come Funziona</h2>
             </div>
 
-            <div class="row g-4 position-relative">
+            <div class="row g-4 position-relative d-flex justify-content-center">
                 <div class="col-md-4 reveal">
                     <div class="step-card">
                         <div class="step-number">01</div>
@@ -53,23 +65,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 reveal delay-1">
-                    <div class="step-card">
-                        <div class="step-number">02</div>
-                        <div class="step-content pt-4">
-                            <div
-                                class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex p-4 mb-4 shadow-sm">
-                                <i class="bi bi-calendar-check fs-2"></i>
-                            </div>
-                            <h3 class="h4 fw-bold">Prenota Facile</h3>
-                            <p class="text-muted">Un processo di prenotazione fluido e sicuro, con assistenza dedicata
-                                in ogni fase.</p>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-4 reveal delay-2">
                     <div class="step-card">
-                        <div class="step-number">03</div>
+                        <div class="step-number">02</div>
                         <div class="step-content pt-4">
                             <div
                                 class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex p-4 mb-4 shadow-sm">
@@ -93,8 +91,6 @@
                     <h2 class="display-4 fw-bold mb-0">Categorie Trending</h2>
                     <p class="text-muted mb-0 mt-2">Cosa stanno cercando i nostri viaggiatori</p>
                 </div>
-                <a href="{{ route('journeys.index') }}" class="btn btn-link text-decoration-none fw-bold">Vedi tutto <i
-                        class="bi bi-arrow-right"></i></a>
             </div>
 
             <div class="row g-4">
@@ -291,7 +287,7 @@
             <div class="text-center mb-5 reveal">
                 <h2 id="testimonials-heading" class="display-4 fw-bold">Dicono di noi</h2>
             </div>
-            <!-- (Keeping the loop/content similiar but wrapped in a carousel or grid? Stick to grid for now but polished) -->
+
             <div class="row g-4">
                 <div class="col-md-4 reveal">
                     <div class="card border-0 shadow-lg p-4 h-100 rounded-4 bg-light position-relative parallax-scroll scroll-transform"
@@ -317,7 +313,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- ... adding other 2 testimonials similarly ... -->
+
                 <div class="col-md-4 reveal delay-1">
                     <div class="card border-0 shadow-lg p-4 h-100 rounded-4 bg-light position-relative">
                         <i class="bi bi-quote fs-1 text-primary opacity-25 position-absolute top-0 start-0 m-3"></i>
@@ -462,79 +458,3 @@
         </div>
     </section>
 </x-layout>
-
-<!-- Welcome Modal -->
-<div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true"
-    data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content border-0 shadow-2xl rounded-4 overflow-hidden">
-            <div class="modal-header bg-primary text-white p-4">
-                <h5 class="modal-title fw-bold d-flex align-items-center" id="welcomeModalLabel">
-                    <i class="bi bi-info-circle-fill me-2 fs-4"></i> Benvenuto in StartJourney (Demo)
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-5">
-                <p class="lead text-muted mb-4">Questa è una <strong>versione di test</strong> del nostro sito web.
-                    Sentiti libero di esplorare, aggiungere, modificare ed eliminare viaggi a tuo piacimento!</p>
-
-                <div class="row g-4 mb-4">
-                    <div class="col-md-6">
-                        <div class="p-4 bg-light rounded-3 h-100 border">
-                            <h6 class="fw-bold text-primary mb-3"><i class="bi bi-code-slash me-2"></i> Backend
-                                (Architettura)</h6>
-                            <p class="small text-muted mb-0">Powered by <strong>Laravel 12</strong>. Utilizza
-                                <strong>Eloquent ORM</strong> per interazioni efficienti con il DB, <strong>Storage
-                                    Facades</strong> per la gestione asincrona dei file su Cloud (S3), e Controller
-                                <strong>RESTful</strong> per una gestione pulita delle risorse API-like.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="p-4 bg-light rounded-3 h-100 border">
-                            <h6 class="fw-bold text-success mb-3"><i class="bi bi-palette me-2"></i> Frontend (UI/UX)
-                            </h6>
-                            <p class="small text-muted mb-0">Sviluppato con <strong>Blade Template Engine</strong> e
-                                <strong>Bootstrap 5</strong>. Implementa un design system personalizzato con effetti
-                                <strong>Glassmorphism</strong>, animazioni CSS3 e ottimizzazione degli asset tramite
-                                <strong>Vite</strong>.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="alert alert-warning border-0 d-flex align-items-start rounded-3">
-                    <i class="bi bi-exclamation-triangle-fill fs-4 me-3 mt-1"></i>
-                    <div>
-                        <strong class="d-block mb-1">Nota Importante</strong>
-                        <p class="small mb-0">Le funzionalità di gestione, tasto <strong>"Nuovo"</strong>,
-                            <strong>Modifica</strong> ed
-                            <strong>Elimina</strong> sono normalmente riservate agli amministratori. In questa demo sono
-                            aperte a tutti
-                            per scopi dimostrativi.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer bg-light p-4 border-0 justify-content-center">
-                <button type="button" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-sm"
-                    data-bs-dismiss="modal">
-                    Ho Capito, Fammi Entrare!
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Controlla se la modale è già stata mostrata in questa sessione
-        if (!sessionStorage.getItem('welcomeModalShown')) {
-            var myModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
-            myModal.show();
-            // Imposta il flag per non mostrarla più in questa sessione (opzionale, rimuovere riga sotto se si vuole sempre vedere)
-            // sessionStorage.setItem('welcomeModalShown', 'true');
-        }
-    });
-</script>

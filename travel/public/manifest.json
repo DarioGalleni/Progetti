@@ -1,11 +1,12 @@
 {
-    "name": "Gestionale Gemma del Mare",
-    "short_name": "LPT",
+    "name": "Travel",
+    "short_name": "Travel",
     "start_url": "/",
-    "background_color": "#0D6EFD",
-    "description": "Sistema Gestionale Hotel",
+    "background_color": "#061E29",
+    "description": "Travel",
     "display": "standalone",
-    "theme_color": "#0D6EFD",
+    "theme_color": "#061E29",
+    "orientation": "portrait",
     "icons": [
         {
             "src": "logo.png",

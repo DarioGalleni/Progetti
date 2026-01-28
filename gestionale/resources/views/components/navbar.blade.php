@@ -30,6 +30,11 @@
             Partenze
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('customers.arrivals') }}">
+            Arrivi
+          </a>
+        </li>
         <li class="nav-item ms-2">
           <button id="enable-night-mode" class="btn btn-dark" title="Attiva modalità notte">
             <span class="theme-icon"><i class="fas fa-moon"></i></span>
@@ -45,6 +50,11 @@
               <i class="fas fa-broom"></i>
             </button>
           </form>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('info') }}">
+            <i class="fas fa-info-circle"></i> Info
+          </a>
         </li>
       </ul>
       <form class="d-flex" role="search" method="GET" action="{{ route('customers.search') }}">

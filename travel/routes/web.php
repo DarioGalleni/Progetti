@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JourneyController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,15 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('journeys/{journey}/gallery', [JourneyController::class, 'gallery'])->name('journeys.gallery');
+Route::view('/technical-info', 'technical_info')->name('technical.info');
+Route::get('/admin/journeys', [JourneyController::class, 'listTable'])->name('journeys.table');
 Route::resource('journeys', JourneyController::class);
+
+Route::get('/pulisci', function () {
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('optimize:clear');
+    return 'Cache di sistema pulita! (route, config, view, optimize)';
+});

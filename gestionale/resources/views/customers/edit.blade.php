@@ -12,6 +12,16 @@
                         </p>
                     </div>
                     <div class="card-body p-4 p-md-5">
+                        @if ($errors->any())
+                            <div class="alert alert-danger shadow-sm border-0 mb-4 rounded-3">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <form action="{{ route('customers.update', $customer->id) }}" method="POST">
                             @csrf
                             @method('PUT')
@@ -95,6 +105,7 @@
                             <div class="row g-3 mb-3">
                                 <div class="col-md-6">
                                     <div class="form-check form-switch p-3 bg-light rounded border">
+                                        <input type="hidden" name="is_booking" value="0">
                                         <input class="form-check-input" type="checkbox" id="is_booking"
                                             name="is_booking" value="1" {{ old('is_booking', $customer->is_booking) ? 'checked' : '' }}>
                                         <label class="form-check-label fw-bold small text-muted ms-2"
@@ -103,6 +114,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-switch p-3 bg-light rounded border">
+                                        <input type="hidden" name="is_cash_payment" value="0">
                                         <input class="form-check-input" type="checkbox" id="is_cash_payment"
                                             name="is_cash_payment" value="1" {{ old('is_cash_payment', $customer->is_cash_payment) ? 'checked' : '' }}>
                                         <label class="form-check-label fw-bold small text-muted ms-2"

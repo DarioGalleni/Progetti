@@ -27,18 +27,6 @@
                                 <i class="bi bi-images me-2"></i> Galleria
                             </a>
                         @endif
-                        <a href="{{ route('journeys.edit', $journey) }}"
-                            class="btn btn-outline-secondary rounded-pill px-4 fw-bold hover-scale me-2">
-                            <i class="bi bi-pencil me-2"></i> Modifica
-                        </a>
-                        <form action="{{ route('journeys.destroy', $journey) }}" method="POST" class="d-inline"
-                            onsubmit="return confirm('Sei sicuro di voler eliminare questo viaggio?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-outline-danger rounded-pill px-4 fw-bold hover-scale">
-                                <i class="bi bi-trash me-2"></i> Elimina
-                            </button>
-                        </form>
                     </div>
 
                     <p class="lead text-muted" style="text-align: justify; line-height: 1.8;">
@@ -125,28 +113,22 @@
                                     class="display-4 fw-bold text-primary">€{{ number_format($journey->price, 0, ',', '.') }}</span>
                             </div>
 
-                            <form>
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold small text-uppercase">Data di Partenza</label>
-                                    <input type="date" class="form-control form-control-lg bg-light border-0">
-                                </div>
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold small text-uppercase">Viaggiatori</label>
-                                    <select class="form-select form-select-lg bg-light border-0">
-                                        <option value="1">1 Adulto</option>
-                                        <option value="2" selected>2 Adulti</option>
-                                        <option value="3">3 Adulti</option>
-                                        <option value="4">4 Adulti</option>
-                                    </select>
-                                </div>
-                                <button type="button"
-                                    class="btn btn-warning btn-lg w-100 rounded-pill fw-bold hover-scale shadow-sm">
-                                    Richiedi Preventivo
-                                </button>
-                                <p class="text-center mt-3 small text-muted">
-                                    <i class="bi bi-lock-fill"></i> Prenotazione sicura e senza impegno immediato
+                            <div class="d-grid gap-3">
+                                <a href="mailto:info@startjourney.com?subject=Richiesta%20info:%20{{ urlencode($journey->title) }}&body=ID%20Viaggio:%20{{ $journey->id }}%20(NON%20CANCELLARE%20NECESSARIO%20PER%20USO%20INTERNO)%0D%0A%0D%0ASalve,%20vorrei%20maggiori%20informazioni%20su%20questo%20viaggio..."
+                                    class="btn btn-warning btn-lg rounded-pill fw-bold hover-scale shadow-sm">
+                                    <i class="bi bi-envelope-fill me-2"></i> Invia Email
+                                </a>
+
+                                <a href="https://wa.me/39061234567?text=Richiesta%20info:%20{{ urlencode($journey->title) }}%0A(ID:%20{{ $journey->id }}%20-%20NON%20CANCELLARE%20NECESSARIO%20PER%20USO%20INTERNO)%0A%0ASalve,%20vorrei%20maggiori%20informazioni..."
+                                    target="_blank"
+                                    class="btn btn-success btn-lg rounded-pill fw-bold hover-scale shadow-sm">
+                                    <i class="bi bi-whatsapp me-2"></i> Contattaci su WhatsApp
+                                </a>
+
+                                <p class="text-center mt-2 small text-muted">
+                                    <i class="bi bi-lock-fill"></i> Risposta garantita entro 24h
                                 </p>
-                            </form>
+                            </div>
                         </div>
                     </div>
 

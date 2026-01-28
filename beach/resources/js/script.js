@@ -129,15 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Avvia il modulo calendario
     initCalendarDragModule();
 
-    /* ==========================================================================
-       SEZIONE 2b: Gestione Modale Info
-       Descrizione: Mostra il modale di benvenuto all'avvio automaticamente.
-       ========================================================================== */
-    const infoModalEl = document.getElementById('infoModal');
-    if (infoModalEl) {
-        const infoModal = new bootstrap.Modal(infoModalEl);
-        infoModal.show();
-    }
+
 
 
     /* ==========================================================================

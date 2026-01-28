@@ -132,6 +132,7 @@
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <div class="form-check form-switch p-3 bg-light rounded border">
+                                <input type="hidden" name="is_booking" value="0">
                                 <input class="form-check-input" type="checkbox" id="is_booking" name="is_booking"
                                     value="1" {{ old('is_booking') ? 'checked' : '' }}>
                                 <label class="form-check-label fw-bold small text-muted ms-2"
@@ -140,6 +141,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-check form-switch p-3 bg-light rounded border">
+                                <input type="hidden" name="is_cash_payment" value="0">
                                 <input class="form-check-input" type="checkbox" id="is_cash_payment"
                                     name="is_cash_payment" value="1" {{ old('is_cash_payment') ? 'checked' : '' }}>
                                 <label class="form-check-label fw-bold small text-muted ms-2"

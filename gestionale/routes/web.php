@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\Route;
 
 // Home / Pagina di Benvenuto
 Route::get('/', [CustomerController::class, 'welcome'])->name('welcome');
+Route::view('/info', 'info')->name('info');
 
 // Rotte Specifiche Clienti
 Route::get('/customers/search', [CustomerController::class, 'search'])->name('customers.search');
 Route::get('/customers/departures/today/billing', [CustomerController::class, 'todayDeparturesBilling'])->name('customers.todayDeparturesBilling');
+Route::get('/customers/departures/print', [CustomerController::class, 'printDepartures'])->name('customers.departures.print');
+Route::get('/customers/arrivals', [CustomerController::class, 'arrivals'])->name('customers.arrivals');
+Route::get('/customers/arrivals/print', [CustomerController::class, 'printArrivals'])->name('customers.arrivals.print');
 Route::get('/customers/restaurant', [RoomController::class, 'restaurant'])->name('customers.restaurant');
 Route::get('/customers/restaurant/print', [RoomController::class, 'printRestaurant'])->name('customers.restaurant.print');
 

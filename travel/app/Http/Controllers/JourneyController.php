@@ -20,6 +20,15 @@ class JourneyController extends Controller
     }
 
     /**
+     * Mostra la tabella di amministrazione interna.
+     */
+    public function listTable()
+    {
+        $journeys = Journey::all();
+        return view('journeys.table', compact('journeys'));
+    }
+
+    /**
      * Mostra il form per creare un nuovo viaggio.
      */
     public function create()

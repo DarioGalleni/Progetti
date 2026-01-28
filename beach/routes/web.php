@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/prenotazioni/{id}', [PrenotazioneController::class, 'update'])->name('prenotazioni.update');
     Route::delete('/prenotazioni/{id}', [PrenotazioneController::class, 'destroy'])->name('prenotazioni.destroy');
     Route::get('/prenotazioni/{prenotazione}', [App\Http\Controllers\PrenotazioneController::class, 'show'])->name('prenotazioni.show');
+    Route::get('/technology', [App\Http\Controllers\TechnologyController::class, 'index'])->name('technology');
 });
 
 // Auth Routes

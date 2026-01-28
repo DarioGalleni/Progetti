@@ -11,6 +11,7 @@
         ->startOfWeek(Carbon::MONDAY);
 
     $lastDayOfCalendar = $selectedMonth->copy()
+        ->addMonth()
         ->endOfMonth()
         ->endOfWeek(Carbon::SUNDAY);
 
@@ -189,32 +190,5 @@
         </div>
     </div>
 
-    <!-- <div class="modal fade" id="testEnvironmentModal" tabindex="-1" aria-labelledby="testEnvironmentModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="testEnvironmentModalLabel">
-                        <i class="fas fa-info-circle me-2"></i>Ambiente di Test
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-4 text-center">
-                    <div class="mb-3">
-                        <i class="fas fa-flask fa-3x text-primary opacity-50"></i>
-                    </div>
-                    <h4 class="fw-bold mb-3">Benvenuto!</h4>
-                    <p class="mb-2 text-muted">Questa è una versione dimostrativa.</p>
-                    <p class="mb-0">Puoi effettuare tutti i tentativi, le modifiche e le prove che desideri in totale
-                        libertà.</p>
-                </div>
-                <div class="modal-footer justify-content-center border-0 pb-4">
-                    <button type="button" class="btn btn-primary px-4 rounded-pill" data-bs-dismiss="modal">
-                        Ho Capito, Iniziamo!
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div> -->
+
 </x-layout>

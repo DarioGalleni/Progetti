@@ -4,21 +4,19 @@
             <div class="card-header bg-white border-bottom border-light pt-4 pb-3">
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
                     <h4 class="mb-0 text-dark fw-bold">
-                        <i class="fas fa-plane-departure me-2"></i><span class="text-primary">Partenze</span>
+                        <i class="fas fa-suitcase-rolling me-2"></i><span class="text-danger">Partenze</span>
                     </h4>
 
                     <form method="GET" action="{{ route('customers.todayDeparturesBilling') }}"
                         class="d-flex align-items-center gap-2">
                         <input type="date"
-                            class="form-control form-control-lg border-primary shadow-sm fw-bold text-primary" id="date"
-                            name="date" value="{{ $today->format('Y-m-d') }}" onchange="this.form.submit()"
+                            class="form-control form-control-lg border-danger shadow-sm fw-bold text-danger text-center"
+                            id="date" name="date" value="{{ $today->format('Y-m-d') }}" onchange="this.form.submit()"
                             style="min-width: 200px;">
                     </form>
 
                     <div>
-                        <a href="{{ route('welcome') }}" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-1"></i>Indietro
-                        </a>
+                        {{-- Elimina tasto indietro come richiesto --}}
                     </div>
                 </div>
             </div>
@@ -34,21 +32,21 @@
                         <table class="table table-hover align-middle">
                             <thead class="table-light">
                                 <tr>
-                                    <th class="py-3 ps-3">Nome</th>
-                                    <th class="py-3">Cognome</th>
+                                    <th class="py-3 text-center">Nominativo</th>
                                     <th class="py-3 text-center">Camera</th>
-                                    <th class="py-3 text-end pe-3">Azioni</th>
+                                    <th class="py-3 text-center">Azioni</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($departingCustomers->sortBy('room', SORT_NATURAL) as $customer)
                                     <tr>
-                                        <td class="ps-3 fw-medium">{{ $customer->first_name }}</td>
-                                        <td class="fw-medium">{{ $customer->last_name }}</td>
+                                        <td class="text-center fw-medium">
+                                            {{ $customer->first_name }} {{ $customer->last_name }}
+                                        </td>
                                         <td class="text-center font-monospace">{{ $customer->room }}</td>
-                                        <td class="text-end pe-3">
+                                        <td class="text-center">
                                             <a href="{{ route('customers.bill', $customer->id) }}"
-                                                class="btn btn-sm btn-primary rounded-pill px-3 shadow-sm">
+                                                class="btn btn-sm btn-danger rounded-pill px-3 shadow-sm">
                                                 <i class="fas fa-file-invoice-dollar me-1"></i> Elabora Conto
                                             </a>
                                         </td>
@@ -59,12 +57,32 @@
                     </div>
                 @endif
 
-                <div class="mt-4 d-flex justify-content-center">
-                    <a href="{{ route('welcome') }}" class="btn btn-outline-secondary rounded-pill px-4">
-                        <i class="fas fa-home me-2"></i>Torna alla Home
-                    </a>
+                <div class="mt-4 d-flex justify-content-center gap-3">
+                    <button
+                        onclick="printExternal('{{ route('customers.departures.print', ['date' => $today->format('Y-m-d')]) }}')"
+                        class="btn btn-danger rounded-pill px-4 shadow-sm">
+                        <i class="fas fa-print me-2"></i>Stampa
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
+
+    <script>
+        function printExternal(url) {
+            var iframe = document.createElement('iframe');
+            iframe.style.position = 'fixed';
+            iframe.style.right = '0';
+            iframe.style.bottom = '0';
+            iframe.style.width = '0';
+            iframe.style.height = '0';
+            iframe.style.border = '0';
+            iframe.src = url;
+            document.body.appendChild(iframe);
+            // The iframe will print itself via its own onload event
+        }
+    </script>
+    </div>
+    </div>
     </div>
 </x-layout>
