@@ -1,5 +1,4 @@
-<x-layout>
-    @section('title', 'Modifica Gruppo')
+<x-layout title="Modifica Gruppo">
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
@@ -33,7 +32,7 @@
                                 <label for="description" class="form-label fw-bold text-secondary">Descrizione
                                     Gruppo</label>
                                 <input type="text" class="form-control form-control-lg shadow-sm" id="description"
-                                    name="description" value="{{ old('description', $customer->last_name) }}" required>
+                                    name="description" value="{{ old('description', $customer->group_name) }}" required>
                             </div>
 
                             <div class="row g-3 mb-4">

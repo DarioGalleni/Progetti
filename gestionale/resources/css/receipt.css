@@ -1,0 +1,205 @@
+/* ==================== GENERALE ==================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* ==================== BOX RICEVUTA ==================== */
+.invoice-box {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    line-height: 20px;
+    color: #555;
+}
+
+/* ==================== HEADER RICEVUTA ==================== */
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #336633;
+}
+
+.hotel-info {
+    flex: 1;
+}
+
+.hotel-logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #336633;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hotel-address {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.invoice-title {
+    text-align: right;
+    flex: 0 0 auto;
+}
+
+.invoice-title h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.invoice-title small {
+    color: #999;
+    font-size: 12px;
+}
+
+/* ==================== SEZIONI ==================== */
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    color: #333;
+}
+
+.kv-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.kv-row:last-child {
+    border-bottom: none;
+}
+
+.kv-label {
+    font-weight: 500;
+}
+
+.kv-value {
+    font-weight: 600;
+    color: #000;
+}
+
+/* ==================== TOTALE ==================== */
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+    border-top: 2px solid #333;
+    margin-top: 20px;
+}
+
+/* ==================== FOOTER ==================== */
+.footer-note {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+
+.print-btn {
+    display: block;
+}
+
+/* ==================== PULSANTI ==================== */
+.btn-primary {
+    background-color: #336633;
+    border-color: #336633;
+}
+
+.btn-primary:hover {
+    background-color: #264d26;
+    border-color: #264d26;
+}
+
+/* ==================== STAMPA ==================== */
+@media print {
+    @page {
+        margin: 1cm;
+        size: auto;
+    }
+
+    body {
+        visibility: hidden;
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+    }
+
+    .invoice-box {
+        visibility: visible;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .invoice-header {
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+
+    .hotel-logo {
+        font-size: 20px;
+    }
+
+    .invoice-title h1 {
+        font-size: 24px;
+    }
+
+    .section-title {
+        margin-top: 10px;
+        margin-bottom: 2px;
+        padding-bottom: 2px;
+        font-size: 14px;
+    }
+
+    .kv-row {
+        padding: 1px 0;
+    }
+
+    .total-row {
+        font-size: 16px;
+        margin-top: 10px;
+        padding: 5px 0;
+    }
+
+    .footer-note {
+        margin-top: 15px;
+        padding-top: 5px;
+    }
+
+    .print-btn {
+        display: none;
+    }
+}

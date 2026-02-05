@@ -1,59 +1,77 @@
-<x-layout>
-    <div class="container py-5">
-        <div class="card shadow border-0 rounded-3">
-            <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="fw-bold text-primary mb-0">
-                        <i class="fas fa-search me-2"></i>Risultati della Ricerca
-                    </h2>
-                    <a href="{{ route('welcome') }}" class="btn btn-outline-secondary">
-                        <i class="fas fa-arrow-left me-2"></i>Torna al Calendario
-                    </a>
-                </div>
+@extends('components.layout')
 
-                @if ($customers->isEmpty())
-                    <div class="alert alert-warning shadow-sm border-0 d-flex align-items-center" role="alert">
-                        <i class="fas fa-exclamation-triangle me-3 fs-4"></i>
-                        <div>
-                            Nessun cliente trovato per "<strong>{{ $query }}</strong>".
-                        </div>
-                    </div>
+@section('content')
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold text-primary">
+                @if(request('q'))
+                    Risultati ricerca per: "{{ request('q') }}"
                 @else
-                    <p class="text-muted mb-3">
-                        Trovati <span class="fw-bold text-dark">{{ $customers->count() }}</span> risultati per
-                        "<strong>{{ $query }}</strong>":
-                    </p>
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th class="py-3 ps-3">Nome</th>
-                                    <th class="py-3">Cognome</th>
-                                    <th class="py-3">Telefono</th>
-                                    <th class="py-3">Email</th>
-                                    <th class="py-3 text-end pe-3">Azioni</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($customers as $customer)
-                                    <tr>
-                                        <td class="ps-3 fw-medium">{{ $customer->first_name }}</td>
-                                        <td class="fw-medium">{{ $customer->last_name }}</td>
-                                        <td>{{ $customer->phone ?? 'N/A' }}</td>
-                                        <td>{{ $customer->email }}</td>
-                                        <td class="text-end pe-3">
-                                            <a href="{{ route('customers.show', $customer->id) }}"
-                                                class="btn btn-primary btn-sm shadow-sm rounded-pill px-3">
-                                                Dettagli <i class="fas fa-chevron-right ms-1"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                    Elenco Ospiti
                 @endif
-            </div>
+            </h2>
         </div>
     </div>
-</x-layout>
+
+    @if($customers->isEmpty())
+        <div class="alert alert-info text-center">
+            Nessun ospite trovato{{ request('q') ? ' per la ricerca effettuata.' : '.' }}
+        </div>
+    @else
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="ps-4">Ospite</th>
+                                <th>Camera</th>
+                                <th>Periodo</th>
+                                <th>Contatti</th>
+                                <th class="text-end pe-4">Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($customers as $customer)
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="fw-bold">{{ $customer->first_name }} {{ $customer->last_name }}</div>
+                                        <div class="small text-muted">{{ $customer->pax }} pax - {{ $customer->treatment }}</div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary">{{ $customer->room_number }}</span>
+                                    </td>
+                                    <td>
+                                        <div class="small">It: {{ \Carbon\Carbon::parse($customer->arrival_date)->format('d/m/Y') }}</div>
+                                        <div class="small">Out: {{ \Carbon\Carbon::parse($customer->departure_date)->format('d/m/Y') }}</div>
+                                    </td>
+                                    <td>
+                                        @if($customer->phone)
+                                            <div><i class="bi bi-telephone me-1"></i> {{ $customer->phone }}</div>
+                                        @endif
+                                        @if($customer->email)
+                                            <div class="small text-muted"><i class="bi bi-envelope me-1"></i> {{ $customer->email }}</div>
+                                        @endif
+                                    </td>
+                                    <td class="text-end pe-4">
+                                        <a href="{{ route('customers.show', $customer) }}" class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-eye"></i> Dettagli
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        @if(method_exists($customers, 'links'))
+            <div class="d-flex justify-content-center mt-4">
+                {{ $customers->links() }}
+            </div>
+        @endif
+    @endif
+</div>
+@endsection

@@ -1,5 +1,4 @@
-<x-layout>
-    @section('title', 'Aggiungi Gruppo')
+<x-layout title="Aggiungi Gruppo">
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
@@ -40,13 +39,15 @@
                                     <label for="arrival_date" class="form-label fw-bold text-secondary">Data
                                         Arrivo</label>
                                     <input type="date" class="form-control shadow-sm" id="arrival_date"
-                                        name="arrival_date" value="{{ old('arrival_date') }}" required>
+                                        name="arrival_date" value="{{ old('arrival_date') }}" 
+                                        min="{{ date('Y-m-d') }}" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="departure_date" class="form-label fw-bold text-secondary">Data
                                         Partenza</label>
                                     <input type="date" class="form-control shadow-sm" id="departure_date"
-                                        name="departure_date" value="{{ old('departure_date') }}" required>
+                                        name="departure_date" value="{{ old('departure_date') }}" 
+                                        min="{{ date('Y-m-d', strtotime('+1 day')) }}" required>
                                 </div>
                             </div>
 
@@ -62,7 +63,7 @@
                                     </button>
                                 </div>
 
-                                <div class="row g-2" id="rooms-container">
+                                <div class="row g-2" id="rooms-container" style="max-height: 300px; overflow-y: auto;">
                                     @foreach ($rooms as $roomNumber => $roomLabel)
                                         <div class="col-4 col-sm-3 col-md-3">
                                             <div class="form-check card h-100 p-2 border shadow-sm text-center">
@@ -94,19 +95,7 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const selectAllBtn = document.getElementById('select-all');
-            const deselectAllBtn = document.getElementById('deselect-all');
-            const checkboxes = document.querySelectorAll('.room-checkbox');
-
-            selectAllBtn.addEventListener('click', function () {
-                checkboxes.forEach(cb => cb.checked = true);
-            });
-
-            deselectAllBtn.addEventListener('click', function () {
-                checkboxes.forEach(cb => cb.checked = false);
-            });
-        });
-    </script>
+    <x-slot name="scripts">
+        @vite(['resources/js/groups.js'])
+    </x-slot>
 </x-layout>

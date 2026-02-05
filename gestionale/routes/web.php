@@ -1,48 +1,77 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\CustomerExpenseController;
-use App\Http\Controllers\GroupController;
-use App\Http\Controllers\RoomController;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CleaningController;
+use App\Http\Controllers\BillingController;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ReceptionController;
+use App\Http\Controllers\GroupController;
 
-// Home / Pagina di Benvenuto
-Route::get('/', [CustomerController::class, 'welcome'])->name('welcome');
-Route::view('/info', 'info')->name('info');
+use App\Http\Controllers\DatabaseSyncController;
 
-// Rotte Specifiche Clienti
-Route::get('/customers/search', [CustomerController::class, 'search'])->name('customers.search');
-Route::get('/customers/departures/today/billing', [CustomerController::class, 'todayDeparturesBilling'])->name('customers.todayDeparturesBilling');
-Route::get('/customers/departures/print', [CustomerController::class, 'printDepartures'])->name('customers.departures.print');
-Route::get('/customers/arrivals', [CustomerController::class, 'arrivals'])->name('customers.arrivals');
-Route::get('/customers/arrivals/print', [CustomerController::class, 'printArrivals'])->name('customers.arrivals.print');
-Route::get('/customers/restaurant', [RoomController::class, 'restaurant'])->name('customers.restaurant');
-Route::get('/customers/restaurant/print', [RoomController::class, 'printRestaurant'])->name('customers.restaurant.print');
+/* ==================== HOME ==================== */
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-// Rotte Gruppi
-Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
-Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
-Route::get('/groups/{customer}/edit', [GroupController::class, 'edit'])->name('groups.edit');
-Route::put('/groups/{customer}', [GroupController::class, 'update'])->name('groups.update');
-Route::delete('/groups/{customer}', [GroupController::class, 'destroy'])->name('groups.destroy');
+/* ==================== CLIENTI ==================== */
+Route::prefix('customers')->name('customers.')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('index');
+    Route::get('create', [CustomerController::class, 'create'])->name('create');
+    Route::post('/', [CustomerController::class, 'store'])->name('store');
+    Route::get('{customer}', [CustomerController::class, 'show'])->name('show');
+    Route::get('{customer}/edit', [CustomerController::class, 'edit'])->name('edit');
+    Route::match(['put', 'patch'], '{customer}', [CustomerController::class, 'update'])->name('update');
+    Route::delete('{customer}', [CustomerController::class, 'destroy'])->name('destroy');
+});
 
-// Risorsa Clienti
-Route::resource('customers', CustomerController::class);
+/* ==================== GRUPPI ==================== */
+Route::prefix('groups')->name('groups.')->group(function () {
+    Route::get('/create', [GroupController::class, 'create'])->name('create');
+    Route::post('/', [GroupController::class, 'store'])->name('store');
+    Route::get('/{groupId}', [GroupController::class, 'show'])->name('show');
+    Route::get('/{groupId}/edit', [GroupController::class, 'edit'])->name('edit');
+    Route::put('/{groupId}', [GroupController::class, 'update'])->name('update');
+    Route::delete('/{groupId}', [GroupController::class, 'destroy'])->name('destroy');
+});
 
-// Rotte Camere
-Route::get('/rooms/departures/today', [RoomController::class, 'todayDepartures'])->name('rooms.todayDepartures');
-Route::get('/rooms/departures/today/print', [RoomController::class, 'printTodayDepartures'])->name('rooms.todayDepartures.print');
+/* ==================== FATTURAZIONE ==================== */
+Route::prefix('billing')->name('billing.')->group(function () {
+    Route::get('{customer}/expenses', [BillingController::class, 'expenses'])->name('expenses');
+    Route::post('{customer}/expenses', [BillingController::class, 'storeExpense'])->name('storeExpense');
+    Route::post('{customer}/expenses/update', [BillingController::class, 'updateExpenses'])->name('expenses.update');
+    Route::get('{customer}/expenses/print', [BillingController::class, 'printExpenses'])->name('expenses.print');
+    Route::get('{customer}/bill/print', [BillingController::class, 'printBill'])->name('bill.print');
+    Route::get('{customer}/receipt', [BillingController::class, 'receipt'])->name('receipt');
+});
 
-// Spese e Fatturazione Clienti
-Route::get('/customers/{customer}/bill', [CustomerController::class, 'showBill'])->name('customers.bill');
-Route::get('/customers/{customer}/print-bill', [CustomerController::class, 'printBill'])->name('customers.print_bill');
-Route::get('/customers/{customer}/print-receipt', [CustomerController::class, 'printReceipt'])->name('customers.print_receipt');
-Route::get('/customers/{customer}/expenses', [CustomerExpenseController::class, 'showUpdateExpenses'])->name('customers.expenses.show');
-Route::post('/customers/{customer}/expenses', [CustomerExpenseController::class, 'updateExpenses'])->name('customers.expenses.update');
+/* ==================== MOBILE ==================== */
+Route::prefix('mobile')->name('mobile.')->group(function () {
+    Route::get('/extras', [BillingController::class, 'mobileExtrasIndex'])->name('extras.index');
+    Route::get('/extras/{customer}', [BillingController::class, 'mobileExtrasShow'])->name('extras.show');
+});
 
-// Rotte di Utilità
-Route::post('/optimize-clear', function () {
-    Artisan::call('optimize:clear');
-    return back()->with('success', 'Cache svuotata con successo!');
-})->name('optimize.clear');
+/* ==================== PULIZIE ==================== */
+Route::prefix('cleaning')->name('cleaning.')->group(function () {
+    Route::get('/', [CleaningController::class, 'index'])->name('index');
+    Route::get('/print', [CleaningController::class, 'print'])->name('print');
+});
+
+/* ==================== RISTORANTE ==================== */
+Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurant.index');
+
+/* ==================== RECEPTION ==================== */
+Route::get('/arrivals', [ReceptionController::class, 'arrivals'])->name('arrivals.index');
+Route::get('/departures', [ReceptionController::class, 'departures'])->name('departures.index');
+
+/* ==================== SISTEMA ==================== */
+Route::post('/system/sync-db', [DatabaseSyncController::class, 'sync'])->name('system.sync-db');
+
+Route::post('/system/clear-cache', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    return back()->with('success', 'Tutte le cache di sistema sono state pulite!');
+})->name('system.clear-cache');

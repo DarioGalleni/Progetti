@@ -1,221 +1,168 @@
-/* ==========================================================
-    Modalità Notte
-    ========================================================== */
-body.night-mode {
-    background-color: #28282B;
-    color: #F5F5DC;
+/* ==================== GENERALE ==================== */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
 }
 
-/* Modalità Notte: testo attenuato */
-body.night-mode .text-muted {
-    color: #ceceb9 !important;
+/* ==================== NAVBAR ==================== */
+.navbar-custom {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-/* Modalità Notte: navbar */
-body.night-mode .navbar {
-    background-color: #28282B !important;
-    border-bottom: 1px solid #3a3a3c;
+/* ==================== CARD ==================== */
+.card-custom {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01);
+    background: #fff;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-body.night-mode .navbar .navbar-brand,
-body.night-mode .navbar .nav-link,
-body.night-mode .navbar .navbar-text {
-    color: #F5F5DC !important;
-}
-
-/* Modalità Notte: colonna "Camera" */
-body.night-mode .sticky-header-room,
-body.night-mode .sticky-header-room.bg-light {
-    background-color: #28282B !important;
-    color: #F5F5DC !important;
-    border-right: 1px solid #F5F5DC !important;
-    z-index: 3;
-}
-
-/* Modalità Notte: tabelle */
-body.night-mode .table,
-body.night-mode .table th,
-body.night-mode .table td {
-    background-color: #28282B;
-    color: #F5F5DC;
-    border-color: #F5F5DC;
-}
-
-body.night-mode .table th,
-body.night-mode .table td {
-    border: 1px solid #F5F5DC;
-}
-
-/* Modalità Notte: icona hamburger */
-body.night-mode .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-}
-
-/* Modalità Notte: numeri camera (forza colore bianco anche con text-dark) */
-body.night-mode .sticky-room-cell .text-dark {
-    color: #F5F5DC !important;
-}
-
-/* ==========================================================
-    Temi e Transizioni
-    ========================================================== */
-/* Transizioni per cambio tema */
-body,
-.navbar,
-.navbar .navbar-brand,
-.navbar .nav-link,
-.table,
-.table th,
-.table td,
-.sticky-header-room,
-.sticky-header-room.bg-light,
-.btn,
-.btn-sun {
-    transition: background-color .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease;
-}
-
-/* ==========================================================
-    Icone e Animazioni
-    ========================================================== */
-/* Animazioni switch icone tema (fade + scala) */
-.theme-icon {
-    display: inline-block;
-    transition: transform .45s ease, opacity .45s ease;
-    will-change: transform, opacity;
-}
-
-.anim-in {
-    animation: iconIn .5s ease forwards;
-}
-
-.anim-out {
-    animation: iconOut .45s ease forwards;
-}
-
-@keyframes iconIn {
-    from {
-        opacity: 0;
-        transform: scale(.6) rotate(-8deg);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1) rotate(0);
-    }
-}
-
-@keyframes iconOut {
-    from {
-        opacity: 1;
-        transform: scale(1) rotate(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: scale(.6) rotate(8deg);
-    }
-}
-
-/* ==========================================================
-    Drag-to-Scroll Calendario
-    ========================================================== */
-#calendar-container.drag-scroll {
+.card-custom .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     position: relative;
+}
+
+/* ==================== CALENDARIO ==================== */
+.calendar-container {
     cursor: grab;
-    -webkit-overflow-scrolling: touch;
-}
-
-#calendar-container.drag-scroll.dragging {
-    cursor: grabbing;
-    user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-
-
-
-/* ==========================================================
-    Utility e Classi di Supporto
-    ========================================================== */
-/* Utility: altezza massima calendario */
-.calendar-max-height {
-    max-height: 80vh;
     overflow: auto;
+    position: relative;
+    background: #fff;
+    user-select: none;
+    height: 100%;
+    width: 100%;
 }
 
-/* Utility: testo non a capo in tabella */
-.table-nowrap {
+.calendar-container:active {
+    cursor: grabbing;
+}
+
+#calendar-header {
+    max-height: 100px;
+    opacity: 1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+#calendar-header.header-hidden {
+    max-height: 0;
+    opacity: 0;
+    margin-bottom: 0 !important;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+/* ==================== GRIGLIA CALENDARIO ==================== */
+.room-column {
+    background: #f1f3f5;
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    border-right: 1px solid #dee2e6;
+    height: fit-content;
+    min-height: 100%;
+}
+
+.date-header {
+    text-align: center;
+    border-bottom: 2px solid #dee2e6;
+    min-width: 100px;
+}
+
+.room-cell {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.grid-cell {
+    height: 60px;
+    border-bottom: 1px solid #e9ecef;
+    border-right: 1px solid #e9ecef;
+    min-width: 100px;
+    position: relative;
+}
+
+.today-column {
+    background-color: #ffeeba !important;
+    border-left: 2px solid #ffc107;
+    border-right: 2px solid #ffc107;
+}
+
+/* ==================== PRENOTAZIONI ==================== */
+.booking-block {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    padding: 4px;
+    overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 5;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s;
 }
 
-/* Utility: cella sticky colonna camera */
-.sticky-room-cell {
-    position: sticky;
-    left: 0;
-    z-index: 1;
-    min-width: 140px;
+.booking-block:hover {
+    transform: scale(1.02);
+    z-index: 10;
 }
 
-/* Utility: header sticky colonna camera */
-.sticky-room-header {
-    position: sticky;
-    left: 0;
-    z-index: 2;
+.booking-source-booking,
+.booking-source-cash {
+    background-color: #0d6efd;
 }
 
-/* Utility: nascondi elementi via CSS */
-.hidden {
-    display: none !important;
+.booking-source-group {
+    background-color: #6f42c1 !important;
+    border: 1px solid #59359a;
+    color: white;
 }
 
-/* ==========================================================
-    Pulsanti Tema
-    ========================================================== */
-/* Pulsante "sole" (disattiva modalità notte) */
-.btn-sun {
-    background-color: #FFC107;
-    color: #000000;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+.booking-sticker {
+    display: inline-block;
+    margin-left: 5px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0 4px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 900;
+    line-height: normal;
+    color: #000;
+    vertical-align: middle;
 }
 
-/* ==========================================================
-    Stili Camera (Colonna Sticky)
-    ========================================================== */
-/* Numero camera nella colonna sticky */
-.room-number {
-    font-size: 1.25rem;
-    line-height: 1;
+/* ==================== INPUT NUMBER ==================== */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-/* Etichetta camera nella colonna sticky */
-.room-label {
-    font-size: 0.9rem;
-    display: block;
-}
-
-/* ==========================================================
-    Celle Prenotazione
-    ========================================================== */
-/* Nome e cognome a capo nelle celle prenotazione */
-.booking-name {
-    white-space: normal;
-    word-break: break-word;
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 1.15;
-}
-
-/* ==========================================================
-    Input Number - Rimozione Frecce (Spinners)
-    ========================================================== */
-/* Chrome, Safari, Edge, Opera */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none !important;
-    margin: 0 !important;
-}
-
-/* Firefox */
 input[type=number] {
-    -moz-appearance: textfield !important;
+    -moz-appearance: textfield;
 }

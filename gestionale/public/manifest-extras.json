@@ -1,0 +1,38 @@
+{
+    "name": "Gemma eXTRAS",
+    "short_name": "Gemma eXTRAS",
+    "start_url": "./mobile/extras",
+    "scope": "./mobile/extras",
+    "id": "/mobile/extras",
+    "background_color": "#336633",
+    "description": "Gemma eXTRAS",
+    "display": "standalone",
+    "theme_color": "#336633",
+    "icons": [
+        {
+            "src": "drink.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "drink.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "drink.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src": "drink.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}

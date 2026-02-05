@@ -1,227 +1,272 @@
-<x-layout>
-    <div class="container py-5">
-        <div class="card shadow border-0 rounded-3">
-            <div class="card-header bg-white border-bottom border-light pt-4 pb-3">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="mb-0 text-primary fw-bold">
-                        <i class="fas fa-info-circle me-2"></i>Dettagli Prenotazione
-                    </h4>
-                    <span class="badge bg-light text-dark border p-2">
-                        <i class="fas fa-hashtag me-1"></i>ID: {{ $customer->id }}
-                    </span>
+<x-layout :title="'Dettaglio Cliente: ' . $customer->first_name . ' ' . $customer->last_name">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card card-custom">
+                <div class="card-header bg-white border-0 pt-4 pb-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                        <h4 class="fw-bold text-primary mb-0">Dettaglio Cliente: {{ $customer->first_name }}
+                            {{ $customer->last_name }}
+                        </h4>
+                        <span class="badge bg-secondary" style="font-size: 0.75rem;">ID: {{ $customer->id }}</span>
+                    </div>
+                    <div>
+                        <a href="{{ url('/') }}" class="btn btn-outline-secondary">Torna al Calendario</a>
+                    </div>
                 </div>
-                <h5 class="mt-2 text-dark fw-bold">{{ $customer->first_name }} {{ $customer->last_name }}</h5>
-            </div>
-
-            <div class="card-body p-4">
-                <div class="row g-4">
-                    {{-- Info Cliente --}}
-                    <div class="col-md-6">
-                        <div class="h-100 p-4 bg-light rounded-3 border-0">
-                            <h5 class="text-secondary fw-bold mb-3 border-bottom pb-2">
-                                <i class="fas fa-user me-2"></i>Informazioni Cliente
-                            </h5>
-                            <ul class="list-unstyled mb-0 d-grid gap-2">
-                                <li class="d-flex justify-content-between">
-                                    <span class="text-muted">Nome:</span>
-                                    <span class="fw-bold">{{ $customer->first_name }}</span>
-                                </li>
-                                <li class="d-flex justify-content-between">
-                                    <span class="text-muted">Cognome:</span>
-                                    <span class="fw-bold">{{ $customer->last_name }}</span>
-                                </li>
-                                <li class="d-flex justify-content-between">
-                                    <span class="text-muted">Email:</span>
-                                    <span class="fw-bold">{{ $customer->email }}</span>
-                                </li>
-                                <li class="d-flex justify-content-between">
-                                    <span class="text-muted">Telefono:</span>
-                                    <span class="fw-bold">{{ $customer->phone ?? 'N/A' }}</span>
-                                </li>
-                                @if($customer->is_booking)
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span class="text-muted">Origine:</span>
-                                        <span class="badge bg-primary">Booking.com</span>
-                                    </li>
-                                @endif
-                                @if($customer->is_cash_payment)
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span class="text-muted">Pagamento:</span>
-                                        <span class="badge bg-success">Contanti</span>
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-
-                    {{-- Dettagli Soggiorno --}}
-                    <div class="col-md-6">
-                        <div class="h-100 p-4 bg-light rounded-3 border-0">
-                            <h5 class="text-secondary fw-bold mb-3 border-bottom pb-2">
-                                <i class="fas fa-bed me-2"></i>Dettagli Soggiorno
-                            </h5>
-                            <ul class="list-unstyled mb-0 d-grid gap-2">
-                                <li class="d-flex justify-content-between">
-                                    <span class="text-muted">Camera:</span>
-                                    <span class="badge bg-primary fs-6">{{ $customer->room }}</span>
-                                </li>
-                                <li class="d-flex justify-content-between">
-                                    <span class="text-muted">Arrivo:</span>
-                                    <span class="fw-bold">{{ date('d/m/Y', strtotime($customer->arrival_date)) }}</span>
-                                </li>
-                                <li class="d-flex justify-content-between">
-                                    <span class="text-muted">Partenza:</span>
-                                    <span
-                                        class="fw-bold">{{ date('d/m/Y', strtotime($customer->departure_date)) }}</span>
-                                </li>
-                                <li class="d-flex justify-content-between">
-                                    <span class="text-muted">Trattamento:</span>
-                                    <span class="fw-bold">{{ $customer->treatment }}</span>
-                                </li>
-                                <li class="d-flex justify-content-between">
-                                    <span class="text-muted">Persone:</span>
-                                    <span class="fw-bold">{{ $customer->number_of_people }}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    {{-- Dati Finanziari --}}
-                    <div class="col-md-6">
-                        <div class="h-100 p-4 bg-light rounded-3 border-0">
-                            <h5 class="text-secondary fw-bold mb-3 border-bottom pb-2">
-                                <i class="fas fa-euro-sign me-2"></i>Dati Finanziari
-                            </h5>
-                            <ul class="list-unstyled mb-0 d-grid gap-2">
-                                <li class="d-flex justify-content-between align-items-center">
-                                    <span class="text-muted">Costo Totale:</span>
-                                    <span
-                                        class="fs-5 fw-bold text-success">{{ number_format($customer->total_stay_cost, 2, ',', '.') }}
-                                        €</span>
-                                </li>
-                                <li class="d-flex justify-content-between align-items-center">
-                                    <span class="text-muted">Acconto:</span>
-                                    <span class="fw-bold">{{ number_format($customer->down_payment, 2, ',', '.') }}
-                                        €</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    {{-- Spese Aggiuntive --}}
-                    <div class="col-md-6">
-                        <div class="h-100 p-4 bg-light rounded-3 border-0">
-                            <h5 class="text-secondary fw-bold mb-3 border-bottom pb-2">
-                                <i class="fas fa-receipt me-2"></i>Spese Aggiuntive
-                            </h5>
-                            @if ($customer->expenses->isNotEmpty())
-                                <ul class="list-unstyled mb-0 d-grid gap-2">
-                                    @foreach ($customer->expenses as $expense)
-                                        <li class="d-flex justify-content-between border-bottom border-light pb-1">
-                                            <span>{{ ucfirst($expense->expense_type) }}</span>
-                                            <span class="fw-bold">{{ number_format($expense->amount, 2, ',', '.') }} €</span>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @else
-                                <div class="text-center text-muted fst-italic py-3">
-                                    Nessuna spesa aggiuntiva.
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-
-                    @if($customer->additional_notes)
-                        <div class="col-md-12">
-                            <div class="h-100 p-4 bg-light rounded-3 border-0">
-                                <h5 class="text-secondary fw-bold mb-3 border-bottom pb-2">
-                                    <i class="fas fa-sticky-note me-2"></i>Note Aggiuntive
-                                </h5>
-                                <p class="mb-0 text-muted">{{ $customer->additional_notes }}</p>
+                <div class="card-body">
+                    @if($customer->group_id)
+                        <div class="alert alert-info d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="bi bi-people-fill me-2"></i>
+                                <strong>Prenotazione di Gruppo:</strong> <a
+                                    href="{{ route('groups.show', $customer->group_id) }}"
+                                    class="fw-bold text-decoration-none">{{ $customer->group_name }}</a>
                             </div>
                         </div>
                     @endif
-                </div>
 
-                <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 pt-3 border-top gap-3">
-                    <a href="{{ route('welcome') }}" class="btn btn-outline-secondary">
-                        <i class="fas fa-arrow-left me-2"></i>Indietro
-                    </a>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5 class="text-muted mb-3">Informazioni Personali</h5>
+                            <dl class="row">
+                                <dt class="col-sm-4">Nome:</dt>
+                                <dd class="col-sm-8">{{ $customer->first_name }} {{ $customer->last_name }}</dd>
 
-                    <div class="d-flex gap-2">
-                        @if($customer->is_group)
-                            {{-- Azioni Gruppo --}}
-                            <div class="btn-group shadow-sm">
-                                <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="fas fa-edit me-1"></i>Modifica
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item"
-                                            href="{{ route('customers.edit', $customer->id) }}">Modifica Solo Questa
-                                            Camera</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('groups.edit', $customer->id) }}">Modifica
-                                            Tutto il Gruppo</a></li>
-                                </ul>
-                            </div>
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">{{ $customer->email ?: 'N/D' }}</dd>
 
-                            <a href="{{ route('customers.expenses.show', $customer->id) }}"
-                                class="btn btn-info text-white shadow-sm">
-                                <i class="fas fa-coins me-1"></i>Spese
-                            </a>
+                                <dt class="col-sm-4">Telefono:</dt>
+                                <dd class="col-sm-8">{{ $customer->phone ?: 'N/D' }}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-muted mb-3">Dettagli Soggiorno</h5>
+                            <dl class="row">
+                                <dt class="col-sm-4">Camera:</dt>
+                                <dd class="col-sm-8"><strong>{{ $customer->room_number }}</strong> -
+                                    {{ config('rooms')[$customer->room_number] ?? '' }}
+                                </dd>
 
-                            <div class="btn-group shadow-sm">
-                                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="fas fa-trash-alt me-1"></i>Elimina
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <form action="{{ route('customers.destroy', $customer->id) }}" method="POST"
-                                            class="d-inline w-100">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="dropdown-item text-danger"
-                                                onclick="return confirm('Sei sicuro di voler eliminare SOLO questa camera?');">
-                                                Elimina Solo Questa Camera
-                                            </button>
-                                        </form>
-                                    </li>
-                                    <li>
-                                        <form action="{{ route('groups.destroy', $customer->id) }}" method="POST"
-                                            class="d-inline w-100">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="dropdown-item text-danger fw-bold"
-                                                onclick="return confirm('ATTENZIONE: Stai per eliminare TUTTO il gruppo e tutte le camere associate. Sei sicuro?');">
-                                                Elimina Tutto il Gruppo
-                                            </button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div>
-                        @else
-                            {{-- Azioni Cliente Singolo --}}
-                            <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning shadow-sm">
-                                <i class="fas fa-edit me-1"></i>Modifica
-                            </a>
-                            <a href="{{ route('customers.expenses.show', $customer->id) }}"
-                                class="btn btn-info text-white shadow-sm">
-                                <i class="fas fa-coins me-1"></i>Spese
-                            </a>
-                            <form action="{{ route('customers.destroy', $customer->id) }}" method="POST"
-                                onsubmit="return confirm('Sei sicuro di voler eliminare questa prenotazione?');"
-                                class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger shadow-sm">
-                                    <i class="fas fa-trash-alt me-1"></i>Elimina
-                                </button>
-                            </form>
-                        @endif
+                                <dt class="col-sm-4">Periodo:</dt>
+                                <dd class="col-sm-8">
+                                    Dal {{ \Carbon\Carbon::parse($customer->arrival_date)->format('d/m/Y') }}<br>
+                                    Al {{ \Carbon\Carbon::parse($customer->departure_date)->format('d/m/Y') }}
+                                </dd>
+
+                                <dt class="col-sm-4">Ospiti:</dt>
+                                <dd class="col-sm-8">
+                                    {{ $customer->pax }}
+                                    @if($customer->under_12_pax > 0)
+                                        <small class="text-muted">(di cui {{ $customer->under_12_pax }}
+                                            < 12 anni)</small>
+                                    @endif
+                                </dd>
+
+                                <dt class="col-sm-4">Trattamento:</dt>
+                                <dd class="col-sm-8">{{ $customer->treatment }}</dd>
+                            </dl>
+                        </div>
                     </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <h5 class="text-muted mb-3">Dati Finanziari</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="table-light">
+                                            <th>Prezzo Soggiorno</th>
+                                            <th>Acconto Versato</th>
+                                            <th>Metodo Pagamento</th>
+                                            <th>Totale Spese Extra</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="fs-5">€ {{ number_format($customer->total_price, 2) }}</td>
+                                            <td class="fs-5">€ {{ number_format($customer->deposit, 2) }}</td>
+                                            <td>
+                                                @if($customer->payment_method == 'booking')
+                                                    <span class="badge bg-primary">Booking.com</span>
+                                                @else
+                                                    <span class="badge bg-success">Contanti / Diretto</span>
+                                                @endif
+                                            </td>
+                                            <td class="fs-5 fw-bold text-danger">€
+                                                {{ number_format($customer->expenses->sum('amount'), 2) }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if($customer->notes)
+                        <div class="alert alert-secondary mb-4">
+                            <strong>Note:</strong> {{ $customer->notes }}
+                        </div>
+                    @endif
+
+                    <div class="row g-4 mt-4">
+                        <!-- Stampa Conto -->
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body text-center p-4">
+                                    <h5 class="fw-bold mb-2">Stampa Conto</h5>
+                                    <p class="text-muted small mb-3">Riepilogo del conto ad oggi. Non valido come
+                                        ricevuta
+                                        fiscale</p>
+                                    <a href="{{ route('billing.bill.print', $customer) }}" target="_blank"
+                                        class="btn btn-primary btn-lg w-100">
+                                        <i class="bi bi-printer me-2"></i> Stampa Conto
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stampa Ricevuta -->
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body text-center p-4">
+                                    <h5 class="fw-bold mb-2">Stampa Ricevuta</h5>
+                                    <p class="text-muted small mb-3">Stampa ricevuta fiscale alla partenza</p>
+                                    <a href="{{ route('billing.receipt', $customer) }}" target="_blank"
+                                        class="btn btn-success btn-lg w-100">
+                                        <i class="bi bi-receipt me-2"></i> Stampa Ricevuta
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modifica -->
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body text-center p-4">
+                                    <h5 class="fw-bold mb-2">Modifica</h5>
+                                    <p class="text-muted small mb-3">Modifica dati anagrafici, date, pax, ecc.</p>
+
+                                    @if($customer->group_id)
+                                        <button type="button" class="btn btn-warning btn-lg w-100" data-bs-toggle="modal"
+                                            data-bs-target="#editGroupModal">
+                                            <i class="bi bi-pencil me-2"></i> Modifica
+                                        </button>
+                                    @else
+                                        <a href="{{ route('customers.edit', $customer) }}"
+                                            class="btn btn-warning btn-lg w-100">
+                                            <i class="bi bi-pencil me-2"></i> Modifica
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Spese Extra -->
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body text-center p-4">
+                                    <h5 class="fw-bold mb-2">Spese Extra</h5>
+                                    <p class="text-muted small mb-3">Aggiungi consumazioni e servizi in hotel</p>
+                                    <a href="{{ route('billing.expenses', $customer) }}"
+                                        class="btn btn-info btn-lg w-100 text-white">
+                                        <i class="bi bi-cash-coin me-2"></i> Spese Extra
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Elimina -->
+                        <div class="col-md-12">
+                            <div class="card border-danger shadow-sm">
+                                <div class="card-body text-center p-4">
+                                    <h5 class="fw-bold mb-2 text-danger">Elimina Prenotazione</h5>
+                                    <p class="text-muted small mb-3">Elimina prenotazione dal sistema (azione
+                                        irreversibile)</p>
+
+                                    @if($customer->group_id)
+                                        <button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal"
+                                            data-bs-target="#deleteGroupModal">
+                                            <i class="bi bi-trash me-2"></i> Elimina
+                                        </button>
+                                    @else
+                                        <form action="{{ route('customers.destroy', $customer) }}" method="POST"
+                                            onsubmit="return confirm('Sei sicuro di voler eliminare questa prenotazione?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-lg">
+                                                <i class="bi bi-trash me-2"></i> Elimina
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- Modals for Group Actions --}}
+    @if($customer->group_id)
+        <!-- Edit Modal -->
+        <div class="modal fade" id="editGroupModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold">Modifica Prenotazione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Questa prenotazione fa parte del gruppo <strong>{{ $customer->group_name }}</strong>.</p>
+                        <p>Cosa vuoi modificare?</p>
+                        <div class="d-grid gap-3 mt-4">
+                            <a href="{{ route('customers.edit', $customer) }}" class="btn btn-outline-primary btn-lg">
+                                <i class="bi bi-person me-2"></i> Solo questa camera ({{ $customer->room_number }})
+                            </a>
+                            <a href="{{ route('groups.edit', $customer->group_id) }}" class="btn btn-warning btn-lg">
+                                <i class="bi bi-people me-2"></i> Tutto il Gruppo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteGroupModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold text-danger">Elimina Prenotazione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Questa prenotazione fa parte del gruppo <strong>{{ $customer->group_name }}</strong>.</p>
+                        <p>Cosa vuoi eliminare?</p>
+                        <div class="d-grid gap-3 mt-4">
+                            <form action="{{ route('customers.destroy', $customer) }}" method="POST"
+                                onsubmit="return confirm('Sicuro di eliminare solo questa stanza?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger btn-lg w-100">
+                                    <i class="bi bi-trash me-2"></i> Solo questa camera ({{ $customer->room_number }})
+                                </button>
+                            </form>
+
+                            <form action="{{ route('groups.destroy', $customer->group_id) }}" method="POST"
+                                onsubmit="return confirm('ATTENZIONE: Stai per eliminare TUTTO il gruppo. Continuare?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-lg w-100">
+                                    <i class="bi bi-trash-fill me-2"></i> Tutto il Gruppo
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </x-layout>

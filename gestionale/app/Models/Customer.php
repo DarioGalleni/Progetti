@@ -12,32 +12,24 @@ class Customer extends Model
     protected $fillable = [
         'first_name',
         'last_name',
-        'room',
+        'email',
+        'phone',
+        'room_number',
         'arrival_date',
         'departure_date',
         'treatment',
-        'phone',
-        'email',
-        'number_of_people',
-        'total_stay_cost',
-        'down_payment',
-        'additional_notes',
-        'is_booking',
-        'is_cash_payment',
-        'is_group',
+        'pax',
+        'under_12_pax',
+        'total_price',
+        'deposit',
+        'payment_method',
+        'notes',
+        'group_id',
+        'group_name',
     ];
 
-    protected $casts = [
-        'is_group' => 'boolean',
-        'is_booking' => 'boolean',
-        'is_cash_payment' => 'boolean',
-    ];
-
-    /**
-     * Get the expenses for the customer.
-     */
     public function expenses()
     {
-        return $this->hasMany(CustomerExpense::class);
+        return $this->hasMany(Expense::class);
     }
 }

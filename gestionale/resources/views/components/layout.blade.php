@@ -4,20 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="manifest" href="{{ asset($manifest ?? 'manifest.json') }}">
+    <meta name="theme-color" content="#336633">
+    <title>{{ $title ?? 'Gemma Hotel Management' }}</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <meta name="theme-color" content="#0D6EFD">
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
-    <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
-
-    @vite(['resources/css/app.css', 'resources/css/style.css', 'resources/js/app.js'])
-    <title>@yield('title', 'Gestionale Hotel')</title>
 </head>
 
 <body>
-    <x-navbar />
-    {{$slot}}
+    @unless($hideNavbar ?? false)
+        @include('components.navbar')
+    @endunless
+
+    <div class="container-fluid py-4">
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        {{ $slot ?? '' }}
+        @yield('content')
+    </div>
+
+    {{ $scripts ?? '' }}
+    @yield('scripts')
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

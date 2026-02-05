@@ -2,161 +2,137 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
-    /**
-     * Show the form for creating a new group booking.
-     */
     public function create()
     {
-        // Get rooms from config
         $rooms = config('rooms');
         return view('groups.create', compact('rooms'));
     }
 
-    /**
-     * Store a newly created group booking in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'description' => 'required|string|max:255',
             'arrival_date' => 'required|date|after_or_equal:today',
-            'departure_date' => 'required|date|after:arrival_date|after_or_equal:tomorrow',
+            'departure_date' => 'required|date|after:arrival_date',
             'rooms' => 'required|array|min:1',
-            'rooms.*' => 'integer',
-        ], [
-            'rooms.required' => 'Devi selezionare almeno una camera.',
-            'arrival_date.after_or_equal' => 'La data di arrivo non può essere nel passato.',
-            'departure_date.after' => 'La data di partenza deve essere successiva all\'arrivo.',
+            'rooms.*' => 'required',
         ]);
 
-        $rooms = $request->input('rooms');
-        $arrivalDate = $request->input('arrival_date');
-        $departureDate = $request->input('departure_date');
-        $description = $request->input('description');
+        $groupId = (string) Str::uuid();
+        $groupName = $request->description;
 
-        // Check availability for ALL selected rooms first
-        foreach ($rooms as $roomNumber) {
-            $exists = \App\Models\Customer::where('room', $roomNumber)
-                ->where('arrival_date', '<', $departureDate)
-                ->where('departure_date', '>', $arrivalDate)
-                ->exists();
+        DB::beginTransaction();
+        try {
+            $arrival = Carbon::parse($request->arrival_date);
+            $departure = Carbon::parse($request->departure_date);
 
-            if ($exists) {
-                return back()->withErrors(['rooms' => "La camera $roomNumber non è disponibile per il periodo selezionato."])->withInput();
+            // Controllo disponibilità camere
+            $occupied = Customer::whereIn('room_number', $request->rooms)
+                ->where(function ($q) use ($arrival, $departure) {
+                    $q->where('arrival_date', '<', $departure->format('Y-m-d'))
+                        ->where('departure_date', '>', $arrival->format('Y-m-d'));
+                })->exists();
+
+            if ($occupied) {
+                return back()->withInput()->withErrors(['rooms' => 'Una o più camere selezionate sono occupate nel periodo scelto.']);
             }
+
+            foreach ($request->rooms as $roomNumber) {
+                Customer::create([
+                    'first_name' => $groupName,
+                    'last_name' => '(Gruppo)',
+                    'email' => null,
+                    'phone' => null,
+                    'room_number' => $roomNumber,
+                    'arrival_date' => $request->arrival_date,
+                    'departure_date' => $request->departure_date,
+                    'treatment' => 'BB',
+                    'pax' => 2,
+                    'under_12_pax' => 0,
+                    'total_price' => 0,
+                    'deposit' => 0,
+                    'payment_method' => 'cash',
+                    'notes' => 'Gruppo: ' . $groupName,
+                    'group_id' => $groupId,
+                    'group_name' => $groupName,
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('welcome')->with('success', 'Gruppo creato con successo!');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Errore: ' . $e->getMessage());
         }
-
-        // Create bookings
-        foreach ($rooms as $roomNumber) {
-            \App\Models\Customer::create([
-                'first_name' => 'Gruppo',
-                'last_name' => $description,
-                'room' => $roomNumber,
-                'arrival_date' => $arrivalDate,
-                'departure_date' => $departureDate,
-                'treatment' => 'BB', // Default treatment
-                'number_of_people' => 2, // Default pax
-                'total_stay_cost' => 0,
-                'is_group' => true,
-            ]);
-        }
-
-        return redirect()->route('welcome')->with('success', 'Gruppo inserito con successo!');
-    }
-    /**
-     * Show the form for editing the group.
-     */
-    public function edit(\App\Models\Customer $customer)
-    {
-        if (!$customer->is_group) {
-            abort(404);
-        }
-
-        // Find common data
-        // We assume group is identified by: is_group=true, last_name (desc), arrival, departure
-        $siblings = \App\Models\Customer::where('is_group', true)
-            ->where('last_name', $customer->last_name)
-            ->where('arrival_date', $customer->arrival_date)
-            ->where('departure_date', $customer->departure_date)
-            ->get();
-
-        $rooms = $siblings->pluck('room')->toArray();
-
-        return view('groups.edit', compact('customer', 'rooms', 'siblings'));
     }
 
-    /**
-     * Update the group.
-     */
-    public function update(Request $request, \App\Models\Customer $customer)
+    public function edit($groupId)
     {
-        if (!$customer->is_group) {
-            abort(404);
+        $customers = Customer::where('group_id', $groupId)->get();
+        if ($customers->isEmpty()) {
+            return back()->with('error', 'Gruppo non trovato');
+        }
+
+        $customer = $customers->first();
+        $siblings = $customers;
+        $rooms = $customers->pluck('room_number');
+
+        return view('groups.edit', compact('customer', 'siblings', 'rooms'));
+    }
+
+    public function update(Request $request, $customer_id)
+    {
+        $leader = Customer::findOrFail($customer_id);
+        if (!$leader->group_id) {
+            return back()->with('error', 'Questa prenotazione non appartiene ad un gruppo');
         }
 
         $request->validate([
-            'description' => 'required|string|max:255',
-            'arrival_date' => 'required|date|after_or_equal:today',
-            'departure_date' => 'required|date|after:arrival_date|after_or_equal:tomorrow',
+            'description' => 'required|string',
+            'arrival_date' => 'required|date',
+            'departure_date' => 'required|date|after:arrival_date',
         ]);
 
-        $newDescription = $request->input('description');
-        $newArrival = $request->input('arrival_date');
-        $newDeparture = $request->input('departure_date');
+        $groupId = $leader->group_id;
+        $arrival = Carbon::parse($request->arrival_date);
+        $departure = Carbon::parse($request->departure_date);
 
-        // Identify the group BEFORE update
-        $query = \App\Models\Customer::where('is_group', true)
-            ->where('last_name', $customer->last_name)
-            ->where('arrival_date', $customer->arrival_date)
-            ->where('departure_date', $customer->departure_date);
+        $groupRooms = Customer::where('group_id', $groupId)->pluck('room_number');
 
-        $siblings = $query->get();
+        // Controllo disponibilità escludendo il gruppo corrente
+        $occupied = Customer::whereIn('room_number', $groupRooms)
+            ->where('group_id', '!=', $groupId)
+            ->where(function ($q) use ($arrival, $departure) {
+                $q->where('arrival_date', '<', $departure->format('Y-m-d'))
+                    ->where('departure_date', '>', $arrival->format('Y-m-d'));
+            })->exists();
 
-        // Check availability if dates changed
-        if ($newArrival != $customer->arrival_date || $newDeparture != $customer->departure_date) {
-            foreach ($siblings as $sibling) {
-                $exists = \App\Models\Customer::where('room', $sibling->room)
-                    ->where('id', '!=', $sibling->id) // Exclude self
-                    ->where('arrival_date', '<', $newDeparture)
-                    ->where('departure_date', '>', $newArrival)
-                    ->exists();
-
-                if ($exists) {
-                    return back()->withErrors(['dates' => "La camera {$sibling->room} non è disponibile per le nuove date."])->withInput();
-                }
-            }
+        if ($occupied) {
+            return back()->withInput()->withErrors(['arrival_date' => 'Le date scelte confliggono con altre prenotazioni per le camere del gruppo.']);
         }
 
-        // Perform Update
-        $query->update([
-            'last_name' => $newDescription,
-            'arrival_date' => $newArrival,
-            'departure_date' => $newDeparture,
+        Customer::where('group_id', $groupId)->update([
+            'group_name' => $request->description,
+            'first_name' => $request->description,
+            'arrival_date' => $request->arrival_date,
+            'departure_date' => $request->departure_date,
         ]);
 
-        return redirect()->route('welcome')->with('success', 'Gruppo aggiornato con successo!');
+        return redirect()->route('customers.show', $leader->id)->with('success', 'Gruppo aggiornato con successo');
     }
 
-    /**
-     * Remove the specified group from storage.
-     */
-    public function destroy(\App\Models\Customer $customer)
+    public function destroy($groupId)
     {
-        if (!$customer->is_group) {
-            abort(404);
-        }
-
-        // Delete all bookings with same group attributes
-        \App\Models\Customer::where('is_group', true)
-            ->where('last_name', $customer->last_name)
-            ->where('arrival_date', $customer->arrival_date)
-            ->where('departure_date', $customer->departure_date)
-            ->delete();
-
-        return redirect()->route('welcome')->with('success', 'Gruppo eliminato con successo!');
+        Customer::where('group_id', $groupId)->delete();
+        return redirect()->route('welcome')->with('success', 'Gruppo eliminato.');
     }
 }

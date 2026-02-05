@@ -1,159 +1,157 @@
-document.addEventListener('DOMContentLoaded', function () {
-	/* ==========================
-	   Modulo: Tema (modalità notte)
-	   ========================== */
-	function initThemeModule() {
-		const enableButton = document.getElementById('enable-night-mode');
-		const disableButton = document.getElementById('disable-night-mode');
-		const body = document.body;
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.querySelector('.calendar-container');
+    const header = document.getElementById('calendar-header');
 
-		// Anima le icone del tema quando si alterna la modalità notte; clsIn=true => animazione-in, false => animazione-out
-		function animateIcon(el, clsIn) {
-			if (!el) return;
-			el.classList.remove('anim-in', 'anim-out');
-			// Forza il reflow per riavviare l'animazione
-			void el.offsetWidth;
-			el.classList.add(clsIn ? 'anim-in' : 'anim-out');
-		}
+    // Gestione scroll header
+    if (slider && header) {
+        slider.addEventListener('scroll', () => {
+            if (slider.scrollTop > 10) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+        });
+    }
 
-		// Applica o rimuove gli stili della modalità notte e salva la preferenza in localStorage
-		function applyNightMode(enabled) {
-			const enableIcon = enableButton?.querySelector('.theme-icon');
-			const disableIcon = disableButton?.querySelector('.theme-icon');
+    // Gestione Drag & Drop scroll
+    if (slider) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
 
-			if (enabled) {
-				body.classList.add('night-mode');
-				localStorage.setItem('nightMode', 'enabled');
-				enableButton?.classList.add('hidden');
-				disableButton?.classList.remove('hidden');
-				animateIcon(disableIcon, true);
-				animateIcon(enableIcon, false);
-			} else {
-				body.classList.remove('night-mode');
-				localStorage.setItem('nightMode', 'disabled');
-				enableButton?.classList.remove('hidden');
-				disableButton?.classList.add('hidden');
-				animateIcon(enableIcon, true);
-				animateIcon(disableIcon, false);
-			}
-		}
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
 
-		// Inizializza l'interfaccia in base alla preferenza di modalità notte salvata
-		const stored = localStorage.getItem('nightMode');
-		applyNightMode(stored === 'enabled');
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
 
-		// Collega i gestori di click ai pulsanti di cambio tema
-		if (enableButton) enableButton.addEventListener('click', () => applyNightMode(true));
-		if (disableButton) disableButton.addEventListener('click', () => applyNightMode(false));
-	}
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
 
-	/* ==========================
-	   Modulo: Calendario drag & helpers
-	   ========================== */
-	function initCalendarDragModule() {
-		const calendarContainer = document.getElementById('calendar-container');
-		if (!calendarContainer) return;
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2;
+            slider.scrollLeft = scrollLeft - walk;
+        });
 
-		// classi iniziali
-		calendarContainer.classList.add('drag-scroll');
+        const todayEl = slider.querySelector('.today-column');
+        if (todayEl) {
+            const elementCenter = todayEl.offsetLeft + (todayEl.offsetWidth / 2);
+            const containerCenter = slider.clientWidth / 2;
+            slider.scrollLeft = elementCenter - containerCenter;
+        } else {
+            const gridWidth = slider.scrollWidth;
+            const clientWidth = slider.clientWidth;
+            if (gridWidth > clientWidth) {
+                slider.scrollLeft = (gridWidth - clientWidth) / 2;
+            }
+        }
+    }
 
-		let isPointerDown = false;
-		let isDragging = false;
-		let startX = 0, startY = 0;
-		let scrollLeft = 0, scrollTop = 0;
-		const DRAG_THRESHOLD = 4;
+    // Chiusura alert
+    const alertEl = document.querySelector('.alert-success');
+    if (alertEl) {
+        setTimeout(() => {
+            const closeBtn = alertEl.querySelector('.btn-close');
+            if (closeBtn) {
+                closeBtn.click();
+            } else {
+                alertEl.style.display = 'none';
+            }
+        }, 10000);
+    }
 
-		// Avvia il trascinamento per lo scorrimento del calendario
-		calendarContainer.addEventListener('mousedown', (e) => {
-			isPointerDown = true;
-			isDragging = false;
-			startX = e.pageX;
-			startY = e.pageY;
-			scrollLeft = calendarContainer.scrollLeft;
-			scrollTop = calendarContainer.scrollTop;
-		});
+    // Validazione date (solo per form di creazione, non di modifica)
+    const arrivalInput = document.getElementById('arrival_date');
+    const departureInput = document.getElementById('departure_date');
+    const bookingForm = arrivalInput ? arrivalInput.closest('form') : null;
+    
+    // Applica validazione solo se NON siamo in una pagina di modifica
+    const isEditPage = window.location.pathname.includes('/edit');
 
-		// Termina il trascinamento
-		window.addEventListener('mouseup', () => {
-			if (!isPointerDown) return;
-			isPointerDown = false;
-			calendarContainer.classList.remove('dragging');
-			setTimeout(() => { isDragging = false; }, 0);
-		});
+    if (arrivalInput && departureInput && bookingForm && !isEditPage) {
+        const today = new Date().toISOString().split('T')[0];
+        arrivalInput.setAttribute('min', today);
 
-		// Aggiorna la posizione di scorrimento durante il trascinamento
-		window.addEventListener('mousemove', (e) => {
-			if (!isPointerDown) return;
-			const dx = e.pageX - startX;
-			const dy = e.pageY - startY;
-			if (!isDragging && Math.hypot(dx, dy) > DRAG_THRESHOLD) {
-				isDragging = true;
-				calendarContainer.classList.add('dragging');
-			}
-			if (isDragging) {
-				e.preventDefault();
-				calendarContainer.scrollLeft = scrollLeft - dx;
-				calendarContainer.scrollTop = scrollTop - dy;
-			}
-		});
+        function validateDates() {
+            const arrivalVal = arrivalInput.value;
+            const departureVal = departureInput.value;
 
-		// Previene i click accidentali durante il trascinamento
-		calendarContainer.addEventListener('click', (e) => {
-			if (isDragging) {
-				e.preventDefault();
-				e.stopPropagation();
-			}
-		}, true);
+            if (!arrivalVal) return;
 
-		// All'avvio, scorre il calendario per mostrare la colonna di oggi se presente
-		window.addEventListener('load', function () {
-			const todayCol = document.getElementById('today');
-			if (todayCol) calendarContainer.scrollLeft = todayCol.offsetLeft;
-		});
+            if (arrivalVal < today) {
+                alert('La data di arrivo non può essere nel passato.');
+                arrivalInput.value = today;
+                return;
+            }
 
-		// Centra la cella di oggi nel calendario
-		function centerToday() {
-			const todayCell = document.querySelector('.today-cell');
-			if (todayCell) {
-				const containerWidth = calendarContainer.offsetWidth;
-				const cellWidth = todayCell.offsetWidth;
-				const cellLeft = todayCell.offsetLeft;
-				const scrollTo = cellLeft - (containerWidth / 2) + (cellWidth / 2);
-				calendarContainer.scrollLeft = scrollTo;
-			}
-		}
+            if (arrivalVal) {
+                const arrDate = new Date(arrivalVal);
+                arrDate.setDate(arrDate.getDate() + 1);
+                const minDep = arrDate.toISOString().split('T')[0];
+                departureInput.setAttribute('min', minDep);
+            }
 
-		// Chiama la funzione al caricamento della pagina e quando il calendario è visibile
-		window.addEventListener('load', centerToday);
-		window.addEventListener('resize', centerToday);
-	}
+            if (departureVal && arrivalVal && departureVal <= arrivalVal) {
+                departureInput.setCustomValidity('La data di partenza deve essere successiva all\'arrivo.');
+            } else {
+                departureInput.setCustomValidity('');
+            }
+        }
 
+        arrivalInput.addEventListener('change', validateDates);
+        departureInput.addEventListener('change', validateDates);
+        validateDates();
 
+        bookingForm.addEventListener('submit', (e) => {
+            if (arrivalInput.value < today) {
+                e.preventDefault();
+                alert('La data di arrivo non deve essere nel passato.');
+            }
+            if (departureInput.value <= arrivalInput.value) {
+                e.preventDefault();
+                alert('La data di partenza deve essere successiva alla data di arrivo.');
+            }
+        });
+    } else if (arrivalInput && departureInput && bookingForm && isEditPage) {
+        // Per le pagine di modifica, valida solo che partenza > arrivo (senza vincoli sul passato)
+        function validateDatesEdit() {
+            const arrivalVal = arrivalInput.value;
+            const departureVal = departureInput.value;
 
-	/* ==========================
-	   Modulo: Alert scompaiono da soli
-	   ========================== */
-	function initAutoDismissAlerts() {
-		setTimeout(function () {
-			let alerts = document.querySelectorAll('.alert');
-			alerts.forEach(function (alert) {
-				let closeButton = alert.querySelector('.btn-close');
-				if (closeButton) {
-					closeButton.click();
-				} else {
-					alert.style.transition = "opacity 0.5s ease";
-					alert.style.opacity = "0";
-					setTimeout(() => alert.remove(), 500);
-				}
-			});
-		}, 5000);
-	}
+            if (arrivalVal) {
+                const arrDate = new Date(arrivalVal);
+                arrDate.setDate(arrDate.getDate() + 1);
+                const minDep = arrDate.toISOString().split('T')[0];
+                departureInput.setAttribute('min', minDep);
+            }
 
-	/* ==========================
-	   Inizializzazione moduli
-	   ========================== */
-	initThemeModule();
-	initCalendarDragModule();
+            if (departureVal && arrivalVal && departureVal <= arrivalVal) {
+                departureInput.setCustomValidity('La data di partenza deve essere successiva all\'arrivo.');
+            } else {
+                departureInput.setCustomValidity('');
+            }
+        }
 
-	initAutoDismissAlerts();
+        arrivalInput.addEventListener('change', validateDatesEdit);
+        departureInput.addEventListener('change', validateDatesEdit);
+        validateDatesEdit();
+
+        bookingForm.addEventListener('submit', (e) => {
+            if (departureInput.value <= arrivalInput.value) {
+                e.preventDefault();
+                alert('La data di partenza deve essere successiva alla data di arrivo.');
+            }
+        });
+    }
 });

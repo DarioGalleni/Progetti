@@ -1,5 +1,4 @@
-import * as bootstrap from 'bootstrap';
+import './bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
 import './script';
-
-// Esponi Bootstrap globalmente per compatibilità con script che lo richiedono
-window.bootstrap = bootstrap;
