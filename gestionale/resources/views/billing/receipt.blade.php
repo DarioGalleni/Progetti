@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Ricevuta Fiscale - {{ $customer->first_name }} {{ $customer->last_name }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    @vite(['resources/css/receipt.css', 'resources/js/receipt.js'])
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body id="receipt-page">
     <div class="container py-5">
         <div class="invoice-box">
             <!-- Intestazione con Logo e Info Hotel -->
@@ -133,7 +133,22 @@
                 </div>
             @endif
 
-            <div class="kv-row" style="margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px;">
+            @php
+                $taxableAmount = ($customer->total_price ?? 0) + ($extrasTotal ?? 0);
+                $vatAmount = $taxableAmount * 22 / 122;
+                $netAmount = $taxableAmount - $vatAmount;
+            @endphp
+
+            <div class="kv-row" style="margin-top: 20px; border-top: 1px dashed #ddd; padding-top: 10px;">
+                <span class="kv-label">Imponibile:</span>
+                <span class="kv-value">{{ number_format($netAmount, 2, ',', '.') }} €</span>
+            </div>
+            <div class="kv-row">
+                <span class="kv-label">IVA (22%):</span>
+                <span class="kv-value">{{ number_format($vatAmount, 2, ',', '.') }} €</span>
+            </div>
+
+            <div class="kv-row" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
                 <span class="kv-label"><strong>Totale Complessivo:</strong></span>
                 <span class="kv-value">{{ number_format($grandTotal ?? 0, 2, ',', '.') }} €</span>
             </div>

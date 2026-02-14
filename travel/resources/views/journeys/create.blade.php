@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <!-- Alerts -->
+            <!-- Avvisi -->
             @if (session('success'))
                 <div class="alert alert-success bg-transparent text-success border-success rounded-0 d-flex align-items-center mb-4"
                     role="alert">
@@ -39,12 +39,12 @@
                 class="needs-validation">
                 @csrf
 
-                <!-- Grid -->
+                <!-- Griglia -->
                 <div class="row g-5">
-                    <!-- Left Column: inputs -->
+                    <!-- Colonna Sinistra -->
                     <div class="col-lg-8">
 
-                        <!-- Title -->
+                        <!-- Titolo -->
                         <div class="mb-4">
                             <label for="title"
                                 class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Titolo
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="row g-4 mb-4">
-                            <!-- Price -->
+                            <!-- Prezzo -->
                             <div class="col-md-6">
                                 <label for="price"
                                     class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Prezzo
@@ -65,7 +65,7 @@
                                     class="form-control bg-dark text-white border-secondary rounded-0 p-3 fs-5"
                                     id="price" name="price" value="{{ old('price') }}" placeholder="0.00" required>
                             </div>
-                            <!-- Duration -->
+                            <!-- Durata -->
                             <div class="col-md-6">
                                 <label for="duration_days"
                                     class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Durata
@@ -77,7 +77,7 @@
                             </div>
                         </div>
 
-                        <!-- Description -->
+                        <!-- Descrizione -->
                         <div class="mb-4">
                             <label for="description"
                                 class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Descrizione</label>
@@ -89,7 +89,7 @@
 
                     </div>
 
-                    <!-- Right Column: Images -->
+                    <!-- Colonna Destra: Immagini -->
                     <div class="col-lg-4">
                         <div class="mb-4">
                             <label for="images"
@@ -101,17 +101,16 @@
                                 <i class="bi bi-info-circle me-1"></i> Carica le foto e seleziona la copertina.
                             </div>
 
-                            <!-- Hidden input for cover index -->
+                            <!-- Input nascosto indice copertina -->
                             <input type="hidden" name="cover_image_index" id="coverImageIndex" value="0">
 
-                            <!-- Preview Container -->
-                            <div id="imagePreviewContainer" class="row g-2">
-                                <!-- Previews will be injected here via JS -->
-                            </div>
+                            <!-- Contenitore Anteprime -->
+                            <div id="imagePreviewContainer" class="row g-2"></div>
                         </div>
-                        <!-- Details: Includes & Excludes -->
+
+                        <!-- Dettagli: Incluso & Escluso -->
                         <div class="row g-4 mb-4">
-                            <!-- Includes -->
+                            <!-- Incluso -->
                             <div class="col-12">
                                 <label
                                     class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Cosa
@@ -134,7 +133,7 @@
                                 </button>
                             </div>
 
-                            <!-- Excludes -->
+                            <!-- Escluso -->
                             <div class="col-12">
                                 <label
                                     class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Cosa
@@ -158,13 +157,13 @@
                             </div>
                         </div>
 
-                        <!-- Itinerary -->
+                        <!-- Itinerario -->
                         <div class="mb-5">
                             <label
                                 class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase mb-3">Itinerario
                                 Giornaliero</label>
                             <div id="itinerary-container">
-                                <!-- Day 1 -->
+                                <!-- Giorno 1 -->
                                 <div class="card bg-dark border-secondary mb-3 itinerary-day">
                                     <div
                                         class="card-header bg-transparent border-secondary d-flex justify-content-between align-items-center">
@@ -196,10 +195,9 @@
                                 <i class="bi bi-plus-lg me-2"></i> Aggiungi Giorno
                             </button>
                         </div>
-
                     </div>
 
-                    <!-- Actions -->
+                    <!-- Azioni -->
                     <div
                         class="col-12 border-top border-secondary pt-4 mt-2 d-flex justify-content-between align-items-center">
                         <a href="{{ route('journeys.index') }}"

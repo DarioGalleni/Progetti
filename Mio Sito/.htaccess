@@ -1,10 +1,46 @@
 <IfModule mod_rewrite.c>
-
-
     RewriteEngine On
+    RewriteBase /dariux/
 
-    RewriteCond %{REQUEST_URI} !^/dariux(/|$)
-        RewriteCond %{REQUEST_URI} !^/dario(/|$)
-        RewriteRule ^(.*)$ /dariux/$1 [L,R=301]
+    # Prevent directory listing (Security)
+    Options -Indexes
 </IfModule>
 
+# ----------------------------------------------------------------------
+# | Custom Error Pages                                                 |
+# ----------------------------------------------------------------------
+# Correction: Path must include subdirectory since this is inside /dariux/
+ErrorDocument 404 /dariux/404.html
+
+# ----------------------------------------------------------------------
+# | Performance & SEO Optimizations                                    |
+# ----------------------------------------------------------------------
+
+# 1. Enable Gzip Compression (Speed)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json font/svg+xml
+</IfModule>
+
+# 2. Browser Caching (Speed)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresDefault "access plus 2 days"
+</IfModule>
+
+# 3. Security Headers (Trust)
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    # Referrer Policy for SEO/Privacy
+    Header set Referrer-Policy "no-referrer-when-downgrade"
+</IfModule>

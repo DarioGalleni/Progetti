@@ -5,7 +5,7 @@
  */
 
 /**
- * Gestisce l'animazione di comparsa degli elementi allo scroll (classe .reveal)
+ * Gestisce l'animazione di comparsa elementi (.reveal)
  */
 function handleReveal() {
     const reveals = document.querySelectorAll('.reveal');
@@ -14,12 +14,10 @@ function handleReveal() {
 
     reveals.forEach(reveal => {
         const revealTop = reveal.getBoundingClientRect().top;
-
         if (revealTop < windowHeight - revealPoint) {
             if (!reveal.classList.contains('active')) {
                 reveal.classList.add('active');
-
-                // Avvia il contatore solo se siamo nella sezione statistiche e non è già partito
+                // Avvia contatore statistiche se necessario
                 if (reveal.classList.contains('stats-container') && !reveal.hasAttribute('data-counted')) {
                     startCounter();
                     reveal.setAttribute('data-counted', 'true');
@@ -30,28 +28,16 @@ function handleReveal() {
 }
 
 /**
- * Gestisce l'effetto Parallax sugli elementi (classe .parallax-scroll)
- * Calcola la traslazione verticale basandosi sulla posizione rispetto al centro dello schermo.
+ * Gestisce effetto Parallax (.parallax-scroll)
  */
 function handleParallax() {
-    const parallaxElements = document.querySelectorAll('.parallax-scroll');
-
-    parallaxElements.forEach(element => {
+    document.querySelectorAll('.parallax-scroll').forEach(element => {
         const rect = element.getBoundingClientRect();
-        // Controlla se l'elemento è visibile nel viewport
-        const isInView = (rect.top <= window.innerHeight) && (rect.bottom >= 0);
-
-        if (isInView) {
+        // Calcola solo se visibile
+        if (rect.top <= window.innerHeight && rect.bottom >= 0) {
             const speed = parseFloat(element.getAttribute('data-parallax-speed') || 0.5);
-
-            // Calcola la distanza dal centro dello schermo
-            const centerPosition = window.innerHeight / 2;
-            const elementCenter = rect.top + (rect.height / 2);
-            const distanceFromCenter = centerPosition - elementCenter;
-
-            // Applica la traslazione Y
-            const translateY = distanceFromCenter * speed;
-            element.style.transform = `translateY(${translateY}px)`;
+            const distanceFromCenter = (window.innerHeight / 2) - (rect.top + (rect.height / 2));
+            element.style.transform = `translateY(${distanceFromCenter * speed}px)`;
         }
     });
 }
@@ -63,43 +49,33 @@ function handleParallax() {
  */
 
 /**
- * Animazione contatore per la sezione statistiche
+ * Animazione numeri incrementali
  */
 function startCounter() {
-    const counters = document.querySelectorAll('.counter-value');
     const duration = 2000;
-
-    counters.forEach(counter => {
+    document.querySelectorAll('.counter-value').forEach(counter => {
         const target = +counter.getAttribute('data-target');
         const suffix = counter.getAttribute('data-suffix') || '';
-        let startTimestamp = null;
+        let start = null;
 
         const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-
-            const current = Math.floor(progress * target);
-            counter.innerText = current.toLocaleString('it-IT');
-
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            } else {
-                counter.innerText = target.toLocaleString('it-IT') + suffix;
-            }
+            if (!start) start = timestamp;
+            const progress = Math.min((timestamp - start) / duration, 1);
+            counter.innerText = Math.floor(progress * target).toLocaleString('it-IT') + (progress === 1 ? suffix : '');
+            if (progress < 1) window.requestAnimationFrame(step);
         };
-
         window.requestAnimationFrame(step);
     });
 }
 
 /**
  * ==========================================
- * 3. LOGICA FORM DINAMICI (Viaggi Create/Edit)
+ * 3. LOGICA FORM DINAMICI (Viaggi)
  * ==========================================
  */
 
 /**
- * Aggiunge un campo dinamico (es. Include/Esclude)
+ * Aggiunge campo dinamico (Include/Esclude)
  */
 function addItem(containerId, inputName) {
     const container = document.getElementById(containerId);
@@ -117,27 +93,25 @@ function addItem(containerId, inputName) {
 }
 
 /**
- * Rimuove un elemento dinamico generico
+ * Rimuove elemento dinamico
  */
 function removeItem(button) {
     button.closest('.input-group').remove();
 }
 
 /**
- * Aggiunge un giorno all'itinerario
+ * Aggiunge giorno itinerario
  */
 function addDay() {
     const container = document.getElementById('itinerary-container');
     if (!container) return;
 
-    const days = container.children.length;
-    const newIndex = days;
-
+    const index = container.children.length;
     const card = document.createElement('div');
     card.className = 'card bg-dark border-secondary mb-3 itinerary-day';
     card.innerHTML = `
         <div class="card-header bg-transparent border-secondary d-flex justify-content-between align-items-center">
-            <span class="text-white small text-uppercase fw-bold">Giorno <span class="day-number">${days + 1}</span></span>
+            <span class="text-white small text-uppercase fw-bold">Giorno <span class="day-number">${index + 1}</span></span>
             <button type="button" class="btn btn-sm text-secondary hover-text-danger p-0" onclick="removeDay(this)">
                 <i class="bi bi-trash"></i>
             </button>
@@ -145,40 +119,29 @@ function addDay() {
         <div class="card-body">
             <div class="mb-2">
                 <input type="text" class="form-control bg-black text-white border-secondary rounded-0 mb-2" 
-                    name="itinerary[${newIndex}][title]" placeholder="Titolo del giorno" required>
+                    name="itinerary[${index}][title]" placeholder="Titolo del giorno" required>
             </div>
             <div>
                 <textarea class="form-control bg-black text-white border-secondary rounded-0" 
-                    name="itinerary[${newIndex}][description]" rows="3" placeholder="Descrizione delle attività..." required></textarea>
+                    name="itinerary[${index}][description]" rows="3" placeholder="Descrizione delle attività..." required></textarea>
             </div>
         </div>
     `;
     container.appendChild(card);
-    updateDayNumbers();
 }
 
 /**
- * Rimuove un giorno dall'itinerario e ricalcola gli indici
+ * Rimuove giorno e ricalcola indici
  */
 function removeDay(button) {
-    const card = button.closest('.itinerary-day');
-    card.remove();
-    updateDayNumbers();
-    reindexItinerary();
+    button.closest('.itinerary-day').remove();
+    updateItineraryIndices();
 }
 
-function updateDayNumbers() {
-    const days = document.querySelectorAll('.itinerary-day');
-    days.forEach((day, index) => {
+function updateItineraryIndices() {
+    document.querySelectorAll('.itinerary-day').forEach((day, index) => {
         day.querySelector('.day-number').innerText = index + 1;
-    });
-}
-
-function reindexItinerary() {
-    const days = document.querySelectorAll('.itinerary-day');
-    days.forEach((day, index) => {
-        const inputs = day.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
+        day.querySelectorAll('input, textarea').forEach(input => {
             if (input.name.includes('[title]')) input.name = `itinerary[${index}][title]`;
             if (input.name.includes('[description]')) input.name = `itinerary[${index}][description]`;
         });
@@ -186,7 +149,7 @@ function reindexItinerary() {
 }
 
 /**
- * Anteprima Immagini Upload
+ * Anteprima immagini upload con selezione cover
  */
 function initImagePreview() {
     const imageInput = document.getElementById('images');
@@ -195,61 +158,30 @@ function initImagePreview() {
     imageInput.addEventListener('change', function (event) {
         const container = document.getElementById('imagePreviewContainer');
         const coverInput = document.getElementById('coverImageIndex');
-
         if (!container || !coverInput) return;
 
         container.innerHTML = '';
-        const files = event.target.files;
-        if (files.length === 0) return;
+        if (event.target.files.length === 0) return;
 
-        Array.from(files).forEach((file, index) => {
+        Array.from(event.target.files).forEach((file, index) => {
             const reader = new FileReader();
             reader.onload = function (e) {
                 const col = document.createElement('div');
                 col.className = 'col-6';
-
-                const card = document.createElement('div');
-                card.className = 'card bg-dark border-secondary h-100 overflow-hidden';
-
-                const imgContainer = document.createElement('div');
-                Object.assign(imgContainer.style, {
-                    height: '100px',
-                    backgroundImage: `url(${e.target.result})`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                });
-                imgContainer.className = 'bg-black';
-
-                const cardBody = document.createElement('div');
-                cardBody.className = 'card-body p-2 text-center';
-
-                const formCheck = document.createElement('div');
-                formCheck.className = 'form-check d-flex justify-content-center align-items-center m-0';
-
-                const radio = document.createElement('input');
-                radio.className = 'form-check-input border-secondary bg-dark';
-                radio.type = 'radio';
-                radio.name = 'cover_selection';
-                radio.id = `cover_${index}`;
-                radio.checked = (index === 0);
-
-                radio.addEventListener('change', function () {
-                    if (this.checked) coverInput.value = index;
-                });
-
-                const label = document.createElement('label');
-                label.className = 'form-check-label text-secondary small ms-2';
-                label.htmlFor = `cover_${index}`;
-                label.innerText = 'Cover';
-                label.style.cursor = 'pointer';
-
-                formCheck.append(radio, label);
-                cardBody.appendChild(formCheck);
-                card.append(imgContainer, cardBody);
-                col.appendChild(card);
+                col.innerHTML = `
+                    <div class="card bg-dark border-secondary h-100 overflow-hidden">
+                        <div class="bg-black" style="height: 100px; background-image: url(${e.target.result}); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                        <div class="card-body p-2 text-center">
+                            <div class="form-check d-flex justify-content-center align-items-center m-0">
+                                <input class="form-check-input border-secondary bg-dark" type="radio" name="cover_selection" id="cover_${index}" ${index === 0 ? 'checked' : ''}>
+                                <label class="form-check-label text-secondary small ms-2" for="cover_${index}" style="cursor: pointer;">Cover</label>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                col.querySelector('input').addEventListener('change', () => coverInput.value = index);
                 container.appendChild(col);
-            }
+            };
             reader.readAsDataURL(file);
         });
     });
@@ -257,29 +189,20 @@ function initImagePreview() {
 
 /**
  * ==========================================
- * 4. INIZIALIZZAZIONE EVENTI & SCROLL
+ * 4. GESTIONE EVENTI GLOBALI
  * ==========================================
  */
 
-/**
- * Gestisce il cambio stile della Navbar allo scroll
- */
 function handleNavbarScroll() {
     const nav = document.getElementById('mainNav');
-    if (!nav) return;
-
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
 }
 
-// Evento Scroll ottimizzato con requestAnimationFrame
+// Loop visualizzazione ottimizzato
 let isScrolling = false;
-window.addEventListener('scroll', function () {
+window.addEventListener('scroll', () => {
     if (!isScrolling) {
-        window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(() => {
             handleNavbarScroll();
             handleReveal();
             handleParallax();
@@ -289,31 +212,25 @@ window.addEventListener('scroll', function () {
     }
 });
 
-/**
- * Rimuove automaticamente gli alert di successo dopo 5 secondi
- */
 function initAlertDismissal() {
-    setTimeout(function () {
-        var alert = document.getElementById('success-alert');
+    setTimeout(() => {
+        const alert = document.getElementById('success-alert');
         if (alert) {
             alert.style.transition = 'opacity 0.5s ease';
             alert.style.opacity = '0';
-            setTimeout(function () {
-                alert.remove();
-            }, 500);
+            setTimeout(() => alert.remove(), 500);
         }
     }, 5000);
 }
 
-// Inizializzazione al caricamento del DOM
-document.addEventListener('DOMContentLoaded', function () {
+// Init
+document.addEventListener('DOMContentLoaded', () => {
     handleReveal();
     handleParallax();
     initImagePreview();
     initAlertDismissal();
 });
-
-// Espone le funzioni globalmente per gli onclick nel HTML
+// Esposizione globale per attributi onclick
 window.addItem = addItem;
 window.removeItem = removeItem;
 window.addDay = addDay;

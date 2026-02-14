@@ -29,8 +29,7 @@
                 <div class="carousel-inner bg-dark">
                     @foreach($journey->images as $index => $image)
                         <div class="carousel-item {{ $index === 0 ? 'active' : '' }}" style="height: 75vh;">
-                            <!-- NOTA: Assicurati che il path sia accessibile pubblicamente o usa un helper dedicato -->
-                            <img src="{{ Storage::url($image->path) }}" class="d-block w-100 h-100"
+                            <img src="{{ asset('img/' . $image->path) }}" class="d-block w-100 h-100"
                                 style="object-fit: contain;" alt="Foto {{ $index + 1 }}">
                         </div>
                     @endforeach

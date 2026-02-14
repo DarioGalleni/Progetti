@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prospetto Spese - {{ $customer->first_name }} {{ $customer->last_name }}</title>
-    @vite(['resources/css/print-expenses.css', 'resources/js/print-expenses.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body id="print-expenses-page">
 
     <div class="no-print" style="text-align: right;">
         <button onclick="window.print()" class="btn-print">Stamp Conto</button>

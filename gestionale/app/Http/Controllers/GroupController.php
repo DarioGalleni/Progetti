@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
+    protected $backupService;
+
+    public function __construct(\App\Services\BackupService $backupService)
+    {
+        $this->backupService = $backupService;
+    }
+
     public function create()
     {
         $rooms = config('rooms');
@@ -45,26 +52,32 @@ class GroupController extends Controller
                 return back()->withInput()->withErrors(['rooms' => 'Una o più camere selezionate sono occupate nel periodo scelto.']);
             }
 
-            foreach ($request->rooms as $roomNumber) {
-                Customer::create([
-                    'first_name' => $groupName,
-                    'last_name' => '(Gruppo)',
-                    'email' => null,
-                    'phone' => null,
-                    'room_number' => $roomNumber,
-                    'arrival_date' => $request->arrival_date,
-                    'departure_date' => $request->departure_date,
-                    'treatment' => 'BB',
-                    'pax' => 2,
-                    'under_12_pax' => 0,
-                    'total_price' => 0,
-                    'deposit' => 0,
-                    'payment_method' => 'cash',
-                    'notes' => 'Gruppo: ' . $groupName,
-                    'group_id' => $groupId,
-                    'group_name' => $groupName,
-                ]);
-            }
+            // Evita N backup consecutivi sospendendo gli eventi durante il loop
+            Customer::withoutEvents(function () use ($request, $groupName, $groupId) {
+                foreach ($request->rooms as $roomNumber) {
+                    Customer::create([
+                        'first_name' => $groupName,
+                        'last_name' => '(Gruppo)',
+                        'email' => null,
+                        'phone' => null,
+                        'room_number' => $roomNumber,
+                        'arrival_date' => $request->arrival_date,
+                        'departure_date' => $request->departure_date,
+                        'treatment' => 'BB',
+                        'pax' => 2,
+                        'under_12_pax' => 0,
+                        'total_price' => 0,
+                        'deposit' => 0,
+                        'payment_method' => 'cash',
+                        'notes' => 'Gruppo: ' . $groupName,
+                        'group_id' => $groupId,
+                        'group_name' => $groupName,
+                    ]);
+                }
+            });
+
+            // Backup singolo alla fine dell'operazione di gruppo
+            $this->backupService->createBackup('autosave_backup.sql');
 
             DB::commit();
             return redirect()->route('welcome')->with('success', 'Gruppo creato con successo!');
@@ -127,12 +140,27 @@ class GroupController extends Controller
             'departure_date' => $request->departure_date,
         ]);
 
+        // Backup manuale poiché update() massivo non triggera gli observer
+        try {
+            $this->backupService->createBackup('autosave_backup.sql');
+        } catch (\Exception $e) {
+            // Log silent
+        }
+
         return redirect()->route('customers.show', $leader->id)->with('success', 'Gruppo aggiornato con successo');
     }
 
     public function destroy($groupId)
     {
         Customer::where('group_id', $groupId)->delete();
+
+        // Backup manuale poiché delete() massivo non triggera gli observer
+        try {
+            $this->backupService->createBackup('autosave_backup.sql');
+        } catch (\Exception $e) {
+            // Log silent
+        }
+
         return redirect()->route('welcome')->with('success', 'Gruppo eliminato.');
     }
 }

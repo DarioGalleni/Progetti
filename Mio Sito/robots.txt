@@ -1,5 +1,5 @@
 # Robots.txt per dariux87.it
-# Ottimizzato per migliore indicizzazione SEO
+# Ottimizzato per indicizzazione: Creazione Siti Web Versilia
 
 User-agent: *
 Allow: /

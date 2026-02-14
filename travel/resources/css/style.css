@@ -12,6 +12,7 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Scrollbar Personalizzata */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -29,7 +30,7 @@ html {
     background: #555;
 }
 
-/* Nasconde le freccette dell'input numero */
+/* Reset Input Numerici */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -42,7 +43,7 @@ input[type=number] {
 }
 
 /* =========================================
-   2. TYPOGRAFIA & UTILITÀ
+   2. TIPOGRAFIA & UTILITÀ
    ========================================= */
 .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -75,27 +76,11 @@ input[type=number] {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-.hover-translate-start {
-    transition: transform 0.3s ease;
-}
-
-.hover-translate-start:hover {
-    transform: translateX(-5px);
-}
-
-.rotate-2 {
-    transform: rotate(2deg);
-}
-
-.rotate-n2 {
-    transform: rotate(-2deg);
-}
-
 /* =========================================
    3. ANIMAZIONI & TRANSIZIONI
    ========================================= */
 
-/* Animazione Reveal (Scroll) */
+/* Reveal Scroll */
 .reveal {
     opacity: 0;
     transform: translateY(50px);
@@ -107,14 +92,13 @@ input[type=number] {
     transform: translateY(0);
 }
 
-/* Animazione Parallax Scroll Avanzata */
+/* Parallax */
 .scroll-transform {
     will-change: transform;
     transition: transform 0.1s linear;
-    /* Transizione lineare fluida per aggiornamenti continui */
 }
 
-/* Animazioni Float / Bounce */
+/* Animazioni Extra */
 .animate-bounce {
     animation: bounce 2s infinite;
 }
@@ -159,7 +143,7 @@ input[type=number] {
     animation-delay: 0.4s;
 }
 
-/* Effetti Hover */
+/* Hover Effects */
 .hover-scale {
     transition: transform 0.3s ease;
 }
@@ -176,11 +160,16 @@ input[type=number] {
     transform: translateY(-5px);
 }
 
+.hover-primary:hover {
+    color: #0d6efd !important;
+    transition: color 0.3s ease;
+}
+
 /* =========================================
    4. COMPONENTI UI
    ========================================= */
 
-/* --- Navbar --- */
+/* Navbar */
 .navbar {
     transition: background-color 0.3s ease, padding 0.3s ease;
     padding: 1.5rem 0;
@@ -214,13 +203,12 @@ input[type=number] {
     width: 100%;
 }
 
-/* --- Moduli / Form --- */
+/* Form */
 .form-control:focus {
     box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
     background-color: #fff !important;
 }
 
-/* Overwrite per input scuri se necessario */
 .bg-dark.form-control:focus {
     background-color: #212529 !important;
     color: #fff !important;
@@ -231,7 +219,7 @@ input[type=number] {
     color: #fff !important;
 }
 
-/* --- Glassmorphism Card --- */
+/* Glassmorphism */
 .glass-card {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -244,7 +232,7 @@ input[type=number] {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Box Icona Moderno --- */
+/* Icon Box */
 .icon-box-modern {
     width: 80px;
     height: 80px;
@@ -267,18 +255,31 @@ input[type=number] {
 }
 
 /* =========================================
-   5. PAGINE SPECIFICHE: WELCOME & LANDING
+   5. PAGINE SPECIFICHE
    ========================================= */
 
-/* --- Hero Section --- */
-.hero-bg {
-    height: 100vh;
-    background-image: var(--hero-bg);
+/* Hero Section */
+.hero-bg,
+.stats-bg,
+.newsletter-bg,
+.divider-bg {
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+}
+
+.hero-bg {
+    height: 100vh;
+}
+
+.newsletter-bg {
+    height: 70vh;
+}
+
+.divider-bg {
+    height: 60vh;
 }
 
 .hero-title {
@@ -291,32 +292,11 @@ input[type=number] {
     margin: 0 auto;
 }
 
-/* --- Features (Griglia Bento) --- */
+/* Bento Grid */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1.5rem;
-}
-
-@media (min-width: 992px) {
-    .bento-grid {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(2, minmax(250px, auto));
-    }
-
-    .hover-primary:hover {
-        color: #0d6efd !important;
-        transition: color 0.3s ease;
-    }
-
-    .bento-item-large {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-
-    .bento-item-medium {
-        grid-column: span 2;
-    }
 }
 
 .bento-card {
@@ -336,7 +316,23 @@ input[type=number] {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Come Funziona (Step) --- */
+@media (min-width: 992px) {
+    .bento-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, minmax(250px, auto));
+    }
+
+    .bento-item-large {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .bento-item-medium {
+        grid-column: span 2;
+    }
+}
+
+/* Step Cards */
 .step-card {
     position: relative;
     padding: 2rem;
@@ -360,7 +356,7 @@ input[type=number] {
     z-index: 1;
 }
 
-/* --- Categorie Trending --- */
+/* Categorie Trending */
 .category-card {
     position: relative;
     overflow: hidden;
@@ -395,67 +391,11 @@ input[type=number] {
     transform: scale(1.1);
 }
 
-/* Immagini Categorie */
-.cat-img-1 {
-    background-image: var(--relax-bg);
-}
-
-.cat-img-2 {
-    background-image: var(--adventure-bg);
-}
-
-.cat-img-3 {
-    background-image: var(--culture-bg);
-}
-
-.cat-img-4 {
-    background-image: var(--honeymoon-bg);
-}
-
-
-/* --- Sezione Statistiche --- */
-.stats-bg {
-    background-image: var(--stats-bg);
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
-/* --- Sezione Divisore --- */
-.divider-bg {
-    height: 60vh;
-    background-image: var(--divider-bg);
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
-/* --- Sezione Newsletter --- */
-.newsletter-bg {
-    height: 70vh;
-    background-image: var(--newsletter-bg);
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
-/* --- Altri Componenti Pagina --- */
+/* Utils Vari */
 .journey-card-img-container {
     height: 300px;
 }
 
-.floating-review {
-    max-width: 250px;
-    transform: rotate(-2deg);
-}
-
-/* Base Parallax Generica */
 .parallax-section {
     position: relative;
 }

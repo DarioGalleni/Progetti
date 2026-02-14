@@ -1,0 +1,120 @@
+# GUIDA CONFIGURAZIONE FILESYSTEM E IMMAGINI
+
+Questa guida documenta la configurazione del filesystem per la gestione delle immagini in ambiente locale (Windows/XAMPP) e di produzione (Hosting Netsons), garantendo la compatibilità tra i due ambienti senza la necessità di link simbolici (`storage:link`) e supportando l'installazione in sottodirectory (`/trav/`).
+
+## 1. Obiettivo
+
+L'obiettivo è permettere il caricamento e la visualizzazione delle immagini sia in locale (`localhost:8000`) che online (`www.dariux87.it/trav`) senza modificare il codice o i percorsi nel database ogni volta che si effettua il deploy.
+
+## 2. Configurazione Filesystem (`config/filesystems.php`)
+
+È stato creato un disco personalizzato `public_uploads` che si adatta dinamicamente all'ambiente.
+
+```php
+'public_uploads' => [
+    'driver' => 'local',
+    'root'   => env('APP_ENV') === 'local' 
+                    ? public_path('img') 
+                    : base_path('../public_html/trav/img'),
+    'url'    => env('APP_URL') . '/img',
+    'visibility' => 'public',
+    'throw'  => false,
+],
+```
+
+- **In Locale (`APP_ENV=local`):**
+  - Le immagini vengono salvate in `public/img` del progetto Laravel.
+  - L'URL base è `http://localhost:8000/img`.
+
+- **In Produzione (`APP_ENV=production`):**
+  - Le immagini vengono salvate in `../public_html/trav/img` (relative alla root del progetto Laravel, che si presume sia fuori dalla public_html o protetta).
+  - L'URL base è `https://www.dariux87.it/trav/img`.
+
+## 3. Variabili d'Ambiente (`.env`)
+
+### Locale
+```dotenv
+APP_ENV=local
+APP_URL=http://localhost:8000
+FILESYSTEM_DISK=public_uploads
+```
+
+### Produzione (Online)
+```dotenv
+APP_ENV=production
+APP_URL=https://www.dariux87.it/trav
+FILESYSTEM_DISK=public_uploads
+```
+
+**Nota:** Assicurarsi che `FILESYSTEM_DISK` sia impostato su `public_uploads` in entrambi gli ambienti.
+
+## 4. Gestione Immagini nel Codice
+
+### Upload (Controller)
+Nel `JourneyController`, utilizzare il disco configurato di default:
+
+```php
+$path = $file->store('upload/' . Str::slug($request->title), 'public_uploads');
+```
+Questo salverà il file nel percorso corretto in base all'ambiente.
+
+### Visualizzazione (Blade)
+Per visualizzare le immagini, utilizzare l'helper `asset()` che genera l'URL corretto prefissando l'`APP_URL`.
+
+**Errato (Old way):**
+```php
+{{ Storage::url($journey->image) }} // Non funziona bene con questa configurazione custom senza link simbolico
+```
+
+**Corretto:**
+```php
+<img src="{{ asset('img/' . $journey->image) }}" ...>
+```
+*Nota: Se il percorso nel database include già "img/", adattare di conseguenza. Attualmente i percorsi salvati sono relativi, es: `upload/nome-viaggio/immagine.jpg`.*
+
+**Per i percorsi assoluti nel DB:**
+Se nel database sono salvati URL assoluti (es. `http://localhost:8000/img/...`), è necessario correggerli o utilizzare uno script di migrazione. Abbiamo normalizzato i percorsi nel DB per essere relativi o coerenti.
+
+## 5. Script di Manutenzione
+
+Sono stati creati degli script PHP nella root (da cancellare dopo l'uso o proteggere) per correggere i percorsi nel database quando si migra da locale a online o viceversa, se necessario.
+
+- `fix_online_urls.php`: Sostituisce `http://localhost:8000` con `https://www.dariux87.it/trav` nel database. Utile se si importano dump locali online.
+
+## 6. PWA e Manifest
+
+Per supportare la PWA in una sottodirectory (`/trav/`), il file `public/manifest.json` e i link in `layout.blade.php` sono stati aggiornati.
+
+**manifest.json:**
+```json
+{
+    "start_url": "/trav/",
+    "scope": "/trav/",
+    "icons": [
+        {
+            "src": "/trav/logo.png",
+            ...
+        }
+    ]
+}
+```
+
+**layout.blade.php:**
+I link alle icone vengono generati dinamicamente:
+```blade
+<link rel="apple-touch-icon" href="{{ env('APP_ENV') === 'production' ? '/trav/logo.png' : asset('logo.png') }}">
+```
+
+## 7. Permessi Cartelle (Server)
+
+Assicurarsi che la cartella di destinazione delle immagini sul server abbia i permessi di scrittura corretti (755 o 777 a seconda della configurazione dell'hosting).
+
+Percorso Server: `public_html/trav/img/upload`
+
+## 8. Riepilogo Passaggi per il Deploy
+
+1. Caricare i file del progetto (escluso `node_modules`, `vendor`).
+2. Eseguire `composer install --no-dev`.
+3. Configurare il file `.env` con i parametri di produzione (DB, APP_URL, FILESYSTEM_DISK).
+4. Verificare che la cartella `img` esista in `public_html/trav/` e sia scrivibile.
+5. Se si importa il DB locale, eseguire `fix_online_urls.php` (se necessario) per correggere vecchi link assoluti.

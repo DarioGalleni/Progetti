@@ -19,6 +19,7 @@
                 </div>
             </div>
         @endif
+
         <div class="row g-4">
             @foreach($journeys as $journey)
                 <div class="col-md-6 col-lg-4 animate-fade-in-up delay-2">

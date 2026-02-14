@@ -2,285 +2,153 @@
 
 <x-layout>
     <div class="container mt-4">
-        <div class="card beach-card">
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">
-                    <i class="fas fa-calendar-check"></i> Elenco Prenotazioni
-                </h5>
-                <a href="{{ route('home') }}" class="btn btn-light btn-sm">
-                    <i class="fas fa-umbrella-beach"></i> Vai al Calendario
-                </a>
+        <h2 class="text-sea mb-4 text-center">
+            @if($search)
+                Risultati ricerca per: "{{ $search }}"
+            @else
+                Elenco Prenotazioni
+            @endif
+        </h2>
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
+        @endif
 
-            <div class="card-body">
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                
-                {{-- Filtro Ricerca Attivo --}}
-                @if($search)
-                    <div class="alert alert-info d-flex justify-content-between align-items-center">
-                        <div>
-                            <i class="fas fa-filter"></i> Risultati filtrati per: <strong>"{{ $search }}"</strong>
-                            ({{ $prenotazioni->count() }} {{ $prenotazioni->count() === 1 ? 'risultato' : 'risultati' }})
-                        </div>
-                        <a href="{{ route('prenotazioni.index', ['sort' => $sortBy, 'direction' => $sortDirection]) }}"
-                            class="btn btn-sm btn-outline-info">
-                            Rimuovi Filtro
-                        </a>
-                    </div>
-                @endif
-
-                {{-- Nessun Risultato --}}
+        <div class="card beach-card shadow-sm border-0">
+            <div class="card-header bg-white py-3 border-bottom-0">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0 text-primary"><i class="fas fa-list-ul me-2"></i>Risultati</h5>
+                    <span class="badge bg-light text-dark border">{{ $prenotazioni->count() }} trovati</span>
+                </div>
+            </div>
+            <div class="card-body p-0">
                 @if($prenotazioni->isEmpty())
-                    @if($search)
-                        <div class="alert alert-warning">
-                            <i class="fas fa-search"></i> Nessuna prenotazione trovata per il termine di ricerca:
-                            <strong>{{ $search }}</strong>.
-                        </div>
-                    @else
-                        <div class="alert alert-info">
-                            <i class="fas fa-info-circle"></i> Nessuna prenotazione presente.
-                        </div>
-                    @endif
+                    <div class="alert alert-light text-center m-4 py-5">
+                        <i class="fas fa-search fa-3x text-muted mb-3 opacity-50"></i>
+                        <h5 class="text-muted">Nessuna prenotazione trovata</h5>
+                        <p class="text-muted small">Prova a modificare i parametri di ricerca</p>
+                    </div>
                 @else
-                    {{-- Helper per Ordinamento Dinamico --}}
-                    @php
-                        $getSortUrl = function($column) use ($sortBy, $sortDirection, $search) {
-                            $newDirection = ($sortBy === $column && $sortDirection === 'asc') ? 'desc' : 'asc';
-                            $params = ['sort' => $column, 'direction' => $newDirection];
-                            if ($search) {
-                                $params['search'] = $search;
-                            }
-                            return route('prenotazioni.index', $params);
-                        };
-
-                        $getSortIcon = function($column) use ($sortBy, $sortDirection) {
-                            if ($sortBy !== $column) {
-                                return '<i class="fas fa-sort text-muted ms-1"></i>';
-                            }
-                            return $sortDirection === 'asc'
-                                ? '<i class="fas fa-sort-up ms-1"></i>'
-                                : '<i class="fas fa-sort-down ms-1"></i>';
-                        };
-                    @endphp
-
-                    {{-- Tabella Prenotazioni --}}
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover align-middle">
-                            <thead class="text-center">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light text-secondary">
                                 <tr>
-                                    <th>
-                                        <a href="{{ $getSortUrl('ombrellone') }}"
-                                            class="text-decoration-none text-dark d-block">
-                                            Ombrellone {!! $getSortIcon('ombrellone') !!}
-                                        </a>
-                                    </th>
+                                    <th class="ps-4">Ombrellone</th>
                                     <th>Cliente</th>
-                                    <th>
-                                        <a href="{{ $getSortUrl('arrivo') }}"
-                                            class="text-decoration-none text-dark d-block">
-                                            Arrivo {!! $getSortIcon('arrivo') !!}
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a href="{{ $getSortUrl('partenza') }}"
-                                            class="text-decoration-none text-dark d-block">
-                                            Partenza {!! $getSortIcon('partenza') !!}
-                                        </a>
-                                    </th>
-                                    <th>Azioni</th>
+                                    <th>Contatti</th>
+                                    <th>Periodo</th>
+                                    <th class="text-end pe-4">Azioni</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($prenotazioni as $prenotazione)
-                                    <tr class="text-center">
-                                        <td>{{ strtoupper($prenotazione->ombrellone->fila) }} - {{ $prenotazione->ombrellone->numero }}</td>
-                                        <td>{{ $prenotazione->nome }} {{ $prenotazione->cognome }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($prenotazione->data_inizio)->format('d/m/Y') }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($prenotazione->data_fine)->addDay()->format('d/m/Y') }}</td>
-                                        <td>
-                                            <div class="d-grid gap-1 d-md-block">
-                                                <button type="button"
-                                                        class="btn btn-info btn-sm action-btn"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#detailsModal{{ $prenotazione->id }}">
-                                                    <i class="fas fa-eye"></i> Dettagli
-                                                </button>
-                                                <button type="button"
-                                                        class="btn btn-danger btn-sm action-btn"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal{{ $prenotazione->id }}">
-                                                    <i class="fas fa-trash"></i> Elimina
-                                                </button>
-                                                <a href="{{ route('prenotazioni.edit', $prenotazione->id) }}"
-                                                   class="btn btn-warning btn-sm action-btn">
-                                                    <i class="fas fa-pen"></i> Modifica
-                                                </a>
+                                    <tr class="position-relative">
+                                        <td class="ps-4">
+                                            <div class="d-flex align-items-center">
+                                                <div class="rounded-circle bg-primary-subtle text-primary d-flex align-items-center justify-content-center me-3"
+                                                    style="width: 40px; height: 40px;">
+                                                    <i class="fas fa-umbrella-beach"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="fw-bold text-dark">
+                                                        {{ strtoupper($prenotazione->ombrellone->fila) }} -
+                                                        {{ $prenotazione->ombrellone->numero }}</div>
+                                                </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <div class="fw-bold">{{ $prenotazione->nome }} {{ $prenotazione->cognome }}</div>
+                                        </td>
+                                        <td>
+                                            @if($prenotazione->telefono)
+                                                <div class="small"><i class="fas fa-phone-alt text-muted me-2"
+                                                        style="width:16px"></i>{{ $prenotazione->telefono }}</div>
+                                            @endif
+                                            @if($prenotazione->email)
+                                                <div class="small"><i class="fas fa-envelope text-muted me-2"
+                                                        style="width:16px"></i>{{ $prenotazione->email }}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="small text-muted"> <i class="far fa-calendar-alt me-1"></i>
+                                                {{ \Carbon\Carbon::parse($prenotazione->data_inizio)->format('d/m') }} -
+                                                {{ \Carbon\Carbon::parse($prenotazione->data_fine)->addDay()->format('d/m/Y') }}
+                                            </div>
+                                            <div class="badge bg-light text-secondary border mt-1">
+                                                {{ \Carbon\Carbon::parse($prenotazione->data_inizio)->diffInDays(\Carbon\Carbon::parse($prenotazione->data_fine)->addDay()) }}
+                                                gg
+                                            </div>
+                                        </td>
+                                        <td class="text-end pe-4">
+                                            <div class="btn-group shadow-sm" role="group">
+                                                <a href="{{ route('prenotazioni.show', $prenotazione->id) }}"
+                                                    class="btn btn-sm btn-light text-primary border" data-bs-toggle="tooltip"
+                                                    title="Visualizza">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="{{ route('prenotazioni.edit', $prenotazione->id) }}"
+                                                    class="btn btn-sm btn-light text-warning border" data-bs-toggle="tooltip"
+                                                    title="Modifica">
+                                                    <i class="fas fa-pen"></i>
+                                                </a>
+                                                <button type="button" class="btn btn-sm btn-light text-danger border"
+                                                    data-bs-toggle="modal" data-bs-target="#deleteModal{{ $prenotazione->id }}"
+                                                    title="Elimina">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" id="deleteModal{{ $prenotazione->id }}" tabindex="-1"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-danger text-white">
+                                                            <h5 class="modal-title">Conferma Eliminazione</h5>
+                                                            <button type="button" class="btn-close btn-close-white"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body text-start">
+                                                            Sei sicuro di voler eliminare la prenotazione di
+                                                            <strong>{{ $prenotazione->nome }}
+                                                                {{ $prenotazione->cognome }}</strong>?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Annulla</button>
+                                                            <form
+                                                                action="{{ route('prenotazioni.destroy', $prenotazione->id) }}"
+                                                                method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger">Elimina</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
                                     </tr>
-
-                                    {{-- Modal Dettagli Prenotazione --}}
-                                    <div class="modal fade"
-                                         id="detailsModal{{ $prenotazione->id }}"
-                                         tabindex="-1"
-                                         aria-labelledby="detailsModalLabel{{ $prenotazione->id }}"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-info text-white d-flex justify-content-center">
-                                                    <button type="button" class="btn-close invisible" aria-hidden="true"></button>
-                                                    <h5 class="modal-title" id="detailsModalLabel{{ $prenotazione->id }}">
-                                                        Dettagli Prenotazione
-                                                    </h5>
-                                                    <button type="button"
-                                                            class="btn-close btn-close-white"
-                                                            data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                </div>
-
-                                                <div class="modal-body">
-                                                    <dl class="row">
-                                                        <dt class="col-sm-4">Ombrellone:</dt>
-                                                        <dd class="col-sm-8">
-                                                            {{ strtoupper($prenotazione->ombrellone->fila) }} - {{ $prenotazione->ombrellone->numero }}
-                                                        </dd>
-
-                                                        <dt class="col-sm-4">Nome:</dt>
-                                                        <dd class="col-sm-8">{{ $prenotazione->nome }}</dd>
-
-                                                        <dt class="col-sm-4">Cognome:</dt>
-                                                        <dd class="col-sm-8">{{ $prenotazione->cognome }}</dd>
-
-                                                        <dt class="col-sm-4">Arrivo:</dt>
-                                                        <dd class="col-sm-8 text-success">
-                                                            {{ \Carbon\Carbon::parse($prenotazione->data_inizio)->format('d/m/Y') }}
-                                                        </dd>
-
-                                                        <dt class="col-sm-4">Partenza:</dt>
-                                                        <dd class="col-sm-8 text-danger">
-                                                            {{ \Carbon\Carbon::parse($prenotazione->data_fine)->addDay()->format('d/m/Y') }}
-                                                        </dd>
-
-                                                        <dt class="col-sm-4">Email:</dt>
-                                                        <dd class="col-sm-8">
-                                                            <a href="mailto:{{ $prenotazione->email ?? '' }}">
-                                                                {{ $prenotazione->email ?? '' }}
-                                                            </a>
-                                                        </dd>
-
-                                                        <dt class="col-sm-4">Telefono:</dt>
-                                                        <dd class="col-sm-8">
-                                                            <a href="tel:{{ $prenotazione->telefono ?? '' }}">
-                                                                {{ $prenotazione->telefono ?? '' }}
-                                                            </a>
-                                                        </dd>
-
-                                                        <dt class="col-sm-4">WhatsApp:</dt>
-                                                        <dd class="col-sm-8">
-                                                            <a id="whatsapp"
-                                                               href="https://wa.me/39{{ $prenotazione->telefono }}"
-                                                               target="blank">
-                                                                Invia Messaggio
-                                                            </a>
-                                                        </dd>
-
-                                                        <dt class="col-sm-4">Note:</dt>
-                                                        <dd class="col-sm-8">{{ $prenotazione->note ?? '' }}</dd>
-
-                                                        @if($prenotazione->costo_totale)
-                                                            <hr class="mt-2 mb-2">
-                                                            <dt class="col-sm-4">Costo Totale:</dt>
-                                                            <dd class="col-sm-8">
-                                                                €{{ number_format($prenotazione->costo_totale, 2, ',', '.') }}
-                                                            </dd>
-                                                        @endif
-
-                                                        @if($prenotazione->acconto)
-                                                            <dt class="col-sm-4">Acconto Versato:</dt>
-                                                            <dd class="col-sm-8">
-                                                                €{{ number_format($prenotazione->acconto, 2, ',', '.') }}
-                                                            </dd>
-                                                        @endif
-
-                                                        @if($prenotazione->costo_totale && $prenotazione->acconto)
-                                                            <dt class="col-sm-4">Saldo:</dt>
-                                                            <dd class="col-sm-8">
-                                                                <strong>
-                                                                    €{{ number_format($prenotazione->costo_totale - $prenotazione->acconto, 2, ',', '.') }}
-                                                                </strong>
-                                                            </dd>
-                                                        @endif
-
-                                                        <dt class="col-sm-4">Creata il:</dt>
-                                                        <dd class="col-sm-8">{{ $prenotazione->created_at->format('d/m/Y') }}</dd>
-                                                    </dl>
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                        Chiudi
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{-- fine modal dettaglio --}}
-
-                                    {{-- Modal Conferma Eliminazione --}}
-                                    <div class="modal fade"
-                                         id="deleteModal{{ $prenotazione->id }}"
-                                         tabindex="-1"
-                                         aria-labelledby="deleteModalLabel{{ $prenotazione->id }}"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-danger text-white">
-                                                    <h5 class="modal-title" id="deleteModalLabel{{ $prenotazione->id }}">
-                                                        Conferma Eliminazione
-                                                    </h5>
-                                                    <button type="button"
-                                                            class="btn-close btn-close-white"
-                                                            data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                </div>
-
-                                                <div class="modal-body">
-                                                    Sei sicuro di voler eliminare la prenotazione per
-                                                    <strong>{{ $prenotazione->nome }} {{ $prenotazione->cognome }}</strong>
-                                                    sull'ombrellone
-                                                    <strong>{{ strtoupper($prenotazione->ombrellone->fila) }} - {{ $prenotazione->ombrellone->numero }}</strong>?
-                                                    <br><br>
-                                                    L'azione è irreversibile.
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                        Annulla
-                                                    </button>
-                                                    <form action="{{ route('prenotazioni.destroy', $prenotazione->id) }}"
-                                                          method="POST"
-                                                          class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">
-                                                            Elimina Definitivamente
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{-- fine modal eliminazione --}}
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 @endif
             </div>
+        </div>
+
+        <div class="mt-3 text-center">
+            <a href="{{ route('home') }}" class="btn btn-secondary">
+                <i class="fas fa-home me-1"></i> Torna alla Home
+            </a>
+            @if($search)
+                <a href="{{ route('prenotazioni.index') }}" class="btn btn-outline-secondary ms-2">
+                    <i class="fas fa-list me-1"></i> Mostra tutte
+                </a>
+            @endif
         </div>
     </div>
 </x-layout>

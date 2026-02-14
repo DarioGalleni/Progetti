@@ -174,25 +174,49 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     addShimmerToCards();
 
-    // Typing effect for hero text (optional enhancement)
-    const addTypingEffect = () => {
-        const typingElements = document.querySelectorAll('[data-typing]');
-        typingElements.forEach(element => {
-            const text = element.textContent;
-            element.textContent = '';
-            element.style.opacity = '1';
-
-            let i = 0;
-            const typeWriter = () => {
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
-                }
-            };
-            typeWriter();
+    // Spotlight Effect for Service Cards
+    const spotlightCards = document.querySelectorAll('.spotlight-card');
+    spotlightCards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
         });
-    };
+    });
+
+    // Initialize Typed.js
+    if (document.querySelector('.typing-element')) {
+        new Typed('.typing-element', {
+            strings: ['Realtà Digitali', 'Esperienze Uniche', 'Business Online'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true,
+            showCursor: true,
+            cursorChar: '|',
+            autoInsertCss: true
+        });
+    }
+
+    // Mouse Scroll Indicator Click
+    const mouseScroll = document.querySelector('.mouse-scroll');
+    if (mouseScroll) {
+        mouseScroll.addEventListener('click', function(e) {
+            e.preventDefault();
+            const aboutSection = document.querySelector('#about');
+            if (aboutSection) {
+                const headerHeight = 80;
+                const targetPosition = aboutSection.offsetTop - headerHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
 
     // Stagger animation for tech icons
     const staggerTechIcons = () => {

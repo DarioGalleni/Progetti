@@ -1,8 +1,7 @@
 <x-layout>
-    <!-- Parallax Hero for Details -->
-    <header class="parallax-section d-flex align-items-end"
-        style="height: 60vh; background-image: url('{{ $journey->image }}'); background-position: center; background-repeat: no-repeat; background-size: cover;"
-        role="banner">
+    <!-- Hero Parallax Dettagli -->
+    <header class="parallax-section d-flex align-items-end" role="banner"
+        style="height: 60vh; background-image: url('{{ $journey->image }}'); background-position: center; background-repeat: no-repeat; background-size: cover;">
         <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-to-t from-black opacity-75"
             aria-hidden="true"></div>
         <div class="container position-relative z-index-1 text-white pb-5 reveal">
@@ -16,7 +15,7 @@
 
     <div class="container py-5 section-padding">
         <div class="row g-5">
-            <!-- Main Content -->
+            <!-- Contenuto Principale -->
             <div class="col-lg-8 animate-fade-in-up">
                 <div class="bg-white p-4 rounded-4 shadow-sm mb-5">
                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -38,8 +37,9 @@
                     <h3 class="h4 fw-bold mb-3">Dettagli Incluso/Escluso</h3>
                     <div class="row g-4">
                         <div class="col-md-6">
-                            <h5 class="text-success small text-uppercase fw-bold mb-3"><i
-                                    class="bi bi-check-circle-fill me-1"></i> Cosa è incluso</h5>
+                            <h5 class="text-success small text-uppercase fw-bold mb-3">
+                                <i class="bi bi-check-circle-fill me-1"></i> Cosa è incluso
+                            </h5>
                             @if(is_array($journey->includes) && count($journey->includes) > 0)
                                 <ul class="list-unstyled">
                                     @foreach($journey->includes as $item)
@@ -53,8 +53,9 @@
                             @endif
                         </div>
                         <div class="col-md-6">
-                            <h5 class="text-danger small text-uppercase fw-bold mb-3"><i
-                                    class="bi bi-x-circle-fill me-1"></i> Cosa NON è incluso</h5>
+                            <h5 class="text-danger small text-uppercase fw-bold mb-3">
+                                <i class="bi bi-x-circle-fill me-1"></i> Cosa NON è incluso
+                            </h5>
                             @if(is_array($journey->excludes) && count($journey->excludes) > 0)
                                 <ul class="list-unstyled">
                                     @foreach($journey->excludes as $item)
@@ -70,7 +71,7 @@
                     </div>
                 </div>
 
-                <!-- Itinerary -->
+                <!-- Itinerario -->
                 @if(is_array($journey->itinerary) && count($journey->itinerary) > 0)
                     <div class="bg-light p-4 rounded-4 shadow-sm reveal">
                         <h3 class="h4 fw-bold mb-4">Itinerario di Viaggio</h3>
@@ -114,12 +115,12 @@
                             </div>
 
                             <div class="d-grid gap-3">
-                                <a href="mailto:info@startjourney.com?subject=Richiesta%20info:%20{{ urlencode($journey->title) }}&body=ID%20Viaggio:%20{{ $journey->id }}%20(NON%20CANCELLARE%20NECESSARIO%20PER%20USO%20INTERNO)%0D%0A%0D%0ASalve,%20vorrei%20maggiori%20informazioni%20su%20questo%20viaggio..."
+                                <a href="mailto:info@startjourney.com?subject=Richiesta%20info:%20{{ urlencode($journey->title) }}&body=ID%20Viaggio:%20{{ $journey->id }}%20(RIFERIMENTO%20INTERNO)%0D%0A%0D%0ASalve,%20vorrei%20maggiori%20informazioni%20su%20questo%20viaggio..."
                                     class="btn btn-warning btn-lg rounded-pill fw-bold hover-scale shadow-sm">
                                     <i class="bi bi-envelope-fill me-2"></i> Invia Email
                                 </a>
 
-                                <a href="https://wa.me/39061234567?text=Richiesta%20info:%20{{ urlencode($journey->title) }}%0A(ID:%20{{ $journey->id }}%20-%20NON%20CANCELLARE%20NECESSARIO%20PER%20USO%20INTERNO)%0A%0ASalve,%20vorrei%20maggiori%20informazioni..."
+                                <a href="https://wa.me/39061234567?text=Richiesta%20info:%20{{ urlencode($journey->title) }}%0A(ID:%20{{ $journey->id }}%20-%20RIFERIMENTO%20INTERNO)%0A%0ASalve,%20vorrei%20maggiori%20informazioni..."
                                     target="_blank"
                                     class="btn btn-success btn-lg rounded-pill fw-bold hover-scale shadow-sm">
                                     <i class="bi bi-whatsapp me-2"></i> Contattaci su WhatsApp

@@ -14,7 +14,8 @@
                         @if(session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
-                                <a href="{{ route('prenotazioni.index') }}" class="alert-link ms-2">Vai alla lista prenotazioni</a>
+                                <a href="{{ route('prenotazioni.index') }}" class="alert-link ms-2">Vai alla lista
+                                    prenotazioni</a>
                             </div>
                         @endif
 
@@ -37,188 +38,121 @@
                         <form action="{{ route('prenotazioni.store') }}" method="POST">
                             @csrf
 
-                            <div class="mb-3">
-                                <label for="ombrellone_id" class="form-label">
-                                    Ombrellone <span class="text-danger">*</span>
-                                </label>
-
-                                <select class="form-select @error('ombrellone_id') is-invalid @enderror"
-                                        id="ombrellone_id"
-                                        name="ombrellone_id"
-                                        required>
-                                    <option value="" disabled
-                                        {{ !isset($ombrellone) && !old('ombrellone_id') ? 'selected' : '' }}>
-                                        Seleziona un ombrellone
-                                    </option>
-
-                                    @foreach($ombrelloni as $o)
-                                        <option value="{{ $o->id }}"
-                                            {{ (isset($ombrellone) && $ombrellone->id == $o->id) || old('ombrellone_id') == $o->id ? 'selected' : '' }}>
-                                            Fila {{ $o->fila }} - N. {{ $o->numero }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                @error('ombrellone_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="arrivo" class="form-label">
-                                        Data di Arrivo <span class="text-danger">*</span>
-                                    </label>
-
-                                    <input type="date"
-                                           class="form-control @error('arrivo') is-invalid @enderror"
-                                           id="arrivo"
-                                           name="arrivo"
-                                           value="{{ old('arrivo', $dataInizio) }}"
-                                           required>
-
-                                    @error('arrivo')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                            <div class="row g-3">
+                                {{-- SEZIONE 1: Dettagli Prenotazione --}}
+                                <div class="col-12">
+                                    <h6 class="text-primary border-bottom pb-2 mb-3">
+                                        <i class="fas fa-umbrella-beach me-2"></i>Dettagli Soggiorno
+                                    </h6>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="partenza" class="form-label">
-                                        Data di Partenza <span class="text-danger">*</span>
-                                    </label>
-
-                                    <input type="date"
-                                           class="form-control @error('partenza') is-invalid @enderror"
-                                           id="partenza"
-                                           name="partenza"
-                                           value="{{ old('partenza') }}"
-                                           required>
-
-                                    @error('partenza')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <p class="text-muted small mb-3">
-                                Nota: La data di partenza è il primo giorno in cui l'ombrellone sarà libero.
-                                L'ombrellone risulterà occupato fino al giorno precedente.
-                            </p>
-
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="nome" class="form-label">
-                                        Nome <span class="text-danger">*</span>
-                                    </label>
-
-                                    <input type="text"
-                                           class="form-control @error('nome') is-invalid @enderror"
-                                           id="nome"
-                                           name="nome"
-                                           value="{{ old('nome') }}"
-                                           required>
-
-                                    @error('nome')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                <div class="col-md-12">
+                                    <label for="ombrellone_id" class="form-label">Ombrellone <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-select @error('ombrellone_id') is-invalid @enderror"
+                                        id="ombrellone_id" name="ombrellone_id" required>
+                                        <option value="" disabled {{ !isset($ombrellone) && !old('ombrellone_id') ? 'selected' : '' }}>Seleziona...</option>
+                                        @foreach($ombrelloni as $o)
+                                            <option value="{{ $o->id }}" {{ (isset($ombrellone) && $ombrellone->id == $o->id) || old('ombrellone_id') == $o->id ? 'selected' : '' }}>
+                                                Fila {{ $o->fila }} - N. {{ $o->numero }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('ombrellone_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="cognome" class="form-label">
-                                        Cognome <span class="text-danger">*</span>
-                                    </label>
-
-                                    <input type="text"
-                                           class="form-control @error('cognome') is-invalid @enderror"
-                                           id="cognome"
-                                           name="cognome"
-                                           value="{{ old('cognome') }}"
-                                           required>
-
-                                    @error('cognome')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="telefono" class="form-label">Telefono (Opzionale)</label>
-
-                                    <input type="number"
-                                           class="form-control @error('telefono') is-invalid @enderror"
-                                           id="telefono"
-                                           name="telefono"
-                                           value="{{ old('telefono') }}">
-
-                                    @error('telefono')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                <div class="col-md-6">
+                                    <label for="arrivo" class="form-label">Data Arrivo <span
+                                            class="text-danger">*</span></label>
+                                    <input type="date" class="form-control @error('arrivo') is-invalid @enderror"
+                                        id="arrivo" name="arrivo" value="{{ old('arrivo', $dataInizio) }}" required>
+                                    @error('arrivo') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Email (Opzionale)</label>
-
-                                    <input type="email"
-                                           class="form-control @error('email') is-invalid @enderror"
-                                           id="email"
-                                           name="email"
-                                           value="{{ old('email') }}">
-
-                                    @error('email')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                <div class="col-md-6">
+                                    <label for="partenza" class="form-label">Data Partenza <span
+                                            class="text-danger">*</span></label>
+                                    <input type="date" class="form-control @error('partenza') is-invalid @enderror"
+                                        id="partenza" name="partenza" value="{{ old('partenza') }}" required>
+                                    @error('partenza') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    <div class="form-text text-muted small">Ultimo giorno di utilizzo (libero dal giorno
+                                        successivo).</div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
+                                {{-- SEZIONE 2: Dati Cliente --}}
+                                <div class="col-12 mt-4">
+                                    <h6 class="text-primary border-bottom pb-2 mb-3">
+                                        <i class="fas fa-user me-2"></i>Dati Cliente
+                                    </h6>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control @error('nome') is-invalid @enderror"
+                                        id="nome" name="nome" value="{{ old('nome') }}" required>
+                                    @error('nome') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="cognome" class="form-label">Cognome <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control @error('cognome') is-invalid @enderror"
+                                        id="cognome" name="cognome" value="{{ old('cognome') }}" required>
+                                    @error('cognome') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="telefono" class="form-label">Telefono</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        <input type="tel" class="form-control @error('telefono') is-invalid @enderror"
+                                            id="telefono" name="telefono" value="{{ old('telefono') }}">
+                                    </div>
+                                    @error('telefono') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                            id="email" name="email" value="{{ old('email') }}">
+                                    </div>
+                                    @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                </div>
+
+                                {{-- SEZIONE 3: Pagamento e Note --}}
+                                <div class="col-12 mt-4">
+                                    <h6 class="text-primary border-bottom pb-2 mb-3">
+                                        <i class="fas fa-euro-sign me-2"></i>Pagamento & Note
+                                    </h6>
+                                </div>
+
+                                <div class="col-md-6">
                                     <label for="costo_totale" class="form-label">Costo Totale (€)</label>
-
-                                    <input type="number"
-                                           class="form-control @error('costo_totale') is-invalid @enderror"
-                                           id="costo_totale"
-                                           name="costo_totale"
-                                           value="{{ old('costo_totale') }}"
-                                           step="0.01"
-                                           min="0">
-
-                                    @error('costo_totale')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <input type="number" step="0.01" min="0"
+                                        class="form-control @error('costo_totale') is-invalid @enderror"
+                                        id="costo_totale" name="costo_totale" value="{{ old('costo_totale') }}">
+                                    @error('costo_totale') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-6">
                                     <label for="acconto" class="form-label">Acconto (€)</label>
+                                    <input type="number" step="0.01" min="0"
+                                        class="form-control @error('acconto') is-invalid @enderror" id="acconto"
+                                        name="acconto" value="{{ old('acconto') }}">
+                                    @error('acconto') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                </div>
 
-                                    <input type="number"
-                                           class="form-control @error('acconto') is-invalid @enderror"
-                                           id="acconto"
-                                           name="acconto"
-                                           value="{{ old('acconto') }}"
-                                           step="0.01"
-                                           min="0">
-
-                                    @error('acconto')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                <div class="col-12">
+                                    <label for="note" class="form-label">Note Aggiuntive</label>
+                                    <textarea class="form-control @error('note') is-invalid @enderror" id="note"
+                                        name="note" rows="2">{{ old('note') }}</textarea>
+                                    @error('note') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="note" class="form-label">Note (Opzionale)</label>
-
-                                <textarea class="form-control @error('note') is-invalid @enderror"
-                                          id="note"
-                                          name="note"
-                                          rows="3">{{ old('note') }}</textarea>
-
-                                @error('note')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="alert alert-info">
+                            <div class="alert alert-info mt-3">
                                 <small>
                                     <i class="bi bi-info-circle"></i>
                                     I campi contrassegnati con

@@ -1,61 +1,47 @@
-const preLoad = function () {
-    return caches.open("offline").then(function (cache) {
-        // caching index and important routes
-        return cache.addAll(filesToCache);
-    });
-};
+const CACHE_VERSION = 'v-local-1.0';
+const CACHE_NAME = `gemma-local-${CACHE_VERSION}`;
+const OFFLINE_CACHE = `gemma-off-local-${CACHE_VERSION}`;
 
-self.addEventListener("install", function (event) {
-    event.waitUntil(preLoad());
-});
-
-const filesToCache = [
+const PRECACHE_URLS = [
     '/',
     '/offline.html'
 ];
 
-const checkResponse = function (request) {
-    return new Promise(function (fulfill, reject) {
-        fetch(request).then(function (response) {
-            if (response.status !== 404) {
-                fulfill(response);
-            } else {
-                reject();
-            }
-        }, reject);
-    });
-};
+self.addEventListener('install', (event) => {
+    self.skipWaiting();
+    event.waitUntil(
+        caches.open(OFFLINE_CACHE).then((cache) => cache.addAll(PRECACHE_URLS))
+    );
+});
 
-const addToCache = function (request) {
-    // Only cache http(s) requests
-    if (!request.url.startsWith('http')) {
-        return Promise.resolve();
-    }
-    return caches.open("offline").then(function (cache) {
-        return fetch(request).then(function (response) {
-            return cache.put(request, response);
-        });
-    });
-};
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
+        caches.keys().then((keys) => Promise.all(
+            keys.map((key) => {
+                if (!key.includes(CACHE_VERSION)) return caches.delete(key);
+            })
+        )).then(() => self.clients.claim())
+    );
+});
 
-
-const returnFromCache = function (request) {
-    return caches.open("offline").then(function (cache) {
-        return cache.match(request).then(function (matching) {
-            if (!matching || matching.status === 404) {
-                return cache.match("offline.html");
-            } else {
-                return matching;
-            }
-        });
-    });
-};
-
-self.addEventListener("fetch", function (event) {
-    event.respondWith(checkResponse(event.request).catch(function () {
-        return returnFromCache(event.request);
-    }));
-    if(!event.request.url.startsWith('http')){
-        event.waitUntil(addToCache(event.request));
-    }
+self.addEventListener('fetch', (event) => {
+    if (event.request.method !== 'GET') return;
+    event.respondWith(
+        fetch(event.request)
+            .then((networkResponse) => {
+                return caches.open(CACHE_NAME).then((cache) => {
+                    cache.put(event.request, networkResponse.clone());
+                    return networkResponse;
+                });
+            })
+            .catch(() => {
+                return caches.match(event.request)
+                    .then((cachedResp) => {
+                        if (cachedResp) return cachedResp;
+                        if (event.request.mode === 'navigate') {
+                            return caches.match('/offline.html');
+                        }
+                    });
+            })
+    );
 });

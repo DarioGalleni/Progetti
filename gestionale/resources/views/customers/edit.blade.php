@@ -44,11 +44,11 @@
                         <hr>
 
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <label for="room_number" class="form-label">Camera *</label>
                                 <select class="form-select @error('room_number') is-invalid @enderror" id="room_number"
                                     name="room_number" required>
-                                    <option value="">Seleziona Camera</option>
+                                    <option value="">Seleziona</option>
                                     @foreach($rooms as $num => $name)
                                         <option value="{{ $num }}" {{ old('room_number', $customer->room_number) == $num ? 'selected' : '' }}>{{ $num }} -
                                             {{ $name }}
@@ -57,17 +57,24 @@
                                 </select>
                                 @error('room_number') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
+                            <div class="col-md-3">
+                                <label for="bed_type" class="form-label">Letto</label>
+                                <select class="form-select" id="bed_type" name="bed_type">
+                                    <option value="double" {{ old('bed_type', $customer->bed_type ?? 'double') == 'double' ? 'selected' : '' }}>Matrimoniale</option>
+                                    <option value="split" {{ old('bed_type', $customer->bed_type ?? 'double') == 'split' ? 'selected' : '' }}>Letti Divisi</option>
+                                </select>
+                            </div>
                             <div class="col-md-2">
                                 <label for="pax" class="form-label">Persone</label>
                                 <input type="number" class="form-control" id="pax" name="pax"
                                     value="{{ old('pax', $customer->pax) }}" min="1">
                             </div>
                             <div class="col-md-2">
-                                <label for="under_12_pax" class="form-label">Minori 12 anni</label>
+                                <label for="under_12_pax" class="form-label">Minori 12</label>
                                 <input type="number" class="form-control" id="under_12_pax" name="under_12_pax"
                                     value="{{ old('under_12_pax', $customer->under_12_pax) }}" min="0">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label for="treatment" class="form-label">Trattamento</label>
                                 <select class="form-select" id="treatment" name="treatment">
                                     <option value="BB" {{ old('treatment', $customer->treatment) == 'BB' ? 'selected' : '' }}>
@@ -115,12 +122,14 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="payment_method" class="form-label">Origine / Pagamento</label>
+                                <label for="payment_method" class="form-label">Pagamento</label>
                                 <select class="form-select" id="payment_method" name="payment_method">
+                                    <option value="Non Selezionato" {{ old('payment_method', $customer->payment_method) == 'Non Selezionato' ? 'selected' : '' }}>
+                                        Non Selezionato</option>
                                     <option value="booking" {{ old('payment_method', $customer->payment_method) == 'booking' ? 'selected' : '' }}>
-                                        Booking.com</option>
-                                    <option value="cash" {{ old('payment_method', $customer->payment_method) == 'cash' ? 'selected' : '' }}>Contanti /
-                                        Diretto</option>
+                                        Booking</option>
+                                    <option value="cash" {{ old('payment_method', $customer->payment_method) == 'cash' ? 'selected' : '' }}>Contanti
+                                    </option>
                                 </select>
                             </div>
                         </div>

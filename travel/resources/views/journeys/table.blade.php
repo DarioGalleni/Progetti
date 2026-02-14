@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <!-- Alerts -->
+            <!-- Avvisi -->
             @if (session('success'))
                 <div class="alert alert-success bg-transparent text-success border-success rounded-0 d-flex align-items-center mb-4"
                     role="alert">
@@ -25,7 +25,7 @@
                 </div>
             @endif
 
-            <!-- Table Container -->
+            <!-- Contenitore Tabella -->
             <div class="border border-secondary">
                 <div class="table-responsive">
                     <table class="table table-dark table-hover mb-0 align-middle">

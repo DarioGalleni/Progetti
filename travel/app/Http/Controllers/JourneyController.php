@@ -54,7 +54,11 @@ class JourneyController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $fullFilename = $filename . '-' . uniqid() . '.' . $extension;
 
-                $path = $file->storeAs($folder, $fullFilename, 'r2');
+
+
+                // Salviamo nel disco 'public_uploads' -> public/img
+                // Cartella: upload/{$slug}
+                $path = $file->storeAs("upload/{$slug}", $fullFilename, 'public_uploads');
                 $uploadedPaths[] = $path;
             }
         }
@@ -66,7 +70,8 @@ class JourneyController extends Controller
         }
 
         /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
-        $disk = Storage::disk('r2');
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        $disk = Storage::disk('public_uploads');
         $coverUrl = $disk->url($uploadedPaths[$coverIndex]);
 
         // Pulizia Array Dati
@@ -132,7 +137,9 @@ class JourneyController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $fullFilename = $filename . '-' . uniqid() . '.' . $extension;
 
-                $path = $file->storeAs($folder, $fullFilename, 'r2');
+                $fullFilename = $filename . '-' . uniqid() . '.' . $extension;
+
+                $path = $file->storeAs("upload/{$slug}", $fullFilename, 'public_uploads');
                 $uploadedPaths[] = $path;
             }
 
@@ -147,7 +154,8 @@ class JourneyController extends Controller
             $coverIndex = $request->input('cover_image_index', -1);
             if ($coverIndex >= 0 && isset($uploadedPaths[$coverIndex])) {
                 /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
-                $disk = Storage::disk('r2');
+                /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+                $disk = Storage::disk('public_uploads');
                 $data['image'] = $disk->url($uploadedPaths[$coverIndex]);
             }
         }
@@ -172,7 +180,9 @@ class JourneyController extends Controller
     {
         // Pulizia Storage
         foreach ($journey->images as $image) {
-            Storage::disk('r2')->delete($image->path);
+            if (Storage::disk('public_uploads')->exists($image->path)) {
+                Storage::disk('public_uploads')->delete($image->path);
+            }
             $image->delete();
         }
 

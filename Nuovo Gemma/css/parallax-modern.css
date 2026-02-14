@@ -88,12 +88,32 @@
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    color: #1a1a1a;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .glass-card:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 15px 50px 0 rgba(31, 38, 135, 0.25);
+}
+
+/* Dark Glass Card for Better Contrast with White Text */
+.glass-card-dark {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glass-card-dark:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Scroll Reveal Animations */
@@ -310,7 +330,7 @@
     cursor: pointer;
 }
 
-/* Smooth Parallax Sections */
+/* Smooth Parallax Sections with JS */
 .parallax-section {
     position: relative;
     background-attachment: fixed;
@@ -321,6 +341,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Fixed Background Sections (CSS ONLY - NO JS) */
+.fixed-bg-section {
+    position: relative;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 /* Scroll Progress Indicator */
@@ -379,11 +413,17 @@
 @media (max-width: 768px) {
 
     #homepage,
-    .parallax-section {
+    .parallax-section,
+    .fixed-bg-section {
         background-attachment: scroll;
+        min-height: 400px;
     }
 
     .glass-card:hover {
+        transform: translateY(-5px) scale(1.01);
+    }
+
+    .glass-card-dark:hover {
         transform: translateY(-5px) scale(1.01);
     }
 

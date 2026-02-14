@@ -1,78 +1,163 @@
-﻿{
-    "@context": "https://schema.org",
-    "@graph": [
-        {
-            "@type": "WebSite",
-            "@id": "https://dariux87.it/#website",
-            "url": "https://dariux87.it/",
-            "name": "Dario Galleni",
-            "description": "Sviluppo e design di siti web professionali e responsive in Versilia.",
-            "publisher": {
-                "@id": "https://dariux87.it/#organization"
+﻿    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://dariux87.it/#website",
+                "url": "https://dariux87.it/",
+                "name": "Dario Galleni - Creazione Siti Web Versilia",
+                "description": "Sviluppo e design di siti web professionali e responsive in Versilia, Viareggio e Lido di Camaiore.",
+                "publisher": {
+                    "@id": "https://dariux87.it/#organization"
+                },
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://dariux87.it/?s={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
             },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://dariux87.it/?s={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
-        },
-        {
-            "@type": "Organization",
-            "@id": "https://dariux87.it/#organization",
-            "name": "Dario Galleni",
-            "url": "https://dariux87.it/",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://dariux87.it/assets/imgs/favicon/android-chrome-192x192.png",
-                "width": 192,
-                "height": 192
+            {
+                "@type": "Organization",
+                "@id": "https://dariux87.it/#organization",
+                "name": "Dario Galleni Web Developer",
+                "url": "https://dariux87.it/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://dariux87.it/assets/imgs/favicon/android-chrome-192x192.png",
+                    "width": 192,
+                    "height": 192
+                },
+                "sameAs": [
+                    "https://www.facebook.com/tuoprofilo",
+                    "https://www.linkedin.com/in/tuoprofilo"
+                ],
+                "contactPoint": [
+                    {
+                        "@type": "ContactPoint",
+                        "telephone": "+393298047791",
+                        "contactType": "customer service",
+                        "areaServed": "IT",
+                        "availableLanguage": [
+                            "Italian",
+                            "English"
+                        ]
+                    }
+                ]
             },
-            "sameAs": [
-                "https://www.facebook.com/tuoprofilo",
-                "https://www.linkedin.com/in/tuoprofilo"
-            ],
-            "contactPoint": [
-                {
-                    "@type": "ContactPoint",
-                    "telephone": "+393298047791",
-                    "contactType": "customer service",
-                    "areaServed": "IT",
-                    "availableLanguage": [
-                        "Italian",
-                        "English"
+            {
+                "@type": "BreadcrumbList",
+                "@id": "https://dariux87.it/#breadcrumblist",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://dariux87.it/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Chi Sono",
+                        "item": "https://dariux87.it/#about"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "Portfolio Siti Web",
+                        "item": "https://dariux87.it/#portfolio"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 4,
+                        "name": "Contatti",
+                        "item": "https://dariux87.it/#contact"
+                    }
+                ]
+            },
+            {
+                "@type": "ProfessionalService",
+                "@id": "https://dariux87.it/#localservice",
+                "name": "Dario Galleni - Creazione Siti Web Versilia",
+                "description": "Servizio professionale di creazione siti web, gestionali su misura e consulenza digitale per aziende, hotel e ristoranti in Versilia, Viareggio, Lido di Camaiore e Forte dei Marmi.",
+                "url": "https://dariux87.it/",
+                "telephone": "+393298047791",
+                "email": "info@dariux87.it",
+                "priceRange": "€€",
+                "areaServed": [
+                    {
+                        "@type": "City",
+                        "name": "Lido di Camaiore"
+                    },
+                    {
+                        "@type": "City",
+                        "name": "Viareggio"
+                    },
+                    {
+                        "@type": "City",
+                        "name": "Forte dei Marmi"
+                    },
+                    {
+                        "@type": "City",
+                        "name": "Pietrasanta"
+                    },
+                    {
+                        "@type": "City",
+                        "name": "Camaiore"
+                    },
+                    {
+                        "@type": "City",
+                        "name": "Lucca"
+                    },
+                    {
+                        "@type": "State",
+                        "name": "Versilia"
+                    },
+                    {
+                        "@type": "State",
+                        "name": "Toscana"
+                    }
+                ],
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Servizi Web Development",
+                    "itemListElement": [
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Realizzazione Siti Web Versilia",
+                                "description": "Siti vetrina e aziendali ottimizzati per la Versilia e la Toscana"
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Programmi Gestionali su Misura",
+                                "description": "Software facili per gestire prenotazioni, ordini e clienti"
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Posizionamento SEO Locale",
+                                "description": "Fatti trovare dai clienti in Versilia quando cercano i tuoi servizi"
+                            }
+                        }
                     ]
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Lido di Camaiore",
+                    "addressRegion": "LU",
+                    "addressCountry": "IT"
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "5",
+                    "reviewCount": "12"
                 }
-            ]
-        },
-        {
-            "@type": "BreadcrumbList",
-            "@id": "https://dariux87.it/#breadcrumblist",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://dariux87.it/"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "About",
-                    "item": "https://dariux87.it/#about"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": "Portfolio",
-                    "item": "https://dariux87.it/#portfolio"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 4,
-                    "name": "Contact",
-                    "item": "https://dariux87.it/#contact"
-                }
-            ]
-        }
-    ]
-}
+            }
+        ]
+    }

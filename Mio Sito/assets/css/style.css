@@ -259,6 +259,113 @@ body {
     animation: gradient-shift 15s ease infinite;
 }
 
+/* Marquee Animation */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.marquee-content {
+    display: inline-flex;
+    animation: marquee 30s linear infinite;
+}
+
+.marquee-content:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Mouse Scroll Indicator */
+.mouse-scroll {
+    width: 30px;
+    height: 50px;
+    border: 2px solid #3b82f6;
+    border-radius: 25px;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.mouse-scroll::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #3b82f6;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    animation: mouse-wheel 2s infinite;
+}
+
+@keyframes mouse-wheel {
+    0% {
+        top: 10px;
+        opacity: 1;
+    }
+    100% {
+        top: 30px;
+        opacity: 0;
+    }
+}
+
+/* Spotlight Effect */
+.spotlight-card {
+    position: relative;
+    overflow: hidden;
+    background: white; 
+    z-index: 10;
+}
+
+.spotlight-card::after {
+    content: '';
+    position: absolute;
+    top: var(--y, -100px);
+    left: var(--x, -100px);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.spotlight-card:hover::after {
+    opacity: 1;
+}
+
+/* Floating Shapes */
+.floating-shape {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.4;
+    filter: blur(50px);
+    border-radius: 50%;
+    animation: float-shape 20s infinite alternate;
+}
+
+@keyframes float-shape {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(50px, 50px) rotate(180deg);
+    }
+}
+
 /* Counter Animation */
 @keyframes count-up {
     from {

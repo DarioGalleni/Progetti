@@ -31,16 +31,39 @@ class OmbrelloneController extends Controller
         $previousMonth = $selectedMonth->copy()->subMonth();
         $nextMonth = $selectedMonth->copy()->addMonth();
 
-        // Carica gli ombrelloni, raggruppati per fila
+        // Carica gli ombrelloni, raggruppati per fila per il calendario
         // Eager load solo le prenotazioni rilevanti per l'intervallo di date visualizzato
-        $ombrelloniPerFila = Ombrellone::with(['prenotazioni' => function ($query) use ($firstDayOfCalendar, $lastDayOfCalendar) {
-            $query->where('data_inizio', '<=', $lastDayOfCalendar)
+        $ombrelloniPerFila = Ombrellone::with([
+            'prenotazioni' => function ($query) use ($firstDayOfCalendar, $lastDayOfCalendar) {
+                $query->where('data_inizio', '<=', $lastDayOfCalendar)
                     ->where('data_fine', '>=', $firstDayOfCalendar);
-        }])
-        ->orderBy('fila')
-        ->orderBy('numero')
-        ->get()
-        ->groupBy('fila');
+            }
+        ])
+            ->orderBy('fila')
+            ->orderBy('numero')
+            ->get()
+            ->groupBy('fila');
+
+        // Logica Ricerca Disponibilità (Mobile)
+        $availableUmbrellas = collect(); // Default empty collection
+        $isSearch = false;
+
+        if ($request->filled(['arrivo', 'partenza'])) {
+            $start = Carbon::parse($request->arrivo);
+            $end = Carbon::parse($request->partenza);
+            $isSearch = true;
+
+            if ($end->gte($start)) {
+                $availableUmbrellas = Ombrellone::whereDoesntHave('prenotazioni', function ($q) use ($start, $end) {
+                    $q->where('data_inizio', '<=', $end)
+                        ->where('data_fine', '>=', $start);
+                })
+                    ->orderBy('fila')
+                    ->orderBy('numero')
+                    ->get()
+                    ->groupBy('fila');
+            }
+        }
 
         // Passa tutti i dati necessari alla vista
         return view('welcome', compact(
@@ -49,7 +72,9 @@ class OmbrelloneController extends Controller
             'firstDayOfCalendar',
             'lastDayOfCalendar',
             'previousMonth',
-            'nextMonth'
+            'nextMonth',
+            'availableUmbrellas',
+            'isSearch'
         ));
     }
 }

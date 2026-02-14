@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'public_uploads'),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,15 +35,14 @@ return [
             'report' => false,
         ],
 
-        'r2' => [
-            'driver' => 's3',
-            'key' => env('R2_ACCESS_KEY_ID'),
-            'secret' => env('R2_SECRET_ACCESS_KEY'),
-            'region' => env('R2_REGION', 'auto'),
-            'bucket' => env('R2_BUCKET'),
-            'endpoint' => env('R2_ENDPOINT'),
-            'url' => env('R2_URL', 'https://pub-8c639c76486d4562ae8cae88c755b89c.r2.dev'),
-            'use_path_style_endpoint' => true,
+        'public_uploads' => [
+            'driver' => 'local',
+            // In locale usa public_path standard. Online salva in public_html/trav/img
+            'root' => env('APP_ENV') === 'local'
+                ? public_path('img')
+                : base_path('../public_html/trav/img'),
+            'url' => env('APP_URL') . '/img',
+            'visibility' => 'public',
             'throw' => false,
             'report' => false,
         ],
@@ -57,7 +56,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        // public_path('storage') => storage_path('app/public'),
     ],
 
 ];

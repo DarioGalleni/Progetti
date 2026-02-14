@@ -7,37 +7,37 @@
                         <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-10"></div>
                         <div class="position-relative z-index-1">
                             <i class="bi bi-code-square fs-1 mb-3 d-block"></i>
-                            <h1 class="display-4 fw-bold mb-2">Ambiente di Test </h1>
+                            <h1 class="display-4 fw-bold mb-2">Ambiente di Test</h1>
                             <p class="lead opacity-90 mb-0">Scopri come funziona StartJourney sotto il cofano.</p>
                         </div>
                     </div>
 
                     <div class="card-body p-5">
-                        <!-- Intro Section -->
+                        <!-- Sezione Introduttiva -->
                         <div class="mb-5 text-center">
                             <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3">
                                 <i class="bi bi-exclamation-triangle-fill me-2"></i> DEMO MODE
                             </span>
                             <h2 class="h3 fw-bold mb-3">Benvenuto nella versione dimostrativa</h2>
                             <p class="text-muted fs-5">
-                                Questa è un progetto <strong>in fase di sviluppo</strong>. Sentiti libero di esplorare tutte le
-                                funzionalità CRUD (Create, Read, Update, Delete).
+                                Questo è un progetto <strong>in fase di sviluppo</strong>. Sentiti libero di esplorare
+                                tutte le funzionalità CRUD (Create, Read, Update, Delete).
                                 Puoi aggiungere nuovi viaggi, modificare quelli esistenti o eliminarli per testare la
                                 robustezza del sistema.
                                 <br><br>
-                                <em>Nota: Le funzionalità di amministrazione, presente nel link " Gestisci " sulla navbar sono state temporaneamente rese pubbliche
-                                per scopi dimostrativi.</em>
+                                <em>Nota: Le funzionalità di amministrazione, presenti nel link "Gestisci" sulla navbar,
+                                    sono state temporaneamente rese pubbliche per scopi dimostrativi.</em>
                             </p>
                         </div>
 
                         <hr class="my-5 opacity-10">
 
-                        <!-- Tech Stack Grid -->
+                        <!-- Griglia Stack Tecnologico -->
                         <div class="row g-4 mb-5">
                             <div class="col-md-6">
                                 <div class="p-4 bg-light rounded-4 h-100 border border-light shadow-sm">
                                     <h3 class="h4 fw-bold text-primary mb-4 d-flex align-items-center">
-                                        <i class="bi bi-server me-3 fs-3"></i> Backend Architecture
+                                        <i class="bi bi-server me-3 fs-3"></i> Architettura Backend
                                     </h3>
                                     <ul class="list-unstyled mb-0">
                                         <li class="mb-3 d-flex align-items-start">
@@ -59,10 +59,9 @@
                                         <li class="d-flex align-items-start">
                                             <i class="bi bi-cloud-arrow-up-fill text-success mt-1 me-3"></i>
                                             <div>
-                                                <strong>Cloud Storage (R2/S3)</strong>
-                                                <p class="small text-muted mb-0">Gestione asincrona dei media via Facade
-                                                    Storage. Le immagini vengono caricate su bucket remoti per
-                                                    performance ottimali.</p>
+                                                <strong>File System Ibrido</strong>
+                                                <p class="small text-muted mb-0">Gestione dinamica degli asset: Locale
+                                                    in sviluppo e ottimizzata per server di produzione.</p>
                                             </div>
                                         </li>
                                     </ul>
@@ -88,14 +87,14 @@
                                             <div>
                                                 <strong>Bootstrap 5 & Custom CSS</strong>
                                                 <p class="small text-muted mb-0">Design responsivo arricchito da
-                                                    variabili CSS personalizzate e utility classes.</p>
+                                                    variabili CSS personalizzate e classi utility.</p>
                                             </div>
                                         </li>
                                         <li class="d-flex align-items-start">
                                             <i class="bi bi-magic text-success mt-1 me-3"></i>
                                             <div>
-                                                <strong>Glassmorphism & Animations</strong>
-                                                <p class="small text-muted mb-0">Scroll Reveal effects e UI moderna per
+                                                <strong>Glassmorphism & Animazioni</strong>
+                                                <p class="small text-muted mb-0">Effetti Scroll Reveal e UI moderna per
                                                     un'esperienza utente premium.</p>
                                             </div>
                                         </li>
@@ -104,7 +103,7 @@
                             </div>
                         </div>
 
-                        <!-- Logic & Controllers Deep Dive -->
+                        <!-- Approfondimento Logica Controller -->
                         <div class="bg-dark text-white p-5 rounded-4 position-relative overflow-hidden mb-5">
                             <div class="position-absolute top-0 end-0 p-4 opacity-25">
                                 <i class="bi bi-gear-wide-connected display-1"></i>
@@ -119,9 +118,9 @@
                                         viaggio seguendo lo standard REST:
                                         <br><code>index</code>: Lista paginata/filtrata dei viaggi.
                                         <br><code>show</code>: Dettaglio singolo viaggio.
-                                        <br><code>create/store</code>: Validazione form e upload immagini su Cloud.
+                                        <br><code>create/store</code>: Validazione form e upload immagini.
                                         <br><code>edit/update</code>: Gestione modifiche e sostituzione immagini.
-                                        <br><code>destroy</code>: Eliminazione sicura dal DB e rimozione file remoti.
+                                        <br><code>destroy</code>: Eliminazione sicura dal DB e rimozione file.
                                     </p>
                                 </div>
                                 <div class="col-lg-6">
@@ -130,7 +129,7 @@
                                         L'esperienza utente è potenziata da JavaScript vanilla (senza jQuery) per
                                         massimizzare le performance:
                                         <br>• Intersection Observer API per le animazioni "on-scroll".
-                                        <br>• Parallax effects calcolati dinamicamente.
+                                        <br>• Effetti Parallax calcolati dinamicamente.
                                         <br>• Gestione modali e feedback utente immediati.
                                     </p>
                                 </div>

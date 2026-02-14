@@ -10,10 +10,11 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReceptionController;
 use App\Http\Controllers\GroupController;
 
-use App\Http\Controllers\DatabaseSyncController;
+
 
 /* ==================== HOME ==================== */
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/mobile-calendar', [WelcomeController::class, 'mobileIndex'])->name('mobile-calendar');
 
 /* ==================== CLIENTI ==================== */
 Route::prefix('customers')->name('customers.')->group(function () {
@@ -59,19 +60,28 @@ Route::prefix('cleaning')->name('cleaning.')->group(function () {
 });
 
 /* ==================== RISTORANTE ==================== */
-Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurant.index');
+Route::prefix('restaurant')->name('restaurant.')->group(function () {
+    Route::get('/', [RestaurantController::class, 'index'])->name('index');
+    Route::get('/print', [RestaurantController::class, 'print'])->name('print');
+});
 
 /* ==================== RECEPTION ==================== */
 Route::get('/arrivals', [ReceptionController::class, 'arrivals'])->name('arrivals.index');
 Route::get('/departures', [ReceptionController::class, 'departures'])->name('departures.index');
 
 /* ==================== SISTEMA ==================== */
-Route::post('/system/sync-db', [DatabaseSyncController::class, 'sync'])->name('system.sync-db');
+Route::post('/system/backup-db', [\App\Http\Controllers\BackupController::class, 'create'])->name('system.backup-db');
 
+/* ==================== CACHE ==================== */
 Route::post('/system/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
     Artisan::call('route:clear');
     Artisan::call('view:clear');
-    return back()->with('success', 'Tutte le cache di sistema sono state pulite!');
+    return redirect('/')->with('success', 'Tutte le cache di sistema sono state pulite!');
 })->name('system.clear-cache');
+
+/* ==================== DOCUMENTAZIONE ==================== */
+Route::get('/documentation', function () {
+    return view('documentation');
+})->name('documentation');

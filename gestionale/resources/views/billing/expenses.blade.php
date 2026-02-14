@@ -10,23 +10,23 @@
                             Gestione Spese
                         </h3>
                         <p class="text-muted mt-1 mb-0">
-                            {{ $customer->first_name }} {{ $customer->last_name }} 
+                            {{ $customer->first_name }} {{ $customer->last_name }}
                             <span class="badge bg-light text-dark ms-2 border">Camera {{ $customer->room_number }}</span>
                         </p>
                     </div>
                     <div class="text-end">
-                        <h4 class="fw-bold mb-0 text-danger">Totale Extra: € {{ number_format($expenses->sum('amount'), 2, ',', '.') }}</h4>
-                        <a href="{{ route('billing.expenses.print', $customer) }}" target="_blank" class="btn btn-primary btn-sm mt-2 me-1">
-                            <i class="bi bi-printer"></i> Stampa
-                        </a>
-                        <a href="{{ route('customers.show', $customer) }}" class="btn btn-outline-secondary btn-sm mt-2">Torna al Cliente</a>
+                        <h4 class="fw-bold mb-0 text-danger">Totale Extra: €
+                            {{ number_format($expenses->sum('amount'), 2, ',', '.') }}
+                        </h4>
+                        <a href="{{ route('customers.show', $customer) }}"
+                            class="btn btn-outline-secondary btn-sm mt-2">Torna al Cliente</a>
                     </div>
                 </div>
 
                 <div class="card-body p-4">
                     <div class="row">
                         <!-- Left Column: Inputs -->
-                        <div class="col-md-5 border-end">
+                        <div class="col-md-5 col-12 border-md-end mb-4 mb-md-0">
                             <h5 class="mb-4 text-muted">Aggiungi / Aggiorna</h5>
                             <form action="{{ route('billing.expenses.update', $customer) }}" method="POST">
                                 @csrf
@@ -47,7 +47,7 @@
                                             $desc = ucfirst(str_replace('_', ' ', $key));
                                             $currentTotal = $totals[$desc] ?? 0;
                                         @endphp
-                                        
+
                                         <div class="card border-0 shadow-sm bg-light">
                                             <div class="card-body py-2 px-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-1">
@@ -69,18 +69,21 @@
                                                 </div>
                                                 <div class="input-group input-group-sm">
                                                     @if($key === 'bevande' && isset($beverageTypes))
-                                                        <select name="expenses[{{ $key }}][type]" class="form-select form-select-sm" style="max-width: 40%">
+                                                        <select name="expenses[{{ $key }}][type]" class="form-select form-select-sm"
+                                                            style="max-width: 40%">
                                                             @foreach($beverageTypes as $type)
                                                                 <option value="{{ $type }}">{{ $type }}</option>
                                                             @endforeach
                                                         </select>
-                                                        <input type="number" step="0.01" class="form-control" 
-                                                            id="{{ $key }}" name="expenses[{{ $key }}][amount]" 
-                                                            placeholder="Importo">
+                                                        <button type="button" class="btn btn-outline-secondary d-md-none"
+                                                            onclick="toggleSign(this)">+/-</button>
+                                                        <input type="text" inputmode="decimal" class="form-control text-end"
+                                                            id="{{ $key }}" name="expenses[{{ $key }}][amount]" placeholder="0">
                                                     @else
-                                                        <input type="number" step="0.01" class="form-control" 
-                                                            id="{{ $key }}" name="expenses[{{ $key }}][amount]" 
-                                                            placeholder="Importo (es. 5 o -5)">
+                                                        <button type="button" class="btn btn-outline-secondary d-md-none"
+                                                            onclick="toggleSign(this)">+/-</button>
+                                                        <input type="text" inputmode="decimal" class="form-control text-end"
+                                                            id="{{ $key }}" name="expenses[{{ $key }}][amount]" placeholder="0">
                                                     @endif
                                                 </div>
                                             </div>
@@ -89,8 +92,8 @@
                                 </div>
 
                                 <div class="alert alert-info mt-4 py-2 small">
-                                    <i class="bi bi-info-circle me-1"></i> 
-                                    Usa valori negativi per stornare.
+                                    <i class="bi bi-info-circle me-1"></i>
+                                    Usa il pulsante <strong>+/-</strong> per invertire il segno e stornare.
                                 </div>
 
                                 <div class="d-grid mt-3">
@@ -102,7 +105,7 @@
                         </div>
 
                         <!-- Right Column: History -->
-                        <div class="col-md-7 ps-md-4">
+                        <div class="col-md-7 col-12 ps-md-4">
                             <h5 class="mb-4 text-muted">Storico Movimenti</h5>
                             <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
                                 <table class="table table-hover table-sm">
@@ -118,7 +121,8 @@
                                             <tr>
                                                 <td class="small">{{ $expense->created_at->format('d/m/Y H:i') }}</td>
                                                 <td>{{ $expense->description }}</td>
-                                                <td class="text-end fw-bold {{ $expense->amount < 0 ? 'text-success' : ($expense->amount > 0 ? 'text-danger' : '') }}">
+                                                <td
+                                                    class="text-end fw-bold {{ $expense->amount < 0 ? 'text-success' : ($expense->amount > 0 ? 'text-danger' : '') }}">
                                                     € {{ number_format($expense->amount, 2, ',', '.') }}
                                                 </td>
                                             </tr>
@@ -138,4 +142,29 @@
             </div>
         </div>
     </div>
+    <script>
+        // Toggle Sign Function per stornare
+        function toggleSign(btn) {
+            // Trova l'input all'interno dello stesso input-group
+            var input = btn.closest('.input-group').querySelector('input[type="text"]');
+            if (input) {
+                var currentValue = input.value;
+
+                // Se è vuoto, inizia con -
+                if (currentValue === '') {
+                    input.value = '-';
+                }
+                // Se c'è già un meno all'inizio, lo toglie
+                else if (currentValue.startsWith('-')) {
+                    input.value = currentValue.substring(1);
+                }
+                // Altrimenti aggiunge il meno davanti
+                else {
+                    input.value = '-' + currentValue;
+                }
+                // Rimetti il focus sull'input
+                input.focus();
+            }
+        }
+    </script>
 @endsection

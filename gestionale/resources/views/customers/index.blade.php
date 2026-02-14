@@ -11,6 +11,12 @@
                     Elenco Ospiti
                 @endif
             </h2>
+            <p class="text-muted d-md-none small mb-0">
+                <i class="bi bi-info-circle me-1"></i>Clicca sul numero di telefono per chiamare, sul link Whatsapp per chattare o sull'email per scrivere.
+            </p>
+            <p class="text-muted d-none d-md-block small mb-0">
+                <i class="bi bi-info-circle me-1"></i>Clicca sull'email per inviare un'email
+            </p>
         </div>
     </div>
 
@@ -48,10 +54,18 @@
                                     </td>
                                     <td>
                                         @if($customer->phone)
-                                            <div><i class="bi bi-telephone me-1"></i> {{ $customer->phone }}</div>
+                                            <div class="d-none d-md-block"><i class="bi bi-telephone me-1"></i> {{ $customer->phone }}</div>
+                                            <div class="d-md-none">
+                                                <a href="tel:{{ $customer->phone }}" class="text-decoration-none d-block mb-1">
+                                                    <i class="bi bi-telephone me-1"></i> {{ $customer->phone }}
+                                                </a>
+                                                <a href="https://wa.me/39{{ str_replace(' ', '', $customer->phone) }}" target="_blank" class="text-success text-decoration-none small">
+                                                    <i class="bi bi-whatsapp me-1"></i> Scrivi su Whatsapp
+                                                </a>
+                                            </div>
                                         @endif
                                         @if($customer->email)
-                                            <div class="small text-muted"><i class="bi bi-envelope me-1"></i> {{ $customer->email }}</div>
+                                            <div class="small mt-1"><a href="mailto:{{ $customer->email }}" class="text-decoration-none"><i class="bi bi-envelope me-1"></i> {{ $customer->email }}</a></div>
                                         @endif
                                     </td>
                                     <td class="text-end pe-4">

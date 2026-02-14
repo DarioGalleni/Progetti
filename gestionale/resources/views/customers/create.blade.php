@@ -5,7 +5,7 @@
         <div class="col-md-8">
             <div class="card card-custom">
                 <div class="card-header bg-white border-0 pt-4 pb-2">
-                    <h4 class="fw-bold text-primary mb-0">Nuova Prenotazione</h4>
+                    <h4 class="fw-bold text-primary mb-0 text-center">Nuova Prenotazione</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ url('/customers') }}" method="POST">
@@ -40,18 +40,25 @@
                         <hr>
 
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <label for="room_number" class="form-label">Camera *</label>
                                 <select class="form-select @error('room_number') is-invalid @enderror" id="room_number"
                                     name="room_number" required>
-                                    <option value="">Seleziona Camera</option>
+                                    <option value="">Seleziona</option>
                                     @foreach($rooms as $num => $name)
-                                        <option value="{{ $num }}" {{ old('room_number') == $num ? 'selected' : '' }}>{{ $num }} -
+                                        <option value="{{ $num }}" {{ (old('room_number') ?? request('room')) == $num ? 'selected' : '' }}>{{ $num }} -
                                             {{ $name }}
                                         </option>
                                     @endforeach
                                 </select>
                                 @error('room_number') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="col-md-3">
+                                <label for="bed_type" class="form-label">Letto</label>
+                                <select class="form-select" id="bed_type" name="bed_type">
+                                    <option value="double" {{ old('bed_type', 'double') == 'double' ? 'selected' : '' }}>Matrimoniale</option>
+                                    <option value="split" {{ old('bed_type') == 'split' ? 'selected' : '' }}>Letti Divisi</option>
+                                </select>
                             </div>
                             <div class="col-md-2">
                                 <label for="pax" class="form-label">Persone</label>
@@ -59,11 +66,11 @@
                                     min="1">
                             </div>
                             <div class="col-md-2">
-                                <label for="under_12_pax" class="form-label">Minori 12 anni</label>
+                                <label for="under_12_pax" class="form-label">Minori 12</label>
                                 <input type="number" class="form-control" id="under_12_pax" name="under_12_pax"
                                     value="{{ old('under_12_pax') }}" min="0" placeholder="0">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label for="treatment" class="form-label">Trattamento</label>
                                 <select class="form-select" id="treatment" name="treatment">
                                     <option value="BB" {{ old('treatment') == 'BB' ? 'selected' : '' }}>BB</option>
@@ -76,14 +83,14 @@
                             <div class="col-md-6">
                                 <label for="arrival_date" class="form-label">Data Arrivo *</label>
                                 <input type="date" class="form-control @error('arrival_date') is-invalid @enderror"
-                                    id="arrival_date" name="arrival_date" value="{{ old('arrival_date') }}"
+                                    id="arrival_date" name="arrival_date" value="{{ old('arrival_date') ?? request('arrival') }}"
                                     min="{{ date('Y-m-d') }}" required>
                                 @error('arrival_date') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                             <div class="col-md-6">
                                 <label for="departure_date" class="form-label">Data Partenza *</label>
                                 <input type="date" class="form-control @error('departure_date') is-invalid @enderror"
-                                    id="departure_date" name="departure_date" value="{{ old('departure_date') }}"
+                                    id="departure_date" name="departure_date" value="{{ old('departure_date') ?? request('departure') }}"
                                     min="{{ date('Y-m-d', strtotime('+1 day')) }}" required>
                                 @error('departure_date') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
@@ -109,12 +116,14 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="payment_method" class="form-label">Origine / Pagamento</label>
+                                <label for="payment_method" class="form-label">Pagamento</label>
                                 <select class="form-select" id="payment_method" name="payment_method">
+                                    <option value="Non Selezionato" {{ old('payment_method', 'Non Selezionato') == 'Non Selezionato' ? 'selected' : '' }}>
+                                        Non Selezionato</option>
                                     <option value="booking" {{ old('payment_method') == 'booking' ? 'selected' : '' }}>
-                                        Booking.com</option>
-                                    <option value="cash" {{ old('payment_method') == 'cash' ? 'selected' : '' }}>Contanti /
-                                        Diretto</option>
+                                        Booking</option>
+                                    <option value="cash" {{ old('payment_method') == 'cash' ? 'selected' : '' }}>Contanti
+                                    </option>
                                 </select>
                             </div>
                         </div>

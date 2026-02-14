@@ -1,0 +1,56 @@
+{
+    "name": "Beach Management",
+    "short_name": "Beach",
+    "description": "Gestione Spiaggia",
+    "id": "/beach/",
+    "start_url": "/beach/",
+    "scope": "/beach/",
+    "display": "standalone",
+    "background_color": "#00A3C4",
+    "theme_color": "#00A3C4",
+    "orientation": "any",
+    "prefer_related_applications": false,
+    "lang": "it-IT",
+    "icons": [
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Beach Management"
+        },
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Mobile View"
+        }
+    ]
+}

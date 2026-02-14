@@ -1,25 +1,9 @@
 <x-layout title="Home - StartJourney">
 
-    <!-- redirect immagini su cloudfare -->
-    <style>
-        :root {
-            --hero-bg: url('{{ Storage::url('images/header.webp') }}');
-            /* categorie */
-            --relax-bg: url('{{ Storage::url('images/relax.avif') }}');
-            --adventure-bg: url('{{ Storage::url('images/adventure.avif') }}');
-            --culture-bg: url('{{ Storage::url('images/culture.jpg') }}');
-            --honeymoon-bg: url('{{ Storage::url('images/honeymoon.avif') }}');
-            /* fine categorie */
-            --stats-bg: url('{{ Storage::url('images/stats.avif') }}');
-            --divider-bg: url('{{ Storage::url('images/parallax_divider_1.avif') }}');
-            --newsletter-bg: url('{{ Storage::url('images/newsletter.avif') }}');
-        }
-    </style>
-
     <!-- HERO SECTION -->
     <header
         class="d-flex align-items-center justify-content-center text-white hero-bg position-relative overflow-hidden top-0"
-        role="banner">
+        role="banner" style="background-image: url('{{ asset('img/assets/header.webp') }}');">
         <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-25"></div>
         <div class="position-absolute top-0 start-0 w-100 h-100 overlay-gradient"></div>
         <div class="container position-relative z-index-1 text-center">
@@ -96,7 +80,8 @@
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3 reveal">
                     <div class="category-card parallax-scroll scroll-transform" data-parallax-speed="0.1">
-                        <div class="category-bg cat-img-1"></div>
+                        <div class="category-bg cat-img-1"
+                            style="background-image: url('{{ asset('img/assets/relax.avif') }}');"></div>
                         <div class="category-overlay">
                             <h3 class="h4 fw-bold mb-1">Relax & Spa</h3>
                             <p class="small mb-0 opacity-75">Rigenera mente e corpo</p>
@@ -105,7 +90,8 @@
                 </div>
                 <div class="col-md-6 col-lg-3 reveal delay-1">
                     <div class="category-card parallax-scroll scroll-transform" data-parallax-speed="-0.1">
-                        <div class="category-bg cat-img-2"></div>
+                        <div class="category-bg cat-img-2"
+                            style="background-image: url('{{ asset('img/assets/adventure.avif') }}');"></div>
                         <div class="category-overlay">
                             <h3 class="h4 fw-bold mb-1">Avventura</h3>
                             <p class="small mb-0 opacity-75">Per chi ama l'adrenalina</p>
@@ -114,7 +100,8 @@
                 </div>
                 <div class="col-md-6 col-lg-3 reveal delay-2">
                     <div class="category-card parallax-scroll scroll-transform" data-parallax-speed="0.15">
-                        <div class="category-bg cat-img-3"></div>
+                        <div class="category-bg cat-img-3"
+                            style="background-image: url('{{ asset('img/assets/culture.jpg') }}');"></div>
                         <div class="category-overlay">
                             <h3 class="h4 fw-bold mb-1">Cultura</h3>
                             <p class="small mb-0 opacity-75">Immergiti nella storia</p>
@@ -123,7 +110,8 @@
                 </div>
                 <div class="col-md-6 col-lg-3 reveal delay-2">
                     <div class="category-card parallax-scroll scroll-transform" data-parallax-speed="-0.05">
-                        <div class="category-bg cat-img-4"></div>
+                        <div class="category-bg cat-img-4"
+                            style="background-image: url('{{ asset('img/assets/honeymoon.avif') }}');"></div>
                         <div class="category-overlay">
                             <h3 class="h4 fw-bold mb-1">Viaggi di Nozze</h3>
                             <p class="small mb-0 opacity-75">Romantici e indimenticabili</p>
@@ -147,7 +135,7 @@
                 <div class="bento-item-large reveal">
                     <div class="bento-card bg-dark text-white position-relative overflow-hidden border-0">
                         <div class="position-absolute top-0 start-0 w-100 h-100 opacity-50"
-                            style="background: url('{{ Storage::url('images/features.avif') }}') center/cover;"></div>
+                            style="background: url('{{ asset('img/assets/features.avif') }}') center/cover;"></div>
                         <div class="position-relative z-index-1 p-4 d-flex flex-column justify-content-end h-100">
                             <div class="mb-3 text-warning">
                                 <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i
@@ -193,7 +181,8 @@
     </section>
 
     <!-- STATS (EXISTING - REFRESHED) -->
-    <section class="parallax-section py-5 reveal stats-container stats-bg" aria-labelledby="stats-heading">
+    <section class="parallax-section py-5 reveal stats-container stats-bg" aria-labelledby="stats-heading"
+        style="background-image: url('{{ asset('img/assets/stats.avif') }}');">
         <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-75" aria-hidden="true"></div>
         <div class="container position-relative z-index-1 py-5">
             <h2 id="stats-heading" class="visually-hidden">Statistiche azienda</h2>
@@ -431,7 +420,8 @@
 
     <!-- NEWSLETTER -->
     <section class="parallax-section d-flex align-items-center justify-content-center newsletter-bg position-relative"
-        aria-labelledby="newsletter-heading">
+        aria-labelledby="newsletter-heading"
+        style="background-image: url('{{ asset('img/assets/newsletter.avif') }}');">
         <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-75 multiply-blend"></div>
         <div class="container position-relative z-index-1 text-center text-white reveal">
             <h2 id="newsletter-heading" class="display-3 fw-bold mb-4">Resta Ispirato</h2>

@@ -1,14 +1,14 @@
 <footer class="bg-dark text-white pt-5 pb-4 section-padding">
     <div class="container text-md-left">
         <div class="row text-md-left">
-            <!-- Brand and Description -->
+            <!-- Brand e Descrizione -->
             <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                 <h5 class="text-uppercase mb-4 font-weight-bold text-primary">StartJourney</h5>
                 <p class="text-white-50">La tua porta d'accesso alle avventure più straordinarie del mondo. Esperienze
                     autentiche, ricordi indimenticabili.</p>
             </div>
 
-            <!-- Links -->
+            <!-- Link Utili -->
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                 <h5 class="text-uppercase mb-4 font-weight-bold">Esplora</h5>
                 <p><a href="{{ route('home') }}" class="text-white-50 text-decoration-none hover-primary">Home</a></p>
@@ -17,7 +17,7 @@
                 <p><a href="#" class="text-white-50 text-decoration-none hover-primary">Offerte</a></p>
             </div>
 
-            <!-- Contact Info -->
+            <!-- Contatti -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                 <h5 class="text-uppercase mb-4 font-weight-bold">Contatti</h5>
                 <p class="text-white-50"><i class="bi bi-geo-alt-fill me-2 text-primary"></i> Via Roma 123, 00184 Roma,

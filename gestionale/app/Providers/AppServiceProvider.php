@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Customer;
+use App\Models\Expense;
+use App\Observers\AutomaticBackupObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Customer::observe(AutomaticBackupObserver::class);
+        Expense::observe(AutomaticBackupObserver::class);
     }
 }

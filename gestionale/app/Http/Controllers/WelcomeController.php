@@ -8,12 +8,16 @@ use Carbon\Carbon;
 
 class WelcomeController extends Controller
 {
+    /**
+     * Visualizzazione calendario desktop
+     */
     public function index(Request $request)
     {
         $centerDate = $request->has('date') ? Carbon::parse($request->date) : Carbon::today();
         $startDate = $centerDate->copy()->subMonths(12);
         $endDate = $centerDate->copy()->addMonths(12);
 
+        // Genera array di date
         $dates = [];
         for ($date = $startDate->copy(); $date->lte($endDate); $date->addDay()) {
             $dates[] = $date->copy();
@@ -21,6 +25,7 @@ class WelcomeController extends Controller
 
         $rooms = config('rooms');
 
+        // Recupera prenotazioni nel periodo
         $reservationsRaw = Customer::where('departure_date', '>', $startDate->format('Y-m-d'))
             ->where('arrival_date', '<', $endDate->format('Y-m-d'))
             ->get();
@@ -42,5 +47,46 @@ class WelcomeController extends Controller
         }
 
         return view('welcome', compact('rooms', 'dates', 'dailyReservations', 'centerDate'));
+    }
+
+    /**
+     * Visualizzazione calendario mobile
+     */
+    public function mobileIndex(Request $request)
+    {
+        $centerDate = $request->has('date') ? Carbon::parse($request->date) : Carbon::today();
+        $startDate = $centerDate->copy()->subMonths(12);
+        $endDate = $centerDate->copy()->addMonths(12);
+
+        // Genera array di date
+        $dates = [];
+        for ($date = $startDate->copy(); $date->lte($endDate); $date->addDay()) {
+            $dates[] = $date->copy();
+        }
+
+        $rooms = config('rooms');
+
+        // Recupera prenotazioni nel periodo
+        $reservationsRaw = Customer::where('departure_date', '>', $startDate->format('Y-m-d'))
+            ->where('arrival_date', '<', $endDate->format('Y-m-d'))
+            ->get();
+
+        // Costruisce griglia di lookup O(1): [numero_camera][data] => Prenotazione
+        $dailyReservations = [];
+
+        foreach ($reservationsRaw as $res) {
+            $rStart = Carbon::parse($res->arrival_date);
+            $rEnd = Carbon::parse($res->departure_date);
+            $loopStart = $rStart->max($startDate);
+            $loopEnd = $rEnd->min($endDate);
+            $curr = $loopStart->copy();
+
+            while ($curr->lt($rEnd) && $curr->lte($endDate)) {
+                $dailyReservations[$res->room_number][$curr->format('Y-m-d')] = $res;
+                $curr->addDay();
+            }
+        }
+
+        return view('welcome-mobile', compact('rooms', 'dates', 'dailyReservations', 'centerDate'));
     }
 }

@@ -14,18 +14,12 @@
     href="//fonts.googleapis.com/css?family=|Roboto+Sans:400,700|Playfair+Display:400,700">
 
   <!-- Facebook Meta Tags -->
-
   <meta property="og:image"
     content="https://i.postimg.cc/NfjYBR67/big-1587652221big-home-page-standard-album-relax-e-tranquillita-2105.jpg">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/animate.css">
   <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <link rel="stylesheet" href="css/aos.css">
-  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-  <link rel="stylesheet" href="css/jquery.timepicker.css">
   <link rel="stylesheet" href="css/fancybox.min.css">
-  <link rel="stylesheet" href="css/_custom.css">
 
   <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -33,6 +27,7 @@
   <!-- Theme Style -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/parallax-modern.css">
+  <link rel="stylesheet" href="css/_custom.css">
 
   <meta property="og:url" content="https://www.gemmadelmare.com/" />
   <meta property="og:type" content="website" />
@@ -55,10 +50,10 @@
   <header class="site-header js-site-header ">
     <div class="container-fluid">
       <div class="row align-items-center">
-        <div class="col-6 col-lg-4 site-logo" data-aos="fade"><a href="index.html" class="no_wrap">Hotel Gemma del
+        <div class="col-6 col-lg-4 site-logo reveal-left"><a href="index.html" class="no_wrap">Hotel Gemma del
             Mare</a></div>
         <div class="col-6 col-lg-8">
-          <div class="site-menu-toggle js-site-menu-toggle m-1" data-aos="fade">
+          <div class="site-menu-toggle js-site-menu-toggle m-1 reveal-right">
             <span></span>
             <span></span>
             <span></span>
@@ -73,9 +68,10 @@
                       <li class="active"><a href="index.html">Home</a></li>
                       <li><a href="rooms.html">Camere</a></li>
                       <li><a href="about.html">Hotel</a></li>
-                      <!-- <li><a href="fotogallery.html">Photogallery</a></li> -->
+                      <li><a href="fotogallery.html">Photogallery</a></li>
                       <li><a href="contact.html">Contatti</a></li>
-                      <li><a href="https://wa.me/390584840371"><img src="./images/wa.png" alt="whatsapp" width="50px"></a>
+                      <li><a href="https://wa.me/390584840371"><img src="./images/wa.png" alt="whatsapp"
+                            width="50px"></a>
                       </li>
                       <li><a href="mailto:info@gemmadelmare.com"><i class="fa-regular fa-envelope"
                             style="color: #000000;"></i></a></li>
@@ -96,10 +92,14 @@
     style="background-image: url('images/big_hotel-standard-2-4294.jpg');" data-speed="0.5">
     <div class="container">
       <div class="row site-hero-inner justify-content-center align-items-center">
-        <div class="col-md-10 text-center reveal" data-aos="fade-up">
-          <span class="custom-caption text-uppercase text-white d-block mb-3 float-animation">Welcome To</span>
-          <h1 class="heading text-white gradient-text" style="-webkit-text-fill-color: white;">Gemma del Mare<br></h1>
-          <p class="text-white reveal" data-aos="fade-up" data-aos-delay="200">Marina di Pietrasanta</p>
+        <div class="col-md-10 text-center reveal">
+          <div class="d-inline-block px-5 py-4">
+            <span class="custom-caption text-uppercase text-white d-block mb-3 float-animation"
+              style="letter-spacing: 4px;">Welcome To</span>
+            <h1 class="heading text-white gradient-text mb-4" style="-webkit-text-fill-color: white;">Gemma del Mare<br>
+            </h1>
+            <p class="text-white reveal h5 font-weight-light" style="transition-delay: 0.2s;">Marina di Pietrasanta</p>
+          </div>
         </div>
       </div>
     </div>
@@ -111,33 +111,46 @@
   </section>
 
 
-  <section class="py-5 bg-light mt-5">
+  <section id="next" class="py-5 section-modern mt-5">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-md-12 col-lg-7 ml-auto order-lg-2 position-relative mb-5 rounded" data-aos="fade-up">
-          <img src="images/esterno davanti.jpg" alt="Image" class="img-fluid rounded p-2 bg-white">
+        <div class="col-md-12 col-lg-7 ml-auto order-lg-2 position-relative mb-5">
+          <div class="img-parallax glass-card p-2" data-speed="0.1">
+            <img src="images/esterno davanti.jpg" alt="Image" class="img-fluid rounded shadow" loading="lazy">
+          </div>
         </div>
-        <div class="bg-light col-md-12 col-lg-4 order-lg-1" data-aos="fade-up">
-          <h2 class="heading text-center">Relax e Tranquillit&agrave</h2>
-          <p class="mb-4 text-center">L'Hotel Gemma del Mare &egrave situato in una <strong>zona tranquilla e immerso
-              nel verde a circa 900 metri dalle spiaggia</strong>, nelle immediate vicinanze di <strong>Pietrasanta,
-              Forte dei Marmi, Lido di Camaiore e Viareggio.</strong></p>
+        <div class="col-md-12 col-lg-4 order-lg-1 reveal-left">
+          <h2 class="heading mb-4 text-dark font-family-serif">Relax e Tranquillit&agrave;</h2>
+          <p class="mb-4 text-muted">All'Hotel Gemma del Mare, il tempo sembra rallentare. Immerso in una zona
+            residenziale silenziosa e circondato dal verde, il nostro albergo &egrave; l'oasi perfetta per chi cerca una
+            fuga dalla frenesia quotidiana.</p>
+          <p class="mb-4 text-muted">Godetevi la brezza marina nel nostro giardino curato, sorseggiate un aperitivo al
+            tramonto o rilassatevi nelle nostre aree comuni pensate per il vostro benessere. A soli 900 metri dalle
+            spiagge dorate della Versilia e a pochi passi dalle boutique di Forte dei Marmi e dalla cultura di
+            Pietrasanta.</p>
+          <p><a href="about.html" class="btn btn-primary btn-modern text-white py-3 px-4 mr-3 magnetic">Scopri di
+              pi&ugrave;</a></p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section bg-image overlay" style="background-image: url('images/ristorante.jpg');">
+  <section class="section fixed-bg-section overlay gradient-overlay"
+    style="background-image: url('images/ristorante.jpg');">
     <div class="container">
-      <div class="row justify-content-center text-center mb-5">
-        <div class="col-md-7">
-          <h2 class="heading text-white" data-aos="fade">Ristorante</h2>
-          <p class="text-white" data-aos="fade" data-aos-delay="100">Qui, ogni piatto racconta la storia della nostra
-            terra e del mare che ci circonda. Lasciatevi tentare dai nostri piatti di pesce freschissimo, pescato
-            giornalmente, e dalle ricette della tradizione, preparate con amore e ingredienti genuini. La nostra cucina
-            casalinga è un omaggio ai sapori autentici e alle radici profonde di questa terra. Venite a scoprire un
-            angolo di paradiso dove il gusto incontra la tradizione in un’atmosfera accogliente e familiare.
-          </p>
+      <div class="row justify-content-center text-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <div class="glass-card-dark p-4 p-md-5 reveal border-0">
+            <h2 class="heading text-white mb-4 font-family-serif">Il Nostro Ristorante</h2>
+            <p class="text-white lead mb-4 font-italic">
+              "Un viaggio culinario tra i sapori della Versilia."
+            </p>
+            <p class="text-white">
+              Ogni piatto racconta la storia della nostra tradizione: dal pescato del giorno preparato con maestria, ai
+              classici della cucina toscana rivisitati con tocco moderno. Il nostro Chef seleziona personalmente
+              ingredienti a Km 0 per garantirvi un'esperienza indimenticabile.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -148,44 +161,49 @@
     <div class="container">
       <div class="row justify-content-center text-center mb-5">
         <div class="col-md-7 reveal">
-          <h2 class="heading" data-aos="fade-up">Camere</h2>
-          <p data-aos="fade-up" data-aos-delay="100">Le camere ampie e confortevoli con balconi vista su giardino sono
-            munite di: TV, Wi-Fi, bagno doccia, scrivania.</p>
+          <h2 class="heading text-dark">Le Nostre Camere</h2>
+          <p class="text-muted">Eleganza, comfort e dettagli curati per garantirvi il miglior riposo.</p>
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4 reveal stagger-1" data-aos="fade-up" data-aos-delay="100">
-          <div class="room-modern glass-card">
+        <div class="col-md-6 col-lg-4 stagger-1 mb-4">
+          <div class="room-modern glass-card h-100 bg-white">
             <figure class="img-wrap">
               <img src="images/imm singola.jpg" alt="Camera Singola Hotel Gemma del Mare"
-                class="img-fluid mb-3 rounded">
+                class="img-fluid mb-3 rounded-top w-100" style="height: 250px; object-fit: cover;" loading="lazy">
             </figure>
-            <div class="p-3 text-center room-info">
-              <h2>Camera Singola</h2>
+            <div class="p-4 text-center room-info">
+              <h3 class="h4">Camera Singola</h3>
+              <p class="small text-muted mb-3">Intima &amp; accogliente, perfetta per business o solo travel.</p>
+              <a href="rooms.html" class="btn btn-sm btn-outline-primary magnetic rounded-pill px-4">Dettagli</a>
             </div>
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-4 reveal stagger-2" data-aos="fade-up" data-aos-delay="200">
-          <div class="room-modern glass-card">
+        <div class="col-md-6 col-lg-4 stagger-2 mb-4">
+          <div class="room-modern glass-card h-100 bg-white">
             <figure class="img-wrap">
               <img src="images/imm matrim balcone.jpg" alt="Camera Matrimoniale Hotel Gemma del Mare"
-                class="img-fluid mb-3 rounded">
+                class="img-fluid mb-3 rounded-top w-100" style="height: 250px; object-fit: cover;" loading="lazy">
             </figure>
-            <div class="p-3 text-center room-info">
-              <h2>Camera Matrimoniale</h2>
+            <div class="p-4 text-center room-info">
+              <h3 class="h4">Camera Matrimoniale</h3>
+              <p class="small text-muted mb-3">Spazio e relax per coppie, con balcone privato.</p>
+              <a href="rooms.html" class="btn btn-sm btn-outline-primary magnetic rounded-pill px-4">Dettagli</a>
             </div>
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-4 reveal stagger-3" data-aos="fade-up" data-aos-delay="300">
-          <div class="room-modern glass-card">
+        <div class="col-md-6 col-lg-4 stagger-3 mb-4">
+          <div class="room-modern glass-card h-100 bg-white">
             <figure class="img-wrap">
               <img src="images/imm tripla balcone.jpg" alt="Camera Tripla Hotel Gemma del Mare"
-                class="img-fluid mb-3 rounded">
+                class="img-fluid mb-3 rounded-top w-100" style="height: 250px; object-fit: cover;" loading="lazy">
             </figure>
-            <div class="p-3 text-center room-info">
-              <h2>Camera Tripla</h2>
+            <div class="p-4 text-center room-info">
+              <h3 class="h4">Camera Tripla</h3>
+              <p class="small text-muted mb-3">Ideale per famiglie, comfort senza compromessi.</p>
+              <a href="rooms.html" class="btn btn-sm btn-outline-primary magnetic rounded-pill px-4">Dettagli</a>
             </div>
           </div>
         </div>
@@ -195,39 +213,59 @@
 
 
   <!-- SEZIONE CTA CON PARALLAX -->
-  <section class="section bg-image overlay parallax-section"
-    style="background-image: url('images/big_scopri-la-versilia-banner-6821.jpg');" data-speed="0.4">
+  <section class="section overlay fixed-bg-section gradient-overlay"
+    style="background-image: url('images/big_scopri-la-versilia-banner-6821.jpg');">
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-12 col-md-6 text-center mb-4 mb-md-0 text-md-left reveal-left" data-aos="fade-right">
-          <h2 class="text-white font-weight-bold">Il Miglior Posto Dove Soggiornare</h2>
-        </div>
-        <div class="col-12 col-md-6 text-center text-md-right reveal-right" data-aos="fade-left" data-aos-delay="200">
-          <a href="mailto:info@gemmadelmare.com" class="btn btn-modern magnetic py-3 px-5">Contattaci Ora</a>
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-8 text-center reveal">
+          <h2 class="text-white font-weight-bold mb-4 display-4 font-family-serif">Il Miglior Posto Dove Soggiornare
+          </h2>
+          <p class="text-white mb-5 lead">Prenota oggi la tua vacanza da sogno in Versilia. Lasciati coccolare.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="section footer-section">
+  <footer class="section footer-section bg-dark text-white pt-5">
     <div class="container">
-      <div class="row mb-4 justify-content-center">
-        <div class="text-center mb-5 pr-md-5 contact-info text-center">
-          <p class="no_wrap"><span class="d-block"><span
-                class="ion-ios-location h5 mr-3 text-primary"></span>Indirizzo:</span> <span> Via Leonardo da Vinci, 158
-              <br> 55045 Pietrasanta ( Lu )</span></p>
-          <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Telefono:</span> <a
-              href="tel:0584840371">0584 840371</a></p>
-          <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email: <a
-                href="mailto:info@gemmadelmare.com">info@gemmadelmare.com</a> </p>
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-10 text-center contact-info">
+          <div class="row">
+            <div class="col-md-4 mb-4 reveal stagger-1">
+              <div class="glass-card p-4 h-100 bg-transparent border border-secondary">
+                <span class="ion-ios-location h2 text-primary d-block mb-3"></span>
+                <h5 class="text-white text-uppercase small letter-spacing-2">Indirizzo</h5>
+                <p class="text-white-50">Via Leonardo da Vinci, 158<br>55045 Pietrasanta (LU)</p>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4 reveal stagger-2">
+              <div class="glass-card p-4 h-100 bg-transparent border border-secondary">
+                <span class="ion-ios-telephone h2 text-primary d-block mb-3"></span>
+                <h5 class="text-white text-uppercase small letter-spacing-2">Telefono</h5>
+                <p><a href="tel:0584840371" class="text-white-50">0584 840371</a></p>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4 reveal stagger-3">
+              <div class="glass-card p-4 h-100 bg-transparent border border-secondary">
+                <span class="ion-ios-email h2 text-primary d-block mb-3"></span>
+                <h5 class="text-white text-uppercase small letter-spacing-2">Email</h5>
+                <p><a href="mailto:info@gemmadelmare.com" class="text-white-50">info@gemmadelmare.com</a></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row pt-5 justify-content-center">
-        <p class="col-md-6 text-center">
-          Copyright &copy;
-          <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made by <a
-            href="https://www.dariux87.it" target="blank">Dario</a>
-        </p>
+      <div class="row pt-4 pb-4 justify-content-center border-top border-secondary">
+        <div class="col-md-12 text-center small text-muted">
+          <p class="mb-0">
+            Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script> All rights reserved | Hotel Gemma del Mare
+          </p>
+          <p class="mb-0">
+            Designed with <i class="ion-ios-heart" style="color: #ff6b6b;"></i> by <a href="https://www.dariux87.it"
+              target="_blank" class="text-white-50">Dario</a>
+          </p>
+        </div>
       </div>
     </div>
   </footer>
@@ -238,17 +276,9 @@
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
   <script src="js/jquery.fancybox.min.js"></script>
 
-
-  <script src="js/aos.js"></script>
-
-  <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/jquery.timepicker.min.js"></script>
-
-
-
+  <!-- Modern Effects -->
   <script src="js/parallax-effects.js"></script>
   <script src="js/main.js"></script>
 </body>

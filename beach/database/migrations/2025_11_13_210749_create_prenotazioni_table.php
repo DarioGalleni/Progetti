@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('prenotazioni', function (Blueprint $table) {
@@ -19,6 +18,7 @@ return new class extends Migration
             $table->date('data_fine');
             $table->decimal('costo_totale', 8, 2)->nullable();
             $table->decimal('acconto', 8, 2)->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

@@ -1,15 +1,20 @@
 <x-layout title="Calendario - Gemma Hotel">
     <div id="calendar-header" class="d-flex justify-content-between align-items-center mb-3"
         style="transition: opacity 0.3s, transform 0.3s;">
-        <h1 class="h3">Calendario Prenotazioni</h1>
+        <div class="d-flex align-items-center gap-2">
+            <h1 class="h3 mb-0">Calendario Prenotazioni</h1>
+            <a href="{{ route('mobile-calendar') }}" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-phone"></i> Vista Mobile
+            </a>
+        </div>
         <div>
             <a href="{{ route('welcome') }}" class="btn btn-outline-secondary mx-2">Oggi</a>
         </div>
     </div>
 
-    <div class="card card-custom">
-        <div class="card-body p-0">
-            <div class="calendar-container" style="max-height: 80vh; overflow: auto; position: relative;">
+    <div class="card card-custom vh-100">
+        <div class="card-body p-0 vh-100">
+            <div class="calendar-container" style="height: 100%; overflow: auto; position: relative;">
                 <div style="display: flex; min-width: max-content;">
                     <!-- Colonna Fissa: Camere -->
                     <div class="room-column"
@@ -112,7 +117,7 @@
                                                                 <span class="booking-sticker">
                                                                     @if($reservation->payment_method == 'booking')
                                                                         <span style="color: #dc3545;">BK</span>
-                                                                    @else
+                                                                    @elseif($reservation->payment_method == 'cash')
                                                                         <span style="color: #198754;">$</span>
                                                                     @endif
                                                                 </span>
@@ -158,7 +163,7 @@
                                                             <span class="booking-sticker">
                                                                 @if($reservation->payment_method == 'booking')
                                                                     <span style="color: #dc3545;">BK</span>
-                                                                @else
+                                                                @elseif($reservation->payment_method == 'cash')
                                                                     <span style="color: #198754;">$</span>
                                                                 @endif
                                                             </span>
@@ -185,24 +190,5 @@
             </div>
         </div>
     </div>
-    </div>
-
-    <x-slot name="scripts">
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const container = document.querySelector('.calendar-container');
-                const target = document.getElementById('center-date-header');
-
-                if (container && target) {
-                    // Calcola la posizione per centrare l'elemento
-                    const containerWidth = container.clientWidth;
-                    const roomColumnWidth = 150; // Larghezza colonna fissa
-                    const centerOffset = (containerWidth - roomColumnWidth) / 2;
-
-                    // Scrolla
-                    container.scrollLeft = target.offsetLeft - roomColumnWidth - centerOffset + (target.clientWidth / 2);
-                }
-            });
-        </script>
-    </x-slot>
+    @include('components.mobile-redirect')
 </x-layout>

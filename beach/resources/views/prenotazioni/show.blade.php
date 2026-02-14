@@ -32,7 +32,8 @@
                             <div class="col-md-6">
                                 <h5 class="text-secondary border-bottom pb-2 mb-3">Dati Cliente</h5>
                                 <p class="mb-1"><strong>Nome:</strong> {{ $prenotazione->nome }}
-                                    {{ $prenotazione->cognome }}</p>
+                                    {{ $prenotazione->cognome }}
+                                </p>
                                 <p class="mb-1">
                                     <strong>Email:</strong>
                                     @if($prenotazione->email)
@@ -67,7 +68,8 @@
                                     {{ \Carbon\Carbon::parse($prenotazione->data_inizio)->format('d/m/Y') }}</p>
                                 <p class="mb-1"><strong>Partenza:</strong> {{ $dataPartenzaUser->format('d/m/Y') }}</p>
                                 <p class="mb-1"><strong>Durata:</strong> {{ $durata }}
-                                    {{ $durata == 1 ? 'giorno' : 'giorni' }}</p>
+                                    {{ $durata == 1 ? 'giorno' : 'giorni' }}
+                                </p>
                             </div>
 
                             {{-- Sezione Economica --}}
@@ -94,6 +96,7 @@
                                             @endphp
                                             <span class="fs-5 {{ $saldo > 0 ? 'text-danger' : 'text-success' }}">
                                                 {{ number_format($saldo, 2, ',', '.') }} €
+                                                @if($saldo == 0) <i class="fas fa-check-circle ms-1"></i> @endif
                                             </span>
                                         </div>
                                     </div>
@@ -122,7 +125,7 @@
 
                             {{-- Form Cancellazione --}}
                             <form action="{{ route('prenotazioni.destroy', $prenotazione->id) }}" method="POST"
-                                onsubmit="return confirm('Sei sicuro di voler eliminare questa prenotazione?');">
+                                class="delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger text-white">

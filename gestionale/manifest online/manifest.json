@@ -1,0 +1,56 @@
+{
+    "name": "Gemma Hotel Management",
+    "short_name": "Gemma",
+    "description": "Sistema di gestione alberghiera",
+    "id": "/gest/",
+    "start_url": "/gest/",
+    "scope": "/gest/",
+    "display": "standalone",
+    "background_color": "#336633",
+    "theme_color": "#336633",
+    "orientation": "portrait",
+    "prefer_related_applications": false,
+    "lang": "it-IT",
+    "icons": [
+        {
+            "src": "/gest/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/gest/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/gest/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/gest/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/gest/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Gemma Hotel"
+        },
+        {
+            "src": "/gest/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Mobile View"
+        }
+    ]
+}

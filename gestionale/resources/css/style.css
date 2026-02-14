@@ -17,10 +17,9 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01);
     background: #fff;
-    height: calc(100vh - 100px);
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 
 .card-custom .card-body {
@@ -165,4 +164,533 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+/* =========================================================================
+   PAGINA: CLEANING PRINT (id="cleaning-print-page") & RESTAURANT PRINT (id="restaurant-print-page")
+   ========================================================================= */
+#cleaning-print-page body,
+#restaurant-print-page body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #000;
+}
+
+#cleaning-print-page h1,
+#restaurant-print-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+#cleaning-print-page .meta,
+#restaurant-print-page .meta {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+/* Tabella Cleaning & Restaurant Print */
+#cleaning-print-page table,
+#restaurant-print-page .restaurant-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#cleaning-print-page th,
+#cleaning-print-page td,
+#restaurant-print-page th,
+#restaurant-print-page td {
+    border: 1px solid #000;
+    padding: 4px 6px;
+    text-align: center;
+}
+
+#cleaning-print-page td,
+#restaurant-print-page td {
+    height: 25px;
+    vertical-align: middle;
+    font-size: 11px;
+}
+
+#cleaning-print-page th,
+#restaurant-print-page th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+#cleaning-print-page .check,
+#restaurant-print-page .check {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* =========================================================================
+   PAGINA: PRINT EXPENSES (id="print-expenses-page")
+   ========================================================================= */
+#print-expenses-page {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    line-height: 1.3;
+}
+
+#print-expenses-page .header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+#print-expenses-page .header h1 {
+    margin: 0;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#print-expenses-page .header p {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Info Cliente */
+#print-expenses-page .customer-info {
+    margin-bottom: 30px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#print-expenses-page .customer-info table {
+    width: auto;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+#print-expenses-page .customer-info td {
+    padding: 4px 10px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+#print-expenses-page .label {
+    font-weight: bold;
+    color: #555;
+    text-align: right;
+}
+
+/* Tabella Spese */
+#print-expenses-page .expenses-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+#print-expenses-page .expenses-table th,
+#print-expenses-page .expenses-table td {
+    padding: 6px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#print-expenses-page .expenses-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #555;
+}
+
+#print-expenses-page .amount-col {
+    text-align: right !important;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+/* Totale */
+#print-expenses-page .total-section {
+    text-align: right;
+    margin-top: 20px;
+    border-top: 2px solid #333;
+    padding-top: 10px;
+}
+
+#print-expenses-page .total-label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#print-expenses-page .total-amount {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d9534f;
+}
+
+/* Footer & Button */
+#print-expenses-page .footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+#print-expenses-page .btn-print {
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* =========================================================================
+   PAGINA: RECEIPT (id="receipt-page")
+   ========================================================================= */
+#receipt-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+#receipt-page .invoice-box {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    line-height: 20px;
+    color: #555;
+}
+
+#receipt-page .invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #336633;
+}
+
+#receipt-page .hotel-info {
+    flex: 1;
+}
+
+#receipt-page .hotel-logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #336633;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#receipt-page .hotel-address {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+}
+
+#receipt-page .invoice-title {
+    text-align: right;
+    flex: 0 0 auto;
+}
+
+#receipt-page .invoice-title h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+#receipt-page .invoice-title small {
+    color: #999;
+    font-size: 12px;
+}
+
+#receipt-page .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    color: #333;
+}
+
+#receipt-page .kv-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+#receipt-page .kv-row:last-child {
+    border-bottom: none;
+}
+
+#receipt-page .kv-label {
+    font-weight: 500;
+}
+
+#receipt-page .kv-value {
+    font-weight: 600;
+    color: #000;
+}
+
+#receipt-page .total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+    border-top: 2px solid #333;
+    margin-top: 20px;
+}
+
+#receipt-page .footer-note {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+
+#receipt-page .print-btn {
+    display: block;
+}
+
+#receipt-page .btn-primary {
+    background-color: #336633;
+    border-color: #336633;
+}
+
+#receipt-page .btn-primary:hover {
+    background-color: #264d26;
+    border-color: #264d26;
+}
+
+/* =========================================================================
+   PAGINA: RESTAURANT (id="restaurant-page")
+   ========================================================================= */
+#restaurant-page .restaurant-table,
+#cleaning-page .restaurant-table,
+#cleaning-page .cleaning-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: sans-serif;
+}
+
+#restaurant-page .restaurant-table th,
+#restaurant-page .restaurant-table td,
+#cleaning-page .restaurant-table th,
+#cleaning-page .restaurant-table td,
+#cleaning-page .cleaning-table th,
+#cleaning-page .cleaning-table td {
+    border: 1px solid #000;
+    padding: 4px 8px;
+    text-align: center;
+    font-size: 14px;
+}
+
+#restaurant-page .restaurant-table th,
+#cleaning-page .restaurant-table th,
+#cleaning-page .cleaning-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+#restaurant-page .col-room,
+#cleaning-page .col-room {
+    width: 15%;
+}
+
+#restaurant-page .col-pax,
+#cleaning-page .col-pax {
+    width: 10%;
+}
+
+#restaurant-page .col-breakfast {
+    width: 37%;
+}
+
+#restaurant-page .col-dinner {
+    width: 38%;
+}
+
+#cleaning-page .col-arrival {
+    width: 25%;
+}
+
+#cleaning-page .col-departure {
+    width: 25%;
+}
+
+#cleaning-page .col-stayover {
+    width: 25%;
+}
+
+
+#restaurant-page .check,
+#cleaning-page .check {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#restaurant-page .note {
+    font-size: 0.85em;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+/* =========================================================================
+   PAGINA: RECEPTION (id="reception-page")
+   ========================================================================= */
+#reception-page table {
+    border-color: #000 !important;
+}
+
+#reception-page th,
+#reception-page td {
+    border-color: #000 !important;
+}
+
+/* =========================================================================
+   MEDIA QUERY: PRINT (COMUNE)
+   ========================================================================= */
+@media print {
+
+    /* Reset generici per la stampa */
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .no-print,
+    .navbar,
+    .alert {
+        display: none !important;
+    }
+
+    .container-fluid {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    button {
+        display: none;
+    }
+
+    /* Cleaning Print Specifics */
+    #cleaning-print-page table {
+        font-size: 12pt;
+    }
+
+    /* Print Expenses Specifics */
+    #print-expenses-page .no-print {
+        display: none;
+    }
+
+    /* Receipt Specifics */
+    #receipt-page {
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+        visibility: hidden;
+        /* Nasconde tutto tranne invoice-box */
+    }
+
+    #receipt-page .invoice-box {
+        visibility: visible;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    #receipt-page .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    #receipt-page .invoice-header {
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+
+    #receipt-page .hotel-logo {
+        font-size: 20px;
+    }
+
+    #receipt-page .invoice-title h1 {
+        font-size: 24px;
+    }
+
+    #receipt-page .section-title {
+        margin-top: 10px;
+        margin-bottom: 2px;
+        padding-bottom: 2px;
+        font-size: 14px;
+    }
+
+    #receipt-page .kv-row {
+        padding: 1px 0;
+    }
+
+    #receipt-page .total-row {
+        font-size: 16px;
+        margin-top: 10px;
+        padding: 5px 0;
+    }
+
+    #receipt-page .footer-note {
+        margin-top: 15px;
+        padding-top: 5px;
+    }
+
+    #receipt-page .print-btn {
+        display: none;
+    }
+
+    /* Restaurant Specifics */
+    #restaurant-page .restaurant-table {
+        width: 100%;
+    }
+
+    #restaurant-page h1 {
+        font-size: 18pt;
+        margin-bottom: 10px;
+    }
+
+    /* Reception Specifics */
+    #reception-page table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #reception-page th,
+    #reception-page td {
+        border: 1px solid black !important;
+        padding: 10px;
+    }
 }

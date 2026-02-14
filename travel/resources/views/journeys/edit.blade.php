@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <!-- Alerts -->
+            <!-- Avvisi -->
             @if ($errors->any())
                 <div class="alert alert-danger bg-transparent text-danger border-danger rounded-0 mb-4" role="alert">
                     <div class="d-flex align-items-center mb-2">
@@ -32,12 +32,12 @@
                 @csrf
                 @method('PUT')
 
-                <!-- Grid -->
+                <!-- Griglia -->
                 <div class="row g-5">
-                    <!-- Left Column: inputs -->
+                    <!-- Colonna Sinistra -->
                     <div class="col-lg-8">
 
-                        <!-- Title -->
+                        <!-- Titolo -->
                         <div class="mb-4">
                             <label for="title"
                                 class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Titolo
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="row g-4 mb-4">
-                            <!-- Price -->
+                            <!-- Prezzo -->
                             <div class="col-md-6">
                                 <label for="price"
                                     class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Prezzo
@@ -59,7 +59,7 @@
                                     id="price" name="price" value="{{ old('price', $journey->price) }}"
                                     placeholder="0.00" required>
                             </div>
-                            <!-- Duration -->
+                            <!-- Durata -->
                             <div class="col-md-6">
                                 <label for="duration_days"
                                     class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Durata
@@ -72,7 +72,7 @@
                             </div>
                         </div>
 
-                        <!-- Description -->
+                        <!-- Descrizione -->
                         <div class="mb-4">
                             <label for="description"
                                 class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Descrizione</label>
@@ -81,10 +81,40 @@
                                 placeholder="Scrivi una descrizione dettagliata..."
                                 required>{{ old('description', $journey->description) }}</textarea>
                         </div>
+                    </div>
 
-                        <!-- Details: Includes & Excludes -->
+                    <!-- Colonna Destra: Immagini -->
+                    <div class="col-lg-4">
+                        <div class="mb-4">
+                            <label
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Immagine
+                                Copertina (Attuale)</label>
+                            <div class="mb-3">
+                                <img src="{{ $journey->image }}" class="img-fluid border border-secondary"
+                                    alt="Copertina">
+                                <input type="hidden" name="image" value="{{ $journey->image }}">
+                            </div>
+
+                            <label for="images"
+                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase mt-4">Carica
+                                Nuove Immagini</label>
+                            <input type="file" class="form-control bg-dark text-white border-secondary rounded-0 mb-3"
+                                id="images" name="images[]" multiple accept="image/*">
+                            <div class="form-text text-secondary mb-3 small">
+                                <i class="bi bi-info-circle me-1"></i> Caricando nuove immagini potrai selezionare una
+                                nuova copertina.
+                            </div>
+
+                            <!-- Input nascosto indice copertina -->
+                            <input type="hidden" name="cover_image_index" id="coverImageIndex" value="0">
+
+                            <!-- Contenitore Anteprime -->
+                            <div id="imagePreviewContainer" class="row g-2"></div>
+                        </div>
+
+                        <!-- Dettagli: Incluso & Escluso -->
                         <div class="row g-4 mb-4">
-                            <!-- Includes -->
+                            <!-- Incluso -->
                             <div class="col-12">
                                 <label
                                     class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Cosa
@@ -109,7 +139,7 @@
                                 </button>
                             </div>
 
-                            <!-- Excludes -->
+                            <!-- Escluso -->
                             <div class="col-12">
                                 <label
                                     class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Cosa
@@ -135,7 +165,7 @@
                             </div>
                         </div>
 
-                        <!-- Itinerary -->
+                        <!-- Itinerario -->
                         <div class="mb-5">
                             <label
                                 class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase mb-3">Itinerario
@@ -178,39 +208,7 @@
 
                     </div>
 
-                    <!-- Right Column: Images -->
-                    <div class="col-lg-4">
-                        <div class="mb-4">
-                            <label
-                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase">Immagine
-                                Copertina (Attuale)</label>
-                            <div class="mb-3">
-                                <img src="{{ $journey->image }}" class="img-fluid border border-secondary"
-                                    alt="Copertina">
-                                <input type="hidden" name="image" value="{{ $journey->image }}">
-                            </div>
-
-                            <label for="images"
-                                class="form-label text-secondary small fw-bold letter-spacing-1 text-uppercase mt-4">Carica
-                                Nuove Immagini</label>
-                            <input type="file" class="form-control bg-dark text-white border-secondary rounded-0 mb-3"
-                                id="images" name="images[]" multiple accept="image/*">
-                            <div class="form-text text-secondary mb-3 small">
-                                <i class="bi bi-info-circle me-1"></i> Caricando nuove immagini potrai selezionare una
-                                nuova copertina.
-                            </div>
-
-                            <!-- Hidden input for cover index -->
-                            <input type="hidden" name="cover_image_index" id="coverImageIndex" value="0">
-
-                            <!-- Preview Container -->
-                            <div id="imagePreviewContainer" class="row g-2">
-                                <!-- Previews will be injected here via JS -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Actions -->
+                    <!-- Azioni -->
                     <div
                         class="col-12 border-top border-secondary pt-4 mt-2 d-flex justify-content-between align-items-center">
                         <a href="{{ route('journeys.show', $journey) }}"

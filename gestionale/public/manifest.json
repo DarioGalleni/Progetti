@@ -1,37 +1,55 @@
 {
-    "name": "Gemma",
-    "short_name": "Gemma",
-    "start_url": "./",
-    "scope": "./",
-    "background_color": "#336633",
-    "description": "Gemma",
+    "name": "Gemma Hotel (DEV)",
+    "short_name": "Gemma DEV",
+    "description": "Versione Locale Sviluppo",
+    "id": "/",
+    "start_url": "/",
+    "scope": "/",
     "display": "standalone",
+    "background_color": "#336633",
     "theme_color": "#336633",
+    "orientation": "any",
+    "prefer_related_applications": false,
     "icons": [
         {
-            "src": "logo.png",
+            "src": "/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/logo.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "logo.png",
+            "src": "/logo.png",
             "sizes": "192x192",
             "type": "image/png",
-            "purpose": "any"
+            "purpose": "maskable"
         }
     ],
     "screenshots": [
         {
-            "src": "logo.png",
+            "src": "/logo.png",
             "sizes": "192x192",
             "type": "image/png",
-            "form_factor": "wide"
+            "form_factor": "wide",
+            "label": "Dev Preview"
         },
         {
-            "src": "logo.png",
+            "src": "/logo.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Mobile Preview"
         }
     ]
 }

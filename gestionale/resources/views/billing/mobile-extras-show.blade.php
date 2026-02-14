@@ -52,7 +52,9 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="input-group">
-                                                    <input type="number" step="0.50" inputmode="decimal"
+                                                    <button type="button" class="btn btn-outline-secondary fw-bold"
+                                                        onclick="toggleSign(this)">+/-</button>
+                                                    <input type="text" inputmode="decimal"
                                                         class="form-control fw-bold text-end"
                                                         name="expenses[bevande][amount]" placeholder="0">
                                                 </div>
@@ -75,9 +77,10 @@
                                             </div>
                                         </div>
                                         <div class="input-group input-group-lg w-50">
-                                            <input type="number" step="1" inputmode="decimal"
-                                                class="form-control fw-bold text-end" name="expenses[pasti][amount]"
-                                                placeholder="0">
+                                            <button type="button" class="btn btn-outline-secondary fw-bold"
+                                                onclick="toggleSign(this)">+/-</button>
+                                            <input type="text" inputmode="decimal" class="form-control fw-bold text-end"
+                                                name="expenses[pasti][amount]" placeholder="0">
                                         </div>
                                     </div>
                                 </div>
@@ -87,9 +90,6 @@
                                 <button type="submit" class="btn btn-dark btn-lg py-3 shadow">
                                     <i class="bi bi-check-lg me-2"></i>CONFERMA E SALVA
                                 </button>
-                                <a href="{{ route('mobile.extras.index') }}" class="btn btn-outline-secondary py-2">
-                                    <i class="bi bi-arrow-left me-2"></i>Torna alla lista
-                                </a>
                             </div>
                         </form>
                     </div>
@@ -115,12 +115,6 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            <div class="text-center mt-3">
-                                <a href="{{ route('billing.expenses', $customer) }}"
-                                    class="btn btn-link btn-sm text-decoration-none">
-                                    Vedi tutto completo <i class="bi bi-arrow-right"></i>
-                                </a>
-                            </div>
                         @endif
                     </div>
 
@@ -128,8 +122,29 @@
             </div>
         </div>
     </div>
-@endsection
+    <script>
+        // --- 8. MOBILE EXTRAS (TOGGLE SIGN) ---
+function toggleSign(btn) {
+    // Trova l'input all'interno dello stesso input-group
+    var input = btn.closest('.input-group').querySelector('input');
+    if (input) {
+        var currentValue = input.value;
 
-@section('scripts')
-    {{-- Scripts removed as per request to disable auto-redirect --}}
+        // Se è vuoto, inizia con -
+        if (currentValue === '') {
+            input.value = '-';
+        }
+        // Se c'è già un meno all'inizio, lo toglie
+        else if (currentValue.startsWith('-')) {
+            input.value = currentValue.substring(1);
+        }
+        // Altrimenti aggiunge il meno davanti
+        else {
+            input.value = '-' + currentValue;
+        }
+        // Rimetti il focus sull'input
+        input.focus();
+    }
+}
+    </script>
 @endsection
