@@ -9,3 +9,23 @@
   height: 100vh;
 }
 
+
+/* Uniforma dimensione icona WhatsApp alle altre icone (h2) */
+.footer-icon-uniform {
+    font-size: 2rem;
+    line-height: 1.2;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/* Colore e animazione specifica per WhatsApp */
+.whatsapp-card:hover .fa-whatsapp {
+    color: #25D366 !important;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.whatsapp-card a:hover {
+    color: #25D366 !important;
+    text-decoration: none;
+}

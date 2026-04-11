@@ -115,7 +115,7 @@
                                         {{ $customer->pax }}
                                         @if($customer->under_12_pax > 0)
                                             <small class="text-muted">(di cui {{ $customer->under_12_pax }}
-                                                < 12 anni)</small>
+                                                minori di 12 anni)</small>
                                         @endif
                                     </dd>
 

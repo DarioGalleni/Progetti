@@ -1,9 +1,13 @@
 User-agent: *
 Disallow: /web/struttura/
 Disallow: /gallery/upload/
+Disallow: /gest/
 Allow: /
 
-Sitemap: https://www.gemmadelmare.com/sitemap.xml
-Allow: /
+User-agent: MSNBot
+Crawl-delay: 5
+
+User-agent: bingbot
+Crawl-delay: 5
 
 Sitemap: https://www.gemmadelmare.com/sitemap.xml

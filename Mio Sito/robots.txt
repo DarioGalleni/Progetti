@@ -8,27 +8,21 @@ Allow: /assets/imgs/
 Allow: /assets/css/
 Allow: /assets/js/
 
-# Disallow admin/private areas (se presenti)
+# Disallow admin/private areas e sottocartelle progetti portfolio
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.git/
 Disallow: /node_modules/
+Disallow: /gest/
+Disallow: /beach/
+Disallow: /trav/
+Disallow: /gemma/
+Disallow: /prova/
 
-# Allow all major search engines
-User-agent: Googlebot
-Allow: /
 
-User-agent: Googlebot-Image
-Allow: /assets/imgs/
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
 
 # Sitemap location
 Sitemap: https://dariux87.it/sitemap.xml
 
-# Crawl delay (opzionale, per evitare sovraccarico)
-Crawl-delay: 10
+# Crawl delay (ignorato da Googlebot, ma usato da altri crawler)
+# Crawl-delay: 10

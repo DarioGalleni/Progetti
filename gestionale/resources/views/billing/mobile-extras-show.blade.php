@@ -32,13 +32,8 @@
                                     <div class="card-body p-2">
                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                             <div class="d-flex align-items-center">
-                                                <div class="bg-primary text-white rounded-circle p-2 me-3">
-                                                    <i class="bi bi-cup-straw fs-5"></i>
-                                                </div>
                                                 <div>
                                                     <h6 class="mb-0 fw-bold text-primary">Bevande</h6>
-                                                    <small class="text-muted">Tot: €
-                                                        {{ number_format($totals['Bevande'] ?? 0, 2) }}</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -67,13 +62,8 @@
                                 <div class="card border-success bg-light shadow-sm">
                                     <div class="card-body p-2 d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center">
-                                            <div class="bg-success text-white rounded-circle p-2 me-3">
-                                                <i class="bi bi-egg-fried fs-5"></i>
-                                            </div>
                                             <div>
                                                 <h6 class="mb-0 fw-bold text-success">Pasti</h6>
-                                                <small class="text-muted">Tot: €
-                                                    {{ number_format($totals['Pasti'] ?? 0, 2) }}</small>
                                             </div>
                                         </div>
                                         <div class="input-group input-group-lg w-50">

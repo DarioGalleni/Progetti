@@ -5,7 +5,7 @@
     <!-- Homepage -->
     <url>
         <loc>https://dariux87.it/</loc>
-        <lastmod>2026-02-13</lastmod>
+        <lastmod>2026-03-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
@@ -14,81 +14,5 @@
             <image:caption>Realizzazione siti internet e gestionali a Lido di Camaiore e Viareggio</image:caption>
         </image:image>
     </url>
-    
-    <!-- About Me Section -->
-    <url>
-        <loc>https://dariux87.it/#about</loc>
-        <lastmod>2026-02-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://dariux87.it/assets/imgs/man_2.jpeg</image:loc>
-            <image:title>Chi sono - Sviluppatore Web Versilia</image:title>
-            <image:caption>Sviluppatore web che parla la tua lingua, operante in tutta la Versilia</image:caption>
-        </image:image>
-    </url>
 
-    <!-- Services Section -->
-    <url>
-        <loc>https://dariux87.it/#services</loc>
-        <lastmod>2026-02-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-
-    <!-- Portfolio Section -->
-    <url>
-        <loc>https://dariux87.it/#portfolio</loc>
-        <lastmod>2026-02-13</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-
-    <!-- Contact Section -->
-    <url>
-        <loc>https://dariux87.it/#contact</loc>
-        <lastmod>2026-02-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Portfolio: Beach Management -->
-    <url>
-        <loc>https://dariux87.it/beach</loc>
-        <lastmod>2026-02-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://www.spiagge.it/magazine/wp-content/uploads/2022/05/spiagge-gestionale.jpg</image:loc>
-            <image:title>Gestionale Spiaggia</image:title>
-            <image:caption>Un sistema di gestione dedicato per stabilimenti balneari, con mappa ombrelloni interattiva</image:caption>
-        </image:image>
-    </url>
-
-    <!-- Portfolio: Hotel Management -->
-    <url>
-        <loc>https://dariux87.it/gest</loc>
-        <lastmod>2026-02-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://dariux87.it/assets/imgs/hotel.jpg</image:loc>
-            <image:title>Gestionale per Hotel</image:title>
-            <image:caption>Sistema gestionale completo per la gestione di prenotazioni e servizi alberghieri</image:caption>
-        </image:image>
-    </url>
-
-    <!-- Portfolio: Travel Agency -->
-    <url>
-        <loc>https://dariux87.it/trav</loc>
-        <lastmod>2026-02-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://dariux87.it/assets/imgs/travel.png</image:loc>
-            <image:title>Agenzia Viaggi</image:title>
-            <image:caption>Software per l'organizzazione di itinerari su misura e gestione pacchetti vacanze</image:caption>
-        </image:image>
-    </url>
-    
 </urlset>

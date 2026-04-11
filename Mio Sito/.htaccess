@@ -1,16 +1,17 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /dariux/
 
     # Prevent directory listing (Security)
     Options -Indexes
-</IfModule>
 
+    # Redirect www to non-www
+    RewriteCond %{HTTP_HOST} ^www\.dariux87\.it [NC]
+    RewriteRule ^(.*)$ https://dariux87.it/$1 [L,R=301]
+</IfModule>
 # ----------------------------------------------------------------------
 # | Custom Error Pages                                                 |
 # ----------------------------------------------------------------------
-# Correction: Path must include subdirectory since this is inside /dariux/
-ErrorDocument 404 /dariux/404.html
+ErrorDocument 404 /404.html
 
 # ----------------------------------------------------------------------
 # | Performance & SEO Optimizations                                    |

@@ -14,7 +14,8 @@
                     "@type": "SearchAction",
                     "target": "https://dariux87.it/?s={search_term_string}",
                     "query-input": "required name=search_term_string"
-                }
+                },
+                "dateModified": "2026-02-19"
             },
             {
                 "@type": "Organization",
@@ -23,7 +24,7 @@
                 "url": "https://dariux87.it/",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://dariux87.it/assets/imgs/favicon/android-chrome-192x192.png",
+                    "url": "https://dariux87.it/assets/imgs/favicon/android-icon-192x192.png",
                     "width": 192,
                     "height": 192
                 },

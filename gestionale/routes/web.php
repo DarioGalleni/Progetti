@@ -14,7 +14,7 @@ use App\Http\Controllers\GroupController;
 
 /* ==================== HOME ==================== */
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-Route::get('/mobile-calendar', [WelcomeController::class, 'mobileIndex'])->name('mobile-calendar');
+
 
 /* ==================== CLIENTI ==================== */
 Route::prefix('customers')->name('customers.')->group(function () {

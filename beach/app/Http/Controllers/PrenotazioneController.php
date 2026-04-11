@@ -6,14 +6,10 @@ use App\Models\Ombrellone;
 use App\Models\Prenotazione;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class PrenotazioneController extends Controller
 {
-
-
-    /**
-     * Mostra l'elenco di tutte le prenotazioni con filtri e ordinamento.
-     */
     public function index(Request $request)
     {
         $search = $request->get('search');
@@ -24,10 +20,10 @@ class PrenotazioneController extends Controller
 
         if ($search) {
             $query->where(function ($q) use ($search) {
-                $q->where('nome', 'LIKE', '%' . $search . '%')
-                    ->orWhere('cognome', 'LIKE', '%' . $search . '%')
-                    ->orWhere('telefono', 'LIKE', '%' . $search . '%')
-                    ->orWhere('email', 'LIKE', '%' . $search . '%');
+                $q->where('nome', 'LIKE', "%$search%")
+                    ->orWhere('cognome', 'LIKE', "%$search%")
+                    ->orWhere('telefono', 'LIKE', "%$search%")
+                    ->orWhere('email', 'LIKE', "%$search%");
             });
         }
 
@@ -48,20 +44,15 @@ class PrenotazioneController extends Controller
 
         return view('prenotazioni.index', compact('prenotazioni', 'search', 'sortBy', 'sortDirection'));
     }
-    /**
-     * Mostra il form per la creazione di una nuova prenotazione.
-     */
+
     public function create(Request $request)
     {
         $ombrelloneId = $request->input('ombrellone_id');
         $dataInizio = $request->input('arrivo', now()->format('Y-m-d'));
 
-        $ombrellone = null;
-        if ($ombrelloneId) {
-            $ombrellone = Ombrellone::find($ombrelloneId);
-        }
+        $ombrellone = $ombrelloneId ? Ombrellone::find($ombrelloneId) : null;
 
-        if (!$ombrellone && $ombrelloneId) {
+        if ($ombrelloneId && !$ombrellone) {
             return redirect()->route('home')->with('error', 'Ombrellone non trovato.');
         }
 
@@ -70,12 +61,9 @@ class PrenotazioneController extends Controller
         return view('prenotazioni.create', compact('ombrellone', 'ombrelloni', 'dataInizio'));
     }
 
-    /**
-     * Salva una nuova prenotazione nel database.
-     */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'ombrellone_id' => 'required|exists:ombrelloni,id',
             'nome' => 'required|string|max:255',
             'cognome' => 'required|string|max:255',
@@ -88,78 +76,65 @@ class PrenotazioneController extends Controller
             'acconto' => 'nullable|numeric|min:0',
         ]);
 
-        $dataFineEffettiva = Carbon::parse($validatedData['partenza'])->subDay()->toDateString();
+        $dataFine = Carbon::parse($validated['partenza'])->subDay()->toDateString();
 
-        $conflitto = Prenotazione::where('ombrellone_id', $validatedData['ombrellone_id'])
-            ->where(function ($query) use ($validatedData, $dataFineEffettiva) {
-                $query->whereBetween('data_inizio', [$validatedData['arrivo'], $dataFineEffettiva])
-                    ->orWhereBetween('data_fine', [$validatedData['arrivo'], $dataFineEffettiva])
-                    ->orWhere(function ($query) use ($validatedData, $dataFineEffettiva) {
-                        $query->where('data_inizio', '<', $validatedData['arrivo'])
-                            ->where('data_fine', '>', $dataFineEffettiva);
+        $conflitto = Prenotazione::where('ombrellone_id', $validated['ombrellone_id'])
+            ->where(function ($q) use ($validated, $dataFine) {
+                $q->whereBetween('data_inizio', [$validated['arrivo'], $dataFine])
+                    ->orWhereBetween('data_fine', [$validated['arrivo'], $dataFine])
+                    ->orWhere(function ($q2) use ($validated, $dataFine) {
+                        $q2->where('data_inizio', '<', $validated['arrivo'])
+                            ->where('data_fine', '>', $dataFine);
                     });
-            })
-            ->exists();
+            })->exists();
 
         if ($conflitto) {
-            return redirect()->back()->withInput()->with('error', 'L\'ombrellone è già prenotato per il periodo selezionato.');
+            return back()->withInput()->with('error', 'Ombrellone già prenotato per questo periodo.');
         }
 
         Prenotazione::create([
-            'ombrellone_id' => $validatedData['ombrellone_id'],
-            'nome' => $validatedData['nome'],
-            'cognome' => $validatedData['cognome'],
-            'data_inizio' => $validatedData['arrivo'],
-            'data_fine' => $dataFineEffettiva,
-            'email' => $validatedData['email'] ?? null,
-            'telefono' => $validatedData['telefono'] ?? null,
-            'note' => $validatedData['note'] ?? null,
-            'costo_totale' => $validatedData['costo_totale'] ?? null,
-            'acconto' => $validatedData['acconto'] ?? null,
+            'ombrellone_id' => $validated['ombrellone_id'],
+            'nome' => $validated['nome'],
+            'cognome' => $validated['cognome'],
+            'data_inizio' => $validated['arrivo'],
+            'data_fine' => $dataFine,
+            'email' => $validated['email'],
+            'telefono' => $validated['telefono'],
+            'note' => $validated['note'],
+            'costo_totale' => $validated['costo_totale'],
+            'acconto' => $validated['acconto'],
         ]);
 
         return redirect()->route('prenotazioni.create')
-            ->with('success', 'Prenotazione per ' . $validatedData['nome'] . ' ' . $validatedData['cognome'] . ' effettuata con successo.');
+            ->with('success', "Prenotazione per {$validated['nome']} {$validated['cognome']} effettuata!");
     }
 
-    /**
-     * Mostra i dettagli di una specifica prenotazione.
-     */
     public function show($id)
     {
         $prenotazione = Prenotazione::with('ombrellone')->findOrFail($id);
-
         $dataPartenzaUser = Carbon::parse($prenotazione->data_fine)->addDay();
-        $dataInizioUser = Carbon::parse($prenotazione->data_inizio);
-        $durata = $dataInizioUser->diffInDays($dataPartenzaUser);
+        $durata = Carbon::parse($prenotazione->data_inizio)->diffInDays($dataPartenzaUser);
 
         return view('prenotazioni.show', compact('prenotazione', 'dataPartenzaUser', 'durata'));
     }
 
-    /**
-     * Mostra il form per la modifica di una prenotazione.
-     */
     public function edit($id)
     {
         $prenotazione = Prenotazione::findOrFail($id);
         $ombrelloni = Ombrellone::orderBy('fila')->orderBy('numero')->get();
-
         $dataPartenza = Carbon::parse($prenotazione->data_fine)->addDay()->toDateString();
         $dataInizio = $prenotazione->data_inizio;
 
         return view('prenotazioni.edit', compact('prenotazione', 'ombrelloni', 'dataPartenza', 'dataInizio'));
     }
 
-    /**
-     * Aggiorna la prenotazione specifica nel database.
-     */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'ombrellone_id' => 'required|exists:ombrelloni,id',
             'nome' => 'required|string|max:255',
             'cognome' => 'required|string|max:255',
-            'arrivo' => 'required|date|after_or_equal:today',
+            'arrivo' => 'required|date',
             'partenza' => 'required|date|after:arrivo',
             'email' => 'nullable|email|max:255',
             'telefono' => 'nullable|string|max:20',
@@ -168,81 +143,67 @@ class PrenotazioneController extends Controller
             'acconto' => 'nullable|numeric|min:0',
         ]);
 
-        $dataFineEffettiva = Carbon::parse($validatedData['partenza'])->subDay()->toDateString();
+        $dataFine = Carbon::parse($validated['partenza'])->subDay()->toDateString();
         $prenotazione = Prenotazione::findOrFail($id);
 
-        $conflitto = Prenotazione::where('ombrellone_id', $validatedData['ombrellone_id'])
+        $conflitto = Prenotazione::where('ombrellone_id', $validated['ombrellone_id'])
             ->where('id', '!=', $id)
-            ->where(function ($query) use ($validatedData, $dataFineEffettiva) {
-                $query->whereBetween('data_inizio', [$validatedData['arrivo'], $dataFineEffettiva])
-                    ->orWhereBetween('data_fine', [$validatedData['arrivo'], $dataFineEffettiva])
-                    ->orWhere(function ($query) use ($validatedData, $dataFineEffettiva) {
-                        $query->where('data_inizio', '<', $validatedData['arrivo'])
-                            ->where('data_fine', '>', $dataFineEffettiva);
+            ->where(function ($q) use ($validated, $dataFine) {
+                $q->whereBetween('data_inizio', [$validated['arrivo'], $dataFine])
+                    ->orWhereBetween('data_fine', [$validated['arrivo'], $dataFine])
+                    ->orWhere(function ($q2) use ($validated, $dataFine) {
+                        $q2->where('data_inizio', '<', $validated['arrivo'])
+                            ->where('data_fine', '>', $dataFine);
                     });
-            })
-            ->exists();
+            })->exists();
 
         if ($conflitto) {
-            return redirect()->back()->withInput()->with('error', 'L\'ombrellone è già prenotato per il periodo selezionato.');
+            return back()->withInput()->with('error', 'Ombrellone già prenotato per questo periodo.');
         }
 
         $prenotazione->update([
-            'ombrellone_id' => $validatedData['ombrellone_id'],
-            'nome' => $validatedData['nome'],
-            'cognome' => $validatedData['cognome'],
-            'data_inizio' => $validatedData['arrivo'],
-            'data_fine' => $dataFineEffettiva,
-            'email' => $validatedData['email'] ?? null,
-            'telefono' => $validatedData['telefono'] ?? null,
-            'note' => $validatedData['note'] ?? null,
-            'costo_totale' => $validatedData['costo_totale'] ?? null,
-            'acconto' => $validatedData['acconto'] ?? null,
+            'ombrellone_id' => $validated['ombrellone_id'],
+            'nome' => $validated['nome'],
+            'cognome' => $validated['cognome'],
+            'data_inizio' => $validated['arrivo'],
+            'data_fine' => $dataFine,
+            'email' => $validated['email'],
+            'telefono' => $validated['telefono'],
+            'note' => $validated['note'],
+            'costo_totale' => $validated['costo_totale'],
+            'acconto' => $validated['acconto'],
         ]);
 
-        return redirect()->route('prenotazioni.show', $id)->with('success', 'Prenotazione aggiornata con successo!');
+        return back()->with('success', 'Prenotazione aggiornata con successo!');
     }
 
-    /**
-     * Elimina la prenotazione specifica.
-     */
     public function destroy($id)
     {
-        $prenotazione = Prenotazione::findOrFail($id);
-        $prenotazione->delete();
-
-        return redirect()->route('home')->with('success', 'Prenotazione eliminata con successo.');
+        Prenotazione::findOrFail($id)->delete();
+        return redirect()->route('home')->with('success', 'Prenotazione eliminata!');
     }
 
-    /**
-     * Mostra le partenze odierne (prenotazioni con data_fine = oggi).
-     */
-    public function partenze()
+    public function partenze(Request $request)
     {
-        $today = Carbon::today();
+        $date = $request->get('date') ? Carbon::parse($request->get('date')) : Carbon::today();
+        $yesterday = $date->copy()->subDay();
 
-        $prenotazioni = Prenotazione::whereDate('data_fine', $today)
+        $prenotazioni = Prenotazione::whereDate('data_fine', $yesterday)
             ->join('ombrelloni', 'prenotazioni.ombrellone_id', '=', 'ombrelloni.id')
-            ->orderBy('ombrelloni.fila', 'asc')
-            ->orderBy('ombrelloni.numero', 'asc')
+            ->orderBy('ombrelloni.fila')
+            ->orderBy('ombrelloni.numero')
             ->select('prenotazioni.*')
             ->with('ombrellone')
             ->get();
 
-        return view('prenotazioni.partenze', compact('prenotazioni'));
+        return view('prenotazioni.partenze', compact('prenotazioni', 'date'));
     }
 
-    /**
-     * Stampa la ricevuta per una prenotazione.
-     */
     public function stampaRicevuta($id)
     {
         $prenotazione = Prenotazione::with('ombrellone')->findOrFail($id);
+        $codiceRicevuta = strtoupper(Str::random(8));
 
-        // Codice casuale di 8 caratteri (lettere e numeri)
-        $codiceRicevuta = strtoupper(\Illuminate\Support\Str::random(8));
-
-        // Calcolo scorporo IVA 22%
         $costoTotale = $prenotazione->costo_totale ?? 0;
         $imponibile = $costoTotale / 1.22;
         $iva = $costoTotale - $imponibile;

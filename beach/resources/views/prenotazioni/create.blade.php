@@ -1,4 +1,4 @@
-<x-layout class="vh-100">
+<x-layout>
     @section('title', 'Inserisci Prenotazione')
 
     <div class="container mt-4">
@@ -10,40 +10,31 @@
                     </div>
 
                     <div class="card-body">
-
                         @if(session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
-                                <a href="{{ route('prenotazioni.index') }}" class="alert-link ms-2">Vai alla lista
-                                    prenotazioni</a>
+                                <a href="{{ route('prenotazioni.index') }}" class="alert-link ms-2">Vai alla lista</a>
                             </div>
                         @endif
 
                         @if(session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
+                            <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
 
                         @if($errors->any())
                             <div class="alert alert-danger">
                                 <ul class="mb-0">
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
+                                    @foreach($errors->all() as $error) <li>{{ $error }}</li> @endforeach
                                 </ul>
                             </div>
                         @endif
 
                         <form action="{{ route('prenotazioni.store') }}" method="POST">
                             @csrf
-
                             <div class="row g-3">
-                                {{-- SEZIONE 1: Dettagli Prenotazione --}}
                                 <div class="col-12">
-                                    <h6 class="text-primary border-bottom pb-2 mb-3">
-                                        <i class="fas fa-umbrella-beach me-2"></i>Dettagli Soggiorno
-                                    </h6>
+                                    <h6 class="text-primary border-bottom pb-2 mb-3"><i
+                                            class="fas fa-umbrella-beach me-2"></i>Dettagli Soggiorno</h6>
                                 </div>
 
                                 <div class="col-md-12">
@@ -53,9 +44,8 @@
                                         id="ombrellone_id" name="ombrellone_id" required>
                                         <option value="" disabled {{ !isset($ombrellone) && !old('ombrellone_id') ? 'selected' : '' }}>Seleziona...</option>
                                         @foreach($ombrelloni as $o)
-                                            <option value="{{ $o->id }}" {{ (isset($ombrellone) && $ombrellone->id == $o->id) || old('ombrellone_id') == $o->id ? 'selected' : '' }}>
-                                                Fila {{ $o->fila }} - N. {{ $o->numero }}
-                                            </option>
+                                            <option value="{{ $o->id }}" {{ (isset($ombrellone) && $ombrellone->id == $o->id) || old('ombrellone_id') == $o->id ? 'selected' : '' }}>Fila {{ $o->fila }} -
+                                                N. {{ $o->numero }}</option>
                                         @endforeach
                                     </select>
                                     @error('ombrellone_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -65,7 +55,8 @@
                                     <label for="arrivo" class="form-label">Data Arrivo <span
                                             class="text-danger">*</span></label>
                                     <input type="date" class="form-control @error('arrivo') is-invalid @enderror"
-                                        id="arrivo" name="arrivo" value="{{ old('arrivo', $dataInizio) }}" required>
+                                        id="arrivo" name="arrivo" value="{{ old('arrivo', $dataInizio) }}"
+                                        min="{{ date('Y-m-d') }}" required>
                                     @error('arrivo') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
 
@@ -79,11 +70,9 @@
                                         successivo).</div>
                                 </div>
 
-                                {{-- SEZIONE 2: Dati Cliente --}}
                                 <div class="col-12 mt-4">
-                                    <h6 class="text-primary border-bottom pb-2 mb-3">
-                                        <i class="fas fa-user me-2"></i>Dati Cliente
-                                    </h6>
+                                    <h6 class="text-primary border-bottom pb-2 mb-3"><i
+                                            class="fas fa-user me-2"></i>Dati Cliente</h6>
                                 </div>
 
                                 <div class="col-md-6">
@@ -121,11 +110,9 @@
                                     @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
 
-                                {{-- SEZIONE 3: Pagamento e Note --}}
                                 <div class="col-12 mt-4">
-                                    <h6 class="text-primary border-bottom pb-2 mb-3">
-                                        <i class="fas fa-euro-sign me-2"></i>Pagamento & Note
-                                    </h6>
+                                    <h6 class="text-primary border-bottom pb-2 mb-3"><i
+                                            class="fas fa-euro-sign me-2"></i>Pagamento & Note</h6>
                                 </div>
 
                                 <div class="col-md-6">
@@ -145,32 +132,19 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="note" class="form-label">Note Aggiuntive</label>
-                                    <textarea class="form-control @error('note') is-invalid @enderror" id="note"
-                                        name="note" rows="2">{{ old('note') }}</textarea>
-                                    @error('note') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    <label for="note" class="form-label">Note</label>
+                                    <textarea class="form-control" id="note" name="note"
+                                        rows="2">{{ old('note') }}</textarea>
                                 </div>
                             </div>
 
-                            <div class="alert alert-info mt-3">
-                                <small>
-                                    <i class="bi bi-info-circle"></i>
-                                    I campi contrassegnati con
-                                    <span class="text-danger">*</span> sono obbligatori
-                                </small>
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-                                <a href="{{ route('home') }}" class="btn btn-secondary">
-                                    <i class="fas fa-arrow-left"></i> Annulla
-                                </a>
-
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-check-circle"></i> Conferma Prenotazione
-                                </button>
+                            <div class="d-flex justify-content-between mt-4">
+                                <a href="{{ route('home') }}" class="btn btn-secondary"><i
+                                        class="fas fa-arrow-left"></i> Annulla</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i>
+                                    Conferma Prenotazione</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.gemmadelmare.com/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
     <image:image>
@@ -16,15 +16,8 @@
   </url>
 
   <url>
-    <loc>https://www.gemmadelmare.com/index.html</loc>
-    <lastmod>2025-08-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-
-  <url>
     <loc>https://www.gemmadelmare.com/camere.html</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
     <image:image>
@@ -37,14 +30,14 @@
 
   <url>
     <loc>https://www.gemmadelmare.com/contatti.html</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
     <loc>https://www.gemmadelmare.com/gallery.html</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
     <image:image>
@@ -60,28 +53,28 @@
 
   <url>
     <loc>https://www.gemmadelmare.com/hotel.html</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
     <loc>https://www.gemmadelmare.com/ristorante.html</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
     <loc>https://www.gemmadelmare.com/servizi.html</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
     <loc>https://www.gemmadelmare.com/tariffe.html</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>

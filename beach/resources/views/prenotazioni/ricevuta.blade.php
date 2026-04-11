@@ -23,7 +23,6 @@
             border-radius: 8px;
             padding: 40px;
             border-top: 5px solid #00A3C4;
-            /* Using brand color */
         }
 
         .header-section {
@@ -186,7 +185,6 @@
 </head>
 
 <body>
-
     <button onclick="window.print()" class="btn btn-primary btn-print">
         <i class="fas fa-print me-2"></i> STAMPA RICEVUTA
     </button>
@@ -203,8 +201,7 @@
             <div class="receipt-meta">
                 <div class="receipt-title">RICEVUTA</div>
                 <div class="receipt-number">#{{ $codiceRicevuta }}</div>
-                <div style="margin-top: 5px; color: #666; font-size: 14px;">Data:
-                    {{ \Carbon\Carbon::now()->format('d/m/Y') }}</div>
+                <div style="margin-top: 5px; color: #666; font-size: 14px;">Data: {{ now()->format('d/m/Y') }}</div>
             </div>
         </div>
 
@@ -214,9 +211,9 @@
                     <div class="client-label">Intestato a</div>
                     <div class="client-name">{{ $prenotazione->nome }} {{ $prenotazione->cognome }}</div>
                     @if($prenotazione->email)
-                    <div class="small text-muted">{{ $prenotazione->email }}</div>@endif
+                    <div class="small text-muted">{{ $prenotazione->email }}</div> @endif
                     @if($prenotazione->telefono)
-                    <div class="small text-muted">{{ $prenotazione->telefono }}</div>@endif
+                    <div class="small text-muted">{{ $prenotazione->telefono }}</div> @endif
                     <div class="small text-muted mt-1">Soggiorno: Dal
                         {{ \Carbon\Carbon::parse($prenotazione->data_inizio)->format('d/m/Y') }} al
                         {{ \Carbon\Carbon::parse($prenotazione->data_fine)->format('d/m/Y') }}</div>
@@ -259,7 +256,6 @@
                     <span>TOTALE</span>
                     <span>€ {{ number_format($prenotazione->costo_totale, 2, ',', '.') }}</span>
                 </div>
-                <!-- Optional: Acconto / Saldo if stored -->
                 @if($prenotazione->acconto > 0)
                     <div class="total-row text-muted mt-2 pt-2 border-top">
                         <span>Acconto Versato</span>
@@ -278,7 +274,6 @@
             <p>Grazie per averci scelto!</p>
         </div>
     </div>
-
 </body>
 
 </html>

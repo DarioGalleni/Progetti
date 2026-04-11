@@ -1,0 +1,262 @@
+:root {
+    --bs-primary: #c68c58;
+    --bs-primary-rgb: 198, 140, 88;
+    --bs-secondary: #1a1a1a;
+    --bs-dark: #0f0f0f;
+    --bs-light: #f8f8f8;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--bs-secondary);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Typography Overrides */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-playfair {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Button Customization */
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--bs-primary);
+    --bs-btn-border-color: var(--bs-primary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #b67d4b;
+    --bs-btn-hover-border-color: #b67d4b;
+    --bs-btn-focus-shadow-rgb: 198, 140, 88;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #9e6c40;
+    --bs-btn-active-border-color: #9e6c40;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--bs-primary);
+    --bs-btn-border-color: var(--bs-primary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--bs-primary);
+    --bs-btn-hover-border-color: var(--bs-primary);
+    --bs-btn-focus-shadow-rgb: 198, 140, 88;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--bs-primary);
+    --bs-btn-active-border-color: var(--bs-primary);
+}
+
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+    color: #fff !important;
+}
+
+.border-primary {
+    border-color: var(--bs-primary) !important;
+}
+
+.hover-primary:hover {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+    color: #fff !important;
+}
+
+/* Image object fits setup */
+.object-fit-cover {
+    object-fit: cover !important;
+}
+
+/* Parallax Utilities */
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+}
+
+.parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.z-index-2 {
+    z-index: 2;
+}
+
+.shadow-text {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Custom Overlays for Cards/Images */
+.menu-img-wrapper {
+    overflow: hidden;
+    height: 220px;
+}
+
+.menu-img-wrapper img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.menu-card:hover .menu-img-wrapper img {
+    transform: scale(1.1);
+}
+
+/* Custom Hover Up Animation for Cards/Buttons */
+.hover-up {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-up:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 .5rem 2rem rgba(0, 0, 0, .15) !important;
+}
+
+/* Gallery Hover */
+.gallery-img {
+    height: 350px;
+}
+
+.gallery-img img {
+    transition: transform 0.6s ease;
+    cursor: pointer;
+}
+
+.gallery-img:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.gallery-img:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* Navbar Custom Overload */
+.navbar {
+    background-color: transparent;
+    padding: 1.5rem 0;
+    box-shadow: none;
+    transition: all 0.4s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(26, 26, 26, 0.95) !important;
+    padding: 0.8rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: var(--bs-primary) !important;
+}
+
+.navbar-toggler {
+    transition: background-color 0.3s ease;
+}
+
+.navbar-toggler:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Scroll Animations Fade-up */
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.fade-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 {
+    transition-delay: 0.15s;
+}
+
+.delay-2 {
+    transition-delay: 0.3s;
+}
+
+.delay-3 {
+    transition-delay: 0.45s;
+}
+
+/* Customizing Bootstrap Utilities */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Responsiveness adjustments for mobile */
+@media (max-width: 991.98px) {
+    .navbar {
+        background-color: rgba(26, 26, 26, 0.95) !important;
+        padding: 1rem 0;
+    }
+
+    .navbar-collapse {
+        background-color: rgba(26, 26, 26, 0.98);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+    .fade-up {
+        transform: translateY(20px);
+    }
+
+    .gallery-img {
+        height: 250px;
+    }
+}
+
+/* Remove Arrows/Spinners from Number Inputs */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
