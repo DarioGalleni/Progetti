@@ -44,4 +44,8 @@ ErrorDocument 404 /404.html
     Header set X-XSS-Protection "1; mode=block"
     # Referrer Policy for SEO/Privacy
     Header set Referrer-Policy "no-referrer-when-downgrade"
+
+    # 4. SEO - Noindex for Demo, Admin and System areas
+    SetEnvIf Request_URI "^/(admin|private|\.git|node_modules|gest|beach|trav|gemma|prova)" NOINDEX_AREA
+    Header set X-Robots-Tag "noindex, nofollow" env=NOINDEX_AREA
 </IfModule>
