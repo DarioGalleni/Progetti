@@ -10,20 +10,33 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('q');
+
+        $selectRaw = 'MIN(id) as id, MAX(group_id) as group_id, MAX(first_name) as first_name, MAX(last_name) as last_name, MAX(email) as email, MAX(phone) as phone, MAX(arrival_date) as arrival_date, MAX(departure_date) as departure_date, SUM(pax) as pax, MAX(treatment) as treatment, MAX(group_name) as group_name, MAX(room_number) as room_number';
+
         $customers = match (true) {
-            filled($query) => Customer::where('first_name', 'like', "%{$query}%")
-                ->orWhere('last_name', 'like', "%{$query}%")
-                ->orWhereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%{$query}%"])
-                ->orWhereRaw("CONCAT(last_name, ' ', first_name) LIKE ?", ["%{$query}%"])
-                ->orWhere('email', 'like', "%{$query}%")
-                ->orWhere('phone', 'like', "%{$query}%")
-                ->latest()
+            filled($query) => Customer::selectRaw($selectRaw)
+                ->where(function ($q) use ($query) {
+                    $q->where('first_name', 'like', "%{$query}%")
+                        ->orWhere('last_name', 'like', "%{$query}%")
+                        ->orWhereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%{$query}%"])
+                        ->orWhereRaw("CONCAT(last_name, ' ', first_name) LIKE ?", ["%{$query}%"])
+                        ->orWhere('email', 'like', "%{$query}%")
+                        ->orWhere('phone', 'like', "%{$query}%")
+                        ->orWhere('group_name', 'like', "%{$query}%");
+                })
+                ->groupByRaw('COALESCE(group_id, id)')
+                ->orderBy('arrival_date', 'asc')
                 ->get(),
             default => collect([])
         };
 
         if (blank($query)) {
-            $customers = Customer::latest()->paginate(20);
+            $today = now()->toDateString();
+            $customers = Customer::selectRaw($selectRaw)
+                ->groupByRaw('COALESCE(group_id, id)')
+                ->orderByRaw('CASE WHEN MAX(arrival_date) < ? THEN 1 ELSE 0 END ASC', [$today])
+                ->orderBy('arrival_date', 'asc')
+                ->paginate(50);
         }
 
         return view('customers.index', compact('customers', 'query'));
@@ -71,7 +84,7 @@ class CustomerController extends Controller
 
         Customer::create(array_merge($request->all(), $validated));
 
-        return redirect('/')->with('success', 'Prenotazione creata con successo.');
+        return back()->with('success', 'Prenotazione creata con successo.');
     }
 
     public function show(Customer $customer)
@@ -123,7 +136,7 @@ class CustomerController extends Controller
 
         $customer->update(array_merge($request->all(), $validated));
 
-        return redirect()->route('customers.show', $customer)->with('success', 'Prenotazione aggiornata con successo.');
+        return back()->with('success', 'Prenotazione aggiornata con successo.');
     }
 
     public function destroy(Customer $customer)

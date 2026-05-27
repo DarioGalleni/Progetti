@@ -8,6 +8,30 @@
                     <h4 class="fw-bold text-primary mb-0">Modifica Prenotazione</h4>
                 </div>
                 <div class="card-body">
+                    {{-- Messaggio di Successo --}}
+                    @if(session('success'))
+                        <div class="alert alert-success mb-4 text-center">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    {{-- Errori di validazione --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger mb-4">
+                            <ul class="mb-0 ps-3">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger mb-4 text-center">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     <form action="{{ route('customers.update', $customer) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -81,6 +105,8 @@
                                         BB</option>
                                     <option value="HB" {{ old('treatment', $customer->treatment) == 'HB' ? 'selected' : '' }}>
                                         HB</option>
+                                    <option value="FB" {{ old('treatment', $customer->treatment) == 'FB' ? 'selected' : '' }}>
+                                        FB</option>
                                 </select>
                             </div>
                         </div>
@@ -138,6 +164,16 @@
                             <label for="notes" class="form-label">Note Aggiuntive</label>
                             <textarea class="form-control" id="notes" name="notes"
                                 rows="3">{{ old('notes', $customer->notes) }}</textarea>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="registrato" class="form-label">Registrato</label>
+                                <select class="form-select" id="registrato" name="registrato">
+                                    <option value="0" {{ old('registrato', $customer->registrato ?? '0') == '0' ? 'selected' : '' }}>No</option>
+                                    <option value="1" {{ old('registrato', $customer->registrato) == '1' ? 'selected' : '' }}>Sì</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="d-grid gap-2">

@@ -6,6 +6,13 @@
                     <h4 class="fw-bold text-primary mb-0 text-center">Aggiungi Gruppo</h4>
                 </div>
                 <div class="card-body">
+                    {{-- Messaggio di Successo --}}
+                    @if(session('success'))
+                        <div class="alert alert-success mb-4 text-center">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     {{-- Errori di validazione --}}
                     @if ($errors->any())
                         <div class="alert alert-danger mb-4">
@@ -41,6 +48,18 @@
                                     value="{{ old('departure_date') }}" min="{{ date('Y-m-d', strtotime('+1 day')) }}"
                                     required>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="pax" class="form-label">Numero Pax</label>
+                            <input type="number" class="form-control" id="pax" name="pax"
+                                value="{{ old('pax') }}" min="0">
+                        </div>
+
+                        {{-- Note --}}
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Note (Opzionale)</label>
+                            <textarea class="form-control" id="notes" name="notes" rows="2">{{ old('notes') }}</textarea>
                         </div>
 
                         {{-- Selezione Camere --}}

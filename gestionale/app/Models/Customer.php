@@ -27,6 +27,7 @@ class Customer extends Model
         'group_id',
         'group_name',
         'bed_type',
+        'registrato',
     ];
 
     public function expenses()

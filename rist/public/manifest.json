@@ -1,0 +1,55 @@
+{
+    "name": "Gusto&Trattoria",
+    "short_name": "Gusto&Trattoria",
+    "description": "Un'esperienza culinaria che celebra la tradizione italiana",
+    "id": "/rist/",
+    "start_url": "/rist/",
+    "scope": "/rist/",
+    "display": "standalone",
+    "background_color": "#8c5525",
+    "theme_color": "#8c5525",
+    "orientation": "any",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "/rist/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/rist/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/rist/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/rist/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/rist/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Desktop Preview"
+        },
+        {
+            "src": "/rist/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Mobile Preview"
+        }
+    ]
+}

@@ -31,6 +31,8 @@ class GroupController extends Controller
             'departure_date' => 'required|date|after:arrival_date',
             'rooms' => 'required|array|min:1',
             'rooms.*' => 'required',
+            'pax' => 'nullable|integer|min:0',
+            'notes' => 'nullable|string'
         ]);
 
         $groupId = (string) Str::uuid();
@@ -52,9 +54,16 @@ class GroupController extends Controller
                 return back()->withInput()->withErrors(['rooms' => 'Una o più camere selezionate sono occupate nel periodo scelto.']);
             }
 
+            $totalPax = $request->pax ?? 0;
+            $numRooms = count($request->rooms);
+            $basePax = intdiv($totalPax, $numRooms);
+            $remainder = $totalPax % $numRooms;
+
             // Evita N backup consecutivi sospendendo gli eventi durante il loop
-            Customer::withoutEvents(function () use ($request, $groupName, $groupId) {
-                foreach ($request->rooms as $roomNumber) {
+            Customer::withoutEvents(function () use ($request, $groupName, $groupId, $basePax, $remainder) {
+                foreach ($request->rooms as $index => $roomNumber) {
+                    $paxForThisRoom = $basePax + ($index < $remainder ? 1 : 0);
+
                     Customer::create([
                         'first_name' => $groupName,
                         'last_name' => '(Gruppo)',
@@ -64,23 +73,22 @@ class GroupController extends Controller
                         'arrival_date' => $request->arrival_date,
                         'departure_date' => $request->departure_date,
                         'treatment' => 'BB',
-                        'pax' => 2,
+                        'pax' => $paxForThisRoom,
                         'under_12_pax' => 0,
                         'total_price' => 0,
                         'deposit' => 0,
                         'payment_method' => 'cash',
-                        'notes' => 'Gruppo: ' . $groupName,
+                        'notes' => $request->notes,
                         'group_id' => $groupId,
                         'group_name' => $groupName,
                     ]);
                 }
             });
 
-            // Backup singolo alla fine dell'operazione di gruppo
             $this->backupService->createBackup('autosave_backup.sql');
 
             DB::commit();
-            return redirect()->route('welcome')->with('success', 'Gruppo creato con successo!');
+            return back()->with('success', 'Gruppo creato con successo!');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -113,6 +121,8 @@ class GroupController extends Controller
             'description' => 'required|string',
             'arrival_date' => 'required|date',
             'departure_date' => 'required|date|after:arrival_date',
+            'pax' => 'nullable|integer|min:0',
+            'notes' => 'nullable|string'
         ]);
 
         $groupId = $leader->group_id;
@@ -133,12 +143,26 @@ class GroupController extends Controller
             return back()->withInput()->withErrors(['arrival_date' => 'Le date scelte confliggono con altre prenotazioni per le camere del gruppo.']);
         }
 
-        Customer::where('group_id', $groupId)->update([
-            'group_name' => $request->description,
-            'first_name' => $request->description,
-            'arrival_date' => $request->arrival_date,
-            'departure_date' => $request->departure_date,
-        ]);
+        $allCustomersInGroup = Customer::where('group_id', $groupId)->get();
+        $totalPax = $request->pax ?? 0;
+        $numRooms = $allCustomersInGroup->count();
+        $basePax = $numRooms > 0 ? intdiv($totalPax, $numRooms) : 0;
+        $remainder = $numRooms > 0 ? $totalPax % $numRooms : 0;
+
+        $index = 0;
+        /** @var \App\Models\Customer $cust */
+        foreach ($allCustomersInGroup as $cust) {
+            $paxForThisRoom = $basePax + ($index < $remainder ? 1 : 0);
+            $cust->update([
+                'group_name' => $request->description,
+                'first_name' => $request->description,
+                'arrival_date' => $request->arrival_date,
+                'departure_date' => $request->departure_date,
+                'pax' => $paxForThisRoom,
+                'notes' => $request->notes,
+            ]);
+            $index++;
+        }
 
         // Backup manuale poiché update() massivo non triggera gli observer
         try {

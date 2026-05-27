@@ -42,15 +42,32 @@
                             @foreach($customers as $customer)
                                 <tr>
                                     <td class="ps-4">
-                                        <div class="fw-bold">{{ $customer->first_name }} {{ $customer->last_name }}</div>
-                                        <div class="small text-muted">{{ $customer->pax }} pax - {{ $customer->treatment }}</div>
+                                        <div class="fw-bold">
+                                            @if($customer->group_id && $customer->group_name)
+                                                {{ $customer->group_name }} ({{ $customer->first_name }})
+                                            @else
+                                                {{ $customer->first_name }} {{ $customer->last_name }}
+                                            @endif
+                                        </div>
+                                        <div class="small text-muted">
+                                            {{ $customer->pax }} pax - {{ $customer->treatment }}
+                                            @if($customer->group_id)
+                                                <span class="badge" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">Gruppo</span>
+                                            @endif
+                                        </div>
                                     </td>
                                     <td>
-                                        <span class="badge bg-secondary">{{ $customer->room_number }}</span>
+                                        @if(!$customer->group_id)
+                                            <span class="badge bg-secondary">{{ $customer->room_number }}</span>
+                                        @else
+                                            <span class="text-muted small">-</span>
+                                        @endif
                                     </td>
                                     <td>
-                                        <div class="small">It: {{ \Carbon\Carbon::parse($customer->arrival_date)->format('d/m/Y') }}</div>
-                                        <div class="small">Out: {{ \Carbon\Carbon::parse($customer->departure_date)->format('d/m/Y') }}</div>
+                                        <div class="small">It:
+                                            {{ \Carbon\Carbon::parse($customer->arrival_date)->format('d/m/Y') }}</div>
+                                        <div class="small">Out:
+                                            {{ \Carbon\Carbon::parse($customer->departure_date)->format('d/m/Y') }}</div>
                                     </td>
                                     <td>
                                         @if($customer->phone)
@@ -80,10 +97,17 @@
                 </div>
             </div>
         </div>
-        
+
         @if(method_exists($customers, 'links'))
-            <div class="d-flex justify-content-center mt-4">
-                {{ $customers->links() }}
+            <div class="mt-4">
+                {{-- Desktop View --}}
+                <div class="d-none d-md-flex justify-content-center">
+                    {{ $customers->links() }}
+                </div>
+                {{-- Mobile View --}}
+                <div class="d-flex d-md-none justify-content-center">
+                    {{ $customers->links('pagination::simple-bootstrap-5') }}
+                </div>
             </div>
         @endif
     @endif

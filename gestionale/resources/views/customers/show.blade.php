@@ -14,14 +14,16 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @if($customer->group_id)
-                        <div class="alert alert-info d-flex justify-content-between align-items-center">
-                            <div>
-                                <i class="bi bi-people-fill me-2"></i>
-                                <strong>Prenotazione di Gruppo:</strong> <a
-                                    href="{{ route('groups.show', $customer->group_id) }}"
-                                    class="fw-bold text-decoration-none">{{ $customer->group_name }}</a>
-                            </div>
+                    {{-- Messaggio di Successo --}}
+                    @if(session('success'))
+                        <div class="alert alert-success mb-4 text-center">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger mb-4 text-center">
+                            {{ session('error') }}
                         </div>
                     @endif
 
@@ -33,28 +35,49 @@
                                     <div class="card-body p-4">
                                         <h5 class="text-muted mb-4 text-center">Dettagli Camera nel Gruppo</h5>
                                         
-                                        <div class="row text-center">
-                                            <div class="col-md-4 mb-3 mb-md-0">
-                                                <div class="p-3 bg-white rounded shadow-sm">
+                                        <div class="row text-center g-3 row-cols-2 row-cols-md-5">
+                                            <div class="col">
+                                                <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-center align-items-center">
+                                                    <small class="text-uppercase fw-bold text-muted mb-2" style="font-size: 0.70rem;">hai selezionato la camera</small>
                                                     <i class="bi bi-door-closed text-primary" style="font-size: 2rem;"></i>
-                                                    <h3 class="mt-2 mb-0">{{ $customer->room_number }}</h3>
-                                                    <small class="text-muted">{{ config('rooms')[$customer->room_number] ?? '' }}</small>
+                                                    <h4 class="mt-2 mb-0 fw-bold">{{ $customer->room_number }}</h4>
+                                                    <small class="text-muted mt-1">{{ config('rooms')[$customer->room_number] ?? 'Nessuna' }}</small>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="col-md-4 mb-3 mb-md-0">
-                                                <div class="p-3 bg-white rounded shadow-sm">
+
+                                            <div class="col">
+                                                <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-center align-items-center">
+                                                    <small class="text-uppercase fw-bold text-muted mb-2" style="font-size: 0.70rem;">Totale</small>
+                                                    <i class="bi bi-tags-fill text-primary" style="font-size: 2rem;"></i>
+                                                    <h4 class="mt-2 mb-0 fw-bold">{{ \App\Models\Customer::where('group_id', $customer->group_id)->count() }}</h4>
+                                                    <small class="text-muted mt-1">Camere Assegnate al Gruppo</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="col">
+                                                <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-center align-items-center">
+                                                    <small class="text-uppercase fw-bold text-muted mb-2" style="font-size: 0.70rem;">Pax Totali</small>
+                                                    <i class="bi bi-person-lines-fill text-primary" style="font-size: 2rem;"></i>
+                                                    <h4 class="mt-2 mb-0 fw-bold">{{ \App\Models\Customer::where('group_id', $customer->group_id)->sum('pax') }}</h4>
+                                                    <small class="text-muted mt-1">Ospiti nel Gruppo</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="col">
+                                                <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-center align-items-center">
+                                                    <small class="text-uppercase fw-bold text-muted mb-2" style="font-size: 0.70rem;">Check-in</small>
                                                     <i class="bi bi-calendar-check text-success" style="font-size: 2rem;"></i>
-                                                    <h5 class="mt-2 mb-0">{{ \Carbon\Carbon::parse($customer->arrival_date)->format('d/m/Y') }}</h5>
-                                                    <small class="text-muted">Check-in</small>
+                                                    <h4 class="mt-2 mb-0 fw-bold">{{ \Carbon\Carbon::parse($customer->arrival_date)->format('d/m/Y') }}</h4>
+                                                    <small class="text-muted mt-1">Data Arrivo</small>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="col-md-4">
-                                                <div class="p-3 bg-white rounded shadow-sm">
+
+                                            <div class="col">
+                                                <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-center align-items-center">
+                                                    <small class="text-uppercase fw-bold text-muted mb-2" style="font-size: 0.70rem;">Check-out</small>
                                                     <i class="bi bi-calendar-x text-danger" style="font-size: 2rem;"></i>
-                                                    <h5 class="mt-2 mb-0">{{ \Carbon\Carbon::parse($customer->departure_date)->format('d/m/Y') }}</h5>
-                                                    <small class="text-muted">Check-out</small>
+                                                    <h4 class="mt-2 mb-0 fw-bold">{{ \Carbon\Carbon::parse($customer->departure_date)->format('d/m/Y') }}</h4>
+                                                    <small class="text-muted mt-1">Data Partenza</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -121,6 +144,15 @@
 
                                     <dt class="col-sm-4">Trattamento:</dt>
                                     <dd class="col-sm-8">{{ $customer->treatment }}</dd>
+
+                                    <dt class="col-sm-4">Registrato:</dt>
+                                    <dd class="col-sm-8">
+                                        @if($customer->registrato)
+                                            <span>Sì</span>
+                                        @else
+                                            <span>No</span>
+                                        @endif
+                                    </dd>
                                 </dl>
                             </div>
                         </div>
@@ -198,10 +230,10 @@
                         @endif
 
                         {{-- Modifica --}}
-                        <div class="col-md-6">
-                            <div class="card border-0 shadow-sm h-100">
+                        <div class="col-md-{{ $customer->group_id ? '12' : '6' }}">
+                            <div class="card {{ $customer->group_id ? 'border-warning' : 'border-0' }} shadow-sm h-100">
                                 <div class="card-body text-center p-4">
-                                    <h5 class="fw-bold mb-2">Modifica</h5>
+                                    <h5 class="fw-bold mb-2 {{ $customer->group_id ? 'text-warning' : '' }}">Modifica Prenotazione</h5>
                                     <p class="text-muted small mb-3">Modifica dati anagrafici, date, pax, ecc.</p>
 
                                     @if($customer->group_id)

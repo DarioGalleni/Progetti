@@ -8,7 +8,7 @@
         .dashboard-container {
             background-color: #000;
             min-height: 100vh;
-            padding-top: 120px;
+            padding-top: 150px;
             color: #fff;
         }
 
@@ -56,13 +56,6 @@
             color: #000;
         }
 
-        .date-navigator {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
         .date-input {
             background-color: #111;
             color: #fff;
@@ -97,22 +90,35 @@
             background-color: #000 !important;
             border-bottom: 1px solid #333;
         }
+        
+        .border-dashed {
+            border-style: dashed !important;
+        }
+
+        @media (max-width: 767.98px) {
+            .dashboard-container {
+                padding-top: 120px;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 
     <div class="dashboard-container pb-5">
         <div class="container">
             <!-- HEADER -->
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 gap-3">
-                <h2 class="fw-bold m-0" style="letter-spacing: 2px; text-transform: uppercase;">Dashboard Prenotazioni</h2>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 mb-md-5 gap-3 text-center text-md-start">
+                <h2 class="fw-bold m-0" style="letter-spacing: 2px; text-transform: uppercase;">Dashboard <span class="d-none d-md-inline">Prenotazioni</span></h2>
                 
-                <form action="{{ route('dashboard.toggle') }}" method="POST">
+                <form action="{{ route('dashboard.toggle') }}" method="POST" class="w-100 w-md-auto">
                     @csrf
                     @if($reservationsBlocked)
-                        <button type="submit" class="btn btn-outline-contrast rounded-0 px-4 py-2">
+                        <button type="submit" class="btn btn-outline-contrast rounded-0 px-4 py-2 w-100 w-md-auto">
                             <i data-lucide="unlock" class="me-2"></i> SBLOCCA PRENOTAZIONI
                         </button>
                     @else
-                        <button type="submit" class="btn btn-contrast rounded-0 px-4 py-2 text-danger">
+                        <button type="submit" class="btn btn-contrast rounded-0 px-4 py-2 text-danger w-100 w-md-auto">
                             <i data-lucide="lock" class="me-2"></i> BLOCCA PRENOTAZIONI
                         </button>
                     @endif
@@ -123,52 +129,59 @@
             @if(session('success'))
                 <div class="alert bg-success text-white border-0 rounded-0 mb-4 fw-bold" role="alert">
                     <i data-lucide="check-circle" class="me-2"></i> {{ session('success') }}
-                    <button type="button" class="btn-close btn-close-white float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white float-end" data-bs-dismiss="alert" aria-label="Chiudi"></button>
                 </div>
             @endif
 
             @if($reservationsBlocked)
-                <div class="alert bg-warning text-dark border-0 rounded-0 mb-4 fw-bold shadow-lg">
-                    <i data-lucide="alert-triangle" class="me-2"></i> LE PRENOTAZIONI SONO ATTUALMENTE BLOCCATE.
+                <div class="alert bg-warning text-dark border-0 rounded-0 mb-4 fw-bold shadow-lg d-flex align-items-center">
+                    <i data-lucide="alert-triangle" class="me-2 flex-shrink-0"></i> 
+                    <span class="small md-fs-6">LE PRENOTAZIONI SONO ATTUALMENTE BLOCCATE.</span>
                 </div>
             @else
-                <div class="alert bg-success text-white border-0 rounded-0 mb-4 fw-bold shadow-lg">
-                    <i data-lucide="check-circle" class="me-2"></i> LE PRENOTAZIONI SONO ATTUALMENTE ATTIVE.
+                <div class="alert bg-success text-white border-0 rounded-0 mb-4 fw-bold shadow-lg d-flex align-items-center">
+                    <i data-lucide="check-circle" class="me-2 flex-shrink-0"></i> 
+                    <span class="small md-fs-6">LE PRENOTAZIONI SONO ATTUALMENTE ATTIVE.</span>
                 </div>
             @endif
 
             <!-- CALENDARIO / NAVIGATORE DATE -->
-            <div class="bg-dark p-4 mb-5 d-flex flex-column flex-md-row justify-content-center align-items-center rounded-3 shadow-lg" style="border: 1px solid #333;">
-                <form action="{{ route('dashboard') }}" method="GET" class="date-navigator w-100 justify-content-center">
+            <div class="bg-dark p-3 p-md-4 mb-4 mb-md-5 rounded-3 shadow-lg" style="border: 1px solid #333;">
+                <form action="{{ route('dashboard') }}" method="GET" class="d-flex flex-wrap flex-md-nowrap align-items-center justify-content-center gap-2 gap-md-3">
                     @php
                         $currentDate = \Carbon\Carbon::parse($date);
                         $prevDate = $currentDate->copy()->subDay()->toDateString();
                         $nextDate = $currentDate->copy()->addDay()->toDateString();
                     @endphp
                     
-                    <a href="{{ route('dashboard', ['date' => $prevDate]) }}" class="btn btn-outline-contrast rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                    <a href="{{ route('dashboard', ['date' => $prevDate]) }}" class="btn btn-outline-contrast rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 45px; height: 45px;">
                         <i data-lucide="chevron-left"></i>
                     </a>
                     
-                    <div class="fw-bold mx-2 mx-md-4">
-                        <input type="date" name="date" class="date-input fw-bold shadow-sm" value="{{ $date }}" onchange="this.form.submit()">
+                    <div class="fw-bold flex-grow-1 flex-md-grow-0 text-center">
+                        <input type="date" name="date" class="date-input w-100 fw-bold shadow-sm" style="max-width: 250px;" value="{{ $date }}" onchange="this.form.submit()">
                     </div>
                     
-                    <a href="{{ route('dashboard', ['date' => $nextDate]) }}" class="btn btn-outline-contrast rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                    <a href="{{ route('dashboard', ['date' => $nextDate]) }}" class="btn btn-outline-contrast rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 45px; height: 45px;">
                         <i data-lucide="chevron-right"></i>
                     </a>
                     
-                    <a href="{{ route('dashboard') }}" class="btn btn-link text-white ms-md-4 text-decoration-none border-start border-secondary ps-4 fw-bold">OGGI</a>
+                    <a href="{{ route('dashboard') }}" class="btn btn-link text-white text-decoration-none border-secondary ps-md-3 border-start-md fw-bold w-100 w-md-auto mt-2 mt-md-0 text-center d-md-block d-none">OGGI</a>
                 </form>
+                <div class="text-center mt-3 d-block d-md-none border-top border-secondary pt-2">
+                    <a href="{{ route('dashboard') }}" class="btn btn-link text-white text-decoration-none fw-bold small"><i data-lucide="calendar" class="me-2 d-inline" style="width: 14px;"></i> TORNA A OGGI</a>
+                </div>
             </div>
 
             <!-- TABELLE PRANZO / CENA -->
-            <div class="row g-5">
+            <div class="row g-4 g-md-5">
                 
                 <!-- PRANZO -->
                 <div class="col-12 col-xl-6">
                     <h3 class="section-title text-white">Pranzo <span class="badge bg-light text-dark ms-2 rounded-pill">{{ $pranzo->count() }}</span></h3>
-                    <div class="table-responsive rounded-3 overflow-hidden" style="border: 1px solid #333;">
+                    
+                    <!-- Desktop Table View -->
+                    <div class="table-responsive rounded-3 overflow-hidden d-none d-md-block" style="border: 1px solid #333;">
                         <table class="table table-dark-custom mb-0">
                             <thead>
                                 <tr>
@@ -183,7 +196,7 @@
                                     <tr>
                                         <td class="fw-bold fs-5 px-4 text-warning">{{ \Carbon\Carbon::parse($res->time)->format('H:i') }}</td>
                                         <td>
-                                            <div class="fw-bold text-dark fs-5">{{ $res->name }}</div>
+                                            <div class="fw-bold text-white fs-5">{{ $res->name }}</div>
                                             <a href="tel:{{ $res->phone }}" class="text-muted text-decoration-none small"><i data-lucide="phone" style="width: 12px; height: 12px;" class="me-1"></i>{{ $res->phone }}</a>
                                         </td>
                                         <td class="text-center">
@@ -193,7 +206,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="text-center py-5 text-white-50">
+                                        <td colspan="4" class="text-center py-5 text-white-50 border-0">
                                             <i data-lucide="sun" style="width: 40px; height: 40px;" class="mb-3 opacity-25"></i>
                                             <p class="mb-0">Nessuna prenotazione per il pranzo in questa data.</p>
                                         </td>
@@ -202,12 +215,45 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- Mobile Cards View -->
+                    <div class="d-block d-md-none">
+                        @forelse($pranzo as $res)
+                            <div class="card bg-dark border-secondary mb-3 shadow-sm rounded-3">
+                                <div class="card-body p-3">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="fw-bold text-warning fs-3">{{ \Carbon\Carbon::parse($res->time)->format('H:i') }}</div>
+                                        <span class="status-badge"><i data-lucide="users" style="width: 14px; height: 14px;" class="me-1 d-inline"></i>{{ $res->guests }}</span>
+                                    </div>
+                                    <div class="fw-bold text-white fs-5 mb-1">{{ $res->name }}</div>
+                                    <a href="tel:{{ $res->phone }}" class="d-inline-flex align-items-center text-muted text-decoration-none mb-2 mt-1">
+                                        <div class="bg-secondary bg-opacity-25 rounded-circle p-1 me-2 d-flex align-items-center justify-content-center">
+                                            <i data-lucide="phone" style="width: 14px; height: 14px;"></i>
+                                        </div>
+                                        {{ $res->phone }}
+                                    </a>
+                                    @if($res->message)
+                                        <div class="mt-2 pt-2 border-top border-secondary text-white-50 small">
+                                            <i data-lucide="file-text" style="width: 12px; height: 12px;" class="me-1 d-inline"></i> {{ $res->message }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @empty
+                            <div class="text-center py-4 text-white-50 border border-secondary rounded-3 border-dashed">
+                                <i data-lucide="sun" style="width: 30px; height: 30px;" class="mb-2 opacity-25"></i>
+                                <p class="mb-0 small">Nessuna prenotazione per il pranzo.</p>
+                            </div>
+                        @endforelse
+                    </div>
                 </div>
 
                 <!-- CENA -->
                 <div class="col-12 col-xl-6">
                     <h3 class="section-title text-white">Cena <span class="badge bg-light text-dark ms-2 rounded-pill">{{ $cena->count() }}</span></h3>
-                    <div class="table-responsive rounded-3 overflow-hidden" style="border: 1px solid #333;">
+                    
+                    <!-- Desktop Table View -->
+                    <div class="table-responsive rounded-3 overflow-hidden d-none d-md-block" style="border: 1px solid #333;">
                         <table class="table table-dark-custom mb-0">
                             <thead>
                                 <tr>
@@ -222,7 +268,7 @@
                                     <tr>
                                         <td class="fw-bold fs-5 px-4 text-info">{{ \Carbon\Carbon::parse($res->time)->format('H:i') }}</td>
                                         <td>
-                                            <div class="fw-bold text-dark fs-5">{{ $res->name }}</div>
+                                            <div class="fw-bold text-white fs-5">{{ $res->name }}</div>
                                             <a href="tel:{{ $res->phone }}" class="text-muted text-decoration-none small"><i data-lucide="phone" style="width: 12px; height: 12px;" class="me-1"></i>{{ $res->phone }}</a>
                                         </td>
                                         <td class="text-center">
@@ -232,7 +278,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="text-center py-5 text-white-50">
+                                        <td colspan="4" class="text-center py-5 text-white-50 border-0">
                                             <i data-lucide="moon" style="width: 40px; height: 40px;" class="mb-3 opacity-25"></i>
                                             <p class="mb-0">Nessuna prenotazione per la cena in questa data.</p>
                                         </td>
@@ -240,6 +286,37 @@
                                 @endforelse
                             </tbody>
                         </table>
+                    </div>
+
+                    <!-- Mobile Cards View -->
+                    <div class="d-block d-md-none">
+                        @forelse($cena as $res)
+                            <div class="card bg-dark border-secondary mb-3 shadow-sm rounded-3">
+                                <div class="card-body p-3">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="fw-bold text-info fs-3">{{ \Carbon\Carbon::parse($res->time)->format('H:i') }}</div>
+                                        <span class="status-badge"><i data-lucide="users" style="width: 14px; height: 14px;" class="me-1 d-inline"></i>{{ $res->guests }}</span>
+                                    </div>
+                                    <div class="fw-bold text-white fs-5 mb-1">{{ $res->name }}</div>
+                                    <a href="tel:{{ $res->phone }}" class="d-inline-flex align-items-center text-muted text-decoration-none mb-2 mt-1">
+                                        <div class="bg-secondary bg-opacity-25 rounded-circle p-1 me-2 d-flex align-items-center justify-content-center">
+                                            <i data-lucide="phone" style="width: 14px; height: 14px;"></i>
+                                        </div>
+                                        {{ $res->phone }}
+                                    </a>
+                                    @if($res->message)
+                                        <div class="mt-2 pt-2 border-top border-secondary text-white-50 small">
+                                            <i data-lucide="file-text" style="width: 12px; height: 12px;" class="me-1 d-inline"></i> {{ $res->message }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @empty
+                            <div class="text-center py-4 text-white-50 border border-secondary rounded-3 border-dashed">
+                                <i data-lucide="moon" style="width: 30px; height: 30px;" class="mb-2 opacity-25"></i>
+                                <p class="mb-0 small">Nessuna prenotazione per la cena.</p>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
 

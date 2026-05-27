@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    @php
+        $isOnlineProd = str_contains(request()->url(), '/gest');
+        $manifestExtrasPath = $isOnlineProd ? '/gest/manifest-extras.json' : asset('manifest-extras.json');
+        $manifestMainPath = $isOnlineProd ? '/gest/manifest.json' : asset('manifest.json');
+    @endphp
+
     @if(request()->is('*mobile/extras*'))
-        <link rel="manifest" href="{{ asset('manifest-extras.json') }}">
+        <link rel="manifest" href="{{ $manifestExtrasPath }}">
     @else
-        <link rel="manifest" href="{{ asset('manifest.json') }}">
+        <link rel="manifest" href="{{ $manifestMainPath }}">
     @endif
 
     <meta name="theme-color" content="#336633">
@@ -33,19 +39,6 @@
     @endunless
 
     <div class="container-fluid">
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-
         {{ $slot ?? '' }}
         @yield('content')
     </div>

@@ -17,9 +17,6 @@
             class="btn btn-primary d-none d-md-inline-block">
                 <i class="bi bi-printer me-2"></i>Stampa
             </a>
-            <button onclick="window.print()" class="btn btn-primarye">
-                <i class="bi bi-printer"></i>
-            </button>
         </div>
     </div>
 

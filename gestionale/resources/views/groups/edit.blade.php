@@ -9,6 +9,17 @@
                         </h4>
                     </div>
                     <div class="card-body p-4">
+                        @if(session('success'))
+                            <div class="alert alert-success mb-4 text-center">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-danger mb-4 text-center">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         @if ($errors->any())
                             <div class="alert alert-danger shadow-sm border-0 mb-4 rounded-3">
                                 <ul class="mb-0 ps-3">
@@ -50,6 +61,20 @@
                                         name="departure_date"
                                         value="{{ old('departure_date', $customer->departure_date) }}" required>
                                 </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="pax" class="form-label fw-bold text-secondary">Numero Pax Totale Gruppo
+                                    (Opzionale)</label>
+                                <input type="number" class="form-control form-control-lg shadow-sm" id="pax" name="pax"
+                                    value="{{ old('pax', $siblings->sum('pax')) }}" placeholder="Es. 15" min="0">
+                            </div>
+
+                            {{-- Note --}}
+                            <div class="mb-4">
+                                <label for="notes" class="form-label fw-bold text-secondary">Note (Opzionale)</label>
+                                <textarea class="form-control form-control-lg shadow-sm" id="notes" name="notes"
+                                    rows="2">{{ old('notes', $customer->notes) }}</textarea>
                             </div>
 
                             <div class="mb-3">
