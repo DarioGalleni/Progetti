@@ -25,7 +25,7 @@
                             </ul>
                         </div>
                     @endif
-
+                    
                     @if(session('error'))
                         <div class="alert alert-danger mb-4 text-center">
                             {{ session('error') }}
@@ -85,24 +85,24 @@
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <label for="pax" class="form-label">Persone</label>
+                                <label for="pax" class="form-label">Totale persone</label>
                                 <input type="number" class="form-control" id="pax" name="pax" value="{{ old('pax', 2) }}"
                                     min="1">
                             </div>
                             <div class="col-md-2">
-                                <label for="under_12_pax" class="form-label">Minori 12</label>
+                                <label for="under_12_pax" class="form-label">Di cui minori 12</label>
                                 <input type="number" class="form-control" id="under_12_pax" name="under_12_pax"
                                     value="{{ old('under_12_pax') }}" min="0" placeholder="0">
                             </div>
                             <div class="col-md-2">
                                 <label for="treatment" class="form-label">Trattamento</label>
                                 <select class="form-select" id="treatment" name="treatment">
-                                    <option value="BB" {{ old('treatment') == 'BB' ? 'selected' : '' }}>BB</option>
-                                    <option value="HB" {{ old('treatment') == 'HB' ? 'selected' : '' }}>HB</option>
-                                    <option value="FB" {{ old('treatment') == 'FB' ? 'selected' : '' }}>FB</option>
-                                </select>
+                                        <option value="BB" {{ old('treatment') == 'BB' ? 'selected' : '' }}>BB</option>
+                                        <option value="HB" {{ old('treatment') == 'HB' ? 'selected' : '' }}>HB</option>
+                                        <option value="FB" {{ old('treatment') == 'FB' ? 'selected' : '' }}>FB</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
@@ -153,11 +153,6 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="notes" class="form-label">Note Aggiuntive</label>
-                            <textarea class="form-control" id="notes" name="notes" rows="3">{{ old('notes') }}</textarea>
-                        </div>
-
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="registrato" class="form-label">Registrato</label>
@@ -166,6 +161,11 @@
                                     <option value="1" {{ old('registrato') == '1' ? 'selected' : '' }}>Sì</option>
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Note Aggiuntive</label>
+                            <textarea class="form-control" id="notes" name="notes" rows="3">{{ old('notes') }}</textarea>
                         </div>
 
                         <div class="d-grid gap-2">

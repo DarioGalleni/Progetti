@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Customer;
 use App\Models\Expense;
 use App\Observers\AutomaticBackupObserver;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Se siamo online su Netsons (production), la cartella public è ../public_html/gest
+        if ($this->app->environment('production')) {
+            $this->app->instance('path.public', base_path('../public_html/gest'));
+        }
     }
 
     /**
@@ -22,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Paginator::useBootstrapFive();
         Customer::observe(AutomaticBackupObserver::class);
         Expense::observe(AutomaticBackupObserver::class);
     }

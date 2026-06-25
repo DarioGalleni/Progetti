@@ -9,6 +9,7 @@
                         </h4>
                     </div>
                     <div class="card-body p-4">
+                        {{-- Messaggio di Successo --}}
                         @if(session('success'))
                             <div class="alert alert-success mb-4 text-center">
                                 {{ session('success') }}
@@ -93,7 +94,7 @@
                                 </button>
                                 <a href="{{ route('customers.show', $customer->id) }}"
                                     class="btn btn-outline-secondary rounded-pill">
-                                    Annulla
+                                    Indietro
                                 </a>
                             </div>
                         </form>

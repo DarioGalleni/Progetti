@@ -101,15 +101,12 @@
                             <div class="col-md-2">
                                 <label for="treatment" class="form-label">Trattamento</label>
                                 <select class="form-select" id="treatment" name="treatment">
-                                    <option value="BB" {{ old('treatment', $customer->treatment) == 'BB' ? 'selected' : '' }}>
-                                        BB</option>
-                                    <option value="HB" {{ old('treatment', $customer->treatment) == 'HB' ? 'selected' : '' }}>
-                                        HB</option>
-                                    <option value="FB" {{ old('treatment', $customer->treatment) == 'FB' ? 'selected' : '' }}>
-                                        FB</option>
-                                </select>
+                                        <option value="BB" {{ old('treatment', $customer->treatment) == 'BB' ? 'selected' : '' }}>BB</option>
+                                        <option value="HB" {{ old('treatment', $customer->treatment) == 'HB' ? 'selected' : '' }}>HB</option>
+                                        <option value="FB" {{ old('treatment', $customer->treatment) == 'FB' ? 'selected' : '' }}>FB</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
@@ -160,12 +157,6 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="notes" class="form-label">Note Aggiuntive</label>
-                            <textarea class="form-control" id="notes" name="notes"
-                                rows="3">{{ old('notes', $customer->notes) }}</textarea>
-                        </div>
-
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="registrato" class="form-label">Registrato</label>
@@ -174,6 +165,12 @@
                                     <option value="1" {{ old('registrato', $customer->registrato) == '1' ? 'selected' : '' }}>Sì</option>
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Note Aggiuntive</label>
+                            <textarea class="form-control" id="notes" name="notes"
+                                rows="3">{{ old('notes', $customer->notes) }}</textarea>
                         </div>
 
                         <div class="d-grid gap-2">

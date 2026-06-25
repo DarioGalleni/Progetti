@@ -29,14 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollLeft = slider.scrollLeft;
         });
 
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-            slider.classList.remove('active');
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            slider.classList.remove('active');
+        ['mouseleave', 'mouseup'].forEach(evt => {
+            slider.addEventListener(evt, () => {
+                isDown = false;
+                slider.classList.remove('active');
+            });
         });
 
         slider.addEventListener('mousemove', (e) => {
@@ -74,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const validateDates = () => {
-            const arrivalVal = arrivalInput.value;
+            let arrivalVal = arrivalInput.value;
             const departureVal = departureInput.value;
 
             if (!arrivalVal) return;
@@ -83,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isEditPage && arrivalVal < today) {
                 alert('La data di arrivo non può essere nel passato.');
                 arrivalInput.value = today;
-                return;
+                arrivalVal = today;
             }
 
             // Imposta il minimo per la partenza (almeno +1 giorno dall'arrivo)
@@ -103,29 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
         arrivalInput.addEventListener('change', validateDates);
         departureInput.addEventListener('change', validateDates);
         validateDates();
-
-        bookingForm.addEventListener('submit', (e) => {
-            if (!isEditPage && arrivalInput.value < today) {
-                e.preventDefault();
-                alert('La data di arrivo non deve essere nel passato.');
-            }
-            if (departureInput.value <= arrivalInput.value) {
-                e.preventDefault();
-                alert('La data di partenza deve essere successiva alla data di arrivo.');
-            }
-        });
     }
 
     // --- 3. GESTIONE NOTIFICHE (ALERT) ---
-    const alertEl = document.querySelector('.alert-success');
-    if (alertEl) {
+    const alerts = document.querySelectorAll('.alert-success');
+    alerts.forEach(alertEl => {
         setTimeout(() => {
             const closeBtn = alertEl.querySelector('.btn-close');
             closeBtn ? closeBtn.click() : (alertEl.style.display = 'none');
         }, 10000);
-    }
+    });
 
-    // --- 5. GESTIONE GRUPPI (SELEZIONE/DESELEZIONE CHECKBOX) ---
+    // --- 4. GESTIONE GRUPPI (SELEZIONE/DESELEZIONE CHECKBOX) ---
     const selectAllBtn = document.getElementById('select-all');
     const deselectAllBtn = document.getElementById('deselect-all');
 
@@ -141,24 +127,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 6. GESTIONE RICEVUTA FISCALE ---
+    // --- 5. GESTIONE RICEVUTA FISCALE ---
     const receiptSpan = document.getElementById('receipt-number');
     if (receiptSpan) {
-        function generateReceiptNumber(length) {
-            const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            let result = "";
-            for (let i = 0; i < length; i++) {
-                result += charset.charAt(Math.floor(Math.random() * charset.length));
-            }
-            return result;
-        }
-
-        receiptSpan.textContent += generateReceiptNumber(8);
         window.print();
     }
 });
 
-// --- 7. STAMPA AUTOMATICA (LOAD COMPLETO) ---
+// --- 6. STAMPA AUTOMATICA (LOAD COMPLETO) ---
 window.addEventListener('load', function () {
     const isPrintExpensesPage = document.getElementById('print-expenses-page');
     const isCleaningPrintPage = document.getElementById('cleaning-print-page');

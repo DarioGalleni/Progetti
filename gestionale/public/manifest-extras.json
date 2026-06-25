@@ -1,36 +1,36 @@
 {
-    "name": "Gemma Extras (DEV)",
-    "short_name": "Extras DEV",
-    "description": "Versione Locale Extras",
-    "id": "/mobile/extras",
-    "start_url": "/mobile/extras",
-    "scope": "/mobile/extras",
+    "name": "Drinks",
+    "short_name": "Drinks",
+    "description": "Drinks",
+    "id": "gemma-drinks",
+    "start_url": "mobile/extras?app=drinks",
+    "scope": ".",
     "display": "standalone",
     "background_color": "#336633",
     "theme_color": "#336633",
-    "orientation": "portrait",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "/drink.png",
+            "src": "drink.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "/drink.png",
+            "src": "drink.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "/drink.png",
+            "src": "drink.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "/drink.png",
+            "src": "drink.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
@@ -38,18 +38,18 @@
     ],
     "screenshots": [
         {
-            "src": "/drink.png",
+            "src": "drink.png",
             "sizes": "512x512",
             "type": "image/png",
             "form_factor": "wide",
-            "label": "Menu Extras"
+            "label": "Menu Extras Desktop"
         },
         {
-            "src": "/drink.png",
+            "src": "screen_narrow.png",
             "sizes": "512x512",
             "type": "image/png",
             "form_factor": "narrow",
-            "label": "Mobile View"
+            "label": "Menu Extras Mobile"
         }
     ]
 }

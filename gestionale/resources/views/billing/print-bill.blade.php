@@ -19,7 +19,7 @@
     <div class="customer-info">
         <table>
             <tr>
-                <td class="label">Cliente:</td>
+                <td class="label">Ospite:</td>
                 <td><strong>{{ $customer->first_name }} {{ $customer->last_name }}</strong></td>
                 <td class="label" style="padding-left: 20px;">Camera:</td>
                 <td><strong>{{ $customer->room_number }}</strong></td>

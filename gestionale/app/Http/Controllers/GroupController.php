@@ -63,7 +63,7 @@ class GroupController extends Controller
             Customer::withoutEvents(function () use ($request, $groupName, $groupId, $basePax, $remainder) {
                 foreach ($request->rooms as $index => $roomNumber) {
                     $paxForThisRoom = $basePax + ($index < $remainder ? 1 : 0);
-
+                    
                     Customer::create([
                         'first_name' => $groupName,
                         'last_name' => '(Gruppo)',
@@ -164,14 +164,13 @@ class GroupController extends Controller
             $index++;
         }
 
-        // Backup manuale poiché update() massivo non triggera gli observer
         try {
             $this->backupService->createBackup('autosave_backup.sql');
         } catch (\Exception $e) {
             // Log silent
         }
 
-        return redirect()->route('customers.show', $leader->id)->with('success', 'Gruppo aggiornato con successo');
+        return back()->with('success', 'Gruppo aggiornato con successo');
     }
 
     public function destroy($groupId)

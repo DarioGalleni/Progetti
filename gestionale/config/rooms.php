@@ -1,7 +1,6 @@
 <?php
 
 return [
-    101 => 'TR V.P',
     102 => 'TR V.P',
     103 => 'TR V. P',
     104 => 'QD V.P',

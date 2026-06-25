@@ -24,7 +24,7 @@
     <div class="customer-info">
         <table>
             <tr>
-                <td class="label">Cliente:</td>
+                <td class="label">Ospite:</td>
                 <td><strong>{{ $customer->first_name }} {{ $customer->last_name }}</strong></td>
                 <td class="label" style="padding-left: 20px;">Periodo:</td>
                 <td>{{ date('d/m/Y', strtotime($customer->arrival_date)) }}

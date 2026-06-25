@@ -15,7 +15,6 @@ use App\Http\Controllers\GroupController;
 /* ==================== HOME ==================== */
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-
 /* ==================== CLIENTI ==================== */
 Route::prefix('customers')->name('customers.')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('index');
@@ -80,8 +79,3 @@ Route::post('/system/clear-cache', function () {
     Artisan::call('view:clear');
     return redirect('/')->with('success', 'Tutte le cache di sistema sono state pulite!');
 })->name('system.clear-cache');
-
-/* ==================== DOCUMENTAZIONE ==================== */
-Route::get('/documentation', function () {
-    return view('documentation');
-})->name('documentation');

@@ -37,10 +37,7 @@
                     <a class="nav-link {{ request()->routeIs('departures.index') ? 'active fw-bold' : '' }}"
                         href="{{ route('departures.index') }}">Partenze</a>
                 </li>
-                <li class="nav-item d-none d-md-block">
-                    <a class="nav-link fw-bold text-danger {{ request()->routeIs('documentation') ? 'active' : '' }}"
-                        href="{{ route('documentation') }}">Documentazione</a>
-                </li>
+
             </ul>
             <form class="d-flex align-items-center" role="search" action="{{ route('customers.index') }}" method="GET">
                 <input class="form-control me-2" type="search" placeholder="Cerca ospite..." aria-label="Search"
@@ -74,5 +71,6 @@
                 </ul>
             </div>
         </div>
+
     </div>
 </nav>

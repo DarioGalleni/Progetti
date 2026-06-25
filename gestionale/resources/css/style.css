@@ -66,14 +66,14 @@ body {
     position: sticky;
     left: 0;
     z-index: 10;
-    border-right: 1px solid #dee2e6;
+    border-right: 1px solid #ced4da;
     height: fit-content;
     min-height: 100%;
 }
 
 .date-header {
     text-align: center;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 1px solid #ced4da;
     min-width: 100px;
 }
 
@@ -83,13 +83,12 @@ body {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid #ced4da;
 }
 
 .grid-cell {
     height: 60px;
-    border-bottom: 1px solid #e9ecef;
-    border-right: 1px solid #e9ecef;
+    border-bottom: 1px solid #ced4da;
     min-width: 100px;
     position: relative;
 }
@@ -142,6 +141,17 @@ body {
     color: white;
 }
 
+.calendar-grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+    background-image: repeating-linear-gradient(to right, transparent, transparent 119px, rgba(0, 0, 0, 0.2) 119px, rgba(0, 0, 0, 0.2) 120px);
+}
+
 .booking-sticker {
     display: inline-block;
     margin-left: 5px;
@@ -159,11 +169,13 @@ body {
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
+    appearance: none;
     margin: 0;
 }
 
 input[type=number] {
     -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 /* =========================================================================

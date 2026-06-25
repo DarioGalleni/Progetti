@@ -29,13 +29,14 @@
                     <h1>Ricevuta Fiscale</h1>
                     <small>Emesso il {{ \Carbon\Carbon::now()->format('d/m/Y H:i') }}</small>
                     <br>
-                    <small id="receipt-number">Ricevuta fiscale N: </small>
+                    <small id="receipt-number">Ricevuta fiscale N: {{ $customer->receipt_number }}</small>
+                    
                 </div>
             </div>
 
             <!-- Dati Cliente -->
             <div class="kv-row">
-                <span class="kv-label">Cliente:</span>
+                <span class="kv-label">Ospite:</span>
                 <span class="kv-value">{{ $customer->first_name }} {{ $customer->last_name }}</span>
             </div>
             <div class="kv-row">
@@ -135,7 +136,7 @@
 
             @php
                 $taxableAmount = ($customer->total_price ?? 0) + ($extrasTotal ?? 0);
-                $vatAmount = $taxableAmount * 22 / 122;
+                $vatAmount = $taxableAmount * 10 / 110;
                 $netAmount = $taxableAmount - $vatAmount;
             @endphp
 
@@ -144,7 +145,7 @@
                 <span class="kv-value">{{ number_format($netAmount, 2, ',', '.') }} €</span>
             </div>
             <div class="kv-row">
-                <span class="kv-label">IVA (22%):</span>
+                <span class="kv-label">IVA (10%):</span>
                 <span class="kv-value">{{ number_format($vatAmount, 2, ',', '.') }} €</span>
             </div>
 
@@ -166,6 +167,8 @@
             <div class="footer-note">
                 <p class="mb-1">Grazie per aver scelto Hotel Gemma del Mare</p>
                 <p class="mb-0">www.gemmadelmare.com</p>
+                <p class="mb-0" style="margin-top: 10px; font-size: 0.9em; color: #555;">Matricola registratore di
+                    cassa: 3CMAB004211</p>
             </div>
         </div>
     </div>

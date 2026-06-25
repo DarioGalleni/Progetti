@@ -14,7 +14,7 @@
         </div>
     @endif
     {{-- fine messaggi di sistema --}}
-
+    
     <div class="d-none d-md-block">
     <div id="calendar-header" class="d-flex justify-content-between align-items-center"
         style="transition: opacity 0.3s, transform 0.3s;">
@@ -72,6 +72,16 @@
 
                         <!-- Righe Camere -->
                         <div style="position: relative;">
+                            <!-- Sfondo Giallo Indipendente per colonna Oggi -->
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; pointer-events: none; z-index: 0;">
+                                @foreach($dates as $date)
+                                    <div class="{{ $date->isToday() ? 'today-column' : '' }}" style="flex: 0 0 120px; width: 120px; border-top: none; border-bottom: none;"></div>
+                                @endforeach
+                            </div>
+
+                            <!-- Overlay Griglia per evidenziare i quadratini sopra le prenotazioni -->
+                            <div class="calendar-grid-overlay"></div>
+                            
                             @foreach($rooms as $roomNumber => $roomName)
                                 <div style="display: flex; height: 60px;">
                                     @php
@@ -86,9 +96,6 @@
 
                                             // Direct lookup O(1)
                                             $reservation = $dailyReservations[$roomNumber][$dateKey] ?? null;
-
-                                            $isToday = $date->isToday();
-                                            $class = $isToday ? 'today-column' : '';
                                         @endphp
 
                                         @if($reservation && $reservation->arrival_date == $dateKey)
@@ -114,7 +121,7 @@
                                                 }
                                             @endphp
 
-                                            <div class="grid-cell {{ $class }} {{ $reservation->group_id ? 'group-event-cell' : '' }}"
+                                            <div class="grid-cell {{ $reservation->group_id ? 'group-event-cell' : '' }}"
                                                 style="flex: 0 0 {{ $span * 120 }}px; width: {{ $span * 120 }}px; z-index: 5;">
                                                 <a href="{{ route('customers.show', $reservation) }}"
                                                     class="text-decoration-none text-white d-block h-100">
@@ -123,6 +130,16 @@
                                                         @if($reservation->group_id)
                                                             <strong class="text-truncate d-block w-100"
                                                                 style="font-size: 0.85rem;">{{ $reservation->first_name }}</strong>
+                                                            @php
+                                                                static $gCache1 = [];
+                                                                if (!isset($gCache1[$reservation->group_id])) {
+                                                                    $gm = \App\Models\Customer::where('group_id', $reservation->group_id)->orderBy('room_number')->get();
+                                                                    $gCache1[$reservation->group_id] = ['pax' => $gm->sum('pax'), 'first' => $gm->first()->id ?? null];
+                                                                }
+                                                            @endphp
+                                                            @if($gCache1[$reservation->group_id]['first'] == $reservation->id)
+                                                                <small>{{ $gCache1[$reservation->group_id]['pax'] }} pax</small>
+                                                            @endif
                                                         @else
                                                             <strong>{{ $reservation->first_name }}
                                                                 {{ $reservation->last_name }}</strong>
@@ -160,7 +177,7 @@
                                                     }
                                                 }
                                             @endphp
-                                            <div class="grid-cell {{ $class }} {{ $reservation->group_id ? 'group-event-cell' : '' }}"
+                                            <div class="grid-cell {{ $reservation->group_id ? 'group-event-cell' : '' }}"
                                                 style="flex: 0 0 {{ $span * 120 }}px; width: {{ $span * 120 }}px; z-index: 5;">
                                                 <a href="{{ route('customers.show', $reservation) }}"
                                                     class="text-decoration-none text-white d-block h-100">
@@ -170,6 +187,16 @@
                                                             <small>&laquo; Continua</small>
                                                             <strong class="text-truncate d-block w-100"
                                                                 style="font-size: 0.85rem;">{{ $reservation->first_name }}</strong>
+                                                            @php
+                                                                static $gCache2 = [];
+                                                                if (!isset($gCache2[$reservation->group_id])) {
+                                                                    $gm = \App\Models\Customer::where('group_id', $reservation->group_id)->orderBy('room_number')->get();
+                                                                    $gCache2[$reservation->group_id] = ['pax' => $gm->sum('pax'), 'first' => $gm->first()->id ?? null];
+                                                                }
+                                                            @endphp
+                                                            @if($gCache2[$reservation->group_id]['first'] == $reservation->id)
+                                                                <small>{{ $gCache2[$reservation->group_id]['pax'] }} pax</small>
+                                                            @endif
                                                         @else
                                                             <small>&laquo; Continua</small>
                                                             <strong>{{ $reservation->first_name }}
@@ -188,11 +215,11 @@
                                             @php $currentDateIndex += $span; @endphp
 
                                         @elseif($reservation)
-                                            <div class="grid-cell {{ $class }}" style="flex: 0 0 120px;"></div>
+                                            <div class="grid-cell" style="flex: 0 0 120px;"></div>
                                             @php $currentDateIndex++; @endphp
                                         @else
                                             {{-- Free --}}
-                                            <div class="grid-cell {{ $class }}" style="flex: 0 0 120px;"></div>
+                                            <div class="grid-cell" style="flex: 0 0 120px;"></div>
                                             @php $currentDateIndex++; @endphp
                                         @endif
                                     @endwhile

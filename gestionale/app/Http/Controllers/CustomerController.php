@@ -10,7 +10,7 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('q');
-
+        
         $selectRaw = 'MIN(id) as id, MAX(group_id) as group_id, MAX(first_name) as first_name, MAX(last_name) as last_name, MAX(email) as email, MAX(phone) as phone, MAX(arrival_date) as arrival_date, MAX(departure_date) as departure_date, SUM(pax) as pax, MAX(treatment) as treatment, MAX(group_name) as group_name, MAX(room_number) as room_number';
 
         $customers = match (true) {
@@ -123,7 +123,6 @@ class CustomerController extends Controller
 
         $validated['under_12_pax'] = $validated['under_12_pax'] ?? 0;
 
-        // Controllo conflitti escludendo il cliente corrente
         $exists = Customer::where('room_number', $request->room_number)
             ->where('id', '!=', $customer->id)
             ->where('arrival_date', '<', $request->departure_date)

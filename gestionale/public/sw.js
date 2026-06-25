@@ -1,10 +1,9 @@
-const CACHE_VERSION = 'v-local-1.0';
+const CACHE_VERSION = 'v-local-1.2';
 const CACHE_NAME = `gemma-local-${CACHE_VERSION}`;
 const OFFLINE_CACHE = `gemma-off-local-${CACHE_VERSION}`;
 
 const PRECACHE_URLS = [
-    '/',
-    '/offline.html'
+    'offline.html'
 ];
 
 self.addEventListener('install', (event) => {
@@ -25,10 +24,14 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    if (event.request.method !== 'GET') return;
+    if (event.request.method !== 'GET' || !event.request.url.startsWith('http')) return;
+
     event.respondWith(
         fetch(event.request)
             .then((networkResponse) => {
+                if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+                    return networkResponse;
+                }
                 return caches.open(CACHE_NAME).then((cache) => {
                     cache.put(event.request, networkResponse.clone());
                     return networkResponse;
@@ -39,7 +42,7 @@ self.addEventListener('fetch', (event) => {
                     .then((cachedResp) => {
                         if (cachedResp) return cachedResp;
                         if (event.request.mode === 'navigate') {
-                            return caches.match('/offline.html');
+                            return caches.match('offline.html');
                         }
                     });
             })

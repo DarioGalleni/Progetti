@@ -86,6 +86,7 @@ return new class extends Migration {
         // Application Tables
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('receipt_number')->nullable();
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('email')->nullable();
@@ -103,6 +104,7 @@ return new class extends Migration {
             $table->text('notes')->nullable();
             $table->string('group_id')->nullable()->index();
             $table->string('group_name')->nullable();
+            $table->boolean('registrato')->default(0);
             $table->timestamps();
         });
 

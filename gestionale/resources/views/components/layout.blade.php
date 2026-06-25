@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#336633">
+    <title>{{ $title ?? 'Gemma Hotel Management' }}</title>
 
     @php
         $isOnlineProd = str_contains(request()->url(), '/gest');
@@ -17,12 +19,8 @@
         <link rel="manifest" href="{{ $manifestMainPath }}">
     @endif
 
-    <meta name="theme-color" content="#336633">
-
     <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
-
-    <title>{{ $title ?? 'Gemma Hotel Management' }}</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
@@ -30,7 +28,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
 
 <body id="{{ $bodyId ?? '' }}" class="{{ $bodyClass ?? '' }}">
@@ -39,6 +36,7 @@
     @endunless
 
     <div class="container-fluid">
+
         {{ $slot ?? '' }}
         @yield('content')
     </div>
@@ -49,10 +47,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                // Rileva se siamo online nella cartella /gest/ o in locale
                 const isOnlineProd = window.location.pathname.includes('/gest');
-
-                // Imposta i percorsi corretti dinamicamente
                 const swPath = isOnlineProd ? '/gest/sw.js' : '/sw.js';
                 const swScope = isOnlineProd ? '/gest/' : '/';
 

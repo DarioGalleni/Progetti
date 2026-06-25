@@ -89,6 +89,31 @@ class BillingController extends Controller
 
     public function receipt(Customer $customer)
     {
+        if (empty($customer->receipt_number)) {
+            $startDate = \Carbon\Carbon::parse('2026-06-25')->startOfDay();
+            $today = now()->startOfDay();
+            $daysDiff = $startDate->diffInDays($today, false);
+            $prefix = 707 + max(0, $daysDiff);
+            $prefixStr = str_pad($prefix, 4, '0', STR_PAD_LEFT);
+
+            $receipts = \App\Models\Customer::where('receipt_number', 'like', "$prefixStr-%")->pluck('receipt_number');
+            $maxNumber = 0;
+            foreach ($receipts as $receiptNum) {
+                $parts = explode('-', $receiptNum);
+                if (count($parts) == 2) {
+                    $num = intval($parts[1]);
+                    if ($num > $maxNumber) {
+                        $maxNumber = $num;
+                    }
+                }
+            }
+            $nextNumber = $maxNumber + 1;
+            $nextNumberStr = str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
+
+            $customer->receipt_number = "$prefixStr-$nextNumberStr";
+            $customer->save();
+        }
+
         $data = $this->calculateBillingData($customer);
         $data['grandTotal'] = $customer->total_price + $data['extrasTotal'] + $data['touristTax'];
 

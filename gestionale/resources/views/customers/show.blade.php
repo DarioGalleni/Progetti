@@ -27,13 +27,15 @@
                         </div>
                     @endif
 
+                    <!-- =============================== -->
+                    <!-- INIZIO VISTA GRUPPI             -->
+                    <!-- =============================== -->
                     @if($customer->group_id)
-                        {{-- Vista Semplificata per Gruppi --}}
                         <div class="row mb-4">
                             <div class="col-md-12">
                                 <div class="card bg-light border-0">
                                     <div class="card-body p-4">
-                                        <h5 class="text-muted mb-4 text-center">Dettagli Camera nel Gruppo</h5>
+                                        <h5 class="text-muted mb-4 text-center">Dettagli</h5>
                                         
                                         <div class="row text-center g-3 row-cols-2 row-cols-md-5">
                                             <div class="col">
@@ -44,7 +46,7 @@
                                                     <small class="text-muted mt-1">{{ config('rooms')[$customer->room_number] ?? 'Nessuna' }}</small>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="col">
                                                 <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-center align-items-center">
                                                     <small class="text-uppercase fw-bold text-muted mb-2" style="font-size: 0.70rem;">Totale</small>
@@ -53,7 +55,7 @@
                                                     <small class="text-muted mt-1">Camere Assegnate al Gruppo</small>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="col">
                                                 <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-center align-items-center">
                                                     <small class="text-uppercase fw-bold text-muted mb-2" style="font-size: 0.70rem;">Pax Totali</small>
@@ -62,7 +64,7 @@
                                                     <small class="text-muted mt-1">Ospiti nel Gruppo</small>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="col">
                                                 <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-center align-items-center">
                                                     <small class="text-uppercase fw-bold text-muted mb-2" style="font-size: 0.70rem;">Check-in</small>
@@ -71,7 +73,7 @@
                                                     <small class="text-muted mt-1">Data Arrivo</small>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="col">
                                                 <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-center align-items-center">
                                                     <small class="text-uppercase fw-bold text-muted mb-2" style="font-size: 0.70rem;">Check-out</small>
@@ -95,16 +97,19 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- fine modalità gruppi -->
 
                         @if($customer->notes)
                             <div class="alert alert-secondary mb-4">
                                 <strong>Note:</strong> {{ $customer->notes }}
                             </div>
                         @endif
-
+                    <!-- =============================== -->
+                    <!-- FINE VISTA GRUPPI               -->
+                    <!-- =============================== -->
                     @else
-                        {{-- Vista Completa per Prenotazioni Singole --}}
+                    <!-- =============================== -->
+                    <!-- INIZIO VISTA CAMERE SINGOLE     -->
+                    <!-- =============================== -->
                         <div class="row mb-4 text-center text-md-start">
                             <div class="col-md-6">
                                 <h5 class="text-muted mb-3">Informazioni Personali</h5>
@@ -198,6 +203,9 @@
                                 <strong>Note:</strong> {{ $customer->notes }}
                             </div>
                         @endif
+                    <!-- =============================== -->
+                    <!-- FINE VISTA CAMERE SINGOLE       -->
+                    <!-- =============================== -->
                     @endif
 
                     <div class="row g-4 mt-4">
@@ -237,7 +245,7 @@
                                     <p class="text-muted small mb-3">Modifica dati anagrafici, date, pax, ecc.</p>
 
                                     @if($customer->group_id)
-                                        <button type="button" class="btn btn-warning btn-lg w-100" data-bs-toggle="modal" data-bs-target="#editGroupModal">
+                                        <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#editGroupModal">
                                             <i class="bi bi-pencil me-2"></i> Modifica
                                         </button>
                                     @else
