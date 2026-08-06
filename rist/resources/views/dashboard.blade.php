@@ -27,7 +27,9 @@
             border-color: #333;
         }
 
-        .table-dark-custom td {
+        .table-dark-custom td, .table-dark-custom tr {
+            background-color: #111 !important;
+            color: #fff !important;
             border-color: #333;
             vertical-align: middle;
         }
@@ -77,8 +79,8 @@
         }
 
         .status-badge {
-            background-color: #fff;
-            color: #000;
+            background-color: #fff !important;
+            color: #000 !important;
             font-weight: bold;
             padding: 5px 12px;
             border-radius: 20px;
@@ -182,7 +184,7 @@
                     
                     <!-- Desktop Table View -->
                     <div class="table-responsive rounded-3 overflow-hidden d-none d-md-block" style="border: 1px solid #333;">
-                        <table class="table table-dark-custom mb-0">
+                        <table class="table table-dark table-dark-custom mb-0">
                             <thead>
                                 <tr>
                                     <th style="width: 80px;" class="py-3 px-4">Ora</th>
@@ -200,9 +202,9 @@
                                             <a href="tel:{{ $res->phone }}" class="text-muted text-decoration-none small"><i data-lucide="phone" style="width: 12px; height: 12px;" class="me-1"></i>{{ $res->phone }}</a>
                                         </td>
                                         <td class="text-center">
-                                            <span class="status-badge">{{ $res->guests }}</span>
+                                            <span class="status-badge">{{ $res->people }}</span>
                                         </td>
-                                        <td class="text-white-50 small pe-4">{{ $res->message ?? '-' }}</td>
+                                        <td class="text-white-50 small pe-4">{{ $res->notes ?? '-' }}</td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -223,7 +225,7 @@
                                 <div class="card-body p-3">
                                     <div class="d-flex justify-content-between align-items-start mb-2">
                                         <div class="fw-bold text-warning fs-3">{{ \Carbon\Carbon::parse($res->time)->format('H:i') }}</div>
-                                        <span class="status-badge"><i data-lucide="users" style="width: 14px; height: 14px;" class="me-1 d-inline"></i>{{ $res->guests }}</span>
+                                        <span class="status-badge"><i data-lucide="users" style="width: 14px; height: 14px;" class="me-1 d-inline"></i>{{ $res->people }}</span>
                                     </div>
                                     <div class="fw-bold text-white fs-5 mb-1">{{ $res->name }}</div>
                                     <a href="tel:{{ $res->phone }}" class="d-inline-flex align-items-center text-muted text-decoration-none mb-2 mt-1">
@@ -232,9 +234,9 @@
                                         </div>
                                         {{ $res->phone }}
                                     </a>
-                                    @if($res->message)
+                                    @if($res->notes)
                                         <div class="mt-2 pt-2 border-top border-secondary text-white-50 small">
-                                            <i data-lucide="file-text" style="width: 12px; height: 12px;" class="me-1 d-inline"></i> {{ $res->message }}
+                                            <i data-lucide="file-text" style="width: 12px; height: 12px;" class="me-1 d-inline"></i> {{ $res->notes }}
                                         </div>
                                     @endif
                                 </div>
@@ -254,7 +256,7 @@
                     
                     <!-- Desktop Table View -->
                     <div class="table-responsive rounded-3 overflow-hidden d-none d-md-block" style="border: 1px solid #333;">
-                        <table class="table table-dark-custom mb-0">
+                        <table class="table table-dark table-dark-custom mb-0">
                             <thead>
                                 <tr>
                                     <th style="width: 80px;" class="py-3 px-4">Ora</th>
@@ -272,9 +274,9 @@
                                             <a href="tel:{{ $res->phone }}" class="text-muted text-decoration-none small"><i data-lucide="phone" style="width: 12px; height: 12px;" class="me-1"></i>{{ $res->phone }}</a>
                                         </td>
                                         <td class="text-center">
-                                            <span class="status-badge">{{ $res->guests }}</span>
+                                            <span class="status-badge">{{ $res->people }}</span>
                                         </td>
-                                        <td class="text-white-50 small pe-4">{{ $res->message ?? '-' }}</td>
+                                        <td class="text-white-50 small pe-4">{{ $res->notes ?? '-' }}</td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -295,7 +297,7 @@
                                 <div class="card-body p-3">
                                     <div class="d-flex justify-content-between align-items-start mb-2">
                                         <div class="fw-bold text-info fs-3">{{ \Carbon\Carbon::parse($res->time)->format('H:i') }}</div>
-                                        <span class="status-badge"><i data-lucide="users" style="width: 14px; height: 14px;" class="me-1 d-inline"></i>{{ $res->guests }}</span>
+                                        <span class="status-badge"><i data-lucide="users" style="width: 14px; height: 14px;" class="me-1 d-inline"></i>{{ $res->people }}</span>
                                     </div>
                                     <div class="fw-bold text-white fs-5 mb-1">{{ $res->name }}</div>
                                     <a href="tel:{{ $res->phone }}" class="d-inline-flex align-items-center text-muted text-decoration-none mb-2 mt-1">
@@ -304,9 +306,9 @@
                                         </div>
                                         {{ $res->phone }}
                                     </a>
-                                    @if($res->message)
+                                    @if($res->notes)
                                         <div class="mt-2 pt-2 border-top border-secondary text-white-50 small">
-                                            <i data-lucide="file-text" style="width: 12px; height: 12px;" class="me-1 d-inline"></i> {{ $res->message }}
+                                            <i data-lucide="file-text" style="width: 12px; height: 12px;" class="me-1 d-inline"></i> {{ $res->notes }}
                                         </div>
                                     @endif
                                 </div>
